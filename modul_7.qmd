@@ -1,0 +1,924 @@
+# Transformasi Data  
+Transformasi Data adalah proses pembuatan atau modifikasi variabel atau fitur dari sebuah dataset untuk membuat dataset lebih mudah digunakan dan atau lebih akurat, sehingga dapat membuat model yang lebih akurat.  
+
+Konstruksi Data dibagi menjadi empat aktivitas utama, yaitu:  
+- Rekayasa Fitur  
+- Imputasi  
+- Handling Outlier  
+- Dokumentasi Fitur  
+
+## RekayasaFitur  
+Rekayasa fitur adalah proses penambahan atau modifikasi fitur dengan mengaplikasikan penghitungan matematik, statistika, atau pengetahuan terhadap fitur.   
+
+Sebagai contoh, anda dapat membuat fitur baru bernama average atau rata rata yang mengambil nilai dari fitur-fitur lain. Atau anda dapat membuat fitur kategori baru dengan mengolah data dari fitur-fitur lain.  
+
+Diharapkan fitur-fitur yang di modifikasi atau ditambah dapat menambah kualitas dataset sehingga dapat menghasilkan model yang lebih akurat dan efisien.  
+
+### Hands On Coding  
+Kita akan melakukan proses feature enginnering ke sebuah dataset dibawah ini   
+Jangan lupa untuk menginstall library pandas menggunakan command `pip install pandas`
+```{python}
+import plotly.express as px
+from sklearn.impute import KNNImputer
+from keras.optimizers import Adam
+from keras.layers import Dense
+from keras.models import Sequential
+from scipy.stats import pearsonr
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.DataFrame({'Country': ['Afghanistan', 'Cameroon', 'Indonesia', 'Guatemala'], 'UrbanPopulation': [10142913, 15248270, 153983073,
+                  8738685], 'RuralPopulation': [28829316, 11242817, 117874900, 8119648], 'SlumPopulation': [7434756, 4981883, 29889391, 3285745]})
+df.head()
+```
+
+Dataset ini mempunyai 4 fitur:  
+- Country, Nama negara  
+- UrbanPopulation, populasi manusia yang hidup di daerah urban (perumahan kota)  
+- RuralPopulation, populasi manusia yang hidup di daerah rural (pinggiran kota)  
+- SlumPopulation, populasi manusia yang hidup di daerah slum (pemukiman kumuh)  
+
+Pertama kita akan menghitung presentase jumlah populasi yang hidup di slum (pemukiman kumuh) dari populasi yang hidup di urban (perumahan kota). Nilai ini didapat menggunakan rumus:  
+
+$$
+SlumPrecentage = \dfrac{SlumPopulation}{UrbanPopulation} * 100
+$$
+
+
+```{python}
+df['SlumPopulation'] = round(
+    (df['SlumPopulation']/(df['UrbanPopulation']))*100, 2)
+df.head()
+```
+
+Selanjutnya, kita menggabungkan dua fitur (urban dan rural) menjadi satu, dan mengubah nilainya dari jumlah penduduk ke presentase penduduk. Rumusnya cukup simple:  
+
+$$
+UrbanPrecentage = \dfrac{UrbanPopulation}{UrbanPopulation+RuralPopulation} * 100
+$$
+
+```{python}
+df['UrbanPopulation'] = round(
+    (df['UrbanPopulation']/(df['UrbanPopulation']+df['RuralPopulation']))*100, 2)
+df.head()
+```
+
+Dan untuk sentuhan akhir, kita akan hapus kolom SlumPopulation karena nilainya sudah ter-representasikan di kolom UrbanPopulation
+
+```{python}
+df = df.drop(columns=['RuralPopulation'])
+df.head()
+```
+
+Hasilnya, nilai atau value di dataset lebih mudah dibaca, dan dapat direpresentasikan menggunakan fitur yang lebih sedikit. Dataset sudah siap untuk diproses lebih lanjut.
+
+
+## Imputasi  
+Imputasi adalah proses penggantian nilai data yang hilang dengan data yang baru. Seperti contoh rekayasa fitur sebelumnya, nilai NaN termasuk data yang perlu kita olah.  
+
+Dalam bab ini kita akan mempelajari beberapa hal terkait imputasi antara lain:
+- Jenis-jenis imputasi  
+- Teknik imputasi  
+
+### Jenis-jenis Imputasi  
+Jenis data yang hilang dikelompokkan menjadi 3, yaitu
+- Missing completely at random  (MCAR)
+- Missing at random  (MAR)
+- Missing not at random  (MNAR)
+
+![Gambar1. Jenis-jenis Imputasi](./1.imputation.png)
+
+#### Missing Completely At Random (MCAR)  
+Jika probabilitas hilangnya data dalam suatu fitur **sama antara satu data dengan yang lain**. Asumsi ini dapat diuji dengan memisahkan data yang hilang dan yang lengkap serta memeriksa karakteristik data. Jika karakteristik data tidak sama untuk kedua fitur, asumsi MCAR tidak berlaku
+
+![Gambar2. Contoh MCAR](./2.mcar.png)
+
+#### Missing At Random (MAR)  
+Kemungkinan data yang hilang **dipengaruhi oleh variabel lain, namun tidak dipengaruhi oleh variabel yang hilang**. Sebagai contoh, untuk data di samping, hanya peserta dengan umur yang dibawah 31 yang nilainya hilang. Berarti fitur age mempengaruhi probabilitas missing data IQ score.
+
+![Gambar3. Contoh MAR](./3.mar.png)
+
+### Missing Not At Random   
+Kemungkinan data yang hilang **tidak dipengaruhi oleh fitur lain, namun  dipengaruhi oleh fitur pada data yang hilang**. Sebagai contoh, untuk data di samping, ada kemungkinan bahwa data IQ score yang hilang hanya data yang nilainya dibawah 110. Sedangkan variabel age tidak berpengaruh atas hilangnya data IQ score karena age yang kecil dan besar sama sama mempunyai data yang hilang
+
+![Gambar4. Contoh MNAR](./4.mnar.png)
+
+### Teknik-Teknik Imputasi  
+Perlu diingat bahwa jika 70% data hilang/missing, maka semua fitur(kolom) dan data (row) harus dihapus.  
+
+![Gambar5. Flow Proses Imputasi](./5.imp.png)  
+
+Data yang hilang harus dimutasikan berdasarkan jenis datanya, yaitu :  
+
+**Numerik**  
+- Mean/Median  
+- Arbitrary  
+- End of tail  
+- Regresi  
+- KNN  
+
+**Kategorik**  
+- Frequent/Modus  
+- KNN  
+
+#### Mean  
+Dataset imputasi mean adalah metode untuk mengisi nilai yang hilang dalam dataset dengan menggunakan nilai rata-rata (mean) dari variabel yang bersangkutan. Ketika ada nilai yang hilang dalam suatu variabel dalam dataset, imputasi mean menggantikan nilai-nilai yang hilang tersebut dengan nilai rata-rata dari seluruh nilai yang ada dalam variabel tersebut.
+
+**Kelebihan**  
+- Mudah dan cepat.  
+- Bekerja efektif untuk dataset numerik berukuran kecil.  
+- Cocok untuk variabel numerik.  
+- Cocok untuk data missing completely at random (MCAR).  
+- Dapat digunakan dalam produksi (mis. dalam model deployment)  
+
+**Kekurangan**  
+- Tidak memperhitungkan korelasi antar fitur, berfungsi pada tingkat kolom.  
+- Kurang akurat.  
+- Tidak memperhitungkan probabilitas/ketidakpastian.    
+- Tidak cocok utk >5% missing data.  
+
+##### Hands On Coding  
+Pertama kita akan buat sebuah dataset menggunakan pandas dataframe
+
+```{python}
+# buat dataset dengan format dataframe
+df = pd.DataFrame({'age': [25, 26, 29, 30, 30, 31, 44, 46],
+                   'IQ': [np.NaN, 121, 91, np.NaN, 110, np.NaN, 118, 93]})
+display(df)
+```
+
+Lalu kita akan hitung mean atau rata rata dari dataset  
+
+```{python}
+mean = df['IQ'].mean()
+print(f'Mean: {mean}, dibulatkan menjadi {round(mean)}')
+display(df)
+```
+
+Lalu kita masukkan nilai mean tersebut ke data yang kosong  
+
+```{python}
+# masukkan nilai mean ke missing value
+df['IQ'] = df['IQ'].fillna(round(mean))
+display(df)
+```
+
+#### Arbiter  
+Teknik imputasi arbiter (arbiter imputation) adalah metode untuk mengisi nilai yang hilang dalam dataset dengan menggunakan hasil gabungan dari beberapa metode imputasi yang berbeda. Dalam metode ini, beberapa teknik imputasi yang berbeda diterapkan pada dataset yang sama, dan hasil dari setiap teknik imputasi digabungkan menjadi satu nilai yang digunakan untuk mengisi nilai yang hilang.
+
+**Kelebihan**
+- Sangat mudah dan cepat  
+- Cocok untuk missing dataset dengan asumsi tidak missing at random  
+
+**Kekurangan**
+- Mengganggu variansi dan distribusi variable original  
+- Dapat membentuk outlier  
+- Semakin besar nilai arbitrary, maka semakin besar distorsi  
+
+##### Hands On Coding  
+Kita akan gunakan dataset yang sama seperti sebelumnya  
+```{python}
+
+# buat dataset dengan format dataframe
+df = pd.DataFrame({'age': [25, 26, 29, 30, 30, 31, 44, 46],
+                   'IQ': [np.NaN, 121, 91, np.NaN, 110, np.NaN, 118, 93]})
+display(df)
+```
+
+Cukup masukkan nilai arbiter ke data yang kosong. Dalam koding ini, nilai arbiter adalah 130.  
+
+```{python}
+df['IQ'] = df['IQ'].fillna(130)
+display(df)
+```
+
+#### End Of Tail
+
+Teknik imputasi end of tail adalah metode untuk mengisi nilai yang hilang dalam dataset dengan menggunakan nilai ekstrem (tail) dari distribusi data yang ada. Metode ini didasarkan pada asumsi bahwa nilai yang hilang cenderung berada di ekor distribusi data. Namun untuk teknik ini kita harus mengikuti sebuah ketentuan khusus, yaitu:  
+
+**Jika distribusi data bersifat normal, maka gunakan rumus :**  
+$$
+{\sigma = \sqrt{\dfrac{\Sigma |x-\mu|^2}{N}}}
+$$
+
+**Jika distribusi data bersifat skewed, maka gunakan rumus IQR proximity**  
+$$
+{IQR = Q_{3} - Q_{1}}
+$$
+
+##### Distribusi Normal  
+Data yang terdistribusi secara normal, juga dikenal sebagai distribusi Gaussian atau kurva lonceng, mengacu pada distribusi statistik di mana titik-titik data secara simetris terdistribusi di sekitar nilai rata-rata, menciptakan kurva berbentuk lonceng yang khas.  
+Untuk menghitung data yg mempunyai distribusi normal, kita harus mengetahui standar deviasinya. Berikut rumus untuk menghitung standar deviasi :  
+$$
+{\mu + 3 * \sigma}
+$$
+Keterangan:  
+**σ** = Standar Deviasi  
+**Σ** = jumlah  
+**x** = data yang dihitung  
+**μ** = Mean/rata rata  
+**N** = Jumlah data  
+
+##### Distribusi Normal - Hands On Coding  
+Pertama kita akan buat sebuah dataset yang cukup besar jika dibandingkan dengan dataset yang diatas.  
+Jangan lupa untuk menginstall library yang dibutuhkan :  
+- `pip install numpy`  
+- `pip install pandas`  
+- `pip install matplotlib`  
+- `pip install keras`
+- `pip install tensorflow`
+```{python}
+
+age = [25, 26, 29, 30, 30, 31, 44, 46, 22, 33,
+       35, 27, 21, 23, 45, 47, 41, 38, 37, 21, 24]
+data = [85, 90, 95, 95, 100, np.nan, 100, 110, 105, 105, 110,
+        np.nan, 110, 110, 115, 115, 115, 120, np.nan, 125, 130]
+
+# make a dataframe
+df = pd.DataFrame({'age': age, 'IQ': data})
+display(df)
+```
+
+Selanjutnya kita akan mengecek jenis distribusi data menggunakan library matplotlib
+
+```{python}
+data = [85, 90, 95, 95, 100, np.nan, 100, 110, 105, 105, 110,
+        np.nan, 110, 110, 115, 115, 115, 120, np.nan, 125, 130]
+
+plt.hist(data, bins=5)
+plt.xlabel('Data')
+plt.ylabel('Frequency')
+plt.show()
+```
+
+Dapat dilihat bahwa grafik histogram membentuk seperti gunung atau lonceng, dengan puncak tepat di tengah-tengah grafik. Inilah salah satu karakteristik dataset dengan distribusi normal.  
+
+Selanjutnya, kita akan mencari mean dari dataset
+
+```{python}
+# nilai kosong dihilangkan dari data terlebih dahulu
+data = [85, 90, 95, 95, 100, 100, 110, 105, 105,
+        110, 110, 110, 115, 115, 115, 120, 125, 130]
+mean = np.mean(data)
+print(f'Mean dari dataset adalah: ', mean)
+```
+
+Lalu, kita akan menghitung jarak antara nilai x dan mean  
+
+```{python}
+total = 0
+for i in data:
+    calc = (107.5-i)**2
+    total = total + calc
+
+print(f'jarak antara nilai x dan mean adalah ', total)
+```
+
+Mari kita hitung standar deviasi nya
+
+```{python}
+# math.sqrt adalah fungsi untuk melakukan operasi akar pangkat
+# round adalah fungsi untuk membulatkan hasil operasi)
+stddev = round(math.sqrt(total/len(data)), 2)
+print(f'nilai standar deviasi adalah ', stddev)
+```
+
+Hitung nilai imputasi End of Tail
+
+```{python}
+imp = round(mean + 3 * stddev, 1)
+print(f'nilai imputasi end of tail adalah ', imp)
+```
+
+<!-- ${\Sigma|x-\mu|^2 = (107.5-85)^2+(107.5-90)^2+(107.5-95)^2+(107.5-95)^2+(107.5-100)^2+(107.5-100)^2+(107.5-110)^2+(107.5-105)^2+(107.5-105)^2}$  
+
+${+(107.5-110)^2+(107.5-110)^2+(107.5-110)^2+(107.5-115)^2+(107.5-115)^2+(107.5-115)^2+(107.5-120)^2+(107.5-125)^2+(107.5-130)^2}$  
+
+${\Sigma|x-\mu|^2 = 506.25 + 306.25 + 156.25 + 156.25 + 56.25 + 56.25 + 6.25 + 6.25 + 6.25 + 6.25 + 6.25 + 6.25 + 56.25 + 56.25 + 56.25 + 156.25 + 306.25 + 506.25 }$  
+
+
+Kita akan hitung standar deviasinya  
+
+${\Sigma|x-\mu|^2 = 2412.5 }$  
+
+${\sigma = \sqrt{\dfrac{2412.5}{18}} = 11.58}$  
+
+
+Hitung nilai imputasi End of Tail
+
+${= \mu + 3 * \sigma}$  
+
+${= 107.5 + 3 * 11.58}$   
+
+${= 142.24 \sim 142.2}$ -->
+
+Dari kalkulasi nilai imputasi end of tail, diperoleh nilai 142.2.  
+Kita akan memasukkan nilai ini ke dalam dataset  
+
+```{python}
+df['IQ'] = df['IQ'].fillna(imp)
+display(df)
+```
+
+##### Distribusi Skewed
+
+Distribusi skew atau skewness mengacu pada karakteristik asimetri dalam distribusi data. Dalam distribusi skew, ekor distribusi data cenderung condong ke salah satu sisi, baik ke kanan (positif) atau ke kiri (negatif), dibandingkan dengan pusat distribusi.
+
+**Dalam distribusi skew positif**, ekor distribusi condong ke kanan, sementara nilai-nilai yang lebih kecil cenderung berada di sebelah kiri. Ini menghasilkan ekor yang panjang di sisi kanan distribusi.  
+![Gambar7. Contoh Distribusi Skewed Positif](./7.skewpositive.png)
+
+**Dalam distribusi skew negatif**, ekor distribusi condong ke kiri, dengan nilai-nilai yang lebih besar cenderung berada di sebelah kiri. Ini menghasilkan ekor yang panjang di sisi kiri distribusi. Nilai rata-rata akan lebih kecil daripada median dalam distribusi ini.  
+![Gambar8. Contoh Distribusi Skewed Negative](./8.skewnegative.png)
+
+##### Distribusi Skewed - Hands On Coding  
+Pertama-tama mari kita buat data baru yang terdiri dari 21 data dengan 3 missing value. Tugas kita adalah mengisi missing value dengan imputasi end of tail.  
+
+```{python}
+age = [25, 26, 29, 30, 30, 31, 44, 46, 22, 33,
+       35, 27, 21, 23, 45, 47, 41, 38, 37, 21, 24]
+data = [125, 130, 125, 95, 115, np.nan, 100, np.nan, 130, 110,
+        90, 110, 120, 115, 105, 85, 115, 110, 120, 100, np.nan]
+
+df = pd.DataFrame({'age': age, 'IQ': data})
+display(df)
+```
+
+Selanjutnya kita akan mengecek jenis distribusi data menggunakan library matplotlib  
+
+```{python}
+data = [125, 130, 125, 95, 115, 100, 130, 110, 90,
+        110, 120, 115, 105, 85, 115, 110, 120, 100]
+
+fig = px.histogram(df, x='IQ')
+fig.show()
+```
+
+Distribusi data adalah skew negatif karena puncak dari data berada di sebelah kanan titik tengah. Mari kita hitung nilai imputasi menggunakan rumus IQR. 
+
+Inter-Quartile-Range (IQR) adalah sebuah nilai yang digunakan untuk mengukur sebaran data dalam sebuah distribusi.
+
+${IQR = Q_{3} - Q_{1}}$  
+
+${IQR_{max} = Q_{3} + 3 * IQR}$  
+
+${IQR_{min} = Q_{1} + 3 * IQR}$  
+
+Pertama-tama, kita akan hitung nilai precentile dari dataset, yang dapat kita kalkulasi dengan mudah menggunakan fungsi np.precentile dari library numpy.  
+
+```{python}
+median = np.median(data)
+q1 = np.percentile(data, 25)
+q3 = np.percentile(data, 75)
+
+print(f'Median: {median}')
+print(f'Q1: {q1}')
+print(f'Q3: {q3}')
+```
+
+Lalu kita akan menghitung nilai IQR, IQRmin, dan IQRmax
+
+```{python}
+iqr = q3 - q1
+iqrmin = q1 + 3 * iqr
+iqrmax = q3 + 3 * iqr
+
+print(f'IQR: {iqr}')
+print(f'IQRmin: {iqrmin}')
+print(f'IQRmax: {iqrmax}')
+```
+
+Anda boleh memilih nilai diantara IQRmin dan IQRmax. Namun untuk contoh ini, kita akan ambil nilai IQRmax saja, lalu kita masukkan ke dataset.
+
+```{python}
+df['IQ'] = df['IQ'].fillna(iqrmax)
+display(df)
+```
+
+#### Regresi Linier  
+Teknik imputasi regresi adalah metode untuk mengisi nilai kosong menggunakan algoritma regresi. Algoritma regresi akan memprediksi nilai kosong berdasarkan hubungan fitur nilai kosong dengan fitur lainnya. 
+
+**Kelebihan**
+- Sederhana dan mudah dipahami  
+- Menggabungkan hubungan antar variabel  
+- Cocok untuk data yang besar dan bersifat numerik  
+
+**Kekurangan**
+- Hanya berlaku untuk data yang linear  
+- Sensitif terhadap outlier  
+- Tidak dapat menangani data non-numerik  
+- Bergantung kepada dua fitur  
+
+##### Regresi Linier - Hands On Coding  
+Kelemahan utama dari teknik regresi ini adalah dataset harus mempunyai distribusi linear. Mengambil contoh dataset age (umur) dan IQ, Jika dataset tersebut adalah linear, semakin tinggi umur seseorang, maka semakin tinggi IQ orang tersebut.  
+
+Maka dari itu, kita harus mengecek jenis data yang akan kita kerjakan, apakah data tersebut bersifat linear atau tidak.  Untuk mengecek dataset, kita gunakan grafik scatter plot.  
+
+```{python}
+age = [25, 26, 29, 30, 30, 31, 44, 46, 22, 33,
+       35, 27, 21, 23, 45, 47, 41, 38, 37, 21, 24]
+data = [125, 130, 125, 95, 115, np.nan, 100, np.nan, 130, 110,
+        90, 110, 120, 115, 105, 85, 115, 110, 120, 100, np.nan]
+
+df = pd.DataFrame({'age': age, 'IQ': data})
+
+# hapus data NaN
+df = df.dropna()
+
+# buat grafik scatter
+fig = px.scatter(df, x='age', y='IQ',
+                 color='age', hover_data=['age', 'IQ'])
+fig.show()
+```
+
+Secara garis besar, scatter plot membentuk sebuah garis diagonal dari pojok kiri atas ke pojok kiri bawah.  
+
+![Gambar9. Data bersifat Linear](./9.linear.png)
+
+Untuk menambah keyakinan kita bahwa dataset bersifat linear, kita dapat melakukan pengecekan dataset menggunakan pearson correllation. Kita harus menginstall library scipy terlebih dahulu dengan menjalankan perintah `pip install scipy` di terminal atau command prompt.  
+
+Pearson correlation adalah sebuah rumus yang berfungsi untuk menghitung kekuatan dan arah hubungan antara dua variable.  nilai -1 mengindikasikan bahwa korelasi bersifat negatif, semakin kecil nilai variable x, maka nilai variable y akan semakin besar.  nilai 0 mengindikasikan bahwa tidak ada korelasi linear antara variable.  nilai 1 mengindikasikan bahwa korelasi bersifat positif.  
+
+```{python}
+corr, _ = pearsonr(df['age'], df['IQ'])
+print(f'Pearsons correlation: {round(corr,2)}')
+```
+
+nilai pearson -0.53 menandakan bahwa hubungan antara variabel umur dan iq adalah linear negatif yang mempunyai intensitas lemah.
+
+Selanjutnya, kita akan membuat model regresi. Sebelumnya, kita harus menginstall library keras dengan cara menjalankan perintah `pip install keras` di terminal atau command prompt.  
+
+```{python}
+model = Sequential()
+model.add(Dense(1, input_shape=(1,)))
+model.compile(Adam(learning_rate=0.8), 'mean_squared_error')
+
+model.fit(df['age'], df['IQ'], epochs=1000, verbose=0)
+
+pred = model.predict(df['age'])
+
+plt.scatter(df['age'], df['IQ'])
+plt.plot(df['age'], pred, color='red')
+plt.xlabel('Age')
+plt.ylabel('IQ')
+plt.show()
+```
+
+Lalu buat hasil prediksi dari model regresi. Nilai yang kosong adalah IQ dengan umur 27, 31, dan 37. Maka kita masukkan ketiga nilai tersebut ke model untuk di prediksi nilai IQ nya.  
+```{python}
+hasilprediksi = model.predict([27, 31, 37]).round(0).astype(int)
+print(hasilprediksi)
+```
+
+Hasil prediksi menunjukkan angka 115, 112, dan 107. Maka kita akan masukkan nilai IQ tersebut kedalam dataset
+
+```{python}
+age = [25, 26, 29, 30, 30, 31, 44, 46, 22, 33,
+       35, 27, 21, 23, 45, 47, 41, 38, 37, 21, 24]
+data = [125, 130, 125, 95, 115, np.nan, 100, np.nan, 130, 110,
+        90, 110, 120, 115, 105, 85, 115, 110, 120, 100, np.nan]
+
+data[5] = hasilprediksi[0][0]
+data[7] = hasilprediksi[1][0]
+data[20] = hasilprediksi[2][0]
+df = pd.DataFrame({'age': age, 'IQ': data})
+display(df)
+```
+
+#### Frequent  
+Imputasi frequent adalah teknik imputasi yang hanya bisa digunakan di jenis data kategorik. Kita mengambil nilai kategorik yang paling sering muncul, dan memasukkannya ke data yang kosong. 
+
+**Kelebihan**
+- Cocok untuk data dengan missing at random.  
+- Mudah dan cepat diterapkan.  
+- Cocok utk data yang memiliki skew  
+- Dapat digunakan dalam produksi (mis. dalam model deployment).  
+
+**Kelemahan**
+- Mendistorsi relasi label dengan frekuensi tertinggi vs variabel lain.  
+- Menghasilkan over-representation jika banyak data yang missing.  
+
+##### Frequent - Hands On Coding
+
+Langkah pertama adalah memuat dataset yang mempunyai jenis data kategorik. Oleh karena itu, fitur IQ kita ganti oleh nilai 'rendah', 'sedang', dan 'tinggi'
+
+```{python}
+age = [25, 26, 29, 30, 30, 31, 44, 46, 22, 33,
+       35, 27, 21, 23, 45, 47, 41, 38, 37, 21, 24]
+IQ = ['rendah', 'sedang', 'sedang', np.nan, 'sedang', 'rendah', np.nan, 'tinggi', 'sedang', 'sedang',
+      'rendah', 'sedang', 'tinggi', 'sedang', np.nan, 'rendah', 'tinggi', 'sedang', 'tinggi', 'rendah', 'tinggi']
+
+df = pd.DataFrame({'age': age, 'IQ': IQ})
+display(df)
+```
+
+Lalu kita hitung frekuensi dari data kategorik 
+
+```{python}
+freq = df['IQ'].value_counts()
+print(freq)
+```
+
+Kategori sedang mempunyai frekuensi paling tinggi dengan nilai 8. Jadi, nilai imputasi yang akan kita gunakan adalah ‘sedang’
+
+Selanjutnya, kita masukkan data 'sedang' ke dataset.
+
+```{python}
+df['IQ'] = df['IQ'].fillna('sedang')
+display(df)
+```
+
+#### K-Nearest Neighbor (KNN)  
+Imputasi menggunakan K-Nearest Neighbors (KNN) adalah sebuah metode untuk mengisi data kosong dengan mempertimbangkan nilai terdekat dari fitur lain di kategori yang sama.
+
+**Kelebihan** 
+- Lebih akurat vs mean/median/most frequent.  
+
+**Kekurangan**
+- Biaya komputasi mahal (karena KNN bekerja dengan menyimpan seluruh dataset pelatihan dalam memori).  
+-Sensitif terhadap outlier dalam data (tidak seperti SVM).  
+
+##### K-Nearest Neighbor (KNN) - Hands On Coding  
+Dataset yang kita gunakan sama dengan contoh diatas  
+
+```{python}
+age = [25, 26, 29, 30, 30, 31, 44, 46, 22, 33,
+       35, 27, 21, 23, 45, 47, 41, 38, 37, 21, 24]
+IQ = ['rendah', 'sedang', 'sedang', np.nan, 'sedang', 'rendah', np.nan, 'tinggi', 'sedang', 'sedang',
+      'rendah', 'sedang', 'tinggi', 'sedang', np.nan, 'rendah', 'tinggi', 'sedang', 'tinggi', 'rendah', 'tinggi']
+
+df = pd.DataFrame({'age': age, 'IQ': IQ})
+display(df)
+```
+
+Algoritma KNN tidak bisa menghitung data berjenis string, maka kita harus konversi dari string (huruf/kata) ke integer (angka). 
+
+```{python}
+df['IQ'] = df['IQ'].map({'rendah': 1, 'sedang': 2, 'tinggi': 3})
+display(df)
+```
+
+Lalu kita membuat model KNN. Hasil dari KNN bisa langsung dimasukkan ke dataset.
+
+```{python}
+imputer = KNNImputer(n_neighbors=3)
+# isi missing value dengan KNN, lalu dibulatkan
+df = pd.DataFrame(np.round(imputer.fit_transform(df)), columns=df.columns)
+display(df)
+```
+
+#### Kesimpulan
+
+-  Sebelum melakukan imputasi kita harus mengetahui jenis missing data, tipe data, dan distribusi data  
+-  Tidak ada metode imputasi yang sempurna, masing masing teknik mempunyai kelebihan dan kelemahan yang unik  
+-  Distribusi data sangat berpengaruh terhadap efisiensi imputasi  
+-  Imputasi dapat dilakukan menggunakan function dari library sklearn, feature_engine, dan keras. Namun akan jauh lebih baik jika kita menghitung/coding secara manual untuk mengetahui cara kerja algoritma tsb sebelum menggunakan function dari library.  
+
+## Handling Outlier  
+Outlier adalah sebuah data yang mempunyai pola atau letak yang menyimpang sangat jauh dari rata rata dataset atau pola yang diharapkan dari sebuah dataset.  
+
+Outlier dapat terjadi karena berbagai alasan, seperti kesalahan pengukuran, kesalahan entri data, variasi alami, atau peristiwa langka. Outlier dapat memiliki dampak signifikan pada analisis statistik, model pembelajaran mesin, dan interpretasi data, yang dapat mengarah pada hasil yang bias atau kesimpulan yang tidak akurat.  
+
+Outlier harus kita atasi agar data bisa kita proses secara efisien.
+
+### Deteksi Outlier 
+Outlier dapat dideteksi menggunakan beberapa metode, antara lain 
+
+#### Visualisasi
+Adalah sebuah teknik untuk memvisualisasikan sebuah data menjadi suatu bentuk yang dapat dilihat secara menyeluruh sehingga kita dapat menganalisa bentuk data, ukuran data, data point dan mendeteksi outlier.  
+
+Beberapa bentuk visualisasi yang sering digunakan untuk mendeteksi outlier yaitu
+- Histogram  
+- Scatter plot  
+- Box plot   
+
+Kita akan menggunakan library plotly express untuk melakukan visualisasi, jadi jangan lupa untuk menginstall plotly dengan menjalankan `pip install plotly` di terminal atau cmd
+
+Dataset yang kita gunakan adalah dataset lagu yang diambil dari spotify. Sumber dari dataset adalah https://www.kaggle.com/datasets/vatsalmavani/spotify-dataset
+
+Namun karena dataset ukurannya sangat besar, maka kita akan gunakan subset dataset berjumlah 100 data yang diambil secara random. Dataset versi ini dapat di download di https://github.com/rif42/AssociateDataScientist/blob/master/Module7-AssociateDataScientist/data_sampled_100.csv
+
+Jika sudah di download, masukkan data ke dalam directory lalu muat dataset tersebut. 
+
+```{python}
+data = pd.read_csv('data_sampled_100.csv')
+data.head()
+```
+
+Dataset ini berisi lagu-lagu yang ada di Spotify. Setiap lagu mempunyai fitur yang unik seperti popularitas, durasi, loudness, acousticness, speechiness, danceability, dll. Anda bisa melihat deskripsi data secara detail di 
+https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features
+
+Selanjutnya kita akan lakukan proses visualisasi data menggunakan plot histogram dengan library plotly. Fitur yang kita visualisasikan adalah loudness atau volume lagu terhadap popularitas dari lagu yang ada di dataset.
+
+Berikut diagram scatter plot dari dataset:  
+```{python}
+fig = px.scatter(data, x='loudness', y='popularity', color='loudness',
+                 hover_data=['artists', 'name', 'loudness', 'popularity'])
+fig.show()
+```
+
+Berikut diagram histogram dari dataset: 
+```{python}
+fig = px.histogram(data, x='loudness')
+fig.show()
+```
+
+Berikut diagram box plot dari dataset:  
+```{python}
+fig = px.box(data, x='loudness')
+fig.show()
+```
+
+Ada beberapa data yang bisa disebut outlier, salah satunya adalah lagu `Thursday Afternoon - 2005 digital remaster, oleh Brian Eno` yang mempunyai nilai loudness `-31.8808`. Alasannya adalah tingkat loudness nya jauh lebih kecil daripada yang lain.
+
+
+
+### Kategori Outlier  
+Variate dan univariate adalah dua jenis data dalam statistik. Outlier adalah observasi atau nilai yang secara signifikan berbeda dari pola atau pola umum data yang lain.
+
+#### Variate Data  
+Variate data merujuk pada set data yang terdiri dari beberapa variabel atau fitur. Contoh umum variate data adalah dataset yang terdiri dari beberapa kolom, di mana setiap kolom mewakili variabel yang berbeda. Misalnya, jika kita memiliki dataset tentang mahasiswa yang mencakup variabel seperti tinggi, berat badan, dan usia, maka kita memiliki variate data. Outlier dalam variate data merujuk pada observasi atau nilai yang di luar kisaran yang diharapkan dalam setidaknya satu variabel.  
+
+#### Univariate Data  
+Univariate data merujuk pada set data yang hanya memiliki satu variabel atau fitur. Contoh umum univariate data adalah dataset yang hanya terdiri dari satu kolom, seperti data tinggi badan seseorang. Outlier dalam univariate data merujuk pada observasi atau nilai yang sangat ekstrem atau jauh dari rentang nilai yang diharapkan.
+
+```{python}
+df = pd.DataFrame({'age': [25, 26, 29, 30, 30, 31, 44, 46],
+                   'IQ': [np.NaN, 121, 91, np.NaN, 110, np.NaN, 118, 93]})
+display(df)
+```
+
+Masih ingat contoh data di imputasi data diatas? Data berisi fitur umur dan nilai IQ. Masing masing fitur hanya mempunyai 1 buah nilai. Inilah yang dimaksud dengan univariate data; data di dalam fitur hanya mempunyai satu jenis nilai.
+
+
+### Mengatasi Outlier  
+Tidak semua outlier harus dihapus atau dihilangkan. Pada contoh data lagu di spotify, meskipun letaknya jauh dari yang lain,data ini masih valid sebagai lagu. Karena adalah lagu `Thursday Afternoon - 2005 digital remaster, oleh Brian Eno` mempunyai genre instrumental/ambient. Umumnya, tujuan utama genre ini adalah sebagai music background, sehingga tidak diperlukan vokal atau melodi yang keras.
+
+Namun terkadang outlier harus dihilangkan atau dihapus karena nilainya terlalu jauh dengan yang lain, yang dapat merubah value dari dataset secara keseluruhan, lalu dapat merubah hasil dari training data.  
+
+#### Discretization/Binning
+Discretization atau binning adalah proses mengubah data kontinu menjadi data diskrit dengan cara membagi rentang nilai kontinu menjadi beberapa interval atau kelompok yang disebut "bin" atau "bucket". Tujuan utama dari discretization adalah mengurangi kompleksitas data kontinu dengan mengelompokkan nilainya ke dalam kategori atau range tertentu.
+
+![Gambar10. Grafik Proses Binning Dataset](./10.binning.png)
+
+**Kelebihan**
+- Dapat diterapkan pada data kategorik dan numerik.  
+- Model lebih robust dan mencegah overfitting.  
+
+**Kekurangan**
+- Meningkatnya biaya kinerja perhitungan.  
+- Mengorbankan informasi.  
+- Untuk kolom data numerik, dapat menyebabkan redudansi untuk beberapa algoritma.  
+- Untuk kolom data kategorik, label dengan frekuensi rendah berdampak negatif pada robustness model statistik.  
+
+##### Discretization/Binning - Hands On Coding  
+Kita akan menggunakan dataset lagu spotify dengan fitur loudness untuk melakukan proses binning. Binning dilakukan menggunakan fungsi `pd.cut`. Fungsi ini akan membagi semua nilai yang ada di dalam sebuah fitur menjadi 3 (atau angka lain yang anda inginkan)  
+
+```{python}
+# muat data
+df = pd.read_csv('./data_sampled_100.csv')
+
+# binning data menjadi 5 kategori
+df['loudness'] = pd.cut(df['loudness'], bins=3, labels=[
+                        'sunyi', 'standar', 'bising'])
+
+# urutkan data berdasarkan fitur loudness
+df_sorted = df.sort_values(by='loudness')
+
+# visualisasikan data menggunakan histogram
+fig = px.histogram(df_sorted, x='loudness')
+fig.show()
+```
+
+
+#### Trimming  
+Trimming adalah proses penghapusan data yang dianggap sebagai outlier.  Trimming biasanya dilakukan berdasarkan presentase data yang akan di trim, contohnya 5%.  
+![Gambar11. Grafik Proses Trimming Dataset](./11.trimming.png)
+
+**Kelebihan**  
+- Cepat dan mudah  
+- Dapat memperbaiki rata-rata data  
+
+**Kekurangan**  
+- Hilangnya data yang dapat mengandung informasi  
+- Dapat menyebabkan bias terhadap variansi data  
+
+##### Trimming - Hands On Coding  
+Sangat penting untuk melakukan proses trimming hanya pada data tidak dibutuhkan/invalid. Oleh karena itu, proses trimming seharusnya dimulai dari angka yang sangat kecil, semisal 0.0001%. Jika outlier masih nampak, maka kita tambah presentasenya sedikit demi sedikit.  
+
+Dataset yang kita gunakan masih sama, yaitu lagu spotify dengan fitur loudness. Namun karena ukuran dataset kita cukup kecil, maka kita bisa gunakan presentase trimming 1%.  
+
+Pertama kita muat data, lalu kita sortir dataset.  
+```{python}
+df = pd.read_csv('./data_sampled_100.csv')
+df_sorted = df.sort_values(by='loudness')
+df.head()
+```
+
+Selanjutnya, kita ambil 1% dari data tersebut, hanya dari **tail** atau ujung belakang dari dataset. Nilai ini nantinya akan menjadi batas dari trimming kita.   
+```{python}
+q = df['loudness'].sort_values().quantile(0.01)
+print(q)
+```
+
+Jadi batas dari trimming kita adalah `-27.3332`. Selanjutnya kita akan hilangkan data yang melebihi nilai ini.  
+
+```{python}
+df = df[df['loudness'] > q]
+fig = px.scatter(df, x='loudness', y='popularity', color='loudness',
+                 hover_data=['artists', 'name', 'loudness', 'popularity'])
+fig.show()
+```
+
+Bisa dilihat bahwa lagu `Thursday Afternoon - 2005 digital remaster, oleh Brian Eno` yang mempunyai loudness kurang dari batas trimming sudah hilang.
+
+#### Winsorizing  
+Winsorizing adalah proses penggantian data outlier dengan nilai-nilai yang berada dalam distribusi yang ditentukan.  
+
+**Kelebihan**  
+- Mempertahankan informasi  
+- Mengurangi efek dari outlier  
+- Mudah diimplementasikan  
+
+**Kekurangan**  
+- Dapat menghasilkan bias  
+- Pemilihan presentil dapat mempengaruhi hasil analisis data  
+
+##### Winsorizing - Hands On Coding  
+Kita akan menggunakan dataset dan fitur yang sama, yaitu lagu spotify dengan fitur loudness. Pertama kita akan muat data, lalu tentukan batas data yang akan kita winsorize. Kita akan menggunakan nilai yang sama dengan metode sebelumnya(trimming) yaitu 1% dan batas trimming `-27.3332`.  
+
+```{python}
+df = pd.read_csv('./data_sampled_100.csv')
+df_sorted = df.sort_values(by='loudness')
+df.head()
+```
+
+Perbedaan utama antara trimming dan winsorizing adalah, di proses trimming, nilai dibawah batas dihilangkan, namun di proses winsorizing, nilai dibawah batas digantikan dengan nilai diantara quartil 1 dan quartil 3.
+
+Untuk itu, kita akan menggunakan box plot karena box plot sudah memberikan nilai high fence dan low fence secara langsung.
+
+```{python}
+fig = px.box(df, x='loudness')
+fig.show()
+```
+
+Selanjutnya, kita akan menghitung berapa banyak data yang ada dibawah batas trimming  
+```{python}
+q = df['loudness'].sort_values().quantile(0.01)
+outlier = df[df['loudness'] < q]
+outlier
+```
+
+Diketahui ada 1 buah outlier. Selanjutnya kita akan menentukan nilai q1 dan q3 sebagai batasan nilai winsorizing kita.  
+
+```{python}
+q1 = np.percentile(df['loudness'], 25)
+q3 = np.percentile(df['loudness'], 75)
+print(f'q1 = ',q1)
+print(f'q3 = ',q3)
+```
+
+Nilai q1 dan q3 ini akan kita gunakan untuk memberi batasan terhadap angka random yang akan kita generate sebagai nilai winsorizing kita.  
+
+```{python}
+import random
+import time
+
+#nilai n menyesuaikan jumlah data outlier
+outliercount = len(outlier)
+
+# generate random number
+random.seed(time.time_ns())
+winsorized_outlier = [random.randint(int(q1),int(q3)) for i in range(outliercount)]
+print(winsorized_outlier)
+```
+
+Ingat, nilai ini di generate secara random, jadi nilai akan berubah setiap code di run.  
+Selanjutnya, kita akan memasukkan nilai winsorizing ke outlier, lalu masukkan outlier ke dataset kita.
+
+```{python}
+for i in range(len(winsorized_outlier)):
+    outlier.iloc[i,12] = winsorized_outlier[i]
+
+# masukkan outlier ke dataset induk
+for i in range(len(outlier)):
+    id = outlier.iloc[i,8] # ambil ID dari data outlier
+    index = df[df['id'] == id].index[0] # cari index dari data outlier di dataset
+    df.iloc[index,12] = outlier.iloc[i,12] # gantikan dataset dengan outlier
+
+df = df.sort_values(by='loudness')
+display(df)
+```
+
+
+
+### Imputing  
+Imputing adalah proses penggantian data outlier dengan nilai-nilai yang diprediksi atau diestimasi berdasarkan karakteristik data. Teknik imputasi sudah di bahas secara detail di bab sebelumnya  
+
+**Kelebihan**  
+- Mempertahankan informasi dan ukuran sampel  
+- Meningkatkan akurasi analisis  
+
+**Kekurangan**  
+- Pemilihan metode dan implementasi bisa cukup sulit  
+- Berpotensi merusak distribusi data  
+
+
+### Normalization  
+Adalah metode untuk mengubah skala nilai dalam dataset sehingga nilainya berkisar antara 0 dan 1. Untuk melakukan normalisasi data, kita membagi data berdasarkan nilai minimum dan maksimum dari data. Proses normalisasi baik digunakan untuk dataset yang mempunyai distribusi data non-normal atau tidak beraturan.  
+Rumus dari normalisasi adalah:  
+$$
+normalized_x = \dfrac{x - min(x)}{max(x)-min(x)}
+$$
+
+**Kelebihan**  
+- Mempertahankan informasi dan ukuran sampel  
+- Meningkatkan akurasi analisis  
+- Mudah diimplementasikan  
+
+**Kekurangan**  
+- Metode harus sesuai dengan karakteristik data  
+- Tidak menghilangkan outlier secara langsung, hanya mengurangi efek dari outlier  
+
+
+#### Normalization - Hands On Coding  
+Kita akan menggunakan dataset lagu spotify dengan fitur loudness, mirip seperti bab-bab sebelumnya.  
+Pertama kita cek batasan-batasan data dari fitur loudness  
+
+```{python}
+df = pd.read_csv('./data_sampled_100.csv')
+df['loudness'].describe()
+```
+
+Diketahui bahwa batas minimum data adalah `31.808000`, dan batas maksimum data adalah `-2.478000`  
+Batas-batas data ini akan kita ubah menjadi 0 - 1 menggunakan metode normalization. Sebelumnya, kita cek distribusi dari data menggunakan plot histogram.  
+
+```{python}
+fig = px.histogram(df, x='loudness')
+fig.show()
+```
+
+Lalu kita akan gunakan function minmax scaler untuk melakukan proses normalisasi terhadap data loudness.  
+
+```{python}
+from sklearn.preprocessing import MinMaxScaler
+
+# buat objek scaler
+scaler = MinMaxScaler()
+
+# transformasi data tempo menggunakan objek scaler
+df['loudness'] = scaler.fit_transform(df[['loudness']])
+
+# grafik histogram untuk fitur tempo
+fig = px.histogram(df, x='loudness')
+fig.show()
+```
+
+Selanjutnya, kita cek batas-batas data dari data yang sudah di normalisasi.  
+
+```{python}
+df['loudness'].describe()
+```
+
+Data telah ter-normalisasi! Namun, apa efek dari normalisasi selain mengubah rentang data? Efek yang paling umum adalah jarak data dari kedua ujung menjadi lebih sama-rata. Hal ini dapat menambah akurasi model machine learning.  
+
+### Standarization / Z-Score  
+Standarisasi data adalah suatu proses dalam analisis data yang mengubah variabel-variabel menjadi memiliki rata-rata nol dan standar deviasi satu. Dalam standarisasi data, setiap nilai data dikurangi dengan rata-rata dari seluruh data, kemudian hasilnya dibagi dengan standar deviasi data. Dengan melakukan hal ini, nilai-nilai data akan berada pada skala yang relatif terhadap variabilitas data. Proses standarisasi menggunakan rumus sebagai berikut:  
+
+$$
+standardized_x = \dfrac{x - mean(x)}{standard deviation(x)}
+$$
+
+**Kelebihan**  
+- Mean dan standar deviasi tidak berubah  
+- Tidak sensitif terhadap outlier   
+
+**Kekurangan**  
+- Tidak dapat menentukan batasan data  
+- Hasil dapat berupa angka negatif  
+
+#### Standardization / Z-score - Hands On Coding  
+Kita akan menggunakan dataset lagu spotify dengan fitur loudness, mirip seperti bab-bab sebelumnya.  
+Pertama kita cek batasan-batasan data dari fitur loudness  
+
+```{python}
+df = pd.read_csv('./data_sampled_100.csv')
+df['loudness'].describe()
+```
+
+```{python}
+fig = px.histogram(df, x='loudness')
+fig.show()
+```
+
+Lalu kita akan gunakan function z-score scaler untuk melakukan proses normalisasi terhadap data loudness.  
+
+```{python}
+import scipy.stats as stats
+
+stats.zscore(df['loudness'])
+
+df['loudness'].describe()
+
+
+```

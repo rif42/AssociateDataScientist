@@ -1,0 +1,259 @@
+---
+title: "Project Klasifikasi Sentimen Analisis"
+format: html
+---
+## Klasifikasi Sentimen Analisis
+Klasifikasi dapat berbentuk berupa Sentimen Analisis. Sentimen Analisis merupakan gabungan dari data mining dan text mining. Secara sederhananya merupakan proses mengolah berbagai opini dan argumen dari berbagai media sosial dalam berbagai aspek seperti jasa, produk, atau sesuai dengan isi konten pada media sosial tersebut .
+
+Untuk dapat mengerjakan sebuah sentimen analisis, diperlukan sebuah dataset yang berisi banyak opini positif, negatif, dan atau netral. Maka dari itu pengambilan dataset merupakan proses yang penting dalam tahapan sentimen analisis. Dataset yang baik harus memiliki ukuran yang cukup besar dengan jumlah yang cukup banyak untuk meminimalkan kesalahan secara perhitungan algoritma.
+
+Untuk mendapatkan sebuah dataset yang berisikan opini di media sosial dapat dilakukan dengan berbagai cara. Salah satunya adalah mencari dataset yang sudah jadi pada situs penyedia dataset seperti kaggle, dataset tersebut dapat dikategorikan sebagai dataset publik. Selain dengan menggunakan dataset publik, data opini dapat dibuat dengan cara scraping atau crawling. Scraping merupakan teknik yang sering digunakan untuk mendapatkan atau mengekstrak sebuah informasi pada sebuah media sosial dan atau website secara otomatis tanpa harus melakukan penyalinan secara manual.
+
+## Mencari Data Manual dengan Scraping
+
+Berikut adalah cara mendapatkan data untuk sentimen analisis menggunakan Komentar Youtube. 
+Dapat menggunakan API Key berikut **AIzaSyDkCRF4cmM_TtyBznV9aKptHNZqooyucqU**
+
+```python
+# yang harus di instal
+
+!pip install google-api-python-client
+!pip install google-auth google-auth-oauthlib google-auth-httplib2
+!pip install pickle
+!pip install sastrawi
+!pip install textblob
+```
+
+Code diatas merupakan library yang harus terintal.
+
+```python
+#library yang digunakan, jika dirasa kurang penting dapat dihapus
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import string
+import re
+from nltk import word_tokenize
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from wordcloud import WordCloud, STOPWORDS
+from sklearn.metrics import ConfusionMatrixDisplay
+from textblob import TextBlob
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+```
+Setalah mengimport semua library, selanjutnya measukan code berikut
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+```python
+import pandas as pd
+
+## Call the "build()" function from the Python-client
+from googleapiclient.discovery import build
+
+api_key = input("API KEY: ")
+youtube = build("youtube","v3", developerKey=api_key)
+url = input("VIDEOURL: ")
+
+def get_comments(url):
+    # Get the ID of the video by splitting the URL
+    single_video_id = url.split("=")[1].split("&")[0]
+    # Use the list() method to extract a JSON with key information
+    # from the video.
+    video_list=youtube.videos().list(part="snippet",id=single_video_id).execute()
+    channel_id= video_list["items"][0]["snippet"]["channelId"]
+    title_single_video= video_list["items"][0]["snippet"]["title"]
+    playlist_id = None
+    forUserName = None
+
+    nextPageToken_comments = None
+    commentsone=[]
+
+    while True:
+        #Request the first 50 videos of a channel. This is the full dictionary. The result is store in a variable called "pl_response".
+        #PageToken at this point is "None"
+        pl_request_comment= youtube.commentThreads().list(part=["snippet","replies"],
+                                            videoId=single_video_id,
+                                            maxResults=50,
+                                            pageToken= nextPageToken_comments)
+        pl_response_comment = pl_request_comment.execute()
+
+        ## Send the amount of views and the URL of each video to the videos empty list that was declared at the beginning of the code.
+        for i in pl_response_comment["items"]:
+            vid_comments = i["snippet"]["topLevelComment"]["snippet"]["textOriginal"]
+            comm_author = i["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
+            comm_author_id = i["snippet"]["topLevelComment"]["snippet"]["authorChannelId"]["value"]
+            comm_date = i["snippet"]["topLevelComment"]["snippet"]["publishedAt"]
+            comm_likes = i["snippet"]["topLevelComment"]["snippet"]["likeCount"]
+            new_var=i.get("replies","0")
+
+            commentsone.append({
+                "comm_date":comm_date,
+                "author":comm_author,
+                "author_id":comm_author_id,
+                "likes":comm_likes,
+                "comment":vid_comments,
+                "video_id":single_video_id
+            })
+
+
+
+        nextPageToken_comments = pl_response_comment.get("nextPageToken")
+
+        if not nextPageToken_comments:
+            break
+
+    for i in commentsone[:10]:
+        print(i["comment"])
+
+
+    pd.DataFrame.from_dict(commentsone).to_csv(f"/content/drive/MyDrive/comments/dataset.csv")
+
+get_comments(url)
+```
+pada source code scraping diatas, file yang telah di scraping akan dimasukan kedalam Google Drive dengan nama file **comments**, lalu nama file akan menjadi **dataset.csv**
+
+untuk menampilkan hasil scraping dapat menggunakan perintah seperti berikut.
+
+```python
+df = pd.read_csv('/content/drive/MyDrive/comments/dataset.csv')
+df.head(500)
+df.count()
+```
+
+## Mencari Data dengan mengunjungi website
+Data sentimen analisis bisa didapatkan melalui website penyedia data seperti kaggle dan UC Irvine Machine Learning Repository. 
+
+## Sentimen Analisis menggunakan data scraping youtube
+
+gunakan code berikut untuk melakukan sentimen analisis
+
+```python
+import nltk
+import pandas as pd
+data = pd.read_csv("/content/drive/MyDrive/comments/dataset.csv")
+data = data.dropna()
+print(data.head())
+```
+
+```python
+data_nw = data.drop(['comm_date',"author", 'author_id',"likes",'video_id'], axis=1 )
+data_nw
+```
+Fungsi code diatas adalah untuk menghapus atau melakukan drop pada kolom **'comm_date',"author", 'author_id',"likes",'video_id'**
+
+```python
+data_nw.to_csv("/content/drive/MyDrive/comments/dataset_drop.csv") #Fungsinya untuk menyimpan hasil drop
+```
+
+membuka file hasil dari **dataset_drop.csv**
+```python
+data_baru = pd.read_csv("/content/drive/MyDrive/comments/dataset_drop.csv")
+data_baru.head()
+```
+
+```python
+def caseFolding(comment):
+          comment = comment.lower()
+          comment = comment.strip(" ")
+          comment = re.sub(r'[?|$|.|!]',r'', comment)
+          comment = re.sub(r'[^a-zA-Z0-9 ]',r'', comment)
+          return comment
+
+data_baru['comment'] = data_baru['comment'].apply(caseFolding)
+```
+Fungsi dari code diatas adalah untuk menghilangkan tanda baca serta angka yang tidak dibutuhkan dan mengubah huruf kapital menjadi huruf kecil. Lalu data disimpan ke dalam kolom **comment**.
+
+Selanjutnya simpan menggunakan perintah berikut
+
+```python
+data_baru.to_csv("/content/drive/MyDrive/comments/dataset_bersih.csv")
+```
+Selanjutnya data yang sudah bersih, dapat diberi label negatif, positif, dan atau netral pada samping kolom comments. Label dapat di beri nama **sentiment**. 
+
+Selanjutnya dapat dilakukan uji akurasi menggunakan Algoritma atau model yang sesuai dan yang di inginkan.
+
+Sebagai contoh menggunakan Algoritma KNN, maka dapat menggunakan code berikut.
+
+```python
+import pandas as pd
+
+data = pd.read_csv('/content/drive/MyDrive/comments/dataset_bersih.csv')
+X = data['comment']
+y = data['sentimen']
+```
+
+```python
+# Lakukan preprocessing pada teks
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+
+nltk.download('stopwords')
+
+def preprocessing(text):
+    text = text.lower()
+    text = re.sub(r'\d+', '', text)
+    text = re.sub(r'[^\w\s]', '', text)
+    text = text.strip()
+    tokens = nltk.word_tokenize(text)
+    stop_words = set(stopwords.words('indonesian'))
+    filtered_tokens = [token for token in tokens if token not in stop_words]
+    stemmer = PorterStemmer()
+    stemmed_tokens = [stemmer.stem(token) for token in filtered_tokens]
+    return ' '.join(stemmed_tokens)
+
+X = X.apply(preprocessing)
+```
+
+```python
+# Lakukan vectorization pada teks
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(X)
+```
+
+```python
+# Lakukan pembagian dataset menjadi data training dan data testing
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+```python
+# Lakukan training model KNN
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train, y_train)
+```
+```python
+# Lakukan prediksi pada data testing
+y_pred = knn.predict(X_test)
+```
+```python
+# Lakukan evaluasi model
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average='weighted')
+recall = recall_score(y_test, y_pred, average='weighted')
+f1 = f1_score(y_test, y_pred, average='weighted')
+cm = confusion_matrix(y_test, y_pred)
+
+print('Accuracy:', accuracy)
+print('Precision:', precision)
+print('Recall:', recall)
+print('F1 Score:', f1)
+print('Confusion Matrix:\n', cm)
+```

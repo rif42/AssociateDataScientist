@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Associate Data Scientist - 10&nbsp; Deployment</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./modul_9.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modul_10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Deployment</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Associate Data Scientist</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Understanding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Telaah Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Validasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Menentukan Objek atau Memilih Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cleaning Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pemodelan Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_10.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Deployment</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#pendahuluan" id="toc-pendahuluan" class="nav-link active" data-scroll-target="#pendahuluan"><span class="header-section-number">10.1</span> Pendahuluan</a></li>
+  <li><a href="#instalasi-streamlit" id="toc-instalasi-streamlit" class="nav-link" data-scroll-target="#instalasi-streamlit"><span class="header-section-number">10.2</span> Instalasi Streamlit</a></li>
+  <li><a href="#membuat-aplikasi-web-dengan-streamlit" id="toc-membuat-aplikasi-web-dengan-streamlit" class="nav-link" data-scroll-target="#membuat-aplikasi-web-dengan-streamlit"><span class="header-section-number">10.3</span> Membuat Aplikasi Web dengan Streamlit</a></li>
+  <li><a href="#api-streamlit" id="toc-api-streamlit" class="nav-link" data-scroll-target="#api-streamlit"><span class="header-section-number">10.4</span> API Streamlit</a>
+  <ul class="collapse">
+  <li><a href="#page-config" id="toc-page-config" class="nav-link" data-scroll-target="#page-config"><span class="header-section-number">10.4.1</span> Page Config</a></li>
+  <li><a href="#write" id="toc-write" class="nav-link" data-scroll-target="#write"><span class="header-section-number">10.4.2</span> Write</a></li>
+  <li><a href="#sidebar" id="toc-sidebar" class="nav-link" data-scroll-target="#sidebar"><span class="header-section-number">10.4.3</span> Sidebar</a></li>
+  <li><a href="#input-user" id="toc-input-user" class="nav-link" data-scroll-target="#input-user"><span class="header-section-number">10.4.4</span> Input User</a></li>
+  <li><a href="#handling-input-user" id="toc-handling-input-user" class="nav-link" data-scroll-target="#handling-input-user"><span class="header-section-number">10.4.5</span> Handling Input User</a></li>
+  <li><a href="#pengecekan-dataframe" id="toc-pengecekan-dataframe" class="nav-link" data-scroll-target="#pengecekan-dataframe"><span class="header-section-number">10.4.6</span> Pengecekan Dataframe</a></li>
+  <li><a href="#prediksi" id="toc-prediksi" class="nav-link" data-scroll-target="#prediksi"><span class="header-section-number">10.4.7</span> Prediksi</a></li>
+  <li><a href="#hasil-akhir" id="toc-hasil-akhir" class="nav-link" data-scroll-target="#hasil-akhir"><span class="header-section-number">10.4.8</span> Hasil akhir</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Deployment</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="pendahuluan" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="pendahuluan"><span class="header-section-number">10.1</span> Pendahuluan</h2>
+<p>Deployment model data science dilakukan untuk memastikan model yang dibuat dapat digunakan oleh orang lain. Deployment model data science dapat dilakukan dengan berbagai cara, salah satunya adalah dengan menggunakan <strong>Streamlit</strong>. <br> Streamlit adalah sebuah framework yang dapat digunakan untuk membuat aplikasi web dengan menggunakan bahasa pemrograman Python. Dengan menggunakan Streamlit, deployment model data science dapat dilakukan dengan mudah dan cepat.</p>
+</section>
+<section id="instalasi-streamlit" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="instalasi-streamlit"><span class="header-section-number">10.2</span> Instalasi Streamlit</h2>
+<p><a href="https://streamlit.io/"><img src="images/streamlit-logo-secondary-colormark-darktext.png" class="img-fluid" data-fig-align="left" width="300"></a> <br> Untuk menginstall Streamlit, dapat dilakukan dengan menggunakan perintah berikut pada command prompt atau terminal:</p>
+<pre><code>pip install streamlit</code></pre>
+</section>
+<section id="membuat-aplikasi-web-dengan-streamlit" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="membuat-aplikasi-web-dengan-streamlit"><span class="header-section-number">10.3</span> Membuat Aplikasi Web dengan Streamlit</h2>
+<p>Setelah Streamlit terinstall, langkah selanjutnya adalah membuat aplikasi web dengan menggunakan Streamlit. Untuk membuat aplikasi web dengan Streamlit, dapat dilakukan dengan cara membuat file python baru dengan nama app.py. Kemudian, pada file tersebut, tuliskan kode berikut:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># streamlit umumnya diinisialisasi dengan 'st'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="api-streamlit" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="api-streamlit"><span class="header-section-number">10.4</span> API Streamlit</h2>
+<p>API Streamlit dapat digunakan untuk membuat aplikasi web dengan Streamlit. API Streamlit dapat dilihat pada <a href="https://docs.streamlit.io/library/api-reference">dokumentasi Streamlit</a>. Berikut adalah beberapa API Streamlit yang dapat digunakan untuk membuat aplikasi web dengan Streamlit:</p>
+<section id="page-config" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="page-config"><span class="header-section-number">10.4.1</span> Page Config</h3>
+<p><code>st.set_page_config</code> dapat digunakan untuk mengatur konfigurasi halaman. Beberapa konfigurasi yang dapat diatur adalah judul halaman, layout halaman, dan lain-lain. Berikut adalah contoh penggunaan <code>st.set_page_config</code> untuk mengatur judul halaman:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>st.set_page_config(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    page_title<span class="op">=</span><span class="st">"Estimasi Hotel Yogyakarta"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    page_icon<span class="op">=</span><span class="st">':hotel:'</span> <span class="co"># :hotel: merupakan nama emoji</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/st_page_config.png" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+</section>
+<section id="write" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="write"><span class="header-section-number">10.4.2</span> Write</h3>
+<p><code>st.write</code> dapat digunakan untuk menampilkan teks, dataframe, dan visualisasi. Format penulisan dalam method ini adalah format markdown. Berikut adalah contoh penggunaan <code>st.write</code> untuk menampilkan teks:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">'Yogyakarta Hotel Price Estimation'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>st.write(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'For more info about this project, please visit my [**Github**](https://github.com/Liore-S/hotel-yoyakarta)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/st_write.png" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+</section>
+<section id="sidebar" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="sidebar"><span class="header-section-number">10.4.3</span> Sidebar</h3>
+<p><code>st.sidebar</code> dapat digunakan untuk membuat sidebar. Sidebar bisa digunakan sekedar untuk informasi tambahan atau bahka bisa sebagai input user. Berikut adalah contoh penggunaan <code>st.sidebar</code> untuk membuat sidebar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>st.sidebar.header(<span class="st">'User Input Features'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="input-user" class="level3" data-number="10.4.4">
+<h3 data-number="10.4.4" class="anchored" data-anchor-id="input-user"><span class="header-section-number">10.4.4</span> Input User</h3>
+<p>Untuk memasukkan elemen input user dalam sidebar dapat dilakukan dengan menggunakan <code>st.sidebar.slider</code>, <code>st.sidebar.selectbox</code> dan lain sebagainya . Berikut adalah contoh input data pada sidebar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> user_input_features():</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    starRating <span class="op">=</span> st.sidebar.slider(<span class="st">'Star Rating'</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    builtYear <span class="op">=</span> st.sidebar.slider(<span class="st">'Built Year'</span>, <span class="dv">1900</span>, <span class="dv">2023</span>, <span class="dv">1960</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> st.sidebar.slider(<span class="st">'Room Size (m2)'</span>, <span class="fl">2.0</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                             <span class="fl">100.0</span>, <span class="fl">50.0</span>, <span class="fl">0.1</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'</span><span class="sc">%0.1f</span><span class="st">'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    occupancy <span class="op">=</span> st.sidebar.slider(<span class="st">'Occupancy'</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    childAge <span class="op">=</span> st.sidebar.slider(<span class="st">'Child Age'</span>, <span class="dv">0</span>, <span class="dv">18</span>, <span class="dv">9</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    childOccupancy <span class="op">=</span> st.sidebar.slider(<span class="st">'Child Occupancy'</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    breakfast <span class="op">=</span> st.sidebar.checkbox(<span class="st">'Breakfast Included'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    wifi <span class="op">=</span> st.sidebar.checkbox(<span class="st">'Wifi Included'</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    refund <span class="op">=</span> st.sidebar.checkbox(<span class="st">'Free Cancellation / Refund'</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    livingRoom <span class="op">=</span> st.sidebar.checkbox(<span class="st">'Living Room'</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    hotelFacilitie <span class="op">=</span> st.sidebar.multiselect(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Hotel Facilities'</span>, (hotelFacilities))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    roomFacilitie <span class="op">=</span> st.sidebar.multiselect(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Room Facilities'</span>, (roomFacilities))</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    pointInterest <span class="op">=</span> st.sidebar.multiselect(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Point of Interest'</span>, (nearestPoint))</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Handle Checkbox</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    breakfast <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> breakfast <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    wifi <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> wifi <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    refund <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> refund <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    livingRoom <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> livingRoom <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Handle Multiselect</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    hotelFacilitie <span class="op">=</span> <span class="st">','</span>.join(hotelFacilitie)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    roomFacilitie <span class="op">=</span> <span class="st">','</span>.join(roomFacilitie)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    pointInterest <span class="op">=</span> <span class="st">','</span>.join(pointInterest)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>            <span class="st">'starRating'</span>: starRating,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>            <span class="st">'builtYear'</span>: builtYear,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>            <span class="st">'size'</span>: size,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>            <span class="st">'baseOccupancy'</span>: occupancy,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">'maxChildAge'</span>: childAge,</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>            <span class="st">'maxChildOccupancy'</span>: childOccupancy,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>            <span class="st">'isBreakfastIncluded'</span>: breakfast,</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>            <span class="st">'isWifiIncluded'</span>: wifi,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>            <span class="st">'isRefundable'</span>: refund,</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>            <span class="st">'hasLivingRoom'</span>: livingRoom,</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>            <span class="st">'hotelFacilities'</span>: hotelFacilitie,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>            <span class="st">'roomFacilities'</span>: roomFacilitie,</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nearestPoint'</span>: pointInterest</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    features <span class="op">=</span> pd.DataFrame(data, index<span class="op">=</span>[<span class="dv">0</span>])</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> features</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>st.sidebar.header(<span class="st">'User Input Features'</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> user_input_features()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>slider</strong> digunakan untuk memasukkan elemen input user berupa angka</li>
+<li><strong>checkbox</strong> digunakan untuk memasukkan elemen input user berupa boolean</li>
+<li><strong>multiselect</strong> digunakan untuk memasukkan elemen input user berupa list</li>
+</ul>
+</section>
+<section id="handling-input-user" class="level3" data-number="10.4.5">
+<h3 data-number="10.4.5" class="anchored" data-anchor-id="handling-input-user"><span class="header-section-number">10.4.5</span> Handling Input User</h3>
+<p>Setelah input user diterima, input user perlu diubah menjadi bentuk yang dapat digunakan oleh model. Untuk model ini perlu dilakukan multi-hot encoding untuk kolom fasilitas hotel, fasilitas kamar, dan <em>point of interests</em>, Berikut code untuk melakukan multi-hot encoding:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create function to create dataframe with 0 and 1 value</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_df(dfOri, df_name, df, prefix):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    value <span class="op">=</span> prefix<span class="op">+</span>dfOri[df_name][<span class="dv">0</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(df.columns)):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        column_name <span class="op">=</span> df.columns[i]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> column_name <span class="kw">in</span> value:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            df.loc[<span class="dv">0</span>, column_name] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>            df.loc[<span class="dv">0</span>, column_name] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># create empty dataframe for hotelFacilities, roomFacilities, nearestPoint, with column name from hotelFacilities, roomFacilities, nearestPoint</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>roomFacilities_df <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>roomFacilities)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>hotelFacilities_df <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>hotelFacilities)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>nearestPoint_df <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>nearestPoint)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>create_df(df, <span class="st">'roomFacilities'</span>, roomFacilities_df, <span class="st">'Room_'</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>create_df(df, <span class="st">'hotelFacilities'</span>, hotelFacilities_df, <span class="st">'Hotel_'</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>create_df(df, <span class="st">'nearestPoint'</span>, nearestPoint_df, <span class="st">'Point_'</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop([<span class="st">'hotelFacilities'</span>, <span class="st">'roomFacilities'</span>, <span class="st">'nearestPoint'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([df, hotelFacilities_df, roomFacilities_df, nearestPoint_df], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># change all column data type to unit8 except the first column</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.astype({col: <span class="st">'float64'</span> <span class="cf">for</span> col <span class="kw">in</span> df.columns[:<span class="dv">2</span>]})</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.astype({col: <span class="st">'uint8'</span> <span class="cf">for</span> col <span class="kw">in</span> df.columns[<span class="dv">2</span>:]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Code diatas digunakan untuk membuat data input user menjadi sama pada data yang dilakukan training. Hal ini dilakukan agar model dapat melakukan prediksi dengan benar.</p>
+</section>
+<section id="pengecekan-dataframe" class="level3" data-number="10.4.6">
+<h3 data-number="10.4.6" class="anchored" data-anchor-id="pengecekan-dataframe"><span class="header-section-number">10.4.6</span> Pengecekan Dataframe</h3>
+<p>Setelah data input user diubah menjadi dataframe, perlu dilakukan pengecekan apakah dataframe tersebut sudah sesuai dengan dataframe yang digunakan untuk training. Berikut adalah code untuk mengecek dataframe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check df column order with model column order using colOri, if not the same print the worng column</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># colOri merupakan kolom pada data training yang di export menggunaka pickle</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>colOri <span class="op">=</span> colOri[<span class="dv">1</span>:]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> df.columns.tolist() <span class="op">==</span> colOri.<span class="bu">all</span>():</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    st.info(<span class="st">"Column order is correct."</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    mismatched_columns <span class="op">=</span> [(idx, df_col, model_col) <span class="cf">for</span> idx, (df_col, model_col) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(df.columns.tolist(), colOri)) <span class="cf">if</span> df_col <span class="op">!=</span> model_col]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(mismatched_columns) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        st.warning(<span class="st">"The order of the columns is not the same as the model. Mismatched columns:"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> idx, df_col, model_col <span class="kw">in</span> mismatched_columns:</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            st.write(<span class="ss">f"At index </span><span class="sc">{</span>idx<span class="sc">}</span><span class="ss">: DataFrame column '</span><span class="sc">{</span>df_col<span class="sc">}</span><span class="ss">' - Model column '</span><span class="sc">{</span>model_col<span class="sc">}</span><span class="ss">'"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Urutan kolom hasil input user <strong>harus sama</strong> dengan urutan kolom pada data training. Jika tidak, maka akan terjadi error atau membuat hasil prediksi menjadi tidak valid.</p>
+</div>
+</div>
+</section>
+<section id="prediksi" class="level3" data-number="10.4.7">
+<h3 data-number="10.4.7" class="anchored" data-anchor-id="prediksi"><span class="header-section-number">10.4.7</span> Prediksi</h3>
+<p>Untuk melakukan prediksi, model perlu di-load terlebih dahulu. Berikut adalah code untuk melakukan prediksi:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Model</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>xgbModel <span class="op">=</span> pickle.load(<span class="bu">open</span>(<span class="st">'Model/xgbModel.pkl'</span>, <span class="st">'rb'</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>svrModel <span class="op">=</span> pickle.load(<span class="bu">open</span>(<span class="st">'Model/svrModel.pkl'</span>, <span class="st">'rb'</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>rfModel <span class="op">=</span> pickle.load(<span class="bu">open</span>(<span class="st">'Model/rfModel.pkl'</span>, <span class="st">'rb'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Dalam contoh ini digunakan 3 model, yaitu XGBoost, Support Vector Regression, dan Random Forest. Untuk melakukan prediksi, dapat dilakukan dengan menggunakan code berikut:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>st.write(<span class="st">'Press button below to predict :'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> st.selectbox(<span class="st">'Select Model'</span>, (<span class="st">'XGBoost'</span>, <span class="st">'Random Forest'</span>, <span class="st">'SVR'</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model <span class="op">==</span> <span class="st">'XGBoost'</span> <span class="kw">and</span> st.button(<span class="st">'Predict'</span>):</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    bar <span class="op">=</span> st.progress(<span class="dv">0</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    status_text <span class="op">=</span> st.empty()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">101</span>):</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        status_text.text(<span class="st">"</span><span class="sc">%i%%</span><span class="st"> Complete"</span> <span class="op">%</span> i)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        bar.progress(i)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="fl">0.01</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Formatting the prediction</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">=</span> xgbModel.predict(df)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    formaString <span class="op">=</span> <span class="st">"Rp{:,.2f}"</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">=</span> <span class="bu">float</span>(prediction[<span class="dv">0</span>])</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    formatted_prediction <span class="op">=</span> formaString.<span class="bu">format</span>(prediction)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.08</span>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print the prediction</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    st.subheader(<span class="st">'Prediction'</span>)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    st.metric(<span class="st">'Price (IDR)'</span>, formatted_prediction)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># empty the progress bar and status text</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.08</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    bar.empty()</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    status_text.empty()</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> model <span class="op">==</span> <span class="st">'Random Forest'</span> <span class="kw">and</span> st.button(<span class="st">'Predict'</span>):</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    bar <span class="op">=</span> st.progress(<span class="dv">0</span>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    status_text <span class="op">=</span> st.empty()</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">101</span>):</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        status_text.text(<span class="st">"</span><span class="sc">%i%%</span><span class="st"> Complete"</span> <span class="op">%</span> i)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        bar.progress(i)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="fl">0.01</span>)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Formatting the prediction</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">=</span> rfModel.predict(df)</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    formaString <span class="op">=</span> <span class="st">"Rp{:,.2f}"</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">=</span> <span class="bu">float</span>(prediction[<span class="dv">0</span>])</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    formatted_prediction <span class="op">=</span> formaString.<span class="bu">format</span>(prediction)</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.08</span>)</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print the prediction</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    st.subheader(<span class="st">'Prediction'</span>)</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    st.metric(<span class="st">'Price (IDR)'</span>, formatted_prediction)</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># empty the progress bar and status text</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.08</span>)</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>    bar.empty()</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>    status_text.empty()</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> model <span class="op">==</span> <span class="st">'SVR'</span> <span class="kw">and</span> st.button(<span class="st">'Predict'</span>):</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>    bar <span class="op">=</span> st.progress(<span class="dv">0</span>)</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>    status_text <span class="op">=</span> st.empty()</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">101</span>):</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>        status_text.text(<span class="st">"</span><span class="sc">%i%%</span><span class="st"> Complete"</span> <span class="op">%</span> i)</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>        bar.progress(i)</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="fl">0.01</span>)</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Formatting the prediction</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">=</span> svrModel.predict(df)</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>    formaString <span class="op">=</span> <span class="st">"Rp{:,.2f}"</span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>    prediction <span class="op">=</span> <span class="bu">float</span>(prediction[<span class="dv">0</span>])</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>    formatted_prediction <span class="op">=</span> formaString.<span class="bu">format</span>(prediction)</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># prediction = rfModel.predict(df)</span></span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.08</span>)</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print the prediction</span></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>    st.subheader(<span class="st">'Prediction'</span>)</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>    st.metric(<span class="st">'Price (IDR)'</span>, formatted_prediction)</span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>    <span class="co"># empty the progress bar and status text</span></span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.08</span>)</span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>    bar.empty()</span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>    status_text.empty()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="hasil-akhir" class="level3" data-number="10.4.8">
+<h3 data-number="10.4.8" class="anchored" data-anchor-id="hasil-akhir"><span class="header-section-number">10.4.8</span> Hasil akhir</h3>
+<p>Unutuk contoh hasil akhir dapat dilihat pada link berikut: <a href="https://hotel-yogyakarta.streamlit.app/">Sreamlit hotel Yogyakarta</a> <br> <img src="images/streamlit_full.png" class="img-fluid" data-fig-align="left" width="600"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./modul_9.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluasi Data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

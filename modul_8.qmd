@@ -1,0 +1,94 @@
+# Pemodelan Data Science
+
+## Pendahuluan
+
+Pemodelan data science adalah proses membangun model yang dapat digunakan untuk memprediksi nilai dari suatu variabel berdasarkan nilai variabel lainnya. Model yang dibangun dapat berupa model statistika, model machine learning, atau model deep learning. Pemodelan data science merupakan salah satu tahapan penting dalam proses data science.
+
+Pada modul ini, data yang akan dijadikan contoh adalah data kamar hotel di Yogyakarta. Data ini berisi informasi mengenai kamar hotel di Yogyakarta yang terdapat pada website [Traveloka](https://www.traveloka.com/id-id/hotel/).
+
+## Tahap Pemodelan Machine Learning
+
+### Data Preparation
+Umumnya data terlebih dahulu dibagi menjadi dua bagian, yaitu data training dan data testing. **Data training** digunakan untuk membangun model, sedangkan **data testing** digunakan untuk menguji performa model. Data training dan data testing harus memiliki karakteristik yang sama. Data training dan data testing dapat dibagi secara acak. Data training dan data testing dapat dibagi dengan perbandingan **80:20** atau **70:30** dimana data testing seharusnya mendapatkan data yang lebih banyak dibandingkan testing agar model dapat dilatih dengan lebih baik.
+
+```{python}
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+# membaca dataset
+df = pd.read_csv('./dataset/kamar-hotel-yogyakarta.csv')
+
+# Memisahkan fitur dan label
+x = df.iloc[:, 1:]
+y = df.iloc[:, 0]
+# Alternatif
+# x = df.drop('harga', axis=1)
+# y = df['harga']
+
+# membagi data menjadi data training dan data testing dengan perbandingan 80:20
+# Random state digunakan untuk mengatur agar pembagian data menjadi sama setiap kali dijalankan (dapat diisi dengan angka berapapun)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=123)
+
+# menampilkan ukuran data training dan data testing
+trainRatio = round(x_train.shape[0]/len(df), 2)*100
+testRatio = round(x_test.shape[0]/len(df), 2)*100
+
+print(f'Train set: {x_train.shape[0]} ({trainRatio}%)')
+print(f'Test set: {x_test.shape[0]} ({testRatio}%)')
+```
+
+### Model Training
+Algoritma yang digunakan dalam modul ini adalah Algoritma Random Forest. Algoritma Random Forest merupakan algoritma yang digunakan untuk melakukan klasifikasi dan regresi. Algoritma Random Forest merupakan pengembangan dari algoritma Decision Tree. Algoritma Random Forest mengambil keputusan berdasarkan hasil voting dari beberapa pohon keputusan.
+
+Library yang digunakan untuk membangun model Random Forest adalah [**sklearn**](https://scikit-learn.org/stable/). Library ini berisi algoritma untuk membangun model machine learning seperti Random Forest, Gradient Boosting, dan lainnya.
+
+```{python}
+from sklearn.ensemble import RandomForestRegressor
+
+rf = RandomForestRegressor()
+
+rf.fit(x_train, y_train)
+
+# menampilkan skor akurasi dari model
+print(f'Skor R2: {rf.score(x_test, y_test)}')
+```
+
+### Parameter Tuning
+Parameter tuning dilakukan untuk menemukan parameter terbaik yang dapat digunakan untuk membangun model. Parameter tuning dapat dilakukan dengan menggunakan GridSearchCV atau RandomizedSearchCV yang terdapat pada library [**sklearn**](https://scikit-learn.org/stable/). Grid Search merupakan teknik untuk mencari parameter terbaik dengan cara mencoba semua kombinasi dari parameter yang diberikan, maka dari itu waktu komputasi akan lebih panjang. Untuk mempercepat waktu komputasi, dapat digunakan Random Search yang akan mencari parameter terbaik secara acak. Untuk detail mengenai parameter yang digunakan pada algoritma Random Forest dapat dilihat pada [dokumentasi sklearn](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html).
+
+```{python}
+from sklearn.model_selection import RandomizedSearchCV
+
+# menentukan parameter yang akan dicoba
+rfParams = {
+    'n_estimators': [100, 200, 300, 400, 500],
+    'max_depth': [None, 5, 10, 15, 20],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'max_features': ['sqrt', 'log2', None],
+}
+
+# mencari parameter terbaik
+rfRandom = RandomizedSearchCV(rf, rfParams, random_state=123, n_jobs=-1)
+
+rfRandom.fit(x_train, y_train)
+
+# menampilkan parameter terbaik
+print(f'Parameter terbaik: {rfRandom.best_params_}')
+
+# menampilkan skor akurasi dari model
+print(f'Skor R2: {rfRandom.score(x_test, y_test)}')
+```
+
+### Saving Model
+Model yang telah dibangun dapat disimpan dengan menggunakan library [**pickle**](https://docs.python.org/3/library/pickle.html). Library ini digunakan untuk menyimpan objek Python ke dalam file. Model yang telah disimpan dapat digunakan kembali tanpa harus membangun model dari awal.
+
+```{python}
+import pickle
+
+# refit model dengan parameter terbaik
+rfModel = rfRandom.best_estimator_.fit(x_train, y_train) 
+
+# menyimpan model
+pickle.dump(rfModel, open('rfModel.pkl', 'wb'))
+```

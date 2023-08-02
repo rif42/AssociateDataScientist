@@ -1,0 +1,2 @@
+# Associate Data Scientist  
+Modul ini dibuat untuk mendampingi mahasiswa yang mengikuti pelatihan Associate Data Scientist.  

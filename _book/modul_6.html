@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Associate Data Scientist - 6&nbsp; Cleaning Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./modul_7.html" rel="next">
+<link href="./modul_5.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modul_6.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cleaning Data</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Associate Data Scientist</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Understanding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Telaah Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Validasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Menentukan Objek atau Memilih Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_6.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cleaning Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pemodelan Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Deployment</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link active" data-scroll-target="#data-cleaning"><span class="header-section-number">6.1</span> Data Cleaning</a></li>
+  <li><a href="#cara-mengatasi-missing-value" id="toc-cara-mengatasi-missing-value" class="nav-link" data-scroll-target="#cara-mengatasi-missing-value"><span class="header-section-number">6.2</span> Cara Mengatasi Missing Value</a>
+  <ul class="collapse">
+  <li><a href="#menghapus-baris-atau-kolom-yang-memiliki-missing-value" id="toc-menghapus-baris-atau-kolom-yang-memiliki-missing-value" class="nav-link" data-scroll-target="#menghapus-baris-atau-kolom-yang-memiliki-missing-value">- Menghapus baris atau kolom yang memiliki missing value</a></li>
+  <li><a href="#mengisi-nilai-kosong-dengan-nilai-rata-rata-atau-median" id="toc-mengisi-nilai-kosong-dengan-nilai-rata-rata-atau-median" class="nav-link" data-scroll-target="#mengisi-nilai-kosong-dengan-nilai-rata-rata-atau-median">- Mengisi nilai kosong dengan nilai rata-rata atau median</a></li>
+  <li><a href="#mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul" id="toc-mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul" class="nav-link" data-scroll-target="#mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul">- Mengisi nilai kosong dengan nilai yang sering muncul</a></li>
+  </ul></li>
+  <li><a href="#menangani-outlier" id="toc-menangani-outlier" class="nav-link" data-scroll-target="#menangani-outlier"><span class="header-section-number">6.3</span> Menangani Outlier</a>
+  <ul class="collapse">
+  <li><a href="#menghapus-outlier" id="toc-menghapus-outlier" class="nav-link" data-scroll-target="#menghapus-outlier">- Menghapus Outlier</a></li>
+  <li><a href="#menggantikan-nilai-outlier-dengan-nilai-lain-seperti-nilai-rata-rata-atau-median." id="toc-menggantikan-nilai-outlier-dengan-nilai-lain-seperti-nilai-rata-rata-atau-median." class="nav-link" data-scroll-target="#menggantikan-nilai-outlier-dengan-nilai-lain-seperti-nilai-rata-rata-atau-median.">- Menggantikan nilai outlier dengan nilai lain seperti nilai rata-rata atau median.</a></li>
+  <li><a href="#mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul-1" id="toc-mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul-1" class="nav-link" data-scroll-target="#mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul-1">- Mengisi nilai kosong dengan nilai yang sering muncul</a></li>
+  </ul></li>
+  <li><a href="#menangani-format-yang-tidak-konsisten" id="toc-menangani-format-yang-tidak-konsisten" class="nav-link" data-scroll-target="#menangani-format-yang-tidak-konsisten"><span class="header-section-number">6.4</span> - Menangani Format yang Tidak Konsisten</a>
+  <ul class="collapse">
+  <li><a href="#mengubah-format-data-menjadi-format-yang-konsisten-seperti-mengubah-format-tanggal-menjadi-format-yang-sama" id="toc-mengubah-format-data-menjadi-format-yang-konsisten-seperti-mengubah-format-tanggal-menjadi-format-yang-sama" class="nav-link" data-scroll-target="#mengubah-format-data-menjadi-format-yang-konsisten-seperti-mengubah-format-tanggal-menjadi-format-yang-sama">- Mengubah format data menjadi format yang konsisten seperti mengubah format tanggal menjadi format yang sama</a></li>
+  <li><a href="#memperbaiki-data-yang-salah-ketik-atau-typo" id="toc-memperbaiki-data-yang-salah-ketik-atau-typo" class="nav-link" data-scroll-target="#memperbaiki-data-yang-salah-ketik-atau-typo">- Memperbaiki data yang salah ketik atau typo</a></li>
+  </ul></li>
+  <li><a href="#menangani-malformed-record" id="toc-menangani-malformed-record" class="nav-link" data-scroll-target="#menangani-malformed-record"><span class="header-section-number">6.5</span> Menangani Malformed Record</a>
+  <ul class="collapse">
+  <li><a href="#menghapus-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan" id="toc-menghapus-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan" class="nav-link" data-scroll-target="#menghapus-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan">- Menghapus record yang tidak sesuai dengan format atau struktur yang diharapkan</a></li>
+  <li><a href="#mengubah-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan" id="toc-mengubah-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan" class="nav-link" data-scroll-target="#mengubah-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan">- Mengubah record yang tidak sesuai dengan format atau struktur yang diharapkan</a></li>
+  </ul></li>
+  <li><a href="#kesimpulan" id="toc-kesimpulan" class="nav-link" data-scroll-target="#kesimpulan"><span class="header-section-number">6.6</span> Kesimpulan</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cleaning Data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="data-cleaning" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="data-cleaning"><span class="header-section-number">6.1</span> Data Cleaning</h2>
+<p>Pada proses machine learning, terdapat tahapan <strong>preprocessing</strong>. Preprocessing merupakan tahapan yang penting dalam machine learning. Hasil dari preprocessing dapat mempengaruhi nilai akurasi dari sebuah model. Tujuan dari Preprocessing adalah untuk memastikan data siap untuk diproses dan atau digunakan pada machine learning. Dalam melakukan preprocessing memiliki beberapa tantangan, diantara adalah <strong>missing value, outlier, format tidak konsisten, dan malformed record</strong></p>
+</section>
+<section id="cara-mengatasi-missing-value" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="cara-mengatasi-missing-value"><span class="header-section-number">6.2</span> Cara Mengatasi Missing Value</h2>
+<ul>
+<li>Mising Value merupakan data yang kosong atau tidak lengkap.</li>
+<li>Tantangan dalam mengatasi missing value adalah bagaimana mengisi nilai kosong tersebut.</li>
+<li>Strategi yang dapat dilakukan diantara lain :
+<ul>
+<li>Menghapus baris atau kolom yang memiliki missing value</li>
+<li>Mengisi nilai kosong dengan nilai rata-rata atau median</li>
+<li>Mengisi nilai kosong dengan nilai yang sering muncul</li>
+</ul></li>
+</ul>
+<p>Pilih strategi yang paling sesuai tergantung pada tipe data dan tujuan analisis</p>
+<section id="menghapus-baris-atau-kolom-yang-memiliki-missing-value" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="menghapus-baris-atau-kolom-yang-memiliki-missing-value">- Menghapus baris atau kolom yang memiliki missing value</h3>
+<section id="tanpa-menggunakan-dataset" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="tanpa-menggunakan-dataset">- Tanpa Menggunakan Dataset</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Contoh dataset dengan nilai yang hilang</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'A'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="va">None</span>, <span class="dv">4</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'B'</span>: [<span class="dv">5</span>, <span class="va">None</span>, <span class="dv">7</span>, <span class="dv">8</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'C'</span>: [<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="va">None</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan dataset sebelum penghapusan</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dataset sebelum penghapusan:"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Hapus baris yang memiliki nilai yang hilang</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>df_cleaned_rows <span class="op">=</span> df.dropna()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Dataset setelah menghapus baris yang memiliki nilai yang hilang:"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_cleaned_rows)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Hapus kolom yang memiliki nilai yang hilang</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>df_cleaned_cols <span class="op">=</span> df.dropna(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Dataset setelah menghapus kolom yang memiliki nilai yang hilang:"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_cleaned_cols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="menggunakan-dataset" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="menggunakan-dataset">- Menggunakan Dataset</h4>
+<p>untuk mengunduh dataset agar dapat digunakan pada source code <a href="https://www.kaggle.com/c/titanic/data">disini</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset Titanic dari file CSV</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>titanic_df <span class="op">=</span> pd.read_csv(<span class="st">"titanic.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi mengenai dataset, termasuk jumlah nilai yang hilang di setiap kolom</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Informasi tentang dataset Titanic:"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_df.info())</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Hapus baris yang memiliki nilai yang hilang</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>titanic_cleaned_rows <span class="op">=</span> titanic_df.dropna()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Dataset Titanic setelah menghapus baris yang memiliki nilai yang hilang:"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_cleaned_rows)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Hapus kolom yang memiliki nilai yang hilang</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>titanic_cleaned_cols <span class="op">=</span> titanic_df.dropna(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Dataset Titanic setelah menghapus kolom yang memiliki nilai yang hilang:"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_cleaned_cols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="mengisi-nilai-kosong-dengan-nilai-rata-rata-atau-median" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="mengisi-nilai-kosong-dengan-nilai-rata-rata-atau-median">- Mengisi nilai kosong dengan nilai rata-rata atau median</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset Titanic dari file CSV</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>titanic_df <span class="op">=</span> pd.read_csv(<span class="st">"titanic.csv"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi mengenai dataset, termasuk jumlah nilai yang hilang di setiap kolom</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Informasi tentang dataset Titanic sebelum pengisian nilai kosong:"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_df.info())</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Mengisi nilai kosong pada kolom 'Age' dengan nilai median dari kolom tersebut</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>age_median <span class="op">=</span> titanic_df[<span class="st">'Age'</span>].median()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>titanic_df[<span class="st">'Age'</span>].fillna(age_median, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Mengisi nilai kosong pada kolom 'Fare' dengan nilai rata-rata dari kolom tersebut</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>fare_mean <span class="op">=</span> titanic_df[<span class="st">'Fare'</span>].mean()</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>titanic_df[<span class="st">'Fare'</span>].fillna(fare_mean, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi tentang dataset setelah pengisian nilai kosong</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Informasi tentang dataset Titanic setelah pengisian nilai kosong:"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_df.info())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul">- Mengisi nilai kosong dengan nilai yang sering muncul</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset Titanic dari file CSV</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>titanic_df <span class="op">=</span> pd.read_csv(<span class="st">"titanic.csv"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi mengenai dataset, termasuk jumlah nilai yang hilang di setiap kolom sebelum pengisian</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Informasi tentang dataset Titanic sebelum pengisian nilai kosong:"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_df.info())</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Mengisi nilai kosong pada kolom 'Embarked' dengan nilai yang sering muncul (mode) dari kolom tersebut</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>embarked_mode <span class="op">=</span> titanic_df[<span class="st">'Embarked'</span>].mode()[<span class="dv">0</span>]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>titanic_df[<span class="st">'Embarked'</span>].fillna(embarked_mode, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi tentang dataset setelah pengisian nilai kosong</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Informasi tentang dataset Titanic setelah pengisian nilai kosong:"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_df.info())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="menangani-outlier" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="menangani-outlier"><span class="header-section-number">6.3</span> Menangani Outlier</h2>
+<p>Outlier merupakan data yang jauh dari nilai rata-rata atau nilai normal. Outlier dapat mempengaruhi hasil analisis dan machine learning.</p>
+<ul>
+<li>Strategi untuk mengatasi Outlier :
+<ul>
+<li>Menghapus outlier.</li>
+<li>Menggantikan nilai outlier dengan nilai lain seperti nilai rata-rata atau median.</li>
+<li>Menggunakan teknik scaling atau normalisasi.</li>
+</ul></li>
+</ul>
+<p>Pilih strategi yang paling sesuai tergantung pada tipe data dan tujuan analisis.</p>
+<section id="menghapus-outlier" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="menghapus-outlier">- Menghapus Outlier</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset Iris dari scikit-learn</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_iris()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>iris_df <span class="op">=</span> pd.DataFrame(data.data, columns<span class="op">=</span>data.feature_names)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi tentang dataset Iris sebelum penghapusan outlier</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Informasi tentang dataset Iris sebelum penghapusan outlier:"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iris_df.describe())</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Definisikan fungsi untuk menghapus outlier berdasarkan z-score</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> remove_outliers_zscore(df, z_threshold<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    z_scores <span class="op">=</span> stats.zscore(df)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df[(z_scores <span class="op">&lt;</span> z_threshold).<span class="bu">all</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Hapus outlier dari dataset Iris berdasarkan z-score</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>iris_cleaned <span class="op">=</span> remove_outliers_zscore(iris_df)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi tentang dataset Iris setelah penghapusan outlier</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Informasi tentang dataset Iris setelah penghapusan outlier:"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iris_cleaned.describe())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pada contoh di atas, digunakan metode z-score untuk mendeteksi outlier dalam dataset Iris. Outlier adalah data yang memiliki z-score lebih besar dari z_threshold yang telah ditentukan (z_threshold=3). Fungsi remove_outliers_zscore digunakan untuk menghapus baris yang mengandung outlier berdasarkan z-score, yaitu baris yang memiliki setidaknya satu fitur (kolom) dengan z-score melebihi z_threshold. Penting untuk berhati-hati karena penghapusan outlier dapat mempengaruhi hasil analisis atau model machine learning. Selain z-score, ada banyak teknik deteksi outlier lainnya seperti IQR dan pendekatan berbasis model machine learning atau domain knowledge.</p>
+</section>
+<section id="menggantikan-nilai-outlier-dengan-nilai-lain-seperti-nilai-rata-rata-atau-median." class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="menggantikan-nilai-outlier-dengan-nilai-lain-seperti-nilai-rata-rata-atau-median.">- Menggantikan nilai outlier dengan nilai lain seperti nilai rata-rata atau median.</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># membaca dataset publik</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># menentukan batas outlier</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>q1 <span class="op">=</span> data[<span class="dv">0</span>].quantile(<span class="fl">0.25</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>q3 <span class="op">=</span> data[<span class="dv">0</span>].quantile(<span class="fl">0.75</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>iqr <span class="op">=</span> q3 <span class="op">-</span> q1</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="op">=</span> q1 <span class="op">-</span> (<span class="fl">1.5</span> <span class="op">*</span> iqr)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="op">=</span> q3 <span class="op">+</span> (<span class="fl">1.5</span> <span class="op">*</span> iqr)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># menggantikan outlier dengan nilai rata-rata</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">0</span>] <span class="op">=</span> data[<span class="dv">0</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: data[<span class="dv">0</span>].mean() <span class="cf">if</span> x <span class="op">&lt;</span> lower_bound <span class="kw">or</span> x <span class="op">&gt;</span> upper_bound <span class="cf">else</span> x)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># menggantikan outlier dengan nilai median</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">0</span>] <span class="op">=</span> data[<span class="dv">0</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: data[<span class="dv">0</span>].median() <span class="cf">if</span> x <span class="op">&lt;</span> lower_bound <span class="kw">or</span> x <span class="op">&gt;</span> upper_bound <span class="cf">else</span> x)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># menampilkan dataset yang telah diubah</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pada contoh kode di atas, dataset publik yang digunakan adalah Iris Dataset yang tersedia di UCI Machine Learning Repository. Pertama-tama, kita menentukan batas outlier dengan menghitung kuartil pertama (Q1), kuartil ketiga (Q3), dan rentang antar kuartil (IQR). Kemudian, kita menentukan batas bawah dan batas atas untuk menentukan nilai outlier.</p>
+<p>Kemudian, kita menggantikan nilai outlier dengan nilai rata-rata atau median. Untuk menggantikan dengan nilai rata-rata, kita menggunakan fungsi apply() pada kolom yang menghasilkan nilai rata-rata jika nilai kurang dari batas bawah atau lebih dari batas atas, sedangkan untuk menggantikan dengan nilai median, kita juga menggunakan fungsi apply() pada kolom yang menghasilkan nilai median jika nilai kurang dari batas bawah atau lebih dari batas atas.</p>
+<p>Terakhir, kita menampilkan dataset yang telah diubah dengan fungsi print().</p>
+</section>
+<section id="mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="mengisi-nilai-kosong-dengan-nilai-yang-sering-muncul-1">- Mengisi nilai kosong dengan nilai yang sering muncul</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset Titanic dari file CSV</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>titanic_df <span class="op">=</span> pd.read_csv(<span class="st">"titanic.csv"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi mengenai dataset, termasuk jumlah nilai yang hilang di setiap kolom sebelum pengisian</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Informasi tentang dataset Titanic sebelum pengisian nilai kosong:"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_df.info())</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Mengisi nilai kosong pada kolom 'Embarked' dengan nilai yang sering muncul (mode) dari kolom tersebut</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>embarked_mode <span class="op">=</span> titanic_df[<span class="st">'Embarked'</span>].mode()[<span class="dv">0</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>titanic_df[<span class="st">'Embarked'</span>].fillna(embarked_mode, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan informasi tentang dataset setelah pengisian nilai kosong</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Informasi tentang dataset Titanic setelah pengisian nilai kosong:"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic_df.info())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pada contoh di atas, menggunakan metode mode() dari pandas untuk menghitung nilai yang sering muncul (mode) pada kolom ‘Embarked’, lalu mengisi nilai kosong pada kolom tersebut dengan nilai mode yang dihitung. Penggunaan parameter inplace=True memastikan perubahan dilakukan langsung pada DataFrame asli. Setelah mengisi nilai kosong, hasilnya dapat diperiksa untuk memastikan tidak ada lagi nilai yang hilang pada kolom ‘Embarked’.</p>
+<p>Perlu diingat, pengisian nilai kosong dengan nilai yang sering muncul merupakan salah satu teknik imputasi yang umum. Teknik lainnya termasuk pengisian dengan nilai rata-rata, nilai median, atau menggunakan model machine learning untuk memprediksi nilai yang hilang berdasarkan data lainnya. Pilihan teknik imputasi tergantung pada karakteristik dataset dan tujuan analisis atau model machine learning yang ingin diimplementasikan.</p>
+</section>
+</section>
+<section id="menangani-format-yang-tidak-konsisten" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="menangani-format-yang-tidak-konsisten"><span class="header-section-number">6.4</span> - Menangani Format yang Tidak Konsisten</h2>
+<p><strong>Format Tidak Konsisten</strong> terjadi ketika data memiliki format yang sama atau tidak sesuai dengan format yang diharapkan. Sering terjadi pada pemformatan tanggal, bulan, dan tahun.</p>
+<ul>
+<li>Strategi dalam mengatasi Format Tidak Konsisten
+<ul>
+<li>Mengubah format data menjadi format yang konsisten seperti mengubah format tanggal menjadi format yang sama</li>
+<li>Memperbaiki data yang salah ketik atau typo</li>
+</ul></li>
+</ul>
+<p>Pilih strategi yang paling sesuai tergantung pada tipe data dan tujuan analisis</p>
+<section id="mengubah-format-data-menjadi-format-yang-konsisten-seperti-mengubah-format-tanggal-menjadi-format-yang-sama" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="mengubah-format-data-menjadi-format-yang-konsisten-seperti-mengubah-format-tanggal-menjadi-format-yang-sama">- Mengubah format data menjadi format yang konsisten seperti mengubah format tanggal menjadi format yang sama</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Contoh dataset dengan kolom tanggal dalam format yang berbeda</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Tanggal'</span>: [<span class="st">'2021-08-01'</span>, <span class="st">'02-08-2021'</span>, <span class="st">'2021/08/03'</span>, <span class="st">'20210804'</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan dataset sebelum perubahan format</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dataset sebelum perubahan format:"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Ubah format tanggal menjadi format yang sama (YYYY-MM-DD)</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Tanggal'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Tanggal'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>).dt.strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan dataset setelah perubahan format</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Dataset setelah perubahan format:"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="memperbaiki-data-yang-salah-ketik-atau-typo" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="memperbaiki-data-yang-salah-ketik-atau-typo">- Memperbaiki data yang salah ketik atau typo</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset Iris dari scikit-learn</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_iris()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>iris_df <span class="op">=</span> pd.DataFrame(data.data, columns<span class="op">=</span>data.feature_names)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>iris_df[<span class="st">'species'</span>] <span class="op">=</span> data.target_names[data.target]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Contoh data dengan salah ketik atau typo</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>iris_df.iloc[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> <span class="fl">5.1</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>iris_df.iloc[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">=</span> <span class="fl">3.6</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan dataset sebelum pembersihan data</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dataset sebelum pembersihan data:"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iris_df)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Koreksi data salah ketik atau typo</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Misalnya, jika nilai 3.6 pada kolom 'sepal width (cm)' seharusnya 3.0</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>iris_df.loc[iris_df[<span class="st">'sepal width (cm)'</span>] <span class="op">==</span> <span class="fl">3.6</span>, <span class="st">'sepal width (cm)'</span>] <span class="op">=</span> <span class="fl">3.0</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Tampilkan dataset setelah pembersihan data</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Dataset setelah pembersihan data:"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(iris_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="menangani-malformed-record" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="menangani-malformed-record"><span class="header-section-number">6.5</span> Menangani Malformed Record</h2>
+<p><strong>Malformed Record</strong> terjadi saat ketika data tidak memenuhi format atau struktur yang diharapkan.</p>
+<ul>
+<li>Strategi yang dapat dilakukan diantara lain :
+<ul>
+<li>Menghapus record yang tidak sesuai dengan format atau struktur yang diharapkan</li>
+<li>Mengubah record yang tidak sesuai dengan format atau struktur yang diharapkan</li>
+</ul></li>
+</ul>
+<p>Pilih strategi yang paling sesuai tergantung pada tipe data dan tujuan analisis.</p>
+<section id="menghapus-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="menghapus-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan">- Menghapus record yang tidak sesuai dengan format atau struktur yang diharapkan</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># membaca dataset</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"nama_file.csv"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># mengecek dan menghapus record yang tidak sesuai dengan format atau struktur yang diharapkan</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, row <span class="kw">in</span> data.iterrows():</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> format_check(row):</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        data.drop(i, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># menampilkan dataset yang telah diubah</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Kode di atas menggunakan library pandas untuk membaca dataset dari file csv dan melakukan pengecekan format atau struktur pada setiap record dalam dataset dengan fungsi format_check(). Jika record tidak sesuai dengan format atau struktur yang diharapkan, maka record tersebut dihapus dari dataset menggunakan fungsi drop(). Fungsi iterrows() digunakan untuk mengiterasi setiap record dalam dataset. Setelah proses penghapusan selesai, dataset yang telah diubah ditampilkan menggunakan fungsi print(). Penting untuk menyesuaikan kode dengan format atau struktur dataset yang digunakan dan memastikan menggunakan fungsi format_check() yang sesuai.</p>
+</section>
+<section id="mengubah-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="mengubah-record-yang-tidak-sesuai-dengan-format-atau-struktur-yang-diharapkan">- Mengubah record yang tidak sesuai dengan format atau struktur yang diharapkan</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># membaca dataset dari file csv</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'nama_file.csv'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># fungsi untuk melakukan pengecekan format atau struktur pada setiap record dalam dataset</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_check(record):</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># implementasi pengecekan format atau struktur pada satu record</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return True jika format atau struktur sesuai, False jika tidak sesuai</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># melakukan iterasi pada setiap record dalam dataset</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> data.iterrows():</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># cek apakah format atau struktur record sesuai dengan yang diharapkan</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> format_check(row):</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># jika tidak sesuai, hapus record dari dataset</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> data.drop(index)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># menampilkan dataset yang telah diubah</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pada contoh di atas, dataset dibaca dari file csv menggunakan fungsi read_csv() dari library pandas. Kemudian, dilakukan iterasi pada setiap record dalam dataset menggunakan fungsi iterrows(). Pada setiap iterasi, record dicek dengan fungsi format_check() untuk memastikan bahwa format atau struktur record sesuai dengan yang diharapkan. Jika tidak sesuai, record tersebut dihapus dari dataset menggunakan fungsi drop(). Setelah proses penghapusan selesai, dataset yang telah diubah ditampilkan menggunakan fungsi print(). Harap diingat bahwa fungsi format_check() harus disesuaikan dengan format atau struktur yang diharapkan pada dataset yang digunakan.</p>
+</section>
+</section>
+<section id="kesimpulan" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="kesimpulan"><span class="header-section-number">6.6</span> Kesimpulan</h2>
+<p>Preprocessing merupakan tahapan penting dalam proses machine learning. Tantangan seperti contoh diatas dapat diatasi dengan berbagai strategi, dengan memilih strategi yang tepat dan pemahaman tipe atau jenis data yang ada akan makin memudahkan dalam melakukan preprocessing.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./modul_5.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Menentukan Objek atau Memilih Data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./modul_7.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformasi Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

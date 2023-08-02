@@ -1,0 +1,345 @@
+---
+title: "Evaluasi Data"
+format: html
+---
+
+## Apa itu Evaluasi Model?
+Merupakan salah satu tahap penting dalam proses machine learning yang memiliki tujuan untuk **memastikan model dapat menghasilkan prediksi yang akurat**.
+
+## Metrik Evaluasi
+- Akurasi
+- Presisi
+- Recall
+- F1-Score
+
+### Akurasi
+- Merupakan metrik yang mengukur sejauh mana model dapat melakukan prediksi dengan benar. 
+
+- Formula atau rumus akurasi yaitu 
+
+- Semakin tinggi nilai akurasi, maka semakin baik model tersebut.
+
+#### **Seberapa Penting Nilai Akurasi**  {.unnumbered}
+- Akurasi dapat digunakan untuk mengevaluasi perfoma sebuah model
+- Akurasi memberikan gambaran seberapa baik model yang digunakan secara keseluruhan
+- Dengan nilai akurasi, dapat mengetahui seberapa akurat dalam memprediksi kelas data.
+
+#### **Kelebihan dan Keterbatasan Akurasi**{.unnumbered}
+- Akurasi memiliki kelebihan sebagai matrik evaluasi yang sederhana dan sangat mudah dimengerti. 
+- Keterbatasan akurasi dalam mengatasi ketidakseimbangan kelas pada sebuah dataset.
+
+#### **Pahami Code berikut** {.unnumbered}
+- Perhatikan contoh code di bawah, kira-kira menghasilkan nilai Akurasi berapa persen? 
+- Anda dapat mencoba code di samping menggunakan dataset yang berbeda, lalu fahami dan lihat nilai Akurasinya. 
+
+- Pada dataset yang digunakan, dibagi menjadi 80:20 pada tahap split data. Selanjutnya menggunakan algoritma KNN dengan nilai K=3. selanjutnya akan dilakukan prediksi pada data uji dan akurasi model yang dihitung dengan membandingkan hasil prediksi dengan label sebenarnya pada data uji menggunakan fungsi “accuracy_score”
+
+```python
+# Impor library yang diperlukan
+from sklearn.datasets import load_iris #dataset dari sklearn
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+# Muat dataset Iris
+#dapat dirubah menggunakan dataset yang lain
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Bagi data menjadi data latih dan data uji
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Inisialisasi model K-Nearest Neighbors (KNN) dengan k=3
+model = KNeighborsClassifier(n_neighbors=3)
+
+# Latih model menggunakan data latih
+model.fit(X_train, y_train)
+
+# Lakukan prediksi pada data uji
+y_pred = model.predict(X_test)
+
+# Hitung akurasi model dengan membandingkan prediksi dengan label sebenarnya pada data uji
+accuracy = accuracy_score(y_test, y_pred)
+
+# Tampilkan hasil akurasi
+print("Akurasi model: {:.2f}%".format(accuracy * 100))
+
+
+```
+
+### **Presisi dan Recall**
+Presisi dan Recall merupakan metrik untuk mengukur performa pada model tertentu.
+Semakin tinggi nilai presisi dan recall, maka semakin baik model pada kelas tertentu.
+
+#### **Presisi** {.unnumbered}
+- Presisi mengukur sejauh mana, model **dapat melakukan identifikasi dengan benar** pada kelas tertentu. 
+- Formula atau rumus presisi sebagai berikut 
+
+#### **Recall** {.unnumbered}
+- Recall mengukur sejauh mana model **dapat menemukan kembali** kelas tertentu. 
+- Formula atau rumus dari recall 
+
+#### **Pahami Code berikut** {.unnumbered}
+Pada dataset yang digunakan, dibagi menjadi 80:20 pada tahap split data. Selanjutnya menggunakan algoritma KNN dengan nilai K=3. selanjutnya model akan melakukan prediksi pada data uji dan presisi serta recall dari model menggunakan fungsi **precision_score** dan **recall_score** dengan parameter **average='macro'**
+
+```python
+# Impor library yang diperlukan
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import precision_score, recall_score
+
+# Muat dataset Iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Bagi data menjadi data latih dan data uji
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Inisialisasi model K-Nearest Neighbors (KNN) dengan k=3
+model = KNeighborsClassifier(n_neighbors=3)
+
+# Latih model menggunakan data latih
+model.fit(X_train, y_train)
+
+# Lakukan prediksi pada data uji
+y_pred = model.predict(X_test)
+
+# Hitung presisi model
+precision = precision_score(y_test, y_pred, average='macro')
+
+# Hitung recall model
+recall = recall_score(y_test, y_pred, average='macro')
+
+# Tampilkan hasil presisi dan recall
+print("Presisi model: {:.2f}".format(precision))
+print("Recall model: {:.2f}".format(recall))
+
+```
+
+### **F1-Score**
+- Merupakan metrik untuk menggabungkan presisi dan recall
+- Formula F1-Score 
+
+- Semakin tinggi dari nilai F1-Score, maka semakin baik model pada kelas tersebut.
+#### **Mengapa F1-Score penting?** {.unnumbered}
+- F1-Score cocok digunakan saat terdapat ketidakseimbangan kelas pada sebuah dataset.
+- F1-Score memberikan bobot yang seimbang antara presisi dan recall.
+
+#### **Pahami Code berikut** {.unnumbered}
+
+Pada dataset yang digunakan, dibagi menjadi 80:20 pada tahap **split data**. Selanjutnya menggunakan algoritma KNN dengan nilai K=3. selanjutnya model tersebut melakukan prediksi pada data uji dan F1-score dari model dihitung menggunakan fungsi **f1_score** dengan parameter **average='macro'**
+
+```python
+# Impor library yang diperlukan
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import f1_score
+
+# Muat dataset Iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Bagi data menjadi data latih dan data uji
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Inisialisasi model K-Nearest Neighbors (KNN) dengan k=3
+model = KNeighborsClassifier(n_neighbors=3)
+
+# Latih model menggunakan data latih
+model.fit(X_train, y_train)
+
+# Lakukan prediksi pada data uji
+y_pred = model.predict(X_test)
+
+# Hitung F1-score model
+f1score = f1_score(y_test, y_pred, average='macro')
+
+# Tampilkan hasil F1-score
+print("F1-score model: {:.2f}".format(f1score))
+
+```
+### **Pahami Code berikut**
+- Apa yang berbeda dari ketiga source code sebelumnya? 
+- Bagaimana hasil nilai akurasi, presisi, recall, dan F1-Score?
+
+```python
+# Impor library yang diperlukan
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+# Muat dataset Iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Bagi data menjadi data latih dan data uji
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Inisialisasi model K-Nearest Neighbors (KNN) dengan k=3
+model = KNeighborsClassifier(n_neighbors=3)
+
+# Latih model menggunakan data latih
+model.fit(X_train, y_train)
+
+# Lakukan prediksi pada data uji
+y_pred = model.predict(X_test)
+
+# Hitung akurasi model
+accuracy = accuracy_score(y_test, y_pred)
+
+# Hitung presisi model
+precision = precision_score(y_test, y_pred, average='macro')
+
+# Hitung recall model
+recall = recall_score(y_test, y_pred, average='macro')
+
+# Hitung F1-score model
+f1score = f1_score(y_test, y_pred, average='macro')
+
+# Tampilkan hasil akurasi, presisi, recall, dan F1-score
+print("Akurasi model: {:.2f}%".format(accuracy * 100))
+print("Presisi model: {:.2f}".format(precision))
+print("Recall model: {:.2f}".format(recall))
+print("F1-score model: {:.2f}".format(f1score))
+
+```
+
+### **Kurva ROC dan AUC**
+- ROC dan AUC merupakan metrik evaluasi model pada sebuah machine learning. 
+- ROC atau Receiver Operating Characteristic merupakan grafik yang menggambarkan sebuah performa model pada berbagai threshold.
+- AUC atau Area Under the Curve merupakan luas daerah di bawah kurva ROC yang menggambarkan performa dari keseluruhan model.
+
+#### **Kurva ROC**  {.unnumbered}
+- ROC Curve adalah grafik yang menggambarkan trade-off antara True Positive Rate (TPR) dan False Positive Rate (FPR)
+- TPR adalah rasio data positif yang benar diprediksi oleh model, dibandingkan dengan total data positif
+- FPR adalah rasio data negatif yang salah diprediksi sebagai positif oleh model, dibandingkan dengan total data negatif
+- Semakin dekat kurva ROC ke sudut kiri atas, semakin baik performa model
+
+#### **Kurva AUC** {.unnumbered}
+- AUC adalah metrik evaluasi yang mengukur performa keseluruhan model
+- AUC menghitung luas daerah di bawah kurva ROC
+- Nilai AUC berada dalam rentang 0 hingga 1, dengan nilai terbaik adalah
+
+#### **Pahami Code berikut** {.unnumbered}
+
+```python
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_curve, roc_auc_score
+
+# Muat dataset Iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Bagi data menjadi data latih dan data uji
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Inisialisasi model Logistic Regression
+model = LogisticRegression()
+
+# Latih model menggunakan data latih
+model.fit(X_train, y_train)
+
+# Dapatkan probabilitas prediksi untuk kelas positif
+y_prob = model.predict_proba(X_test)[:, 1]
+
+# Hitung nilai AUC (Area Under the Curve)
+auc_score = roc_auc_score(y_test, y_prob)
+
+# Hitung nilai FPR (False Positive Rate) dan TPR (True Positive Rate) untuk kurva ROC
+fpr, tpr, _ = roc_curve(y_test, y_prob)
+
+# Plot kurva ROC
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = {:.2f})'.format(auc_score))
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC)')
+plt.legend(loc="lower right")
+plt.show()
+
+```
+
+### **Amati dan pahami code berikut**
+- Apa yang berbeda dari ketiga source code sebelumnya? 
+- Bagaimana hasil dari code tersebut?
+
+
+```python
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_curve, roc_auc_score
+
+# Muat dataset Iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Bagi data menjadi data latih dan data uji
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Inisialisasi model Logistic Regression
+model = LogisticRegression()
+
+# Latih model menggunakan data latih
+model.fit(X_train, y_train)
+
+# Lakukan prediksi pada data uji
+y_pred = model.predict(X_test)
+
+# Menghitung akurasi model
+accuracy = accuracy_score(y_test, y_pred)
+print("Akurasi Model: {:.2f}".format(accuracy))
+
+# Menghitung presisi model
+precision = precision_score(y_test, y_pred, average='macro')
+print("Presisi Model: {:.2f}".format(precision))
+
+# Menghitung recall model
+recall = recall_score(y_test, y_pred, average='macro')
+print("Recall Model: {:.2f}".format(recall))
+
+# Menghitung F1-score model
+f1score = f1_score(y_test, y_pred, average='macro')
+print("F1-Score Model: {:.2f}".format(f1score))
+
+# Dapatkan probabilitas prediksi untuk kelas positif
+y_prob = model.predict_proba(X_test)
+
+# Hitung nilai AUC (Area Under the Curve) untuk setiap kelas
+auc_scores = []
+for i in range(len(iris.target_names)):
+    auc_score = roc_auc_score(y_test == i, y_prob[:, i])
+    auc_scores.append(auc_score)
+    print("AUC Class {}: {:.2f}".format(iris.target_names[i], auc_score))
+
+# Plot kurva ROC untuk setiap kelas
+plt.figure()
+for i in range(len(iris.target_names)):
+    fpr, tpr, _ = roc_curve(y_test == i, y_prob[:, i])
+    plt.plot(fpr, tpr, lw=2, label='ROC curve Class {} (area = {:.2f})'.format(iris.target_names[i], auc_scores[i]))
+
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC)')
+plt.legend(loc="lower right")
+plt.show()
+```

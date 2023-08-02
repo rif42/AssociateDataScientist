@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Associate Data Scientist - 3&nbsp; Telaah Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./modul_4.html" rel="next">
+<link href="./modul_2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modul_3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Telaah Data</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Associate Data Scientist</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Understanding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Telaah Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Validasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Menentukan Objek atau Memilih Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cleaning Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pemodelan Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Deployment</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#apa-itu-telaah-data" id="toc-apa-itu-telaah-data" class="nav-link active" data-scroll-target="#apa-itu-telaah-data"><span class="header-section-number">3.1</span> Apa itu telaah data?</a></li>
+  <li><a href="#mengapa-perlu-telaah-data" id="toc-mengapa-perlu-telaah-data" class="nav-link" data-scroll-target="#mengapa-perlu-telaah-data"><span class="header-section-number">3.2</span> Mengapa perlu telaah data?</a></li>
+  <li><a href="#bentuk-data" id="toc-bentuk-data" class="nav-link" data-scroll-target="#bentuk-data"><span class="header-section-number">3.3</span> Bentuk Data</a></li>
+  <li><a href="#sumber-data" id="toc-sumber-data" class="nav-link" data-scroll-target="#sumber-data"><span class="header-section-number">3.4</span> Sumber Data</a></li>
+  <li><a href="#daftar-sumber-data-daring" id="toc-daftar-sumber-data-daring" class="nav-link" data-scroll-target="#daftar-sumber-data-daring"><span class="header-section-number">3.5</span> Daftar Sumber Data Daring</a></li>
+  <li><a href="#tipe-data" id="toc-tipe-data" class="nav-link" data-scroll-target="#tipe-data"><span class="header-section-number">3.6</span> Tipe Data</a>
+  <ul class="collapse">
+  <li><a href="#bedasarkan-sifat" id="toc-bedasarkan-sifat" class="nav-link" data-scroll-target="#bedasarkan-sifat"><span class="header-section-number">3.6.1</span> Bedasarkan sifat</a></li>
+  <li><a href="#bedasarkan-waktu" id="toc-bedasarkan-waktu" class="nav-link" data-scroll-target="#bedasarkan-waktu"><span class="header-section-number">3.6.2</span> Bedasarkan waktu</a></li>
+  </ul></li>
+  <li><a href="#pengambilan-data" id="toc-pengambilan-data" class="nav-link" data-scroll-target="#pengambilan-data"><span class="header-section-number">3.7</span> Pengambilan Data</a></li>
+  <li><a href="#library-pandas" id="toc-library-pandas" class="nav-link" data-scroll-target="#library-pandas"><span class="header-section-number">3.8</span> Library Pandas</a>
+  <ul class="collapse">
+  <li><a href="#memuat-data-ke-pandas" id="toc-memuat-data-ke-pandas" class="nav-link" data-scroll-target="#memuat-data-ke-pandas"><span class="header-section-number">3.8.1</span> Memuat data ke Pandas</a></li>
+  <li><a href="#menampilkan-data" id="toc-menampilkan-data" class="nav-link" data-scroll-target="#menampilkan-data"><span class="header-section-number">3.8.2</span> Menampilkan Data</a></li>
+  <li><a href="#melihat-tipe-data" id="toc-melihat-tipe-data" class="nav-link" data-scroll-target="#melihat-tipe-data"><span class="header-section-number">3.8.3</span> Melihat Tipe Data</a></li>
+  <li><a href="#deskripsi-statistik-data" id="toc-deskripsi-statistik-data" class="nav-link" data-scroll-target="#deskripsi-statistik-data"><span class="header-section-number">3.8.4</span> Deskripsi statistik data</a></li>
+  <li><a href="#fungsi-statistik-dalam-pandas" id="toc-fungsi-statistik-dalam-pandas" class="nav-link" data-scroll-target="#fungsi-statistik-dalam-pandas"><span class="header-section-number">3.8.5</span> Fungsi statistik dalam Pandas</a></li>
+  <li><a href="#mentukan-outlier" id="toc-mentukan-outlier" class="nav-link" data-scroll-target="#mentukan-outlier"><span class="header-section-number">3.8.6</span> Mentukan Outlier</a></li>
+  <li><a href="#nilai-unik" id="toc-nilai-unik" class="nav-link" data-scroll-target="#nilai-unik"><span class="header-section-number">3.8.7</span> Nilai Unik</a></li>
+  <li><a href="#analisis-dengan-groupby" id="toc-analisis-dengan-groupby" class="nav-link" data-scroll-target="#analisis-dengan-groupby"><span class="header-section-number">3.8.8</span> Analisis dengan groupby</a></li>
+  <li><a href="#korelasi" id="toc-korelasi" class="nav-link" data-scroll-target="#korelasi"><span class="header-section-number">3.8.9</span> Korelasi</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Telaah Data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="apa-itu-telaah-data" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="apa-itu-telaah-data"><span class="header-section-number">3.1</span> Apa itu telaah data?</h2>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Telaah data merujuk pada proses pengumpulan, pembersihan, eksplorasi, dan analisis data untuk mendapatkan pemahaman yang lebih yang terkandung dalam data tersebut. Tujuan dari telaah data adalah mendukung pengambilan keputusan berdasarkan bukti yang ditemukan dalam data.</p>
+</section>
+<section id="mengapa-perlu-telaah-data" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="mengapa-perlu-telaah-data"><span class="header-section-number">3.2</span> Mengapa perlu telaah data?</h2>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<ol type="1">
+<li>Data dari masing-masing sumber belum tentu dapat langsung dipakai karena:</li>
+</ol>
+<ul>
+<li>maksud dan tujuan data berbeda-beda</li>
+<li>keadaan asal terpisah-pisah atau justru terintegrasi secara ketat.</li>
+<li>tingkat kekayaan (richness) berbeda-beda</li>
+<li>tingkat keandalan (reliability) berbeda-beda</li>
+</ul>
+<ol start="2" type="1">
+<li>Data understanding memberikan gambaran awal tentang:</li>
+</ol>
+<ul>
+<li>kekuatan data</li>
+<li>kekurangan dan batasan penggunaan data</li>
+<li>tingkat kesesuaian data dengan masalah bisnis yang akan dipecahkan</li>
+<li>ketersediaan data (terbuka/tertutup, biaya akses, dsb.)</li>
+</ul>
+</section>
+<section id="bentuk-data" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="bentuk-data"><span class="header-section-number">3.3</span> Bentuk Data</h2>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Data dapat memiliki berbagai bentuk, diantaranya:</p>
+<ul>
+<li>Spreadsheet(excel, csv, dll)</li>
+<li>Database(SQL, Oracle, dll)</li>
+<li>Text file(txt, doc, pdf, dll)</li>
+<li>Multimedia documents(audio, video, gambar, dll)</li>
+</ul>
+</section>
+<section id="sumber-data" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sumber-data"><span class="header-section-number">3.4</span> Sumber Data</h2>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<ol type="1">
+<li>Sumber Internal</li>
+</ol>
+<ul>
+<li>Data yang dihasilkan oleh perusahaan sendiri</li>
+<li>Data yang dihasilkan oleh perusahaan lain yang terkait dengan perusahaan</li>
+</ul>
+<ol start="2" type="1">
+<li>Sumber Eksternal</li>
+</ol>
+<ul>
+<li>Repositori data publik</li>
+<li>Halaman web publik</li>
+</ul>
+</section>
+<section id="daftar-sumber-data-daring" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="daftar-sumber-data-daring"><span class="header-section-number">3.5</span> Daftar Sumber Data Daring</h2>
+<ul>
+<li><a href="https://data.go.id">Portal Satu Data Indonesia</a></li>
+<li><a href="https://data.jakarta.go.id">Portal Data Jakarta</a></li>
+<li><a href="http://data.bandung.go.id">Portal Data Bandung</a><br>
+</li>
+<li><a href="https://www.bps.go.id">Badan Pusat Statistik</a><br>
+</li>
+<li><a href="https://tanahair.indonesia.go.id/">Badan Informasi Geospasial</a><br>
+</li>
+<li><a href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning repository</a></li>
+<li><a href="https://www.kaggle.com/datasets">Kaggle</a><br>
+</li>
+<li><a href="https://data.worldbank.org">World Bank Open Data</a></li>
+</ul>
+</section>
+<section id="tipe-data" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="tipe-data"><span class="header-section-number">3.6</span> Tipe Data</h2>
+<section id="bedasarkan-sifat" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="bedasarkan-sifat"><span class="header-section-number">3.6.1</span> Bedasarkan sifat</h3>
+<ul>
+<li><strong>Data dikotomi</strong>, merupakan data yang bersifat pilah satu sama lain, misalnya suku, agama, jenis kelamin, pendidikan, dan lain sebagainya.</li>
+<li><strong>Data diskrit</strong>, merupakan data yang proses pengumpulan datanya dijalankan dengan cara menghitung atau membilang. Seperti, jumlah anak, jumlah penduduk, jumlah kematian dan sebagainya.</li>
+<li><strong>Data kontinu</strong>, merupakan data pengumpulan datanya didapatkan dengan cara mengukur dengan alat ukur yang memakai skala tertentu. Seperti misalnya, Suhu, berat, bakat, kecerdasan, dan lainnya.</li>
+</ul>
+</section>
+<section id="bedasarkan-waktu" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="bedasarkan-waktu"><span class="header-section-number">3.6.2</span> Bedasarkan waktu</h3>
+<ul>
+<li><strong>Data Cross Section</strong>, adalah data yang menunjukkan titik waktu tertentu. Contohnya laporan keuangan per 31 Desember 2020, data pelanggan PT.Data Indah bulan mei 2004, dan lain sebagainya.</li>
+<li><strong>Data Time Series / Berkala</strong>, adalah data yang datanya menggambarkan sesuatu dari waktu ke waktu atau periode secara historis. Contoh data time series adalah data perkembangan nilai tukar dollar amerika terhadap rupiah tahun 2016 - 2020</li>
+</ul>
+</section>
+</section>
+<section id="pengambilan-data" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="pengambilan-data"><span class="header-section-number">3.7</span> Pengambilan Data</h2>
+<ul>
+<li>Pengambilan data secara manual.</li>
+<li>Pengambilan data melalui API
+<ul>
+<li>Contoh melalui API Kaggle (pip install kaggle)(<code>kaggle datasets download -d mauryansshivam/paytm-revenue-users-transactions</code>)</li>
+<li>Contoh melalui API Portal Data Bandung (<code>http://data.bandung.go.id/index.php/portal/api/1db4a0cc-dc0f-4362-91f1-d0ad1b4bce98</code>)</li>
+</ul></li>
+<li>Pengambilan data melalui akses langsung ke basis data relasional yang ada.</li>
+<li>Pengambilan data melalui web scraping.
+<ul>
+<li>Contoh pengambilan data melalui web scraping kometar video youtube</li>
+</ul></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Jalankan instalasi library berikut jika belum terinstall</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install google-api-python-client</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> googleapiclient.discovery <span class="im">import</span> build</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the API key and YouTube Data API service</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">## Masukkan API key yang sudah dibuat di Google Cloud Platform</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">## Contoh : AIzaSyCFjru8dOZbGtZUi_AQu1Cz1MLoANaY22k</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>youtube <span class="op">=</span> build(<span class="st">"youtube"</span>, <span class="st">"v3"</span>, developerKey<span class="op">=</span>API_KEY)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scrape_comments(video_id):</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the video details</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    video_response <span class="op">=</span> youtube.videos().<span class="bu">list</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        part<span class="op">=</span><span class="st">"snippet"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">id</span><span class="op">=</span>video_id</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    ).execute()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    video_title <span class="op">=</span> video_response[<span class="st">'items'</span>][<span class="dv">0</span>][<span class="st">'snippet'</span>][<span class="st">'title'</span>]</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Scraping comments for video:"</span>, video_title)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the video comments</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    comments <span class="op">=</span> []</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    next_page_token <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        comment_response <span class="op">=</span> youtube.commentThreads().<span class="bu">list</span>(</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            part<span class="op">=</span><span class="st">"snippet"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            videoId<span class="op">=</span>video_id,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            maxResults<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            pageToken<span class="op">=</span>next_page_token</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        ).execute()</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> comment_response[<span class="st">"items"</span>]:</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>            comment <span class="op">=</span> item[<span class="st">"snippet"</span>][<span class="st">"topLevelComment"</span>][<span class="st">"snippet"</span>][<span class="st">"textDisplay"</span>]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            comments.append(comment)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        next_page_token <span class="op">=</span> comment_response.get(<span class="st">"nextPageToken"</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> next_page_token:</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> comments</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the function</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co">## Masukkan ID video youtube yang ingin diambil komentarnya</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">## Contoh : 5kAF9QV5nYQ</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>video_id <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>comments <span class="op">=</span> scrape_comments(video_id)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Save comments to CSV file</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">"comments.csv"</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">"w"</span>, newline<span class="op">=</span><span class="st">""</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> csvfile:</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    writer <span class="op">=</span> csv.writer(csvfile)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    writer.writerow([<span class="st">"Comment"</span>])</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    writer.writerows(<span class="bu">zip</span>(comments))</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Comments saved to"</span>, filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="library-pandas" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="library-pandas"><span class="header-section-number">3.8</span> Library Pandas</h2>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><a href="https://pandas.pydata.org/"><img src="images/Pandas_logo.png" class="img-fluid figure-img" width="300"></a></p>
+</figure>
+</div>
+<ul>
+<li>Pandas adalah library yang digunakan untuk melakukan manipulasi, analisis, dan visualisasi data.</li>
+<li>Pandas menyediakan struktur data dan fungsi high-level untuk membuat pekerjaan dengan data terstruktur/tabular lebih cepat, mudah, dan ekspresif.</li>
+</ul>
+<section id="memuat-data-ke-pandas" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="memuat-data-ke-pandas"><span class="header-section-number">3.8.1</span> Memuat data ke Pandas</h3>
+<ol type="1">
+<li>Nyalakan Jupyter Notebook di folder kerja Anda.</li>
+<li>Buka atau buat baru suatu skrip ipynb (Python 3)</li>
+<li>Import pandas dan numpy. (Pastikan sudah terinstal sebelumnya).</li>
+<li>Load file CSV yang sudah diunduh sebelumnya (Mengambil Data secara Manual) ke dalam sebuah DataFrame</li>
+<li>Gunakan perintah read_csv(<code>dataset</code>)</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Contoh csv</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'titanic_dataset.csv'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Contoh excel</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_excel(<span class="st">'titanic_dataset.xlsx'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Contoh sqlite</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">'titanic_dataset.sqlite3'</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_sql_query(<span class="st">"SELECT * FROM titanic"</span>, conn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="menampilkan-data" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="menampilkan-data"><span class="header-section-number">3.8.2</span> Menampilkan Data</h3>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Method <code>head()</code> dan <code>tail()</code> pada DataFrame membantu kita menampilkan 5 beberapa baris pertama/terakhir dari data yang kita muat. Dengan memberikan argumen pada method tersebut kita juga bisa mengatur jumlah data yang ditampilkan</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 baris pertama</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df.head()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 baris terakhir</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df.tail()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 baris pertama</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="melihat-tipe-data" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="melihat-tipe-data"><span class="header-section-number">3.8.3</span> Melihat Tipe Data</h3>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Method <code>dtypes</code> pada DataFrame membantu kita menampilkan tipe data dari setiap kolom pada data yang kita muat. Jika terdapat tipe data yang tidak tepat maka sebaiknya dilakukan pengecekan nialai pada kolom tersebut. Jika memang sudah benar, maka kita bisa mengubah tipe data tersebut menjadi tipe data yang tepat.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Melihat tipe data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df.dtypes</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mengubah tipe data menjadi int</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'nama_kolom'</span>] <span class="op">=</span> df[<span class="st">'nama_kolom'</span>].astype(<span class="st">'int'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="deskripsi-statistik-data" class="level3" data-number="3.8.4">
+<h3 data-number="3.8.4" class="anchored" data-anchor-id="deskripsi-statistik-data"><span class="header-section-number">3.8.4</span> Deskripsi statistik data</h3>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Method <code>describe()</code> pada DataFrame membantu kita menampilkan deskripsi statistik dari data yang kita muat. Deskripsi statistik yang ditampilkan adalah deskripsi statistik untuk kolom-kolom dengan tipe data numerik. Jika terdapat kolom dengan tipe data selain numerik, maka deskripsi statistik tersebut tidak akan ditampilkan. Untuk tetap menampilkan deskripsi statistik dari kolom non-numerik, kita bisa menambahkan argumen <code>include='all'</code> pada method <code>describe()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deskripsi statistik data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Deskripsi statistik data termasuk kolom non-numerik</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df.describe(include<span class="op">=</span><span class="st">'all'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fungsi-statistik-dalam-pandas" class="level3" data-number="3.8.5">
+<h3 data-number="3.8.5" class="anchored" data-anchor-id="fungsi-statistik-dalam-pandas"><span class="header-section-number">3.8.5</span> Fungsi statistik dalam Pandas</h3>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Pandas menyediakan fungsi statistik untuk menghitung nilai rata-rata, median, standar deviasi, dan variansi. Fungsi-fungsi tersebut adalah:</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fungsi</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>count</td>
+<td>Jumlah observasi non-NULL</td>
+</tr>
+<tr class="even">
+<td>sum</td>
+<td>Jumlah</td>
+</tr>
+<tr class="odd">
+<td>mean</td>
+<td>Rata-rata</td>
+</tr>
+<tr class="even">
+<td>mad</td>
+<td>Deviasi absolut rata-rata</td>
+</tr>
+<tr class="odd">
+<td>median</td>
+<td>Nilai tengah</td>
+</tr>
+<tr class="even">
+<td>min</td>
+<td>Nilai minimum</td>
+</tr>
+<tr class="odd">
+<td>max</td>
+<td>Nilai maksimum</td>
+</tr>
+<tr class="even">
+<td>mode</td>
+<td>Modus (nilai yang paling sering muncul)</td>
+</tr>
+<tr class="odd">
+<td>abs</td>
+<td>Nilai absolut (nilai mutlak)</td>
+</tr>
+<tr class="even">
+<td>prod</td>
+<td>Hasil kali dari nilai-nilai</td>
+</tr>
+<tr class="odd">
+<td>quantile</td>
+<td>Kuantil sampel (nilai pada persentil), kuartil pertama = quantile(0.25)</td>
+</tr>
+<tr class="even">
+<td>std</td>
+<td>Standar deviasi</td>
+</tr>
+<tr class="odd">
+<td>var</td>
+<td>Varians</td>
+</tr>
+<tr class="even">
+<td>sem</td>
+<td>Standar error mean (standar error dari rata-rata)</td>
+</tr>
+<tr class="odd">
+<td>skew</td>
+<td>Skewness (kecondongan distribusi data)</td>
+</tr>
+<tr class="even">
+<td>kurt</td>
+<td>Kurtosis (tingkat “tumpul” atau “tajam” distribusi data)</td>
+</tr>
+<tr class="odd">
+<td>cumsum</td>
+<td>Akumulasi jumlah</td>
+</tr>
+<tr class="even">
+<td>cumprod</td>
+<td>Akumulasi hasil kali</td>
+</tr>
+<tr class="odd">
+<td>cummax</td>
+<td>Nilai maksimum akumulasi</td>
+</tr>
+<tr class="even">
+<td>cummin</td>
+<td>Nilai minimum akumulasi</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mentukan-outlier" class="level3" data-number="3.8.6">
+<h3 data-number="3.8.6" class="anchored" data-anchor-id="mentukan-outlier"><span class="header-section-number">3.8.6</span> Mentukan Outlier</h3>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Outlier adalah data yang memiliki nilai ekstrim dibandingkan dengan data lainnya. Outlier dapat mempengaruhi hasil analisis data sehingga perlu ditangani dengan baik. Untuk mengetahui apakah suatu data merupakan outlier atau bukan, kita bisa menggunakan beberapa metode, diantaranya:</p>
+<ul>
+<li>Tukey Fences (IQR)
+<ul>
+<li><strong>Plus</strong>: IQR adalah metode yang tahan terhadap nilai ekstrim dan lebih baik digunakan pada data dengan distribusi yang condong (skewed) karena mengandalkan kuartil (quartiles) yang tidak terpengaruh oleh ekstrem nilai.</li>
+<li><strong>Minus</strong>: IQR tidak dapat digunakan pada data dengan distribusi normal karena mengandalkan kuartil (quartiles).</li>
+</ul></li>
+<li>Z-Score
+<ul>
+<li><strong>Plus</strong>: Z-score dapat digunakan pada data dengan distribusi normal karena mengandalkan mean dan standard deviasi.</li>
+<li><strong>Minus</strong>: Z-score tidak tahan terhadap nilai ekstrim.</li>
+</ul></li>
+<li>Metode Hampiran Berbasis Probabilitas (Contoh: grubb’s test)
+<ul>
+<li><strong>Plus</strong>: Metode hampiran berbasis probabilitas seperti Grubbs’ Test dapat memberikan kepercayaan statistik dalam menentukan apakah sebuah data benar-benar outlier atau hanya perbedaan alami dalam distribusi data.</li>
+<li><strong>Minus</strong>: Memerlukan asumsi bahwa data harus berdistribusi normal. Selain itu, metode ini hanya cocok untuk mengidentifikasi satu outlier dalam satu arah (outlier yang memiliki nilai ekstrim di atas atau di bawah rata-rata).</li>
+</ul></li>
+</ul>
+</section>
+<section id="nilai-unik" class="level3" data-number="3.8.7">
+<h3 data-number="3.8.7" class="anchored" data-anchor-id="nilai-unik"><span class="header-section-number">3.8.7</span> Nilai Unik</h3>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Method <code>unique()</code> pada Pandas digunakan untuk mengetahui nilai unik dari suatu kolom. Method ini mengembalikan nilai unik dari suatu kolom dalam bentuk array. Method <code>value_counts()</code> pada Pandas digunakan untuk menghitung berapa kali suatu nilai muncul dalam suatu kolom. Method ini mengembalikan Series yang berisi frekuensi setiap nilai yang muncul dalam suatu kolom.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Penggunaan unique</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"nama_kolom"</span>].unique()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Penggunaan value_counts</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"nama_kolom"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="analisis-dengan-groupby" class="level3" data-number="3.8.8">
+<h3 data-number="3.8.8" class="anchored" data-anchor-id="analisis-dengan-groupby"><span class="header-section-number">3.8.8</span> Analisis dengan groupby</h3>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Method <code>groupby()</code> pada Pandas digunakan untuk melakukan grouping berdasarkan kolom tertentu. Method ini mengembalikan objek DataFrameGroupBy.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Penggunaan groupby dengan fungsi mean </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"kolom1"</span>)[<span class="st">"kolom2"</span>].mean()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># menghitung statistik deskriptif dari setiap kelompok data</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"kolom1"</span>)[<span class="st">"kolom2"</span>].describe()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># agregasi kustom dengan fungsi agg</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"kolom1"</span>)[<span class="st">"kolom2"</span>].agg([<span class="bu">sum</span>, <span class="bu">min</span>, <span class="bu">max</span>])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Menggunakan operasi agregasi kustom (menghitung rasio nilai maksimum dan minimum dalam setiap kelompok</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>df.groupby(<span class="st">"kolom1"</span>)[<span class="st">"kolom2"</span>].agg(<span class="kw">lambda</span> x: x.<span class="bu">max</span>() <span class="op">/</span> x.<span class="bu">min</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="korelasi" class="level3" data-number="3.8.9">
+<h3 data-number="3.8.9" class="anchored" data-anchor-id="korelasi"><span class="header-section-number">3.8.9</span> Korelasi</h3>
+<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<p>Korelasi adalah salah satu metode statistik yang digunakan untuk mengetahui seberapa besar hubungan antara satu variabel dengan variabel lainnya. Korelasi memiliki nilai berkisar antara -1 hingga 1. Nilai 1 menunjukkan hubungan yang sempurna, nilai -1 menunjukkan hubungan yang sempurna pula dengan arah yang berlawanan, dan nilai 0 menunjukkan tidak ada hubungan antara kedua variabel tersebut. Kita dapat menggunakan methon <code>corr()</code> pada Pandas untuk menghitung korelasi dari setiap pasang kolom pada suatu DataFrame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Menghitung korelasi</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df.corr()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Terdapat 3 pilihan metode perhitungan korelasi, yaitu:</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pearson (default), kendall, dan spearman</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df.corr(method<span class="op">=</span><span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./modul_2.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Understanding</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./modul_4.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Validasi Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

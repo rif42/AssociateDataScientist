@@ -1,0 +1,88 @@
+---
+title: "Menentukan Objek atau Memilih Data"
+format: html
+---
+
+## Menentukan Sumber Data
+Sumber data merupakan tempat atau lokasi sebuah data disimpan dan atau diakses untuk dapat dilakukan analisis serta penggunaan lainnya. Pemilihan sumber data harus mempertimbangkan sebuah kendala, akurasi, ketersediaan, serta relvansi data dengan tujuan analisis atau model dari machine learning yang akan digunakan atau di bangun.
+
+## Menelaah Susunan Data
+- Melakukan pemeriksaan struktur data untuk memahami bagaimana data diorganisir.
+- Melihat dimensi data, jumlah atribut/kolom, dan jumlah sampel/baris.
+- Menilai apakah data terstruktur (misalnya, data tabel) atau tidak terstruktur (misalnya, data teks atau gambar).
+
+## Menentukan Tipe dan Model Data yang dimiliki
+- Identifikasi tipe data untuk setiap atribut (numerik, kategorikal, teks, tanggal, dll.).
+- Penentuan model data yang sesuai untuk analisis atau model machine learning berdasarkan tipe data.
+- Pemahaman tentang apakah data bersifat kontinu, diskret, ordinal, atau nominal.
+
+## Mengambil Data
+
+- Proses pengambilan data dari sumber data ke lingkungan analisis atau pengembangan model machine learning.
+- Menggunakan berbagai metode seperti mengimpor file data (misalnya CSV, Excel), mengakses database, atau menggunakan API untuk mengambil data dari sumber online.
+
+## Menelaah Data dalam Machine Learning
+- Melakukan eksplorasi data (data exploration) untuk memahami karakteristik data secara lebih mendalam.
+- Visualisasi data dengan grafik atau plot untuk memahami pola, distribusi, dan korelasi antara atribut.
+- Identifikasi missing value, outlier, dan data yang tidak konsisten untuk diatasi sebelum analisis atau pemodelan.
+
+## Contoh Source Code
+Berikut adalah contoh sederhana menggunakan Python untuk mengambil data dari file CSV, menelaah susunan data, menentukan tipe data, dan melakukan eksplorasi data menggunakan pandas dan matplotlib.
+
+Silahkan Unduh dataset berikut [Iris_Dataset.](https://archive.ics.uci.edu/static/public/53/iris.zip)
+Pastikan dataset disimpan dalam file CSV dengan nama "iris_dataset.csv" dalam folder yang sama dengan script Python.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Mengambil data dari file CSV
+data_path = 'iris_dataset.csv'
+df = pd.read_csv(data_path)
+
+# Menelaah susunan data
+print("Dimensi data:", df.shape)
+print("Info data:")
+print(df.info())
+print("Sepuluh data pertama:")
+print(df.head(10))
+
+# Menentukan tipe data dan model data yang dimiliki
+print("Tipe data untuk setiap atribut:")
+print(df.dtypes)
+
+# Preprocessing data (jika diperlukan)
+# Tidak ada preprocessing yang diperlukan dalam contoh ini
+
+# Mengambil statistik deskriptif untuk data numerik
+print("Statistik deskriptif:")
+print(df.describe())
+
+# Eksplorasi data dengan visualisasi
+plt.figure(figsize=(10, 6))
+plt.scatter(df['sepal_length'], df['sepal_width'])
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+plt.title('Scatter Plot: Sepal Length vs. Sepal Width')
+plt.show()
+
+plt.figure(figsize=(8, 6))
+df['species'].value_counts().plot(kind='bar')
+plt.xlabel('Species')
+plt.ylabel('Count')
+plt.title('Bar Plot: Species Distribution')
+plt.show()
+
+```
+
+Pastikan bahwa dataset "Iris" (iris_dataset.csv) berisi kolom dengan nama "sepal_length", "sepal_width", "petal_length", "petal_width", dan "species". Jika dataset tersebut memiliki atribut lain atau format yang berbeda, Anda perlu menyesuaikan kode di atas sesuai dengan dataset yang digunakan.
+
+Contoh di atas akan membaca dataset Iris, menampilkan informasi dasar tentang dataset, menampilkan sepuluh baris pertama dari data, menentukan tipe data untuk setiap atribut, menampilkan statistik deskriptif untuk data numerik, dan melakukan eksplorasi data dengan visualisasi menggunakan scatter plot untuk melihat hubungan antara panjang dan lebar kelopak bunga serta bar plot untuk melihat distribusi spesies bunga.
+
+Harap dicatat bahwa contoh di atas hanya merupakan contoh sederhana, dan dalam penerapan sebenarnya, langkah-langkah analisis dan eksplorasi data bisa lebih canggih dan lengkap sesuai dengan kompleksitas dan karakteristik data.
+
+Pemahaman mendalam tentang sumber data, susunan data, tipe data, dan karakteristik data adalah langkah kritis sebelum membangun model machine learning yang efektif.
+
+
+
+

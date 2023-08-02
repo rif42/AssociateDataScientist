@@ -1,0 +1,32 @@
+project:
+  type: book
+
+book:
+  title: "Associate Data Scientist"
+  author: "Rifky Ariya Pratama"
+  date: "8/2/2023"
+  chapters:
+    - index.qmd
+    - modul_1.qmd
+    - modul_2.qmd
+    - modul_3.qmd
+    - modul_4.qmd
+    - modul_5.qmd
+    - modul_6.qmd
+    - modul_7.qmd
+    - modul_8.qmd
+    - modul_9.qmd
+    - modul_10.qmd
+    - project_klasifikasi.qmd
+    - project_regresi.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

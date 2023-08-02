@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Associate Data Scientist - 1&nbsp; Data Science Tools</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./modul_2.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./modul_1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Science Tools</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Associate Data Scientist</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Understanding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Telaah Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Validasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Menentukan Objek atau Memilih Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cleaning Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pemodelan Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Deployment</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#python-versi-3.10.10" id="toc-python-versi-3.10.10" class="nav-link active" data-scroll-target="#python-versi-3.10.10"><span class="header-section-number">1.1</span> Python versi 3.10.10</a></li>
+  <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment"><span class="header-section-number">1.2</span> Development Environment</a>
+  <ul class="collapse">
+  <li><a href="#vscode-notebook" id="toc-vscode-notebook" class="nav-link" data-scroll-target="#vscode-notebook"><span class="header-section-number">1.2.1</span> VSCode Notebook</a></li>
+  <li><a href="#jupyter-notebook" id="toc-jupyter-notebook" class="nav-link" data-scroll-target="#jupyter-notebook"><span class="header-section-number">1.2.2</span> Jupyter Notebook</a></li>
+  </ul></li>
+  <li><a href="#install-libraries" id="toc-install-libraries" class="nav-link" data-scroll-target="#install-libraries"><span class="header-section-number">1.3</span> Install Libraries</a></li>
+  <li><a href="#konsep-data-science" id="toc-konsep-data-science" class="nav-link" data-scroll-target="#konsep-data-science"><span class="header-section-number">2</span> Konsep Data Science</a>
+  <ul class="collapse">
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow"><span class="header-section-number">2.1</span> Workflow</a></li>
+  <li><a href="#mengapa-data-scientist-dibutuhkan" id="toc-mengapa-data-scientist-dibutuhkan" class="nav-link" data-scroll-target="#mengapa-data-scientist-dibutuhkan"><span class="header-section-number">2.2</span> Mengapa Data Scientist Dibutuhkan?</a></li>
+  <li><a href="#apa-yang-dimaksud-big-data" id="toc-apa-yang-dimaksud-big-data" class="nav-link" data-scroll-target="#apa-yang-dimaksud-big-data"><span class="header-section-number">2.3</span> Apa Yang Dimaksud Big Data?</a></li>
+  </ul></li>
+  <li><a href="#pengembangan-model-aplikasi-data-science" id="toc-pengembangan-model-aplikasi-data-science" class="nav-link" data-scroll-target="#pengembangan-model-aplikasi-data-science"><span class="header-section-number">3</span> Pengembangan Model Aplikasi Data Science</a>
+  <ul class="collapse">
+  <li><a href="#tahap-pengembangan-sistem-ai-berbasis-big-data" id="toc-tahap-pengembangan-sistem-ai-berbasis-big-data" class="nav-link" data-scroll-target="#tahap-pengembangan-sistem-ai-berbasis-big-data"><span class="header-section-number">3.1</span> Tahap Pengembangan Sistem AI Berbasis Big Data:</a>
+  <ul class="collapse">
+  <li><a href="#pelatihan" id="toc-pelatihan" class="nav-link" data-scroll-target="#pelatihan"><span class="header-section-number">3.1.1</span> Pelatihan</a></li>
+  <li><a href="#penggunaan" id="toc-penggunaan" class="nav-link" data-scroll-target="#penggunaan"><span class="header-section-number">3.1.2</span> Penggunaan</a></li>
+  </ul></li>
+  <li><a href="#software-development-life-cycle-sdlc" id="toc-software-development-life-cycle-sdlc" class="nav-link" data-scroll-target="#software-development-life-cycle-sdlc"><span class="header-section-number">3.2</span> Software Development Life Cycle (SDLC)</a></li>
+  <li><a href="#jenis-jenis-sdlc" id="toc-jenis-jenis-sdlc" class="nav-link" data-scroll-target="#jenis-jenis-sdlc"><span class="header-section-number">3.3</span> Jenis-Jenis SDLC</a>
+  <ul class="collapse">
+  <li><a href="#agile" id="toc-agile" class="nav-link" data-scroll-target="#agile"><span class="header-section-number">3.3.1</span> Agile</a></li>
+  <li><a href="#waterfall" id="toc-waterfall" class="nav-link" data-scroll-target="#waterfall"><span class="header-section-number">3.3.2</span> Waterfall</a></li>
+  <li><a href="#prototype" id="toc-prototype" class="nav-link" data-scroll-target="#prototype"><span class="header-section-number">3.3.3</span> Prototype</a></li>
+  </ul></li>
+  <li><a href="#rapid-application-development-rad" id="toc-rapid-application-development-rad" class="nav-link" data-scroll-target="#rapid-application-development-rad"><span class="header-section-number">3.4</span> Rapid Application Development (RAD)</a></li>
+  <li><a href="#kesimpulan" id="toc-kesimpulan" class="nav-link" data-scroll-target="#kesimpulan"><span class="header-section-number">3.5</span> Kesimpulan</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Science Tools</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Sama seperti pekerjaan pada umumnya, seorang Data Scientist juga membutuhkan alat-alat untuk melakukan pekerjaannya. Namun alat yang dimaksud adalah sekumpulan software yang digunakan untuk pekerjaan Data Scientist sehari-hari. Perlu diingat bahwa semua tools harus sudah diinstall sebelum pelaksanaan materi koding. Mari kita pelajari tools yang akan kita gunakan!</p>
+<section id="python-versi-3.10.10" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="python-versi-3.10.10"><span class="header-section-number">1.1</span> Python versi 3.10.10</h2>
+<ul>
+<li>Buka browser, kunjungi https://www.python.org/downloads/windows/ , cari bagian Python 3.10.10 - Feb 8, 2023, lalu pilih Download Windows Installer.</li>
+<li>Jalankan file yang di download, tunggu sampai proses installing selesai.</li>
+<li>Buka Command Prompt, lalu jalankan command “python –version”</li>
+</ul>
+<p>Jika hasil dari command tersebut adalah “3.10.10” maka instalasi python sudah selesai.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./3.py-cli.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar3. Python di cmd</figcaption>
+</figure>
+</div>
+</section>
+<section id="development-environment" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="development-environment"><span class="header-section-number">1.2</span> Development Environment</h2>
+<p>Environment adalah lingkungan yang kita tinggali selama proses koding. Di course ini kita bisa menggunakan salah satu dari tiga aplikasi, yaitu VSCode, Jupyter dan Google Colab. Cukup pilih salah satu dari ketiga opsi Kami merekomendasikan untuk menggunakan Jupyter notebook. Untuk alasannya, silahkan simak slide selanjutnya</p>
+<section id="vscode-notebook" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="vscode-notebook"><span class="header-section-number">1.2.1</span> VSCode Notebook</h3>
+<p>VSCode adalah sebuah code editor multifungsi yang cukup ringan dan handal. Kelebihan dari VSCode adalah fleksibilitas dari VSCode. Anda dapat mengkustomisasi tema, menambah ekstensi, dan mengubah semua settingan yang ada di VSCode. Anda mempunyai kendali penuh. Kekurangan dari VSCode adalah terkadang settingan VSCode terlalu kompleks untuk digunakan.</p>
+<p>Berikut langkah-langkah untuk menginstalasi VScode Notebook :</p>
+<ul>
+<li>Buka browser, kunjungi https://code.visualstudio.com/download# pilih salah satu link yang berada di System Installer.<br>
+</li>
+<li>Jalankan file yang di download, tunggu sampai proses installing selesai.<br>
+</li>
+<li>Selanjutnya kita akan menginstall beberapa ekstensi.<br>
+</li>
+<li>Buka VSCode, pergi ke bagian Extensions, (ctrl+shift+x) lalu ketik “Python”, lalu install ekstensi yang muncul di paling atas.<br>
+<img src="./4.py-ex.png" class="img-fluid" alt="Gambar4. Ekstensi VSCode python"><br>
+</li>
+<li>Masih di tab Extensions, ketik “Jupyter”, lalu instal ekstensi yang muncul di paling atas<br>
+<img src="./5.jupyter-ex.png" class="img-fluid" alt="Gambar5. Ekstensi VSCode Jupyter"><br>
+</li>
+<li>Reload VSCode</li>
+</ul>
+</section>
+<section id="jupyter-notebook" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="jupyter-notebook"><span class="header-section-number">1.2.2</span> Jupyter Notebook</h3>
+<p>Jupyter Notebook adalah aplikasi yang digunakan untuk memproses dan menampilkan teks, kode, dan data secara bersamaan. Jupyter sangat cocok untuk data science karena Jupyter sangat ringan, mudah di install, dan mudah untuk digunakan. Oleh karena itu, kita merekomendasikan anda untuk menggunakan Jupyter Notebook untuk pelatihan ini.</p>
+<p>Berikut langkah-langkah untuk menginstalasi Jupyter Notebook :<br>
+- Buka Windows start menu, ketik “cmd”<br>
+- Klik kanan pada item command prompt, lalu pilih run as administrator<br>
+- Di dalam command prompt, ketik “pip install jupyterlab”<br>
+- Tunggu sampai proses selesai<br>
+- Ketik “jupyter-lab” untuk menjalankan aplikasi jupyter</p>
+</section>
+</section>
+<section id="install-libraries" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="install-libraries"><span class="header-section-number">1.3</span> Install Libraries</h2>
+<ul>
+<li>Buka terminal (ctrl+shift+~) lalu ketik “pip install [package name]” Contoh : “pip install pandas”, dimana pandas adalah sebuah nama dari package Untuk membuka terminal di Jupyter Notebook, buka launcher baru (ctrl+shift+L) lalu pilih terminal.<br>
+</li>
+<li>Package name diisi dengan list dibawah ini
+<ul>
+<li>numpy</li>
+<li>scipy</li>
+<li>pandas</li>
+<li>matplotlib</li>
+<li>seaborn</li>
+<li>scikit</li>
+</ul></li>
+</ul>
+</section>
+<section id="konsep-data-science" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Konsep Data Science</h1>
+<p>Data science adalah bidang yang berkaitan dengan ekstraksi pengetahuan dan wawasan dari data. Data science menggabungkan konsep dan metode dari berbagai disiplin ilmu seperti statistika, matematika, komputer, dan pemodelan untuk menganalisis dan menginterpretasikan data secara sistematis.</p>
+<section id="workflow" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="workflow"><span class="header-section-number">2.1</span> Workflow</h2>
+<p>Di proses pekerjaan pengolahan data, Data Scientist bekerja untuk mengembangkan model terbaik dari data untuk menjawab permasalahan bisnis. Data Scientist mengambil data dengan bantuan Data Engineer dan DevOps Engineer, lalu menganalisa data tersebut. Hasil analisa data dikembalikan ke mereka atau dipresentasikan ke anggota lain.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./1.workflow.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar1. Contoh workflow data scientist</figcaption>
+</figure>
+</div>
+</section>
+<section id="mengapa-data-scientist-dibutuhkan" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="mengapa-data-scientist-dibutuhkan"><span class="header-section-number">2.2</span> Mengapa Data Scientist Dibutuhkan?</h2>
+<p>Aplikasi Modern mempunyai skala yang jauh lebih besar dari aplikasi-aplikasi sebelumnya. Dalam satu waktu, jumlah user bisa mencapai ratusan ribu, bahkan sampai jutaan. Masing-masing user menghasilkan beberapa request ke server untuk mengambil data, dan menghasilkan data tersendiri. Hasilnya, data yang dibuat, disimpan, dan diproses sangatlah besar. Fenomena ini dinamakan: <strong>BIG DATA</strong></p>
+</section>
+<section id="apa-yang-dimaksud-big-data" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="apa-yang-dimaksud-big-data"><span class="header-section-number">2.3</span> Apa Yang Dimaksud Big Data?</h2>
+<p>Big data mempunyai karakteristik yang dinamakan 5V <img src="./2.bigdata.png" class="img-fluid" alt="Gambar2. Bigdata-5v"></p>
+</section>
+</section>
+<section id="pengembangan-model-aplikasi-data-science" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Pengembangan Model Aplikasi Data Science</h1>
+<p>Tahukah anda bahwa 70% pengembangan software gagal? Data science adalah bagian dari pengembangan software yang mempunyai tingkat kegagalan paling tinggi di angka 80% tingkat kegagalan.<br>
+<img src="./6.appdevelop.png" class="img-fluid" alt="Gambar6. Software Development Survival Rate"><br>
+Banyak sekali masalah yang dihadapi di dalam proses pengembangan software. Mulai dari perubahan requirement, maintenance yang kurang, hingga dokumentasi yang tidak lengkap. Oleh karena itu, pemahaman terhadap pengembangan model sangatlah penting, agar semua usaha kita untuk membuat sebuah aplikasi tidak sia sia, dan dapat membantu orang banyak.</p>
+<section id="tahap-pengembangan-sistem-ai-berbasis-big-data" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="tahap-pengembangan-sistem-ai-berbasis-big-data"><span class="header-section-number">3.1</span> Tahap Pengembangan Sistem AI Berbasis Big Data:</h2>
+<ul>
+<li><strong>Pelatihan</strong>, Adalah tahap dimana kita membangun sebuah model dari nol. Proses pelatihan meliputi pemilihan dataset, pemilihan algoritma, penyetelan parameter, testing, dan lain lain<br>
+</li>
+<li><strong>Penggunaan</strong>, Ketika model sudah dibuat dan siap untuk digunakan, model akan di deploy di internet agar dapat digunakan oleh semua orang.</li>
+</ul>
+<section id="pelatihan" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="pelatihan"><span class="header-section-number">3.1.1</span> Pelatihan</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./7.MLtraining.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar7. Flow dari proses training model machine learning</figcaption>
+</figure>
+</div>
+</section>
+<section id="penggunaan" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="penggunaan"><span class="header-section-number">3.1.2</span> Penggunaan</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./8.MLusage.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar8. Flow dari proses penggunaan model machine learning</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="software-development-life-cycle-sdlc" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="software-development-life-cycle-sdlc"><span class="header-section-number">3.2</span> Software Development Life Cycle (SDLC)</h2>
+<p>Metode SDLC (Software Development Life Cycle) adalah proses pembuatan dan pengubahan sistem serta model dan metodologi yang digunakan untuk mengembangkan sistem rekayasa perangkat lunak.<br>
+<img src="./9.sdlc.png" class="img-fluid" alt="Gambar9. SDLC"><br>
+Proses logika yang digunakan oleh seorang analis sistem untuk mengembangkan sebuah sistem informasi yang melibatkan requirements, validation, training dan pemilik sistem proses yang memproduksi sebuah software dengan kualitas setinggi-tingginya tetapi dengan biaya yang serendah-rendahnya (Stackify)</p>
+</section>
+<section id="jenis-jenis-sdlc" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="jenis-jenis-sdlc"><span class="header-section-number">3.3</span> Jenis-Jenis SDLC</h2>
+<p>Berikut adalah beberapa jenis dari SDLC:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./10.sdlctypes.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar10. Jenis jenis SDLC</figcaption>
+</figure>
+</div>
+<section id="agile" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="agile"><span class="header-section-number">3.3.1</span> Agile</h3>
+<p>Metode pengembangan Agile adalah pendekatan kolaboratif dan iteratif dalam pengembangan perangkat lunak. Dalam metode ini, pengembangan dilakukan dalam iterasi kecil yang disebut “sprints”</p>
+<p><strong>Kelebihan</strong><br>
+- Fleksibilitas tinggi - Kolaborasi erat antar tim - Aplikasi di-update secara rutin - Fokus kepada kebutuhan pengguna</p>
+<p><strong>Kekurangan</strong><br>
+- Sulitnya merencanakan anggaran dan timeline - Memerlukan tingkat disiplin yang tinggi dan pengawasan konstan - Kurang efektif untuk project skala besar</p>
+</section>
+<section id="waterfall" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="waterfall"><span class="header-section-number">3.3.2</span> Waterfall</h3>
+<p>Metode pengembangan Waterfall adalah pendekatan linier dan berurutan dalam pengembangan perangkat lunak. Dalam metode ini, setiap fase pengembangan (analisis kebutuhan, desain, implementasi, pengujian, dan pemeliharaan) dilakukan secara berurutan, di mana setiap fase harus selesai sebelum melanjutkan ke fase berikutnya.</p>
+<p><strong>Kelebihan</strong><br>
+- Struktur yang jelas<br>
+- Dokumentasi lengkap dan rapi<br>
+- Cocok untuk proyek yang kebutuhannya tidak berubah-ubah</p>
+<p><strong>Kekurangan</strong><br>
+- Kurang fleksibel ketika menghadapi kebutuhan yang berubah<br>
+- Keterbatasan dalam kolaborasi dan feedback<br>
+- Risiko terlambatnya mendeteksi kesalahan/glitch</p>
+</section>
+<section id="prototype" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="prototype"><span class="header-section-number">3.3.3</span> Prototype</h3>
+<p>Metode pengembangan prototyping adalah pendekatan dalam pengembangan perangkat lunak di mana prototipe perangkat lunak awal dibuat dan digunakan untuk mengumpulkan umpan balik dari pengguna dan pemangku kepentingan. Prototipe tersebut dapat berupa versi sederhana atau parsial dari perangkat lunak yang akhir.</p>
+<p><strong>Kelebihan</strong><br>
+- Feedback didapatkan lebih awal<br>
+- Klarifikasi kebutuhan lebih jelas<br>
+- Meningkatkan kolaborasi tim</p>
+<p><strong>Kelemahan</strong><br>
+- Membutuhkan banyak waktu dan sumber daya<br>
+- Potensi kesalahan di aspek desain dan efisiensi besar<br>
+- Kesulitan dalam timing untuk berhenti mengembangkan prototipe</p>
+</section>
+</section>
+<section id="rapid-application-development-rad" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="rapid-application-development-rad"><span class="header-section-number">3.4</span> Rapid Application Development (RAD)</h2>
+<p>Metode pengembangan Rapid Application Development (RAD) adalah pendekatan iteratif dan kolaboratif dalam pengembangan perangkat lunak yang menekankan kecepatan, fleksibilitas, dan keterlibatan pengguna. Dalam metode ini, pengembangan dilakukan dalam siklus pendek yang disebut “iterasi” dan melibatkan partisipasi aktif dari pengguna.</p>
+<p><strong>Kelebihan</strong><br>
+- Waktu pengembangan cepat<br>
+- Keterlibatan pengguna secara sering dan langsung<br>
+- Fleksibilitas tinggi<br>
+- Tingginya kolaborasi terhadap developer dan pengguna</p>
+<p><strong>Kelemahan</strong><br>
+- Ketergantungan terhadap pengguna tinggi<br>
+- Sulit untuk diskalakan<br>
+- Kualitas dan efisiensi arsitektur rendah</p>
+</section>
+<section id="kesimpulan" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="kesimpulan"><span class="header-section-number">3.5</span> Kesimpulan</h2>
+<p>Kesimpulannya, Di dunia software development, tidak ada metode yang lebih baik atau buruk, hanya ada pengorbanan atau ‘tradeoff’.</p>
+<p>Untuk melakukan proses development yang baik dan efisien, kita harus memahami kebutuhan, kondisi, dan sumber daya yang kita punya. Pemahaman yang baik memungkinkan kita untuk memilih tradeoff mana yang akan diambil. Setelah itu kita menyesuaikan tradeoff yang kita pilih dengan jenis SDLC yang sudah ada.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./modul_2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Understanding</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

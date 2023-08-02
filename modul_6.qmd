@@ -1,0 +1,334 @@
+---
+title: "Cleaning Data"
+format: html
+---
+
+## Data Cleaning
+Pada proses machine learning, terdapat tahapan **preprocessing**. Preprocessing merupakan tahapan yang penting dalam machine learning. Hasil dari preprocessing dapat mempengaruhi nilai akurasi dari sebuah model. 
+Tujuan dari Preprocessing adalah untuk memastikan data siap untuk diproses dan atau digunakan pada machine learning. 
+Dalam melakukan preprocessing memiliki beberapa tantangan, diantara adalah **missing value, outlier, format tidak konsisten, dan malformed record**
+
+## Cara Mengatasi Missing Value
+- Mising Value merupakan data yang kosong atau tidak lengkap. 
+- Tantangan dalam mengatasi missing value adalah bagaimana mengisi nilai kosong tersebut. 
+- Strategi yang dapat dilakukan diantara lain : 
+    - Menghapus baris atau kolom yang memiliki missing value
+    - Mengisi nilai kosong dengan nilai rata-rata atau median
+    - Mengisi nilai kosong dengan nilai yang sering muncul
+
+Pilih strategi yang paling sesuai tergantung pada tipe data dan tujuan analisis
+
+### - Menghapus baris atau kolom yang memiliki missing value {.unnumbered}
+
+#### - Tanpa Menggunakan Dataset  {.unnumbered}
+
+```python
+import pandas as pd
+
+# Contoh dataset dengan nilai yang hilang
+data = {
+    'A': [1, 2, None, 4],
+    'B': [5, None, 7, 8],
+    'C': [9, 10, 11, None]
+}
+df = pd.DataFrame(data)
+
+# Tampilkan dataset sebelum penghapusan
+print("Dataset sebelum penghapusan:")
+print(df)
+
+# Hapus baris yang memiliki nilai yang hilang
+df_cleaned_rows = df.dropna()
+print("\nDataset setelah menghapus baris yang memiliki nilai yang hilang:")
+print(df_cleaned_rows)
+
+# Hapus kolom yang memiliki nilai yang hilang
+df_cleaned_cols = df.dropna(axis=1)
+print("\nDataset setelah menghapus kolom yang memiliki nilai yang hilang:")
+print(df_cleaned_cols)
+
+```
+
+#### - Menggunakan Dataset {.unnumbered}
+untuk mengunduh dataset agar dapat digunakan pada source code [disini](https://www.kaggle.com/c/titanic/data)
+
+```python
+import pandas as pd
+
+# Load dataset Titanic dari file CSV
+titanic_df = pd.read_csv("titanic.csv")
+
+# Tampilkan informasi mengenai dataset, termasuk jumlah nilai yang hilang di setiap kolom
+print("Informasi tentang dataset Titanic:")
+print(titanic_df.info())
+
+# Hapus baris yang memiliki nilai yang hilang
+titanic_cleaned_rows = titanic_df.dropna()
+print("\nDataset Titanic setelah menghapus baris yang memiliki nilai yang hilang:")
+print(titanic_cleaned_rows)
+
+# Hapus kolom yang memiliki nilai yang hilang
+titanic_cleaned_cols = titanic_df.dropna(axis=1)
+print("\nDataset Titanic setelah menghapus kolom yang memiliki nilai yang hilang:")
+print(titanic_cleaned_cols)
+
+```
+### - Mengisi nilai kosong dengan nilai rata-rata atau median {.unnumbered}
+
+```python
+import pandas as pd
+
+# Load dataset Titanic dari file CSV
+titanic_df = pd.read_csv("titanic.csv")
+
+# Tampilkan informasi mengenai dataset, termasuk jumlah nilai yang hilang di setiap kolom
+print("Informasi tentang dataset Titanic sebelum pengisian nilai kosong:")
+print(titanic_df.info())
+
+# Mengisi nilai kosong pada kolom 'Age' dengan nilai median dari kolom tersebut
+age_median = titanic_df['Age'].median()
+titanic_df['Age'].fillna(age_median, inplace=True)
+
+# Mengisi nilai kosong pada kolom 'Fare' dengan nilai rata-rata dari kolom tersebut
+fare_mean = titanic_df['Fare'].mean()
+titanic_df['Fare'].fillna(fare_mean, inplace=True)
+
+# Tampilkan informasi tentang dataset setelah pengisian nilai kosong
+print("\nInformasi tentang dataset Titanic setelah pengisian nilai kosong:")
+print(titanic_df.info())
+
+```
+### - Mengisi nilai kosong dengan nilai yang sering muncul {.unnumbered}
+
+```python
+import pandas as pd
+
+# Load dataset Titanic dari file CSV
+titanic_df = pd.read_csv("titanic.csv")
+
+# Tampilkan informasi mengenai dataset, termasuk jumlah nilai yang hilang di setiap kolom sebelum pengisian
+print("Informasi tentang dataset Titanic sebelum pengisian nilai kosong:")
+print(titanic_df.info())
+
+# Mengisi nilai kosong pada kolom 'Embarked' dengan nilai yang sering muncul (mode) dari kolom tersebut
+embarked_mode = titanic_df['Embarked'].mode()[0]
+titanic_df['Embarked'].fillna(embarked_mode, inplace=True)
+
+# Tampilkan informasi tentang dataset setelah pengisian nilai kosong
+print("\nInformasi tentang dataset Titanic setelah pengisian nilai kosong:")
+print(titanic_df.info())
+
+```
+
+## Menangani Outlier
+Outlier merupakan data yang jauh dari nilai rata-rata atau nilai normal. Outlier dapat mempengaruhi hasil analisis dan machine learning.
+
+- Strategi untuk mengatasi Outlier : 
+  - Menghapus outlier.
+  - Menggantikan nilai outlier dengan nilai lain seperti nilai rata-rata atau median.
+  - Menggunakan teknik scaling atau normalisasi.
+
+Pilih strategi yang paling sesuai tergantung pada tipe data dan tujuan analisis.
+
+###  - Menghapus Outlier {.unnumbered}
+```python
+import pandas as pd
+from sklearn.datasets import load_iris
+from scipy import stats
+
+# Load dataset Iris dari scikit-learn
+data = load_iris()
+iris_df = pd.DataFrame(data.data, columns=data.feature_names)
+
+# Tampilkan informasi tentang dataset Iris sebelum penghapusan outlier
+print("Informasi tentang dataset Iris sebelum penghapusan outlier:")
+print(iris_df.describe())
+
+# Definisikan fungsi untuk menghapus outlier berdasarkan z-score
+def remove_outliers_zscore(df, z_threshold=3):
+    z_scores = stats.zscore(df)
+    return df[(z_scores < z_threshold).all(axis=1)]
+
+# Hapus outlier dari dataset Iris berdasarkan z-score
+iris_cleaned = remove_outliers_zscore(iris_df)
+
+# Tampilkan informasi tentang dataset Iris setelah penghapusan outlier
+print("\nInformasi tentang dataset Iris setelah penghapusan outlier:")
+print(iris_cleaned.describe())
+
+```
+Pada contoh di atas, digunakan metode z-score untuk mendeteksi outlier dalam dataset Iris. Outlier adalah data yang memiliki z-score lebih besar dari z_threshold yang telah ditentukan (z_threshold=3). Fungsi remove_outliers_zscore digunakan untuk menghapus baris yang mengandung outlier berdasarkan z-score, yaitu baris yang memiliki setidaknya satu fitur (kolom) dengan z-score melebihi z_threshold. Penting untuk berhati-hati karena penghapusan outlier dapat mempengaruhi hasil analisis atau model machine learning. Selain z-score, ada banyak teknik deteksi outlier lainnya seperti IQR dan pendekatan berbasis model machine learning atau domain knowledge.
+
+###  - Menggantikan nilai outlier dengan nilai lain seperti nilai rata-rata atau median. {.unnumbered}
+
+```python
+import pandas as pd
+
+# membaca dataset publik
+data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data", header=None)
+
+# menentukan batas outlier
+q1 = data[0].quantile(0.25)
+q3 = data[0].quantile(0.75)
+iqr = q3 - q1
+lower_bound = q1 - (1.5 * iqr)
+upper_bound = q3 + (1.5 * iqr)
+
+# menggantikan outlier dengan nilai rata-rata
+data[0] = data[0].apply(lambda x: data[0].mean() if x < lower_bound or x > upper_bound else x)
+
+# menggantikan outlier dengan nilai median
+data[0] = data[0].apply(lambda x: data[0].median() if x < lower_bound or x > upper_bound else x)
+
+# menampilkan dataset yang telah diubah
+print(data)
+```
+
+Pada contoh kode di atas, dataset publik yang digunakan adalah Iris Dataset yang tersedia di UCI Machine Learning Repository. Pertama-tama, kita menentukan batas outlier dengan menghitung kuartil pertama (Q1), kuartil ketiga (Q3), dan rentang antar kuartil (IQR). Kemudian, kita menentukan batas bawah dan batas atas untuk menentukan nilai outlier.
+
+Kemudian, kita menggantikan nilai outlier dengan nilai rata-rata atau median. Untuk menggantikan dengan nilai rata-rata, kita menggunakan fungsi apply() pada kolom yang menghasilkan nilai rata-rata jika nilai kurang dari batas bawah atau lebih dari batas atas, sedangkan untuk menggantikan dengan nilai median, kita juga menggunakan fungsi apply() pada kolom yang menghasilkan nilai median jika nilai kurang dari batas bawah atau lebih dari batas atas.
+
+Terakhir, kita menampilkan dataset yang telah diubah dengan fungsi print().
+
+### - Mengisi nilai kosong dengan nilai yang sering muncul {.unnumbered}
+
+```python
+import pandas as pd
+
+# Load dataset Titanic dari file CSV
+titanic_df = pd.read_csv("titanic.csv")
+
+# Tampilkan informasi mengenai dataset, termasuk jumlah nilai yang hilang di setiap kolom sebelum pengisian
+print("Informasi tentang dataset Titanic sebelum pengisian nilai kosong:")
+print(titanic_df.info())
+
+# Mengisi nilai kosong pada kolom 'Embarked' dengan nilai yang sering muncul (mode) dari kolom tersebut
+embarked_mode = titanic_df['Embarked'].mode()[0]
+titanic_df['Embarked'].fillna(embarked_mode, inplace=True)
+
+# Tampilkan informasi tentang dataset setelah pengisian nilai kosong
+print("\nInformasi tentang dataset Titanic setelah pengisian nilai kosong:")
+print(titanic_df.info())
+```
+Pada contoh di atas, menggunakan metode mode() dari pandas untuk menghitung nilai yang sering muncul (mode) pada kolom 'Embarked', lalu mengisi nilai kosong pada kolom tersebut dengan nilai mode yang dihitung. Penggunaan parameter inplace=True memastikan perubahan dilakukan langsung pada DataFrame asli. Setelah mengisi nilai kosong, hasilnya dapat diperiksa untuk memastikan tidak ada lagi nilai yang hilang pada kolom 'Embarked'.
+
+Perlu diingat, pengisian nilai kosong dengan nilai yang sering muncul merupakan salah satu teknik imputasi yang umum. Teknik lainnya termasuk pengisian dengan nilai rata-rata, nilai median, atau menggunakan model machine learning untuk memprediksi nilai yang hilang berdasarkan data lainnya. Pilihan teknik imputasi tergantung pada karakteristik dataset dan tujuan analisis atau model machine learning yang ingin diimplementasikan.
+
+##  - Menangani Format yang Tidak Konsisten
+**Format Tidak Konsisten** terjadi ketika data memiliki format yang sama atau tidak sesuai dengan format yang diharapkan. Sering terjadi pada pemformatan tanggal, bulan, dan tahun. 
+
+- Strategi dalam mengatasi Format Tidak Konsisten
+    - Mengubah format data menjadi format yang konsisten seperti mengubah format tanggal menjadi format yang sama
+    - Memperbaiki data yang salah ketik atau typo
+
+Pilih strategi yang paling sesuai tergantung pada tipe data dan tujuan analisis
+
+###  - Mengubah format data menjadi format yang konsisten seperti mengubah format tanggal menjadi format yang sama {.unnumbered}
+
+```python
+import pandas as pd
+
+# Contoh dataset dengan kolom tanggal dalam format yang berbeda
+data = {
+    'Tanggal': ['2021-08-01', '02-08-2021', '2021/08/03', '20210804']
+}
+df = pd.DataFrame(data)
+
+# Tampilkan dataset sebelum perubahan format
+print("Dataset sebelum perubahan format:")
+print(df)
+
+# Ubah format tanggal menjadi format yang sama (YYYY-MM-DD)
+df['Tanggal'] = pd.to_datetime(df['Tanggal'], errors='coerce').dt.strftime('%Y-%m-%d')
+
+# Tampilkan dataset setelah perubahan format
+print("\nDataset setelah perubahan format:")
+print(df)
+
+```
+
+###  - Memperbaiki data yang salah ketik atau typo {.unnumbered}
+
+```python
+import pandas as pd
+from sklearn.datasets import load_iris
+
+# Load dataset Iris dari scikit-learn
+data = load_iris()
+iris_df = pd.DataFrame(data.data, columns=data.feature_names)
+iris_df['species'] = data.target_names[data.target]
+
+# Contoh data dengan salah ketik atau typo
+iris_df.iloc[0, 0] = 5.1
+iris_df.iloc[1, 1] = 3.6
+
+# Tampilkan dataset sebelum pembersihan data
+print("Dataset sebelum pembersihan data:")
+print(iris_df)
+
+# Koreksi data salah ketik atau typo
+# Misalnya, jika nilai 3.6 pada kolom 'sepal width (cm)' seharusnya 3.0
+iris_df.loc[iris_df['sepal width (cm)'] == 3.6, 'sepal width (cm)'] = 3.0
+
+# Tampilkan dataset setelah pembersihan data
+print("\nDataset setelah pembersihan data:")
+print(iris_df)
+
+```
+
+## Menangani Malformed Record
+**Malformed Record** terjadi saat ketika data tidak memenuhi format atau struktur yang diharapkan.
+
+- Strategi yang dapat dilakukan diantara lain :
+    - Menghapus record yang tidak sesuai dengan format atau struktur yang diharapkan
+    - Mengubah record yang tidak sesuai dengan format atau struktur yang diharapkan
+
+Pilih strategi yang paling sesuai tergantung pada tipe data dan tujuan analisis.
+
+###  - Menghapus record yang tidak sesuai dengan format atau struktur yang diharapkan {.unnumbered}
+
+```python
+import pandas as pd
+
+# membaca dataset
+data = pd.read_csv("nama_file.csv")
+
+# mengecek dan menghapus record yang tidak sesuai dengan format atau struktur yang diharapkan
+for i, row in data.iterrows():
+    if not format_check(row):
+        data.drop(i, inplace=True)
+
+# menampilkan dataset yang telah diubah
+print(data)
+```
+
+Kode di atas menggunakan library pandas untuk membaca dataset dari file csv dan melakukan pengecekan format atau struktur pada setiap record dalam dataset dengan fungsi format_check(). Jika record tidak sesuai dengan format atau struktur yang diharapkan, maka record tersebut dihapus dari dataset menggunakan fungsi drop(). Fungsi iterrows() digunakan untuk mengiterasi setiap record dalam dataset. Setelah proses penghapusan selesai, dataset yang telah diubah ditampilkan menggunakan fungsi print(). Penting untuk menyesuaikan kode dengan format atau struktur dataset yang digunakan dan memastikan menggunakan fungsi format_check() yang sesuai.
+
+###  - Mengubah record yang tidak sesuai dengan format atau struktur yang diharapkan {.unnumbered}
+
+```python
+#| code-fold: true
+import pandas as pd
+
+# membaca dataset dari file csv
+data = pd.read_csv('nama_file.csv')
+
+# fungsi untuk melakukan pengecekan format atau struktur pada setiap record dalam dataset
+def format_check(record):
+    # implementasi pengecekan format atau struktur pada satu record
+    # return True jika format atau struktur sesuai, False jika tidak sesuai
+
+# melakukan iterasi pada setiap record dalam dataset
+for index, row in data.iterrows():
+    # cek apakah format atau struktur record sesuai dengan yang diharapkan
+    if not format_check(row):
+        # jika tidak sesuai, hapus record dari dataset
+        data = data.drop(index)
+
+# menampilkan dataset yang telah diubah
+print(data)
+```
+Pada contoh di atas, dataset dibaca dari file csv menggunakan fungsi read_csv() dari library pandas. Kemudian, dilakukan iterasi pada setiap record dalam dataset menggunakan fungsi iterrows(). Pada setiap iterasi, record dicek dengan fungsi format_check() untuk memastikan bahwa format atau struktur record sesuai dengan yang diharapkan. Jika tidak sesuai, record tersebut dihapus dari dataset menggunakan fungsi drop(). Setelah proses penghapusan selesai, dataset yang telah diubah ditampilkan menggunakan fungsi print(). Harap diingat bahwa fungsi format_check() harus disesuaikan dengan format atau struktur yang diharapkan pada dataset yang digunakan.
+
+## Kesimpulan
+Preprocessing merupakan tahapan penting dalam proses machine learning. Tantangan seperti contoh diatas dapat diatasi dengan berbagai strategi, dengan memilih strategi yang tepat dan pemahaman tipe atau jenis data yang ada akan makin memudahkan dalam melakukan preprocessing.

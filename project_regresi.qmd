@@ -1,0 +1,801 @@
+# Project Regresi Hotel Yogyakarta
+
+## Deskripsi
+Project ini merupakan contoh project Data Science yang menggunakan data hotel di Yogyakarta. Project ini bertujuan untuk memprediksi harga kamar hotel berdasarkan fitur-fitur yang ada. Project ini menggunakan 3 algoritma yaitu, **XGBoost**, **Random Forest**, dan **SVM**. Project ini juga menggunakan teknik *hyperparameter tuning* untuk meningkatkan performa model. Kemudian model tersebut dilakukan deployment menggunakan **streamlit**
+
+## Tentang data
+
+Data ini diperoleh dengan teknik *scrapping* pada website [**Traveloka**](www.traveloka.com/). Data ini berbentuk sqlite yang berisikan 2 tabel bernama `hotel_yogyakarta` dan `hotel_room_yogyakarta`
+
+
+### hotel_yogyakarta
+
+Berikut detail column pada tabel `hotel_yogyakarta`.
+**Dimensi (378, 12)**
+
+- `id`: Unique id hotel
+- `type`: Tipe penginapan
+- `name`: Nama hotel
+- `starRating`: Rating bintang hotel
+- `builtYear`: Tahun dibuatnya hotel
+- `description`: Deskripsi tentang hotel
+- `link`: URL menuju halaman hotel di Traveloka
+- `address`: Alamat hotel
+- `city`: Kota hotel
+- `image`: URL gambar hotel
+- `facilities`: Daftar fasilitas pada hotel
+- `nearestPointofInterests`:  Area populer / fasilitas umum disekitar hotel
+
+### hotel_room_yogyakarta
+
+Berikut detail column pada tabel `hotel_room_yogyakarta`.
+**Dimensi (1199, 16)**
+
+- `id`: Unique id hotel
+- `hotelId`: Id hotel
+- `roomType`: Tipe kamar hotel
+- `description`: deskripsi kamar hotel
+- `bedDescription`: deskripsi kasur kamar
+- `size`: Ukuran kamar ($m^2$)
+- `originalRate`: Harga kamar per malam
+- `baseOccupancy`: Kapasitas kamar
+- `maxChildAge`: Umur maksimal anak-anak
+- `maxChildOccupancy`: Kapasitas kamar untuk anak-anak
+- `numExtraBeds`: Jumlah kasur tambahan
+- `isBreakfastIncluded`:  Fasilitas sarapan
+- `isWifiIncluded`: Fasilitas WiFi
+- `isRefundable`: Fasilitas refund
+- `hasLivingRoom`: Fasilitas ruang keluarga
+- `facilities`: Daftar fasilitas lainnya pada kamar
+
+## Data analysis
+### Import library
+
+```{python}
+from sqlite3 import connect
+import pickle
+import pandas as pd
+import json
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MultiLabelBinarizer
+```
+
+### Load data
+Buat koneksi ke **database sqlite**, lalu baca tabel `hotel_yogyakarta` dan` hotel_room_yogyakarta` menjadi dataframe pandas.
+```{python}
+# SQLite3 connection
+con = connect('./dataset/hotel-directories-ORI.sqlite3')
+df_sql_hotel = pd.read_sql_query("SELECT * from hotel_yogyakarta", con=con)
+df_sql_room = pd.read_sql_query("SELECT * from hotel_room_yogyakarta", con=con)
+con.close()
+
+# Table columns
+print('Kolom Tabel Hotel :')
+print(df_sql_hotel.columns)
+print("Total Baris :", df_sql_hotel.shape[0])
+print("Total Kolom :", df_sql_hotel.shape[1])
+
+print('-' * 50)
+
+print('Kolom Tabel Kamar:')
+print(df_sql_room.columns)
+print("Total Baris :", df_sql_room.shape[0])
+print("Total Kolom :", df_sql_room.shape[1])
+```
+
+Untuk melihat hasil dataframe dapat dilakukan menggunakan code berikut.
+
+```{python}
+print(f"Dimensi : {df_sql_hotel.shape}")
+df_sql_hotel.sample(2)
+```
+```{python}
+print(f"Dimensi : {df_sql_room.shape}")
+df_sql_room.sample(2)
+```
+
+```{python}
+# Fungsi menghitung unique value
+def check_unique(df):
+    count = 0
+    for i in df.columns:
+        if df[i].nunique() == 1:
+            count += 1
+            print(f'{i}: {df[i].nunique()}')
+        else:
+            print(f'{i}: {df[i].nunique()}')
+    if count == 0:
+        print('No columns with only one unique value')
+```
+Gunakan fungsi `check_unique()` untuk mengecek apakah terdapat data dengan unique value kurang dari 2. Jika ada, maka data tersebut tidak akan digunakan.
+
+```{python}
+check_unique(df_sql_hotel)
+```
+
+```{python}
+check_unique(df_sql_room)
+```
+
+
+
+- Nilai penghubung kedua tabel adalah `id` pada data **hotel**  dan `hotelId` pada data **kamar**.
+- Terdapat beberapa beberapa kolom yang tidak digunakan pada analisis ini
+    - **Hotel**: `name`, `description`, `link`, `address`, dan `image`.
+    - **Kamar**: `id`, `roomType`, `description`, dan `bedDescription`.
+- Terdapat beberapa kolom dengan total nilai unik kurang dari 2
+    - **Hotel**: `type` dan `city`.
+    - **Kamar**: `bedDescription` dan `numExtraBeds`
+- Setelah dilakukan penghapusan kolom selanjutnya tabel akan di-*merge* menjadi satu dataframe.
+- `starRating` memiliki 8 nilai unik, perlu di teliti lebih lanjut untuk detailnya.
+
+### Menghapus Kolom 
+```{python}
+hotelDrop = ['name', 'description', 'link', 'address', 'image', 'type', 'city']
+roomDrop = ['id', 'roomType', 'description', 'bedDescription', 'numExtraBeds']
+
+df_hotel = df_sql_hotel.drop(hotelDrop, axis=1)
+df_room = df_sql_room.drop(roomDrop, axis=1)
+
+print('Total Hotel Table Data : ', df_hotel.shape[0])
+print('Total Hotel Table Column : ', df_hotel.shape[1])
+print('-' * 30)
+print('Total Room Table Data : ', df_room.shape[0])
+print('Total Room Table Column : ', df_room.shape[1])
+```
+
+### Merge Data
+```{python}
+# Rename column
+df_hotel.rename(columns={'id': 'hotelId'}, inplace=True)
+df_hotel.rename(columns={'facilities': 'hotelFacilities'}, inplace=True)
+df_room.rename(columns={'facilities': 'roomFacilities'}, inplace=True)
+```
+
+- Menyamakan nama `id` pada tabel **hotel** dan `hotelId` pada tabel **kamar**.
+- Menambah prefix `hotel` dan `room` pada tiap kolom `facilities` masing-masing tabel.
+
+```{python}
+# merge hotel dan room data
+df = pd.merge(df_hotel, df_room, on='hotelId', how='inner')
+
+# remove id column
+df.drop(columns=['hotelId'], inplace=True)
+
+# re arrange column
+df = df[['originalRate', 'starRating', 'builtYear', 'size', 'baseOccupancy', 'maxChildAge',
+         'maxChildOccupancy', 'isBreakfastIncluded', 'isWifiIncluded', 'isRefundable',
+         'hasLivingRoom', 'hotelFacilities', 'roomFacilities', 'nearestPointOfInterests']]
+
+df
+```
+
+- Dimensi pasca penggabungan adalah `(1199, 14)`
+- Menghapus kolom `hotelId` karena sudah tidak diperlukan lagi.
+- Mengubah urutan kolom untuk mempermudah analisis, target kolom berada di kiri dan kolom array berada di kanan.
+
+### Target Processing
+```{python}
+for i in range(0, 5):
+    print(df.loc[i, 'originalRate'])
+```
+
+- Data berbentuk `JSON` atau `Dictionary`, maka perlu diubah menjadi nilai harga dengan 1 nilai.
+- Karena semua data menggunakan matauang `IDR`, maka `currency` tidak diperlukan.
+
+```{python}
+# Extract the amount from originalRate using a lambda function
+df['rate'] = df['originalRate'].apply(lambda x: json.loads(x)['amount'])
+df['tax'] = df['originalRate'].apply(lambda x: json.loads(x)['tax'])
+df = df.drop(columns=['originalRate'])
+```
+
+```{python}
+# check tipe data
+print('Tipe data harga :', df['rate'].dtype)
+print('Tipe data pajak :', df['tax'].dtype)
+```
+
+```{python}
+# ubah tipe data
+df['rate'] = df['rate'].astype('int')
+df['tax'] = df['tax'].astype('int')
+
+print('Tipe data harga :', df['rate'].dtype)
+print('Tipe data pajak :', df['tax'].dtype)
+```
+
+#### Rasio Pajak
+Tahap ini bertujuan untuk mengetahui rasio pajak dari harga kamar hotel. Rasio pajak ini akan digunakan untuk menghitung harga kamar hotel setelah dikenakan pajak.
+
+```{python}
+
+# create series for original rate
+original_rate = df['rate']
+# create series for tax
+tax = df['tax']
+# create dataframe for original rate, tax, and tax rate
+df_rate = pd.DataFrame({'original_rate': original_rate, 'tax': tax})
+df_rate['tax_rate'] = df_rate['tax'] / df_rate['original_rate'] * 100
+
+df_rate
+```
+
+```{python}
+# count number of data with tax rate 20% and under 21%, also over 21%
+count0 = 0
+count_20 = 0
+countBetween = 0
+for i in range(len(df_rate['tax_rate'])):
+    if df_rate['tax_rate'][i] < 20 and df_rate['tax_rate'][i] > 0:
+        countBetween += 1
+    elif df_rate['tax_rate'][i] >= 20:
+        count_20 += 1
+    elif df_rate['tax_rate'][i] == 0:
+        count0 += 1
+print('Median pajak : ', df_rate['tax_rate'].median())
+print('null / 0% pajak: ', count0)
+print('Pajak diantara 0 - 20%:', countBetween)
+print('Rasio pajak diatas 20% :', count_20)
+
+
+# plot for tax rate and give the total value on the top of the bar if the value is 0% it will not show
+sns.set(rc={'figure.figsize': (10, 7)})
+sns.set_style('darkgrid')
+ax = sns.histplot(df_rate['tax_rate'], kde=False, color='dodgerblue', bins=9)
+ax.set(xlabel='Tax Rate (%)', ylabel='Count')
+ax.set_title('Tax Rate Distribution')
+total = len(df_rate['tax_rate'])
+for p in ax.patches:
+    height = p.get_height()
+    if height != 0:
+        ax.text(p.get_x()+p.get_width()/2.,
+                height + 15,
+                '{:1.2f}%'.format(100*height/total),
+                ha="center")
+plt.show()
+```
+
+```{python}
+# Menghapus kolom pajak
+df = df.drop(columns=['tax'])
+
+# Mengubah target kolom menjadi di awal
+# sekedar untuk merapikan dataframe
+df = df[['rate'] + [col for col in df.columns if col != 'rate']]
+df.columns
+```
+
+- Pajak hotel di Yogyakarta ada di kisaran `20-22%` dengan median `21%`
+- Karena `94%` data memiliki pajak dikisaran tersebut maka nilai pajak dianggap 21%(*median*) secara keseluruhan.
+
+### Validaasi Data
+#### Pengecekan Rating Bintang
+```{python}
+# starRating Distribution
+value = df.starRating.value_counts()
+print('OriginalRate Distribution by starRating')
+print(value)
+
+# starRating Distribution by percentage
+value_percentage = value / len(df) * 100
+
+# create a list of tuples where each tuple contains the value and index of each element in the value_percentage series
+value_percentage_list = [(value_percentage[i], i)
+                         for i in value_percentage.index]
+
+# sort the list by the value in descending order
+value_percentage_list_sorted = sorted(value_percentage_list, reverse=True)
+
+fig, ax = plt.subplots(1, 2, figsize=(20, 10), dpi=80,
+                       gridspec_kw={'width_ratios': [1, 0.5]})
+sns.histplot(df, x="rate", hue='starRating', palette='bright',
+             ax=ax[0]).set(title='OriginalRate Distribution by starRating')
+
+# starRating percentage plot
+sns.barplot(x=value_percentage.index, y=value_percentage.values,
+            palette='bright', ax=ax[1]).set(title='starRating percentage')
+
+# add the percentage text using the sorted list
+for container in ax[1].containers:
+    for bar in container.patches:
+        v = bar.get_height()
+        bar_center = bar.get_x() + bar.get_width() / 2
+        ax[1].text(bar_center, v + 0.5,
+                   f'{v:.2f}%', color='black', fontweight='bold', ha='center')
+fig.tight_layout()
+```
+
+- Rating bintang memiliki beberapa nilai dengan 0.5 (desimal), tetapi nilai tersebut hanya memiliki persentase jumlah data yang sedikit, maka dari itu rating tersebut dihilangkan angka desimalnya dari rating seharusnya.
+
+```{python}
+# ubah starRating dengan angka bulat
+df['starRating'] = df['starRating'].replace(2.5, 2)
+df['starRating'] = df['starRating'].replace(3.5, 3)
+```
+
+```{python}
+# starRating Distribution
+value = df.starRating.value_counts()
+print('OriginalRate Distribution by starRating')
+print(value)
+
+# starRating Distribution by percentage
+value_percentage = value / len(df) * 100
+
+# create a list of tuples where each tuple contains the value and index of each element in the value_percentage series
+value_percentage_list = [(value_percentage[i], i)
+                         for i in value_percentage.index]
+
+# sort the list by the value in descending order
+value_percentage_list_sorted = sorted(value_percentage_list, reverse=True)
+
+fig, ax = plt.subplots(1, 2, figsize=(20, 10), dpi=80,
+                       gridspec_kw={'width_ratios': [1, 0.5]})
+sns.histplot(df, x="rate", hue='starRating', palette='bright',
+             ax=ax[0]).set(title='OriginalRate Distribution by starRating')
+
+# starRating percentage plot
+sns.barplot(x=value_percentage.index, y=value_percentage.values,
+            palette='bright', ax=ax[1]).set(title='starRating percentage')
+
+# add the percentage text using the sorted list
+for container in ax[1].containers:
+    for bar in container.patches:
+        v = bar.get_height()
+        bar_center = bar.get_x() + bar.get_width() / 2
+        ax[1].text(bar_center, v + 0.5,
+                   f'{v:.2f}%', color='black', fontweight='bold', ha='center')
+fig.tight_layout()
+```
+
+- Persentase persebaran data tiap rating bintang sudah lebih baik setelah dilakukan pengubahan nilai rating bintang.
+- Terlihat pada plot yang `kiri` bahwa terdapat ekor yang sangat panjang, ini menunjukkan adanya outlier pada kolom harga(`rate`)
+
+```{python}
+df.info()
+```
+
+- Kolom `starRating` masih bertipe data `float` walau sudah tidak memiliki angka desimal, maka perlu akan menjadi `int` 
+- Kolom `builtYear` harus diganti ke tipe data `int`
+- Kolom `size` harus diganti ke tipe data `float` (tipe data dasar dari tabel sqlite adalah `float`)
+- Terdapat nilai `null` pada kolom `builtYear` dan `size` yang harus ditangani 
+
+```{python}
+df['starRating'] = df['starRating'].astype('int')
+print('Tipe data starRating :', df['starRating'].dtype)
+```
+
+#### Data Cleaning
+##### Check Duplicate Data
+```{python}
+# show index who has duplicate value
+print('Total duplicated row = ', df.duplicated().sum())
+# print duplicated data list index 1
+df[df.duplicated(keep=False)]
+```
+
+```{python}
+# drop duplicate data
+df = df.drop_duplicates(keep='first')
+df.shape
+```
+
+- Dengan menggunakan parameter `keep = 'first'` maka data yang duplikat akan dihapus kecuali data pertama yang muncul.
+
+##### Check Null
+```{python}
+# Jumlah baris data
+jumlah_baris_ori = df.shape[0]
+
+# crate dataframe for null value
+df_null = pd.DataFrame(df.isnull().sum(), columns=['null_value'])
+df_null['null_value_percentage'] = df_null['null_value'] / len(df) * 100
+df_null
+```
+
+- Terdapat 2 data yang memiliki nilai `null` dengan persentase yang cukup tinggi, yaitu kolom `builtYear` dan `size`. Oleh karena itu data tersebut akan diubah dengan nilai median per rating hotel.
+
+```{python}
+# create new dataframe for null value rows
+df_null_rows = df[df.isnull().any(axis=1)]
+df_null_rows
+```
+
+```{python}
+# ubah sementara null value menjadi 0
+df['builtYear'] = df['builtYear'].fillna(0)
+df['size'] = df['size'].fillna(0)
+
+# ubah tipe data
+df['builtYear'] = df['builtYear'].astype('int32')
+df['size'] = df['size'].astype('float')
+
+print('Tipe data builtYear :', df['builtYear'].dtype)
+print('Tipe data size :', df['size'].dtype)
+```
+
+:::{.callout-note}
+Kolom yang memiliki nilai `null` akan membuat tipe data menjadi `object`, maka dari itu pada penelitian ini akan diisi dengan nilai `0` terlebih dahulu, kemudian kolom tersebut diubah tipe datanya
+:::
+
+```{python}
+# ubah nilai 0 pada kolom builtYear menjadi median tiap starRating
+for i in df['starRating'].unique():
+    df.loc[(df['starRating'] == i) & (df['builtYear'] == 0),
+           'builtYear'] = df[df['starRating'] == i]['builtYear'].median()
+
+# ubah nilai 0 pada kolom size menjadi median tiap starRating
+for i in df['starRating'].unique():
+    df.loc[(df['starRating'] == i) & (df['size'] == 0),
+           'size'] = df[df['starRating'] == i]['size'].median()
+    
+# crate dataframe for null value
+df_null = pd.DataFrame(df.isnull().sum(), columns=['null_value'])
+df_null['null_value_percentage'] = df_null['null_value'] / len(df) * 100
+df_null
+```
+
+- Data sudah tidak memiliki nilai `null`
+
+#### Statistik Deskriptif
+```{python}
+df.describe()
+```
+
+- Pada kolom `builtYear` terdapat nilai minimum `1` yang tidak mungkin terjadi, maka data tersebut akan dihapus. 
+- nilai median pada `rate` dan `size` terpaut cukup jauh dengan nilai maximum, ini menunjukkan adanya outlier pada kolom `rate`.
+
+##### Built Year Data Handling
+```{python}
+# Cek nilai unique pada kolom builtYear dibawah 2000
+print('Nilai unique builtYear dibawah 2000 :')
+print(df[df['builtYear'] < 2000]['builtYear'].unique())
+
+print('Nilai unique bulitYear dibawah 1900 :')
+print(df[df['builtYear'] < 1900]['builtYear'].unique())
+```
+
+- Terdapat data yang memiliki nilai `builtYear` yang tidak mungkin terjadi, maka data tersebut akan dihapus.
+- Tidak terdapat hotel dibawah tahun 1900, maka dari itu data yang disimpan adalah data diatas tahun 1900.
+
+```{python}
+# menghapus baris yang memiliki nilai dibawah 1900 pada kolom builtYear
+df = df[df['builtYear'] > 1900]
+
+# Cek nilai unique pada kolom builtYear dibawah 2000
+print('Nilai unique builtYear dibawah 2000 :')
+print(df[df['builtYear'] < 2000]['builtYear'].unique())
+```
+
+#### Outlier Handling
+##### Rate Data
+```{python}
+# Statistik Harga
+print('Harga')
+print(f'maximum value : {df.rate.max()}')
+print(f'minimum value : {df.rate.min()}')
+print(f'skew value : {round(df.rate.skew(), 2)}')
+
+# Distribusi harga
+sns.set_style('darkgrid')
+plt.figure(figsize=(20, 10), dpi=80)
+sns.displot(df, x="rate", kind="kde", fill=True).set(
+    title='OriginalRate Distribution')
+plt.show()
+```
+
+- Kolom `rate` memiliki nilai *skew* yang cukup tinggi, selain itu dari plot terlihat memiliki ekor yang cukup panjang. Ini menunjukkan adanya outlier pada kolom `rate`.
+- Penghapusan outlier dilakukan dengan menggunakan metode IQR.
+
+::: {.callout-note}
+Untuk penjelasan lebih lanjut mengenai *skew* dapat dilihat [disini](https://accounting.binus.ac.id/2021/08/12/memahami-nilai-skewness-ukuran-kemiringan-dalam-statistik-deskriptif/)
+:::
+
+```{python}
+# Hitung outlier pada kolom rate
+Q1 = df['rate'].quantile(0.25)
+Q3 = df['rate'].quantile(0.75)
+IQR = Q3 - Q1
+
+print('Batas bawah :', Q1 - (1.5 * IQR))
+print('Batas atas :', Q3 + (1.5 * IQR))
+
+# Hitung jumlah outlier
+total_outlier = len(df[(df['rate'] < (Q1 - (1.5 * IQR))) | (df['rate'] > (Q3 + (1.5 * IQR)))])
+print('Jumlah outlier :', total_outlier)
+```
+
+- Terdapat 91 data outlier pada kolom `rate`.
+
+```{python}
+# Hapus outlier
+df = df[(df['rate'] > (Q1 - (1.5 * IQR))) & (df['rate'] < (Q3 + (1.5 * IQR)))]
+df.describe()
+```
+
+- Nilai maksimum sudah cukup menurun setelah dilakukan penghapusan outlier.
+- Nilai maksimum pada kolom `size` juga ikut menurun.
+
+```{python}
+# Statistik Harga
+print('Harga')
+print(f'maximum value : {df.rate.max()}')
+print(f'minimum value : {df.rate.min()}')
+print(f'skew value : {round(df.rate.skew(), 2)}')
+
+# Distribusi harga
+sns.set_style('darkgrid')
+plt.figure(figsize=(20, 10), dpi=80)
+sns.displot(df, x="rate", kind="kde", fill=True).set(
+    title='OriginalRate Distribution')
+plt.show()
+```
+
+- Nilai skew pada kolom `rate` sudah menjadi lebih baik setelah dilakukan penghapusan outlier.
+
+##### Size Data
+```{python}
+# Statistik Size
+print('Size')
+print('maximum value : {}'.format(df['size'].max()))
+print('minimum value : {}'.format(df['size'].min()))
+print('skew value : {}'.format(df['size'].skew()))
+
+# Distribusi size
+plt.figure(figsize=(20, 10), dpi=80)
+sns.set_style('darkgrid')
+sns.jointplot(data=df, x='size', y='rate')
+plt.show()
+```
+
+- Nilai skew sudah sangat mendekati angka 1, ini menunjukkan bahwa distribusi data sudah sangat baik.
+
+```{python}
+# Hasil data cleaning
+print('Total baris data awal :', jumlah_baris_ori)
+print('Total baris data yang dihapus :', jumlah_baris_ori - df.shape[0])
+print('Total baris data setelah cleaning :', df.shape[0])
+```
+
+```{python}
+df.isnull().sum()
+```
+
+### Encoding Data
+```{python}
+df = df.reset_index(drop=True)
+df.info()
+```
+
+- Kolom `hotelfacilities`, `roomfacilities`, dan `nearestPointofInterests` merupakan sebuah fitur dengan multi label. Oleh karena itu data tersebut akan dilakukan *`multi-hot encoding`*.
+- Proses tersebut akan dilakukan dengan library `sklearn.preprocessing.MultiLabelBinarizer`
+
+:::{.callout-note}
+Untuk penjelasan lebih lanjut tentang *`multi-label`* dan *`multi-class`* dapat dilihat [disini](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)
+:::
+
+#### Check data format
+```{python}
+df['hotelFacilities'].head(2)
+```
+
+```{python}
+df['roomFacilities'].head(2)
+```
+
+```{python}
+df['nearestPointOfInterests'].head(2)
+```
+
+- `roomfacilities` dan `hotelFacilities` memiliki format yang sama, yaitu `list` yang berisi `string`.
+- `nearestPointofInterests` memiliki format yang berbeda, yaitu `list` yang berisi `dictionary`/`json` yang berisi `string` dan `float`.
+
+#### Data Preprocessing
+```{python}
+# create a MultiLabelBinarizer object
+mlb = MultiLabelBinarizer()
+```
+
+- Daftar kolom hasil encoding akan diexport menjadi file `pkl` yang akan digunakan pada aplikasi streamlit.
+
+```{python}
+# reformat kolom hotelFacilities
+df['hotelFacilities'] = df['hotelFacilities'].apply(eval)
+
+# multi label binarizer untuk kolom hotelFacilities dengan preifx Hotel_
+hotel_facilities = pd.DataFrame(mlb.fit_transform(
+    df['hotelFacilities']), columns=[f'Hotel_{col}' for col in mlb.classes_])
+
+hotelNewCol = hotel_facilities.shape[1]
+print('Jumlah kolom :', hotel_facilities.shape[1])
+
+# export hotel_facilities with pickle
+hotelFacilities = hotel_facilities.columns.tolist()
+pickle.dump(hotelFacilities, open('hotelFacilities.pkl', 'wb'))
+    
+hotel_facilities.head(2)
+```
+
+```{python}
+# reformat kolom roomFacilities
+df['roomFacilities'] = df['roomFacilities'].apply(eval)
+
+# multi label binarizer untuk kolom roomFacilities dengan preifx Room_
+room_facilities = pd.DataFrame(mlb.fit_transform(df['roomFacilities']), columns=[
+                               f'Room_{col}' for col in mlb.classes_])
+
+roomNewCol = room_facilities.shape[1]
+print('Jumlah kolom :', roomNewCol)
+
+# export room_facilities with pickle
+roomFacilities = room_facilities.columns.tolist()
+pickle.dump(roomFacilities, open('roomFacilities.pkl', 'wb'))
+
+room_facilities.head(2)
+```
+
+```{python}
+# reformat kolom nearestPointOfInterests
+df['nearestPointOfInterests'] = df['nearestPointOfInterests'].apply(
+    lambda x: [item['landmarkType'] for item in json.loads(x)])
+
+# multi label binarizer untuk kolom nearestPointOfInterests dengan preifx Point_
+pointOfInterests = pd.DataFrame(mlb.fit_transform(
+    df['nearestPointOfInterests']), columns=[f'Point_{col}' for col in mlb.classes_])
+
+pointNewCol = pointOfInterests.shape[1]
+print('Jumlah kolom :', pointNewCol)
+
+# export pointOfInterests with pickle
+pointInterests = pointOfInterests.columns.tolist()
+pickle.dump(pointInterests, open('pointInterests.pkl', 'wb'))
+
+pointOfInterests.head(2)
+```
+
+##### Menggabungkan hasil encoding
+```{python}
+# Total kolom encoding
+totalNewCol = hotelNewCol + roomNewCol + pointNewCol
+print('Total kolom encoding :', totalNewCol)
+```
+
+```{python}
+# menghapus kolom hotelFacilities, roomFacilities, dan nearestPointOfInterests
+df = df.drop(columns=['hotelFacilities', 'roomFacilities', 'nearestPointOfInterests'])
+
+print('df shape :', df.shape)
+print('hotel_facilities shape :', hotel_facilities.shape)
+print('room_facilities shape :', room_facilities.shape)
+print('pointOfInterests shape :', pointOfInterests.shape)
+
+df = pd.concat([df, hotel_facilities, room_facilities,
+               pointOfInterests], axis=1)
+df.head()
+```
+
+```{python}
+df.info()
+```
+
+### Export Data ke CSV
+```{python}
+df.to_csv('kamar-hotel-yogyakarta.csv', index=False)
+```
+
+```{python}
+col = df.columns
+
+# export col with pickle
+pickle.dump(col, open('col.pkl', 'wb'))
+```
+
+```{python}
+print(col)
+```
+
+### Data Anlisis
+```{python}
+value = df.starRating.value_counts()
+print(value)
+
+# starRating Distribution by percentage
+value_percentage = value / len(df) * 100
+
+# create a list of tuples where each tuple contains the value and index of each element in the value_percentage series
+value_percentage_list = [(value_percentage[i], i)
+                         for i in range(len(value_percentage))]
+
+# sort the list by the value in descending order
+value_percentage_list_sorted = sorted(value_percentage_list, reverse=True)
+
+fig, ax = plt.subplots(1, 2, figsize=(20, 10), dpi=80,
+                       gridspec_kw={'width_ratios': [1, 0.5]})
+sns.histplot(df, x="rate", hue='starRating', palette='bright',
+             ax=ax[0]).set(title='Rate Distribution by starRating')
+
+sns.barplot(x=value_percentage.index, y=value_percentage.values,
+            palette='bright', ax=ax[1]).set(title='starRating percentage')
+
+# add the percentage text using the sorted list
+for i, (v, index) in enumerate(value_percentage_list_sorted):
+    ax[1].text(index, v + 0.5, str(round(v, 2)) + '%',
+               color='black', fontweight='bold', ha='center')
+
+fig.tight_layout()
+```
+
+```{python}
+filtered_0 = df[df['starRating'] == 0.0]
+filtered_1 = df[df['starRating'] == 1.0]
+filtered_2 = df[df['starRating'] == 2.0]
+filtered_3 = df[df['starRating'] == 3.0]
+filtered_4 = df[df['starRating'] == 4.0]
+filtered_5 = df[df['starRating'] == 5.0]
+
+print('Skew value for every starRating')
+print(df.groupby('starRating')['rate'].skew())
+
+# OriginalRate Distribution by starRating using hisplot inside subplot
+fig, ax = plt.subplots(2, 3, figsize=(20, 10), dpi=80,
+                       gridspec_kw={'width_ratios': [1, 1, 1]})
+sns.histplot(filtered_0, x="rate", ax=ax[0, 0]).set(
+    title='Rate Distribution by 0 starRating')
+sns.histplot(filtered_1, x="rate", ax=ax[0, 1]).set(
+    title='Rate Distribution by 1 starRating')
+sns.histplot(filtered_2, x="rate", ax=ax[0, 2]).set(
+    title='Rate Distribution by 2 starRating')
+sns.histplot(filtered_3, x="rate", ax=ax[1, 0]).set(
+    title='Rate Distribution by 3 starRating')
+sns.histplot(filtered_4, x="rate", ax=ax[1, 1]).set(
+    title='Rate Distribution by 4 starRating')
+sns.histplot(filtered_5, x="rate", ax=ax[1, 2]).set(
+    title='Rate Distribution by 5 starRating')
+fig.tight_layout()
+```
+
+```{python}
+# Statistik Harga tiap rating bintang hotel
+
+dfRateStat = df.groupby('starRating').agg(
+    {'rate': ['mean', 'std', 'min', 'max', lambda x: x.quantile(0.25), 'median', lambda x: x.quantile(0.75)]})
+
+# change the column name from index 4 and 6
+dfRateStat = dfRateStat.rename(
+    columns={'<lambda_0>': '25%', '<lambda_1>': '75%'})
+dfRateStat
+```
+
+- Pada kota Yogyakarta tidak terdapat banyak hotel bintang 5.
+- Mayoritas hotel di Yogyakarta adalah hotel bintang 0.
+- Terdapat hotel bintang 2 yang memiliki harga setara dengan hotel bintang 5.
+
+:::{.callout-note}
+Dari tabel statistik tersebut mengindikasikan beberapa nilai yang tidak wajar. Untuk penelitian selanjutnya bisa dilakukan pembersihan data lebih mendalam lagi.
+:::
+
+:::{.callout-note}
+Hasil dari *`multi-hot encoding`* juga belum dilakukan `pembersihan data`, selain itu dengan banyaknya hasil kolom juga dapat dilakukan reduksi dimensi, contohnya menggunakan `PCA`. Oleh karena itu untuk penelitian selanjutnya bisa dilakukan pembersihan data lebih mendalam lagi dan dilakukan reduksi dimensi.
+:::
+
+Masih banyak informasi-informasi yang dapat di ambil dari data ini, seperti:
+
+- Perbandingan harga hotel bintang 5 dengan hotel bintang 0.
+- Landmark apa yang paling banyak dicari oleh pengunjung hotel?
+- Fasilitas apa yang sudah manjadi standar pada hotel bintang 3?
+- Dan masih banyak lagi.
+
+## Pemodelan Machine Learning
+```{python}
+import numpy as np
+import xgboost as xgb
+from sklearn.experimental import enable_halving_search_cv
+from sklearn.model_selection import train_test_split, HalvingGridSearchCV
+from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+from IPython import display
+```
+

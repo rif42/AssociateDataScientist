@@ -1,0 +1,3539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Associate Data Scientist - 13&nbsp; Project Regresi Hotel Yogyakarta</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./project_klasifikasi.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project_regresi.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Project Regresi Hotel Yogyakarta</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Associate Data Scientist</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Associate Data Scientist</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Understanding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Telaah Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Menentukan Objek atau Memilih Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cleaning Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pemodelan Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Deployment</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project_klasifikasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Project Klasifikasi Sentimen Analisis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project_regresi.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Project Regresi Hotel Yogyakarta</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#deskripsi" id="toc-deskripsi" class="nav-link active" data-scroll-target="#deskripsi"><span class="header-section-number">13.1</span> Deskripsi</a></li>
+  <li><a href="#tentang-data" id="toc-tentang-data" class="nav-link" data-scroll-target="#tentang-data"><span class="header-section-number">13.2</span> Tentang data</a>
+  <ul class="collapse">
+  <li><a href="#hotel_yogyakarta" id="toc-hotel_yogyakarta" class="nav-link" data-scroll-target="#hotel_yogyakarta"><span class="header-section-number">13.2.1</span> hotel_yogyakarta</a></li>
+  <li><a href="#hotel_room_yogyakarta" id="toc-hotel_room_yogyakarta" class="nav-link" data-scroll-target="#hotel_room_yogyakarta"><span class="header-section-number">13.2.2</span> hotel_room_yogyakarta</a></li>
+  </ul></li>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis"><span class="header-section-number">13.3</span> Data analysis</a>
+  <ul class="collapse">
+  <li><a href="#import-library" id="toc-import-library" class="nav-link" data-scroll-target="#import-library"><span class="header-section-number">13.3.1</span> Import library</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data"><span class="header-section-number">13.3.2</span> Load data</a></li>
+  <li><a href="#menghapus-kolom" id="toc-menghapus-kolom" class="nav-link" data-scroll-target="#menghapus-kolom"><span class="header-section-number">13.3.3</span> Menghapus Kolom</a></li>
+  <li><a href="#merge-data" id="toc-merge-data" class="nav-link" data-scroll-target="#merge-data"><span class="header-section-number">13.3.4</span> Merge Data</a></li>
+  <li><a href="#target-processing" id="toc-target-processing" class="nav-link" data-scroll-target="#target-processing"><span class="header-section-number">13.3.5</span> Target Processing</a></li>
+  <li><a href="#validaasi-data" id="toc-validaasi-data" class="nav-link" data-scroll-target="#validaasi-data"><span class="header-section-number">13.3.6</span> Validaasi Data</a></li>
+  <li><a href="#encoding-data" id="toc-encoding-data" class="nav-link" data-scroll-target="#encoding-data"><span class="header-section-number">13.3.7</span> Encoding Data</a></li>
+  <li><a href="#export-data-ke-csv" id="toc-export-data-ke-csv" class="nav-link" data-scroll-target="#export-data-ke-csv"><span class="header-section-number">13.3.8</span> Export Data ke CSV</a></li>
+  <li><a href="#data-anlisis" id="toc-data-anlisis" class="nav-link" data-scroll-target="#data-anlisis"><span class="header-section-number">13.3.9</span> Data Anlisis</a></li>
+  </ul></li>
+  <li><a href="#pemodelan-machine-learning" id="toc-pemodelan-machine-learning" class="nav-link" data-scroll-target="#pemodelan-machine-learning"><span class="header-section-number">13.4</span> Pemodelan Machine Learning</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Project Regresi Hotel Yogyakarta</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="deskripsi" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="deskripsi"><span class="header-section-number">13.1</span> Deskripsi</h2>
+<p>Project ini merupakan contoh project Data Science yang menggunakan data hotel di Yogyakarta. Project ini bertujuan untuk memprediksi harga kamar hotel berdasarkan fitur-fitur yang ada. Project ini menggunakan 3 algoritma yaitu, <strong>XGBoost</strong>, <strong>Random Forest</strong>, dan <strong>SVM</strong>. Project ini juga menggunakan teknik <em>hyperparameter tuning</em> untuk meningkatkan performa model. Kemudian model tersebut dilakukan deployment menggunakan <strong>streamlit</strong></p>
+</section>
+<section id="tentang-data" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="tentang-data"><span class="header-section-number">13.2</span> Tentang data</h2>
+<p>Data ini diperoleh dengan teknik <em>scrapping</em> pada website <a href="www.traveloka.com/"><strong>Traveloka</strong></a>. Data ini berbentuk sqlite yang berisikan 2 tabel bernama <code>hotel_yogyakarta</code> dan <code>hotel_room_yogyakarta</code></p>
+<section id="hotel_yogyakarta" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="hotel_yogyakarta"><span class="header-section-number">13.2.1</span> hotel_yogyakarta</h3>
+<p>Berikut detail column pada tabel <code>hotel_yogyakarta</code>. <strong>Dimensi (378, 12)</strong></p>
+<ul>
+<li><code>id</code>: Unique id hotel</li>
+<li><code>type</code>: Tipe penginapan</li>
+<li><code>name</code>: Nama hotel</li>
+<li><code>starRating</code>: Rating bintang hotel</li>
+<li><code>builtYear</code>: Tahun dibuatnya hotel</li>
+<li><code>description</code>: Deskripsi tentang hotel</li>
+<li><code>link</code>: URL menuju halaman hotel di Traveloka</li>
+<li><code>address</code>: Alamat hotel</li>
+<li><code>city</code>: Kota hotel</li>
+<li><code>image</code>: URL gambar hotel</li>
+<li><code>facilities</code>: Daftar fasilitas pada hotel</li>
+<li><code>nearestPointofInterests</code>: Area populer / fasilitas umum disekitar hotel</li>
+</ul>
+</section>
+<section id="hotel_room_yogyakarta" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="hotel_room_yogyakarta"><span class="header-section-number">13.2.2</span> hotel_room_yogyakarta</h3>
+<p>Berikut detail column pada tabel <code>hotel_room_yogyakarta</code>. <strong>Dimensi (1199, 16)</strong></p>
+<ul>
+<li><code>id</code>: Unique id hotel</li>
+<li><code>hotelId</code>: Id hotel</li>
+<li><code>roomType</code>: Tipe kamar hotel</li>
+<li><code>description</code>: deskripsi kamar hotel</li>
+<li><code>bedDescription</code>: deskripsi kasur kamar</li>
+<li><code>size</code>: Ukuran kamar (<span class="math inline">\(m^2\)</span>)</li>
+<li><code>originalRate</code>: Harga kamar per malam</li>
+<li><code>baseOccupancy</code>: Kapasitas kamar</li>
+<li><code>maxChildAge</code>: Umur maksimal anak-anak</li>
+<li><code>maxChildOccupancy</code>: Kapasitas kamar untuk anak-anak</li>
+<li><code>numExtraBeds</code>: Jumlah kasur tambahan</li>
+<li><code>isBreakfastIncluded</code>: Fasilitas sarapan</li>
+<li><code>isWifiIncluded</code>: Fasilitas WiFi</li>
+<li><code>isRefundable</code>: Fasilitas refund</li>
+<li><code>hasLivingRoom</code>: Fasilitas ruang keluarga</li>
+<li><code>facilities</code>: Daftar fasilitas lainnya pada kamar</li>
+</ul>
+</section>
+</section>
+<section id="data-analysis" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="data-analysis"><span class="header-section-number">13.3</span> Data analysis</h2>
+<section id="import-library" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="import-library"><span class="header-section-number">13.3.1</span> Import library</h3>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sqlite3 <span class="im">import</span> <span class="ex">connect</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MultiLabelBinarizer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-data" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="load-data"><span class="header-section-number">13.3.2</span> Load data</h3>
+<p>Buat koneksi ke <strong>database sqlite</strong>, lalu baca tabel <code>hotel_yogyakarta</code> dan<code>hotel_room_yogyakarta</code> menjadi dataframe pandas.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SQLite3 connection</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> <span class="ex">connect</span>(<span class="st">'./dataset/hotel-directories-ORI.sqlite3'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_sql_hotel <span class="op">=</span> pd.read_sql_query(<span class="st">"SELECT * from hotel_yogyakarta"</span>, con<span class="op">=</span>con)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df_sql_room <span class="op">=</span> pd.read_sql_query(<span class="st">"SELECT * from hotel_room_yogyakarta"</span>, con<span class="op">=</span>con)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>con.close()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Table columns</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Kolom Tabel Hotel :'</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_sql_hotel.columns)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total Baris :"</span>, df_sql_hotel.shape[<span class="dv">0</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total Kolom :"</span>, df_sql_hotel.shape[<span class="dv">1</span>])</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-'</span> <span class="op">*</span> <span class="dv">50</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Kolom Tabel Kamar:'</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_sql_room.columns)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total Baris :"</span>, df_sql_room.shape[<span class="dv">0</span>])</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total Kolom :"</span>, df_sql_room.shape[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kolom Tabel Hotel :
+Index(['id', 'type', 'name', 'starRating', 'builtYear', 'description', 'link',
+       'address', 'city', 'image', 'facilities', 'nearestPointOfInterests'],
+      dtype='object')
+Total Baris : 378
+Total Kolom : 12
+--------------------------------------------------
+Kolom Tabel Kamar:
+Index(['id', 'hotelId', 'roomType', 'description', 'bedDescription', 'size',
+       'originalRate', 'baseOccupancy', 'maxChildAge', 'maxChildOccupancy',
+       'numExtraBeds', 'isBreakfastIncluded', 'isWifiIncluded', 'isRefundable',
+       'hasLivingRoom', 'facilities'],
+      dtype='object')
+Total Baris : 1199
+Total Kolom : 16</code></pre>
+</div>
+</div>
+<p>Untuk melihat hasil dataframe dapat dilakukan menggunakan code berikut.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dimensi : </span><span class="sc">{</span>df_sql_hotel<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_sql_hotel.sample(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dimensi : (378, 12)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">type</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">starRating</th>
+<th data-quarto-table-cell-role="th">builtYear</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">link</th>
+<th data-quarto-table-cell-role="th">address</th>
+<th data-quarto-table-cell-role="th">city</th>
+<th data-quarto-table-cell-role="th">image</th>
+<th data-quarto-table-cell-role="th">facilities</th>
+<th data-quarto-table-cell-role="th">nearestPointOfInterests</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">195</td>
+<td>3000010034920</td>
+<td>Hotel</td>
+<td>Hotel Cahaya Kasih</td>
+<td>0.0</td>
+<td>1996</td>
+<td>&lt;p&gt;&lt;b&gt;Lokasi&lt;/b&gt;&lt;br&gt;Hotel Cahaya Kasih adalah ...</td>
+<td>https://www.traveloka.com/id-id/hotel/detail?s...</td>
+<td>Jalan Malioboro, Sosromenduran GT.I/280, Jalan...</td>
+<td>Yogyakarta</td>
+<td>https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh2...</td>
+<td>["WIFI_PUBLIC_AREA","WIFI_FREE","AIR_CONDITION...</td>
+<td>[{"landmarkId":"91516349005487","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">28</td>
+<td>3000010014429</td>
+<td>Hotel</td>
+<td>Lafayette Boutique Hotel</td>
+<td>5.0</td>
+<td>2015</td>
+<td>&lt;p&gt;&lt;b&gt;Lokasi&lt;/b&gt;&lt;br&gt;Lafayette Boutique Hotel b...</td>
+<td>https://www.traveloka.com/id-id/hotel/detail?s...</td>
+<td>Jalan Ring Road Utara, No 409, Manggung, Catur...</td>
+<td>Yogyakarta</td>
+<td>https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh2...</td>
+<td>["CARPARK","ELEVATOR","LATE_CHECKOUT","RESTAUR...</td>
+<td>[{"landmarkId":"91607407537252","geoId":null,"...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dimensi : </span><span class="sc">{</span>df_sql_room<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_sql_room.sample(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dimensi : (1199, 16)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">hotelId</th>
+<th data-quarto-table-cell-role="th">roomType</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">bedDescription</th>
+<th data-quarto-table-cell-role="th">size</th>
+<th data-quarto-table-cell-role="th">originalRate</th>
+<th data-quarto-table-cell-role="th">baseOccupancy</th>
+<th data-quarto-table-cell-role="th">maxChildAge</th>
+<th data-quarto-table-cell-role="th">maxChildOccupancy</th>
+<th data-quarto-table-cell-role="th">numExtraBeds</th>
+<th data-quarto-table-cell-role="th">isBreakfastIncluded</th>
+<th data-quarto-table-cell-role="th">isWifiIncluded</th>
+<th data-quarto-table-cell-role="th">isRefundable</th>
+<th data-quarto-table-cell-role="th">hasLivingRoom</th>
+<th data-quarto-table-cell-role="th">facilities</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1146</td>
+<td>1000110288</td>
+<td>3000020012907</td>
+<td>Family</td>
+<td>None</td>
+<td>None</td>
+<td>35.0</td>
+<td>{"amount":"371901","currency":"IDR","tax":"780...</td>
+<td>4</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["AIR_CONDITIONING","COMPLIMENTARY_BOTTLED_WAT...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">442</td>
+<td>1000128391</td>
+<td>3000010004867</td>
+<td>Suite Twin</td>
+<td>&lt;p&gt;Suite Room Twin Beds&lt;/p&gt;</td>
+<td>None</td>
+<td>35.0</td>
+<td>{"amount":"583227","currency":"IDR","tax":"122...</td>
+<td>2</td>
+<td>8</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>["AIR_CONDITIONING","BATHROBES","BLACKOUT_DRAP...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fungsi menghitung unique value</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_unique(df):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> df.columns:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> df[i].nunique() <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>df[i]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>df[i]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> count <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'No columns with only one unique value'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Gunakan fungsi <code>check_unique()</code> untuk mengecek apakah terdapat data dengan unique value kurang dari 2. Jika ada, maka data tersebut tidak akan digunakan.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>check_unique(df_sql_hotel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>id: 378
+type: 1
+name: 377
+starRating: 8
+builtYear: 38
+description: 378
+link: 378
+address: 377
+city: 1
+image: 377
+facilities: 372
+nearestPointOfInterests: 375</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>check_unique(df_sql_room)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>id: 1199
+hotelId: 375
+roomType: 423
+description: 544
+bedDescription: 0
+size: 87
+originalRate: 714
+baseOccupancy: 9
+maxChildAge: 13
+maxChildOccupancy: 5
+numExtraBeds: 1
+isBreakfastIncluded: 2
+isWifiIncluded: 2
+isRefundable: 2
+hasLivingRoom: 2
+facilities: 600</code></pre>
+</div>
+</div>
+<ul>
+<li>Nilai penghubung kedua tabel adalah <code>id</code> pada data <strong>hotel</strong> dan <code>hotelId</code> pada data <strong>kamar</strong>.</li>
+<li>Terdapat beberapa beberapa kolom yang tidak digunakan pada analisis ini
+<ul>
+<li><strong>Hotel</strong>: <code>name</code>, <code>description</code>, <code>link</code>, <code>address</code>, dan <code>image</code>.</li>
+<li><strong>Kamar</strong>: <code>id</code>, <code>roomType</code>, <code>description</code>, dan <code>bedDescription</code>.</li>
+</ul></li>
+<li>Terdapat beberapa kolom dengan total nilai unik kurang dari 2
+<ul>
+<li><strong>Hotel</strong>: <code>type</code> dan <code>city</code>.</li>
+<li><strong>Kamar</strong>: <code>bedDescription</code> dan <code>numExtraBeds</code></li>
+</ul></li>
+<li>Setelah dilakukan penghapusan kolom selanjutnya tabel akan di-<em>merge</em> menjadi satu dataframe.</li>
+<li><code>starRating</code> memiliki 8 nilai unik, perlu di teliti lebih lanjut untuk detailnya.</li>
+</ul>
+</section>
+<section id="menghapus-kolom" class="level3" data-number="13.3.3">
+<h3 data-number="13.3.3" class="anchored" data-anchor-id="menghapus-kolom"><span class="header-section-number">13.3.3</span> Menghapus Kolom</h3>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>hotelDrop <span class="op">=</span> [<span class="st">'name'</span>, <span class="st">'description'</span>, <span class="st">'link'</span>, <span class="st">'address'</span>, <span class="st">'image'</span>, <span class="st">'type'</span>, <span class="st">'city'</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>roomDrop <span class="op">=</span> [<span class="st">'id'</span>, <span class="st">'roomType'</span>, <span class="st">'description'</span>, <span class="st">'bedDescription'</span>, <span class="st">'numExtraBeds'</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>df_hotel <span class="op">=</span> df_sql_hotel.drop(hotelDrop, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>df_room <span class="op">=</span> df_sql_room.drop(roomDrop, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total Hotel Table Data : '</span>, df_hotel.shape[<span class="dv">0</span>])</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total Hotel Table Column : '</span>, df_hotel.shape[<span class="dv">1</span>])</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-'</span> <span class="op">*</span> <span class="dv">30</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total Room Table Data : '</span>, df_room.shape[<span class="dv">0</span>])</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total Room Table Column : '</span>, df_room.shape[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total Hotel Table Data :  378
+Total Hotel Table Column :  5
+------------------------------
+Total Room Table Data :  1199
+Total Room Table Column :  11</code></pre>
+</div>
+</div>
+</section>
+<section id="merge-data" class="level3" data-number="13.3.4">
+<h3 data-number="13.3.4" class="anchored" data-anchor-id="merge-data"><span class="header-section-number">13.3.4</span> Merge Data</h3>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename column</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_hotel.rename(columns<span class="op">=</span>{<span class="st">'id'</span>: <span class="st">'hotelId'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df_hotel.rename(columns<span class="op">=</span>{<span class="st">'facilities'</span>: <span class="st">'hotelFacilities'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>df_room.rename(columns<span class="op">=</span>{<span class="st">'facilities'</span>: <span class="st">'roomFacilities'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Menyamakan nama <code>id</code> pada tabel <strong>hotel</strong> dan <code>hotelId</code> pada tabel <strong>kamar</strong>.</li>
+<li>Menambah prefix <code>hotel</code> dan <code>room</code> pada tiap kolom <code>facilities</code> masing-masing tabel.</li>
+</ul>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge hotel dan room data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.merge(df_hotel, df_room, on<span class="op">=</span><span class="st">'hotelId'</span>, how<span class="op">=</span><span class="st">'inner'</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># remove id column</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>df.drop(columns<span class="op">=</span>[<span class="st">'hotelId'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># re arrange column</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[[<span class="st">'originalRate'</span>, <span class="st">'starRating'</span>, <span class="st">'builtYear'</span>, <span class="st">'size'</span>, <span class="st">'baseOccupancy'</span>, <span class="st">'maxChildAge'</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">'maxChildOccupancy'</span>, <span class="st">'isBreakfastIncluded'</span>, <span class="st">'isWifiIncluded'</span>, <span class="st">'isRefundable'</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">'hasLivingRoom'</span>, <span class="st">'hotelFacilities'</span>, <span class="st">'roomFacilities'</span>, <span class="st">'nearestPointOfInterests'</span>]]</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">originalRate</th>
+<th data-quarto-table-cell-role="th">starRating</th>
+<th data-quarto-table-cell-role="th">builtYear</th>
+<th data-quarto-table-cell-role="th">size</th>
+<th data-quarto-table-cell-role="th">baseOccupancy</th>
+<th data-quarto-table-cell-role="th">maxChildAge</th>
+<th data-quarto-table-cell-role="th">maxChildOccupancy</th>
+<th data-quarto-table-cell-role="th">isBreakfastIncluded</th>
+<th data-quarto-table-cell-role="th">isWifiIncluded</th>
+<th data-quarto-table-cell-role="th">isRefundable</th>
+<th data-quarto-table-cell-role="th">hasLivingRoom</th>
+<th data-quarto-table-cell-role="th">hotelFacilities</th>
+<th data-quarto-table-cell-role="th">roomFacilities</th>
+<th data-quarto-table-cell-role="th">nearestPointOfInterests</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>{"amount":"1008264","currency":"IDR","tax":"21...</td>
+<td>5.0</td>
+<td>2013</td>
+<td>40.0</td>
+<td>2</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...</td>
+<td>[{"landmarkId":"900000001343","geoId":null,"na...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>{"amount":"1049587","currency":"IDR","tax":"22...</td>
+<td>5.0</td>
+<td>2013</td>
+<td>40.0</td>
+<td>2</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...</td>
+<td>[{"landmarkId":"900000001343","geoId":null,"na...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>{"amount":"1049587","currency":"IDR","tax":"22...</td>
+<td>5.0</td>
+<td>2013</td>
+<td>40.0</td>
+<td>2</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...</td>
+<td>[{"landmarkId":"900000001343","geoId":null,"na...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>{"amount":"1842975","currency":"IDR","tax":"38...</td>
+<td>5.0</td>
+<td>2013</td>
+<td>60.0</td>
+<td>2</td>
+<td>8</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...</td>
+<td>[{"landmarkId":"900000001343","geoId":null,"na...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>{"amount":"2396694","currency":"IDR","tax":"50...</td>
+<td>5.0</td>
+<td>2013</td>
+<td>80.0</td>
+<td>2</td>
+<td>8</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...</td>
+<td>[{"landmarkId":"900000001343","geoId":null,"na...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1194</td>
+<td>{"amount":"308540","currency":"IDR","tax":"647...</td>
+<td>1.0</td>
+<td>None</td>
+<td>15.0</td>
+<td>2</td>
+<td>12</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","WIFI_PUBLIC_AREA","LAN_INTERNET_AC...</td>
+<td>["AIR_CONDITIONING","DESK","SHOWER","TELEVISION"]</td>
+<td>[{"landmarkId":"900000001117","geoId":null,"na...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1195</td>
+<td>{"amount":"220385","currency":"IDR","tax":"462...</td>
+<td>1.0</td>
+<td>None</td>
+<td>16.0</td>
+<td>2</td>
+<td>12</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","WIFI_PUBLIC_AREA","LAN_INTERNET_AC...</td>
+<td>["AIR_CONDITIONING","DESK","SHOWER","TELEVISION"]</td>
+<td>[{"landmarkId":"900000001117","geoId":null,"na...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1196</td>
+<td>{"amount":"296425","currency":"IDR","tax":"622...</td>
+<td>2.0</td>
+<td>2013</td>
+<td>25.0</td>
+<td>2</td>
+<td>10</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_OR_TEA_IN_LOBBY","SAFETY_DE...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","COFFEE_...</td>
+<td>[{"landmarkId":"91607407537252","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1197</td>
+<td>{"amount":"994485","currency":"IDR","tax":"208...</td>
+<td>2.0</td>
+<td>2013</td>
+<td>60.0</td>
+<td>6</td>
+<td>10</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_OR_TEA_IN_LOBBY","SAFETY_DE...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","COFFEE_...</td>
+<td>[{"landmarkId":"91607407537252","geoId":null,"...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1198</td>
+<td>{"amount":"220385","currency":"IDR","tax":"462...</td>
+<td>0.0</td>
+<td>None</td>
+<td>16.0</td>
+<td>2</td>
+<td>12</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","HAS_24_HOUR_ROOM_SERVICE","ROOM_SE...</td>
+<td>["AIR_CONDITIONING","NON_SMOKING_ROOMS","SEATI...</td>
+<td>[{"landmarkId":"900000001117","geoId":null,"na...</td>
+</tr>
+</tbody>
+</table>
+
+<p>1199 rows × 14 columns</p>
+</div>
+</div>
+</div>
+<ul>
+<li>Dimensi pasca penggabungan adalah <code>(1199, 14)</code></li>
+<li>Menghapus kolom <code>hotelId</code> karena sudah tidak diperlukan lagi.</li>
+<li>Mengubah urutan kolom untuk mempermudah analisis, target kolom berada di kiri dan kolom array berada di kanan.</li>
+</ul>
+</section>
+<section id="target-processing" class="level3" data-number="13.3.5">
+<h3 data-number="13.3.5" class="anchored" data-anchor-id="target-processing"><span class="header-section-number">13.3.5</span> Target Processing</h3>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">5</span>):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(df.loc[i, <span class="st">'originalRate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{"amount":"1008264","currency":"IDR","tax":"211736"}
+{"amount":"1049587","currency":"IDR","tax":"220413"}
+{"amount":"1049587","currency":"IDR","tax":"220413"}
+{"amount":"1842975","currency":"IDR","tax":"387025"}
+{"amount":"2396694","currency":"IDR","tax":"503306"}</code></pre>
+</div>
+</div>
+<ul>
+<li>Data berbentuk <code>JSON</code> atau <code>Dictionary</code>, maka perlu diubah menjadi nilai harga dengan 1 nilai.</li>
+<li>Karena semua data menggunakan matauang <code>IDR</code>, maka <code>currency</code> tidak diperlukan.</li>
+</ul>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the amount from originalRate using a lambda function</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'rate'</span>] <span class="op">=</span> df[<span class="st">'originalRate'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: json.loads(x)[<span class="st">'amount'</span>])</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'tax'</span>] <span class="op">=</span> df[<span class="st">'originalRate'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: json.loads(x)[<span class="st">'tax'</span>])</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">'originalRate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check tipe data</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Tipe data harga :'</span>, df[<span class="st">'rate'</span>].dtype)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Tipe data pajak :'</span>, df[<span class="st">'tax'</span>].dtype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tipe data harga : object
+Tipe data pajak : object</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ubah tipe data</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'rate'</span>] <span class="op">=</span> df[<span class="st">'rate'</span>].astype(<span class="st">'int'</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'tax'</span>] <span class="op">=</span> df[<span class="st">'tax'</span>].astype(<span class="st">'int'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Tipe data harga :'</span>, df[<span class="st">'rate'</span>].dtype)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Tipe data pajak :'</span>, df[<span class="st">'tax'</span>].dtype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tipe data harga : int32
+Tipe data pajak : int32</code></pre>
+</div>
+</div>
+<section id="rasio-pajak" class="level4" data-number="13.3.5.1">
+<h4 data-number="13.3.5.1" class="anchored" data-anchor-id="rasio-pajak"><span class="header-section-number">13.3.5.1</span> Rasio Pajak</h4>
+<p>Tahap ini bertujuan untuk mengetahui rasio pajak dari harga kamar hotel. Rasio pajak ini akan digunakan untuk menghitung harga kamar hotel setelah dikenakan pajak.</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create series for original rate</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>original_rate <span class="op">=</span> df[<span class="st">'rate'</span>]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create series for tax</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>tax <span class="op">=</span> df[<span class="st">'tax'</span>]</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create dataframe for original rate, tax, and tax rate</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>df_rate <span class="op">=</span> pd.DataFrame({<span class="st">'original_rate'</span>: original_rate, <span class="st">'tax'</span>: tax})</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>df_rate[<span class="st">'tax_rate'</span>] <span class="op">=</span> df_rate[<span class="st">'tax'</span>] <span class="op">/</span> df_rate[<span class="st">'original_rate'</span>] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>df_rate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">original_rate</th>
+<th data-quarto-table-cell-role="th">tax</th>
+<th data-quarto-table-cell-role="th">tax_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1008264</td>
+<td>211736</td>
+<td>21.000056</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1049587</td>
+<td>220413</td>
+<td>20.999974</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1049587</td>
+<td>220413</td>
+<td>20.999974</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1842975</td>
+<td>387025</td>
+<td>21.000014</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2396694</td>
+<td>503306</td>
+<td>21.000011</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1194</td>
+<td>308540</td>
+<td>64793</td>
+<td>20.999870</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1195</td>
+<td>220385</td>
+<td>46282</td>
+<td>21.000522</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1196</td>
+<td>296425</td>
+<td>62249</td>
+<td>20.999916</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1197</td>
+<td>994485</td>
+<td>208842</td>
+<td>21.000015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1198</td>
+<td>220385</td>
+<td>46282</td>
+<td>21.000522</td>
+</tr>
+</tbody>
+</table>
+
+<p>1199 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count number of data with tax rate 20% and under 21%, also over 21%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>count0 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>count_20 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>countBetween <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(df_rate[<span class="st">'tax_rate'</span>])):</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> df_rate[<span class="st">'tax_rate'</span>][i] <span class="op">&lt;</span> <span class="dv">20</span> <span class="kw">and</span> df_rate[<span class="st">'tax_rate'</span>][i] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        countBetween <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> df_rate[<span class="st">'tax_rate'</span>][i] <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        count_20 <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> df_rate[<span class="st">'tax_rate'</span>][i] <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        count0 <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Median pajak : '</span>, df_rate[<span class="st">'tax_rate'</span>].median())</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'null / 0% pajak: '</span>, count0)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Pajak diantara 0 - 20%:'</span>, countBetween)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Rasio pajak diatas 20% :'</span>, count_20)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co"># plot for tax rate and give the total value on the top of the bar if the value is 0% it will not show</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(rc<span class="op">=</span>{<span class="st">'figure.figsize'</span>: (<span class="dv">10</span>, <span class="dv">7</span>)})</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'darkgrid'</span>)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.histplot(df_rate[<span class="st">'tax_rate'</span>], kde<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span><span class="st">'dodgerblue'</span>, bins<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'Tax Rate (%)'</span>, ylabel<span class="op">=</span><span class="st">'Count'</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Tax Rate Distribution'</span>)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">len</span>(df_rate[<span class="st">'tax_rate'</span>])</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> ax.patches:</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> p.get_height()</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> height <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>        ax.text(p.get_x()<span class="op">+</span>p.get_width()<span class="op">/</span><span class="fl">2.</span>,</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>                height <span class="op">+</span> <span class="dv">15</span>,</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>                <span class="st">'</span><span class="sc">{:1.2f}</span><span class="st">%'</span>.<span class="bu">format</span>(<span class="dv">100</span><span class="op">*</span>height<span class="op">/</span>total),</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>                ha<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Median pajak :  20.99999233666715
+null / 0% pajak:  63
+Pajak diantara 0 - 20%: 8
+Rasio pajak diatas 20% : 1128</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="project_regresi_files/figure-html/cell-17-output-2.png" width="828" height="603"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Menghapus kolom pajak</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">'tax'</span>])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mengubah target kolom menjadi di awal</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sekedar untuk merapikan dataframe</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[[<span class="st">'rate'</span>] <span class="op">+</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> col <span class="op">!=</span> <span class="st">'rate'</span>]]</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>Index(['rate', 'starRating', 'builtYear', 'size', 'baseOccupancy',
+       'maxChildAge', 'maxChildOccupancy', 'isBreakfastIncluded',
+       'isWifiIncluded', 'isRefundable', 'hasLivingRoom', 'hotelFacilities',
+       'roomFacilities', 'nearestPointOfInterests'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<ul>
+<li>Pajak hotel di Yogyakarta ada di kisaran <code>20-22%</code> dengan median <code>21%</code></li>
+<li>Karena <code>94%</code> data memiliki pajak dikisaran tersebut maka nilai pajak dianggap 21%(<em>median</em>) secara keseluruhan.</li>
+</ul>
+</section>
+</section>
+<section id="validaasi-data" class="level3" data-number="13.3.6">
+<h3 data-number="13.3.6" class="anchored" data-anchor-id="validaasi-data"><span class="header-section-number">13.3.6</span> Validaasi Data</h3>
+<section id="pengecekan-rating-bintang" class="level4" data-number="13.3.6.1">
+<h4 data-number="13.3.6.1" class="anchored" data-anchor-id="pengecekan-rating-bintang"><span class="header-section-number">13.3.6.1</span> Pengecekan Rating Bintang</h4>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># starRating Distribution</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> df.starRating.value_counts()</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'OriginalRate Distribution by starRating'</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(value)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># starRating Distribution by percentage</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>value_percentage <span class="op">=</span> value <span class="op">/</span> <span class="bu">len</span>(df) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create a list of tuples where each tuple contains the value and index of each element in the value_percentage series</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>value_percentage_list <span class="op">=</span> [(value_percentage[i], i)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>                         <span class="cf">for</span> i <span class="kw">in</span> value_percentage.index]</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the list by the value in descending order</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>value_percentage_list_sorted <span class="op">=</span> <span class="bu">sorted</span>(value_percentage_list, reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>), dpi<span class="op">=</span><span class="dv">80</span>,</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>                       gridspec_kw<span class="op">=</span>{<span class="st">'width_ratios'</span>: [<span class="dv">1</span>, <span class="fl">0.5</span>]})</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>sns.histplot(df, x<span class="op">=</span><span class="st">"rate"</span>, hue<span class="op">=</span><span class="st">'starRating'</span>, palette<span class="op">=</span><span class="st">'bright'</span>,</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>             ax<span class="op">=</span>ax[<span class="dv">0</span>]).<span class="bu">set</span>(title<span class="op">=</span><span class="st">'OriginalRate Distribution by starRating'</span>)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co"># starRating percentage plot</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>value_percentage.index, y<span class="op">=</span>value_percentage.values,</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span><span class="st">'bright'</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>]).<span class="bu">set</span>(title<span class="op">=</span><span class="st">'starRating percentage'</span>)</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="co"># add the percentage text using the sorted list</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> container <span class="kw">in</span> ax[<span class="dv">1</span>].containers:</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> bar <span class="kw">in</span> container.patches:</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> bar.get_height()</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>        bar_center <span class="op">=</span> bar.get_x() <span class="op">+</span> bar.get_width() <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>        ax[<span class="dv">1</span>].text(bar_center, v <span class="op">+</span> <span class="fl">0.5</span>,</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>                   <span class="ss">f'</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">%'</span>, color<span class="op">=</span><span class="st">'black'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OriginalRate Distribution by starRating
+starRating
+0.0    332
+3.0    240
+4.0    204
+2.0    160
+1.0    153
+5.0     92
+2.5     12
+3.5      6
+Name: count, dtype: int64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="project_regresi_files/figure-html/cell-19-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li>Rating bintang memiliki beberapa nilai dengan 0.5 (desimal), tetapi nilai tersebut hanya memiliki persentase jumlah data yang sedikit, maka dari itu rating tersebut dihilangkan angka desimalnya dari rating seharusnya.</li>
+</ul>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ubah starRating dengan angka bulat</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'starRating'</span>] <span class="op">=</span> df[<span class="st">'starRating'</span>].replace(<span class="fl">2.5</span>, <span class="dv">2</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'starRating'</span>] <span class="op">=</span> df[<span class="st">'starRating'</span>].replace(<span class="fl">3.5</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># starRating Distribution</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> df.starRating.value_counts()</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'OriginalRate Distribution by starRating'</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(value)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># starRating Distribution by percentage</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>value_percentage <span class="op">=</span> value <span class="op">/</span> <span class="bu">len</span>(df) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create a list of tuples where each tuple contains the value and index of each element in the value_percentage series</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>value_percentage_list <span class="op">=</span> [(value_percentage[i], i)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>                         <span class="cf">for</span> i <span class="kw">in</span> value_percentage.index]</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the list by the value in descending order</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>value_percentage_list_sorted <span class="op">=</span> <span class="bu">sorted</span>(value_percentage_list, reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>), dpi<span class="op">=</span><span class="dv">80</span>,</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>                       gridspec_kw<span class="op">=</span>{<span class="st">'width_ratios'</span>: [<span class="dv">1</span>, <span class="fl">0.5</span>]})</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>sns.histplot(df, x<span class="op">=</span><span class="st">"rate"</span>, hue<span class="op">=</span><span class="st">'starRating'</span>, palette<span class="op">=</span><span class="st">'bright'</span>,</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>             ax<span class="op">=</span>ax[<span class="dv">0</span>]).<span class="bu">set</span>(title<span class="op">=</span><span class="st">'OriginalRate Distribution by starRating'</span>)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="co"># starRating percentage plot</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>value_percentage.index, y<span class="op">=</span>value_percentage.values,</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span><span class="st">'bright'</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>]).<span class="bu">set</span>(title<span class="op">=</span><span class="st">'starRating percentage'</span>)</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="co"># add the percentage text using the sorted list</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> container <span class="kw">in</span> ax[<span class="dv">1</span>].containers:</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> bar <span class="kw">in</span> container.patches:</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> bar.get_height()</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>        bar_center <span class="op">=</span> bar.get_x() <span class="op">+</span> bar.get_width() <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>        ax[<span class="dv">1</span>].text(bar_center, v <span class="op">+</span> <span class="fl">0.5</span>,</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>                   <span class="ss">f'</span><span class="sc">{</span>v<span class="sc">:.2f}</span><span class="ss">%'</span>, color<span class="op">=</span><span class="st">'black'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OriginalRate Distribution by starRating
+starRating
+0.0    332
+3.0    246
+4.0    204
+2.0    172
+1.0    153
+5.0     92
+Name: count, dtype: int64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="project_regresi_files/figure-html/cell-21-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li>Persentase persebaran data tiap rating bintang sudah lebih baik setelah dilakukan pengubahan nilai rating bintang.</li>
+<li>Terlihat pada plot yang <code>kiri</code> bahwa terdapat ekor yang sangat panjang, ini menunjukkan adanya outlier pada kolom harga(<code>rate</code>)</li>
+</ul>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1199 entries, 0 to 1198
+Data columns (total 14 columns):
+ #   Column                   Non-Null Count  Dtype  
+---  ------                   --------------  -----  
+ 0   rate                     1199 non-null   int32  
+ 1   starRating               1199 non-null   float64
+ 2   builtYear                878 non-null    object 
+ 3   size                     1064 non-null   object 
+ 4   baseOccupancy            1199 non-null   int64  
+ 5   maxChildAge              1199 non-null   int64  
+ 6   maxChildOccupancy        1199 non-null   int64  
+ 7   isBreakfastIncluded      1199 non-null   int64  
+ 8   isWifiIncluded           1199 non-null   int64  
+ 9   isRefundable             1199 non-null   int64  
+ 10  hasLivingRoom            1199 non-null   int64  
+ 11  hotelFacilities          1199 non-null   object 
+ 12  roomFacilities           1199 non-null   object 
+ 13  nearestPointOfInterests  1199 non-null   object 
+dtypes: float64(1), int32(1), int64(7), object(5)
+memory usage: 126.6+ KB</code></pre>
+</div>
+</div>
+<ul>
+<li>Kolom <code>starRating</code> masih bertipe data <code>float</code> walau sudah tidak memiliki angka desimal, maka perlu akan menjadi <code>int</code></li>
+<li>Kolom <code>builtYear</code> harus diganti ke tipe data <code>int</code></li>
+<li>Kolom <code>size</code> harus diganti ke tipe data <code>float</code> (tipe data dasar dari tabel sqlite adalah <code>float</code>)</li>
+<li>Terdapat nilai <code>null</code> pada kolom <code>builtYear</code> dan <code>size</code> yang harus ditangani</li>
+</ul>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'starRating'</span>] <span class="op">=</span> df[<span class="st">'starRating'</span>].astype(<span class="st">'int'</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Tipe data starRating :'</span>, df[<span class="st">'starRating'</span>].dtype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tipe data starRating : int32</code></pre>
+</div>
+</div>
+</section>
+<section id="data-cleaning" class="level4" data-number="13.3.6.2">
+<h4 data-number="13.3.6.2" class="anchored" data-anchor-id="data-cleaning"><span class="header-section-number">13.3.6.2</span> Data Cleaning</h4>
+<section id="check-duplicate-data" class="level5" data-number="13.3.6.2.1">
+<h5 data-number="13.3.6.2.1" class="anchored" data-anchor-id="check-duplicate-data"><span class="header-section-number">13.3.6.2.1</span> Check Duplicate Data</h5>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show index who has duplicate value</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total duplicated row = '</span>, df.duplicated().<span class="bu">sum</span>())</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print duplicated data list index 1</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>df[df.duplicated(keep<span class="op">=</span><span class="va">False</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total duplicated row =  89</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rate</th>
+<th data-quarto-table-cell-role="th">starRating</th>
+<th data-quarto-table-cell-role="th">builtYear</th>
+<th data-quarto-table-cell-role="th">size</th>
+<th data-quarto-table-cell-role="th">baseOccupancy</th>
+<th data-quarto-table-cell-role="th">maxChildAge</th>
+<th data-quarto-table-cell-role="th">maxChildOccupancy</th>
+<th data-quarto-table-cell-role="th">isBreakfastIncluded</th>
+<th data-quarto-table-cell-role="th">isWifiIncluded</th>
+<th data-quarto-table-cell-role="th">isRefundable</th>
+<th data-quarto-table-cell-role="th">hasLivingRoom</th>
+<th data-quarto-table-cell-role="th">hotelFacilities</th>
+<th data-quarto-table-cell-role="th">roomFacilities</th>
+<th data-quarto-table-cell-role="th">nearestPointOfInterests</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1049587</td>
+<td>5</td>
+<td>2013</td>
+<td>40.0</td>
+<td>2</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...</td>
+<td>[{"landmarkId":"900000001343","geoId":null,"na...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1049587</td>
+<td>5</td>
+<td>2013</td>
+<td>40.0</td>
+<td>2</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...</td>
+<td>[{"landmarkId":"900000001343","geoId":null,"na...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>6000000</td>
+<td>5</td>
+<td>2012</td>
+<td>105.0</td>
+<td>2</td>
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BATHROBES","BATHTUB","COF...</td>
+<td>[{"landmarkId":"91607408097208","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>6000000</td>
+<td>5</td>
+<td>2012</td>
+<td>105.0</td>
+<td>2</td>
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BATHROBES","BATHTUB","COF...</td>
+<td>[{"landmarkId":"91607408097208","geoId":null,"...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>1933333</td>
+<td>5</td>
+<td>2012</td>
+<td>40.0</td>
+<td>2</td>
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...</td>
+<td>["AIR_CONDITIONING","BATHROBES","COMPLIMENTARY...</td>
+<td>[{"landmarkId":"91607408097208","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1169</td>
+<td>141273</td>
+<td>0</td>
+<td>None</td>
+<td>None</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>["HAS_24_HOUR_FRONT_DESK"]</td>
+<td>[]</td>
+<td>[{"landmarkId":"91607407537252","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1173</td>
+<td>550964</td>
+<td>0</td>
+<td>None</td>
+<td>None</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>[]</td>
+<td>[]</td>
+<td>[{"landmarkId":"91607407802715","geoId":null,"...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1174</td>
+<td>550964</td>
+<td>0</td>
+<td>None</td>
+<td>None</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>[]</td>
+<td>[]</td>
+<td>[{"landmarkId":"91607407802715","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1189</td>
+<td>413223</td>
+<td>1</td>
+<td>None</td>
+<td>9.0</td>
+<td>2</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>["WIFI_PUBLIC_AREA","ACCESS_FRIENDLY","ACCESSI...</td>
+<td>["AIR_CONDITIONING","DESK","NON_SMOKING_ROOMS"...</td>
+<td>[{"landmarkId":"91607407537252","geoId":null,"...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1190</td>
+<td>413223</td>
+<td>1</td>
+<td>None</td>
+<td>9.0</td>
+<td>2</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>["WIFI_PUBLIC_AREA","ACCESS_FRIENDLY","ACCESSI...</td>
+<td>["AIR_CONDITIONING","DESK","NON_SMOKING_ROOMS"...</td>
+<td>[{"landmarkId":"91607407537252","geoId":null,"...</td>
+</tr>
+</tbody>
+</table>
+
+<p>177 rows × 14 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop duplicate data</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop_duplicates(keep<span class="op">=</span><span class="st">'first'</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>(1110, 14)</code></pre>
+</div>
+</div>
+<ul>
+<li>Dengan menggunakan parameter <code>keep = 'first'</code> maka data yang duplikat akan dihapus kecuali data pertama yang muncul.</li>
+</ul>
+</section>
+<section id="check-null" class="level5" data-number="13.3.6.2.2">
+<h5 data-number="13.3.6.2.2" class="anchored" data-anchor-id="check-null"><span class="header-section-number">13.3.6.2.2</span> Check Null</h5>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Jumlah baris data</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>jumlah_baris_ori <span class="op">=</span> df.shape[<span class="dv">0</span>]</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># crate dataframe for null value</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>df_null <span class="op">=</span> pd.DataFrame(df.isnull().<span class="bu">sum</span>(), columns<span class="op">=</span>[<span class="st">'null_value'</span>])</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>df_null[<span class="st">'null_value_percentage'</span>] <span class="op">=</span> df_null[<span class="st">'null_value'</span>] <span class="op">/</span> <span class="bu">len</span>(df) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>df_null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">null_value</th>
+<th data-quarto-table-cell-role="th">null_value_percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">rate</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">starRating</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">builtYear</td>
+<td>305</td>
+<td>27.477477</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">size</td>
+<td>121</td>
+<td>10.900901</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">baseOccupancy</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">maxChildAge</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">maxChildOccupancy</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">isBreakfastIncluded</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">isWifiIncluded</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">isRefundable</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">hasLivingRoom</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">hotelFacilities</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">roomFacilities</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">nearestPointOfInterests</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>Terdapat 2 data yang memiliki nilai <code>null</code> dengan persentase yang cukup tinggi, yaitu kolom <code>builtYear</code> dan <code>size</code>. Oleh karena itu data tersebut akan diubah dengan nilai median per rating hotel.</li>
+</ul>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create new dataframe for null value rows</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df_null_rows <span class="op">=</span> df[df.isnull().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>df_null_rows</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rate</th>
+<th data-quarto-table-cell-role="th">starRating</th>
+<th data-quarto-table-cell-role="th">builtYear</th>
+<th data-quarto-table-cell-role="th">size</th>
+<th data-quarto-table-cell-role="th">baseOccupancy</th>
+<th data-quarto-table-cell-role="th">maxChildAge</th>
+<th data-quarto-table-cell-role="th">maxChildOccupancy</th>
+<th data-quarto-table-cell-role="th">isBreakfastIncluded</th>
+<th data-quarto-table-cell-role="th">isWifiIncluded</th>
+<th data-quarto-table-cell-role="th">isRefundable</th>
+<th data-quarto-table-cell-role="th">hasLivingRoom</th>
+<th data-quarto-table-cell-role="th">hotelFacilities</th>
+<th data-quarto-table-cell-role="th">roomFacilities</th>
+<th data-quarto-table-cell-role="th">nearestPointOfInterests</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41</td>
+<td>716253</td>
+<td>4</td>
+<td>None</td>
+<td>28.0</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["COFFEE_SHOP","ELEVATOR","RESTAURANT_FOR_BREA...</td>
+<td>["AIR_CONDITIONING","BLACKOUT_DRAPES_CURTAINS"...</td>
+<td>[{"landmarkId":"91510822038476","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">42</td>
+<td>826447</td>
+<td>4</td>
+<td>None</td>
+<td>28.0</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["COFFEE_SHOP","ELEVATOR","RESTAURANT_FOR_BREA...</td>
+<td>["AIR_CONDITIONING","BLACKOUT_DRAPES_CURTAINS"...</td>
+<td>[{"landmarkId":"91510822038476","geoId":null,"...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">43</td>
+<td>936639</td>
+<td>4</td>
+<td>None</td>
+<td>35.0</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["COFFEE_SHOP","ELEVATOR","RESTAURANT_FOR_BREA...</td>
+<td>["AIR_CONDITIONING","BLACKOUT_DRAPES_CURTAINS"...</td>
+<td>[{"landmarkId":"91510822038476","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">44</td>
+<td>1212121</td>
+<td>4</td>
+<td>None</td>
+<td>28.0</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["COFFEE_SHOP","ELEVATOR","RESTAURANT_FOR_BREA...</td>
+<td>["AIR_CONDITIONING","BLACKOUT_DRAPES_CURTAINS"...</td>
+<td>[{"landmarkId":"91510822038476","geoId":null,"...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">60</td>
+<td>846281</td>
+<td>4</td>
+<td>2018</td>
+<td>None</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","ELEVATOR","HAS_24_HOUR_ROOM_SERVIC...</td>
+<td>["TOWELS_PROVIDED","NON_SMOKING_ROOMS","LINENS...</td>
+<td>[{"landmarkId":"91575379594159","geoId":null,"...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1192</td>
+<td>187328</td>
+<td>1</td>
+<td>None</td>
+<td>12.0</td>
+<td>2</td>
+<td>12</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","WIFI_PUBLIC_AREA","LAN_INTERNET_AC...</td>
+<td>["DESK","FAN","PRIVATE_BATHROOM","TELEVISION"]</td>
+<td>[{"landmarkId":"900000001117","geoId":null,"na...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1193</td>
+<td>440772</td>
+<td>1</td>
+<td>None</td>
+<td>28.0</td>
+<td>4</td>
+<td>12</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","WIFI_PUBLIC_AREA","LAN_INTERNET_AC...</td>
+<td>["AIR_CONDITIONING","BATHTUB","DESK","TELEVISI...</td>
+<td>[{"landmarkId":"900000001117","geoId":null,"na...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1194</td>
+<td>308540</td>
+<td>1</td>
+<td>None</td>
+<td>15.0</td>
+<td>2</td>
+<td>12</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","WIFI_PUBLIC_AREA","LAN_INTERNET_AC...</td>
+<td>["AIR_CONDITIONING","DESK","SHOWER","TELEVISION"]</td>
+<td>[{"landmarkId":"900000001117","geoId":null,"na...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1195</td>
+<td>220385</td>
+<td>1</td>
+<td>None</td>
+<td>16.0</td>
+<td>2</td>
+<td>12</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","WIFI_PUBLIC_AREA","LAN_INTERNET_AC...</td>
+<td>["AIR_CONDITIONING","DESK","SHOWER","TELEVISION"]</td>
+<td>[{"landmarkId":"900000001117","geoId":null,"na...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1198</td>
+<td>220385</td>
+<td>0</td>
+<td>None</td>
+<td>16.0</td>
+<td>2</td>
+<td>12</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>["CARPARK","HAS_24_HOUR_ROOM_SERVICE","ROOM_SE...</td>
+<td>["AIR_CONDITIONING","NON_SMOKING_ROOMS","SEATI...</td>
+<td>[{"landmarkId":"900000001117","geoId":null,"na...</td>
+</tr>
+</tbody>
+</table>
+
+<p>378 rows × 14 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ubah sementara null value menjadi 0</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'builtYear'</span>] <span class="op">=</span> df[<span class="st">'builtYear'</span>].fillna(<span class="dv">0</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'size'</span>] <span class="op">=</span> df[<span class="st">'size'</span>].fillna(<span class="dv">0</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ubah tipe data</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'builtYear'</span>] <span class="op">=</span> df[<span class="st">'builtYear'</span>].astype(<span class="st">'int32'</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'size'</span>] <span class="op">=</span> df[<span class="st">'size'</span>].astype(<span class="st">'float'</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Tipe data builtYear :'</span>, df[<span class="st">'builtYear'</span>].dtype)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Tipe data size :'</span>, df[<span class="st">'size'</span>].dtype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tipe data builtYear : int32
+Tipe data size : float64</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kolom yang memiliki nilai <code>null</code> akan membuat tipe data menjadi <code>object</code>, maka dari itu pada penelitian ini akan diisi dengan nilai <code>0</code> terlebih dahulu, kemudian kolom tersebut diubah tipe datanya</p>
+</div>
+</div>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ubah nilai 0 pada kolom builtYear menjadi median tiap starRating</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> df[<span class="st">'starRating'</span>].unique():</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    df.loc[(df[<span class="st">'starRating'</span>] <span class="op">==</span> i) <span class="op">&amp;</span> (df[<span class="st">'builtYear'</span>] <span class="op">==</span> <span class="dv">0</span>),</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">'builtYear'</span>] <span class="op">=</span> df[df[<span class="st">'starRating'</span>] <span class="op">==</span> i][<span class="st">'builtYear'</span>].median()</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ubah nilai 0 pada kolom size menjadi median tiap starRating</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> df[<span class="st">'starRating'</span>].unique():</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    df.loc[(df[<span class="st">'starRating'</span>] <span class="op">==</span> i) <span class="op">&amp;</span> (df[<span class="st">'size'</span>] <span class="op">==</span> <span class="dv">0</span>),</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">'size'</span>] <span class="op">=</span> df[df[<span class="st">'starRating'</span>] <span class="op">==</span> i][<span class="st">'size'</span>].median()</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="co"># crate dataframe for null value</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>df_null <span class="op">=</span> pd.DataFrame(df.isnull().<span class="bu">sum</span>(), columns<span class="op">=</span>[<span class="st">'null_value'</span>])</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>df_null[<span class="st">'null_value_percentage'</span>] <span class="op">=</span> df_null[<span class="st">'null_value'</span>] <span class="op">/</span> <span class="bu">len</span>(df) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>df_null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">null_value</th>
+<th data-quarto-table-cell-role="th">null_value_percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">rate</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">starRating</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">builtYear</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">size</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">baseOccupancy</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">maxChildAge</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">maxChildOccupancy</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">isBreakfastIncluded</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">isWifiIncluded</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">isRefundable</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">hasLivingRoom</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">hotelFacilities</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">roomFacilities</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">nearestPointOfInterests</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>Data sudah tidak memiliki nilai <code>null</code></li>
+</ul>
+</section>
+</section>
+<section id="statistik-deskriptif" class="level4" data-number="13.3.6.3">
+<h4 data-number="13.3.6.3" class="anchored" data-anchor-id="statistik-deskriptif"><span class="header-section-number">13.3.6.3</span> Statistik Deskriptif</h4>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rate</th>
+<th data-quarto-table-cell-role="th">starRating</th>
+<th data-quarto-table-cell-role="th">builtYear</th>
+<th data-quarto-table-cell-role="th">size</th>
+<th data-quarto-table-cell-role="th">baseOccupancy</th>
+<th data-quarto-table-cell-role="th">maxChildAge</th>
+<th data-quarto-table-cell-role="th">maxChildOccupancy</th>
+<th data-quarto-table-cell-role="th">isBreakfastIncluded</th>
+<th data-quarto-table-cell-role="th">isWifiIncluded</th>
+<th data-quarto-table-cell-role="th">isRefundable</th>
+<th data-quarto-table-cell-role="th">hasLivingRoom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>1.110000e+03</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+<td>1110.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>7.118771e+05</td>
+<td>2.042342</td>
+<td>1993.248649</td>
+<td>25.430982</td>
+<td>2.080180</td>
+<td>6.528829</td>
+<td>0.747748</td>
+<td>0.322523</td>
+<td>0.896396</td>
+<td>0.457658</td>
+<td>0.020721</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>9.971952e+05</td>
+<td>1.643362</td>
+<td>122.853595</td>
+<td>20.378749</td>
+<td>0.804554</td>
+<td>3.013432</td>
+<td>0.570834</td>
+<td>0.467652</td>
+<td>0.304883</td>
+<td>0.498428</td>
+<td>0.142512</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>8.264500e+04</td>
+<td>0.000000</td>
+<td>1.000000</td>
+<td>3.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>2.708675e+05</td>
+<td>0.000000</td>
+<td>2000.000000</td>
+<td>16.000000</td>
+<td>2.000000</td>
+<td>5.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>4.081860e+05</td>
+<td>2.000000</td>
+<td>2012.000000</td>
+<td>21.000000</td>
+<td>2.000000</td>
+<td>5.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>7.816760e+05</td>
+<td>3.000000</td>
+<td>2015.000000</td>
+<td>29.000000</td>
+<td>2.000000</td>
+<td>10.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>1.156198e+07</td>
+<td>5.000000</td>
+<td>2022.000000</td>
+<td>350.000000</td>
+<td>16.000000</td>
+<td>12.000000</td>
+<td>4.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>Pada kolom <code>builtYear</code> terdapat nilai minimum <code>1</code> yang tidak mungkin terjadi, maka data tersebut akan dihapus.</li>
+<li>nilai median pada <code>rate</code> dan <code>size</code> terpaut cukup jauh dengan nilai maximum, ini menunjukkan adanya outlier pada kolom <code>rate</code>.</li>
+</ul>
+<section id="built-year-data-handling" class="level5" data-number="13.3.6.3.1">
+<h5 data-number="13.3.6.3.1" class="anchored" data-anchor-id="built-year-data-handling"><span class="header-section-number">13.3.6.3.1</span> Built Year Data Handling</h5>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cek nilai unique pada kolom builtYear dibawah 2000</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Nilai unique builtYear dibawah 2000 :'</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[df[<span class="st">'builtYear'</span>] <span class="op">&lt;</span> <span class="dv">2000</span>][<span class="st">'builtYear'</span>].unique())</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Nilai unique bulitYear dibawah 1900 :'</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[df[<span class="st">'builtYear'</span>] <span class="op">&lt;</span> <span class="dv">1900</span>][<span class="st">'builtYear'</span>].unique())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nilai unique builtYear dibawah 2000 :
+[1997 1995 1964 1990 1992 1937    1 1994 1977 1993 1996 1978 1989 1986
+ 1998]
+Nilai unique bulitYear dibawah 1900 :
+[1]</code></pre>
+</div>
+</div>
+<ul>
+<li>Terdapat data yang memiliki nilai <code>builtYear</code> yang tidak mungkin terjadi, maka data tersebut akan dihapus.</li>
+<li>Tidak terdapat hotel dibawah tahun 1900, maka dari itu data yang disimpan adalah data diatas tahun 1900.</li>
+</ul>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># menghapus baris yang memiliki nilai dibawah 1900 pada kolom builtYear</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'builtYear'</span>] <span class="op">&gt;</span> <span class="dv">1900</span>]</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cek nilai unique pada kolom builtYear dibawah 2000</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Nilai unique builtYear dibawah 2000 :'</span>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[df[<span class="st">'builtYear'</span>] <span class="op">&lt;</span> <span class="dv">2000</span>][<span class="st">'builtYear'</span>].unique())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nilai unique builtYear dibawah 2000 :
+[1997 1995 1964 1990 1992 1937 1994 1977 1993 1996 1978 1989 1986 1998]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="outlier-handling" class="level4" data-number="13.3.6.4">
+<h4 data-number="13.3.6.4" class="anchored" data-anchor-id="outlier-handling"><span class="header-section-number">13.3.6.4</span> Outlier Handling</h4>
+<section id="rate-data" class="level5" data-number="13.3.6.4.1">
+<h5 data-number="13.3.6.4.1" class="anchored" data-anchor-id="rate-data"><span class="header-section-number">13.3.6.4.1</span> Rate Data</h5>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistik Harga</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Harga'</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'maximum value : </span><span class="sc">{</span>df<span class="sc">.</span>rate<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'minimum value : </span><span class="sc">{</span>df<span class="sc">.</span>rate<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'skew value : </span><span class="sc">{</span><span class="bu">round</span>(df.rate.skew(), <span class="dv">2</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribusi harga</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'darkgrid'</span>)</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>), dpi<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>sns.displot(df, x<span class="op">=</span><span class="st">"rate"</span>, kind<span class="op">=</span><span class="st">"kde"</span>, fill<span class="op">=</span><span class="va">True</span>).<span class="bu">set</span>(</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'OriginalRate Distribution'</span>)</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Harga
+maximum value : 11561983
+minimum value : 82645
+skew value : 5.33</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\seaborn\axisgrid.py:118: UserWarning:
+
+The figure layout has changed to tight
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 1600x800 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="project_regresi_files/figure-html/cell-33-output-4.png" width="464" height="469"></p>
+</div>
+</div>
+<ul>
+<li>Kolom <code>rate</code> memiliki nilai <em>skew</em> yang cukup tinggi, selain itu dari plot terlihat memiliki ekor yang cukup panjang. Ini menunjukkan adanya outlier pada kolom <code>rate</code>.</li>
+<li>Penghapusan outlier dilakukan dengan menggunakan metode IQR.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Untuk penjelasan lebih lanjut mengenai <em>skew</em> dapat dilihat <a href="https://accounting.binus.ac.id/2021/08/12/memahami-nilai-skewness-ukuran-kemiringan-dalam-statistik-deskriptif/">disini</a></p>
+</div>
+</div>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hitung outlier pada kolom rate</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>Q1 <span class="op">=</span> df[<span class="st">'rate'</span>].quantile(<span class="fl">0.25</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>Q3 <span class="op">=</span> df[<span class="st">'rate'</span>].quantile(<span class="fl">0.75</span>)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>IQR <span class="op">=</span> Q3 <span class="op">-</span> Q1</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Batas bawah :'</span>, Q1 <span class="op">-</span> (<span class="fl">1.5</span> <span class="op">*</span> IQR))</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Batas atas :'</span>, Q3 <span class="op">+</span> (<span class="fl">1.5</span> <span class="op">*</span> IQR))</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Hitung jumlah outlier</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>total_outlier <span class="op">=</span> <span class="bu">len</span>(df[(df[<span class="st">'rate'</span>] <span class="op">&lt;</span> (Q1 <span class="op">-</span> (<span class="fl">1.5</span> <span class="op">*</span> IQR))) <span class="op">|</span> (df[<span class="st">'rate'</span>] <span class="op">&gt;</span> (Q3 <span class="op">+</span> (<span class="fl">1.5</span> <span class="op">*</span> IQR)))])</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Jumlah outlier :'</span>, total_outlier)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Batas bawah : -502673.875
+Batas atas : 1556801.125
+Jumlah outlier : 91</code></pre>
+</div>
+</div>
+<ul>
+<li>Terdapat 91 data outlier pada kolom <code>rate</code>.</li>
+</ul>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hapus outlier</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[(df[<span class="st">'rate'</span>] <span class="op">&gt;</span> (Q1 <span class="op">-</span> (<span class="fl">1.5</span> <span class="op">*</span> IQR))) <span class="op">&amp;</span> (df[<span class="st">'rate'</span>] <span class="op">&lt;</span> (Q3 <span class="op">+</span> (<span class="fl">1.5</span> <span class="op">*</span> IQR)))]</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rate</th>
+<th data-quarto-table-cell-role="th">starRating</th>
+<th data-quarto-table-cell-role="th">builtYear</th>
+<th data-quarto-table-cell-role="th">size</th>
+<th data-quarto-table-cell-role="th">baseOccupancy</th>
+<th data-quarto-table-cell-role="th">maxChildAge</th>
+<th data-quarto-table-cell-role="th">maxChildOccupancy</th>
+<th data-quarto-table-cell-role="th">isBreakfastIncluded</th>
+<th data-quarto-table-cell-role="th">isWifiIncluded</th>
+<th data-quarto-table-cell-role="th">isRefundable</th>
+<th data-quarto-table-cell-role="th">hasLivingRoom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>1.015000e+03</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+<td>1015.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>4.900464e+05</td>
+<td>1.858128</td>
+<td>2000.077833</td>
+<td>22.072798</td>
+<td>2.066010</td>
+<td>6.599015</td>
+<td>0.753695</td>
+<td>0.284729</td>
+<td>0.887685</td>
+<td>0.456158</td>
+<td>0.016749</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>3.242374e+05</td>
+<td>1.554268</td>
+<td>27.601540</td>
+<td>9.015316</td>
+<td>0.645556</td>
+<td>2.969237</td>
+<td>0.567377</td>
+<td>0.451508</td>
+<td>0.315910</td>
+<td>0.498320</td>
+<td>0.128392</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>8.264500e+04</td>
+<td>0.000000</td>
+<td>1937.000000</td>
+<td>3.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>2.589530e+05</td>
+<td>0.000000</td>
+<td>2001.000000</td>
+<td>16.000000</td>
+<td>2.000000</td>
+<td>5.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>3.719010e+05</td>
+<td>2.000000</td>
+<td>2012.000000</td>
+<td>20.000000</td>
+<td>2.000000</td>
+<td>5.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>6.118455e+05</td>
+<td>3.000000</td>
+<td>2015.000000</td>
+<td>26.500000</td>
+<td>2.000000</td>
+<td>10.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>1.534866e+06</td>
+<td>5.000000</td>
+<td>2022.000000</td>
+<td>72.000000</td>
+<td>6.000000</td>
+<td>12.000000</td>
+<td>4.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>Nilai maksimum sudah cukup menurun setelah dilakukan penghapusan outlier.</li>
+<li>Nilai maksimum pada kolom <code>size</code> juga ikut menurun.</li>
+</ul>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistik Harga</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Harga'</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'maximum value : </span><span class="sc">{</span>df<span class="sc">.</span>rate<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'minimum value : </span><span class="sc">{</span>df<span class="sc">.</span>rate<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'skew value : </span><span class="sc">{</span><span class="bu">round</span>(df.rate.skew(), <span class="dv">2</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribusi harga</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'darkgrid'</span>)</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>), dpi<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>sns.displot(df, x<span class="op">=</span><span class="st">"rate"</span>, kind<span class="op">=</span><span class="st">"kde"</span>, fill<span class="op">=</span><span class="va">True</span>).<span class="bu">set</span>(</span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'OriginalRate Distribution'</span>)</span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Harga
+maximum value : 1534866
+minimum value : 82645
+skew value : 1.31</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\seaborn\axisgrid.py:118: UserWarning:
+
+The figure layout has changed to tight
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 1600x800 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="project_regresi_files/figure-html/cell-36-output-4.png" width="464" height="469"></p>
+</div>
+</div>
+<ul>
+<li>Nilai skew pada kolom <code>rate</code> sudah menjadi lebih baik setelah dilakukan penghapusan outlier.</li>
+</ul>
+</section>
+<section id="size-data" class="level5" data-number="13.3.6.4.2">
+<h5 data-number="13.3.6.4.2" class="anchored" data-anchor-id="size-data"><span class="header-section-number">13.3.6.4.2</span> Size Data</h5>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistik Size</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Size'</span>)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'maximum value : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(df[<span class="st">'size'</span>].<span class="bu">max</span>()))</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'minimum value : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(df[<span class="st">'size'</span>].<span class="bu">min</span>()))</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'skew value : </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(df[<span class="st">'size'</span>].skew()))</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribusi size</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>), dpi<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'darkgrid'</span>)</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>sns.jointplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'size'</span>, y<span class="op">=</span><span class="st">'rate'</span>)</span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Size
+maximum value : 72.0
+minimum value : 3.0
+skew value : 1.2163013252656778</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 1600x800 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="project_regresi_files/figure-html/cell-37-output-3.png" width="560" height="560"></p>
+</div>
+</div>
+<ul>
+<li>Nilai skew sudah sangat mendekati angka 1, ini menunjukkan bahwa distribusi data sudah sangat baik.</li>
+</ul>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hasil data cleaning</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total baris data awal :'</span>, jumlah_baris_ori)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total baris data yang dihapus :'</span>, jumlah_baris_ori <span class="op">-</span> df.shape[<span class="dv">0</span>])</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total baris data setelah cleaning :'</span>, df.shape[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total baris data awal : 1110
+Total baris data yang dihapus : 95
+Total baris data setelah cleaning : 1015</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>rate                       0
+starRating                 0
+builtYear                  0
+size                       0
+baseOccupancy              0
+maxChildAge                0
+maxChildOccupancy          0
+isBreakfastIncluded        0
+isWifiIncluded             0
+isRefundable               0
+hasLivingRoom              0
+hotelFacilities            0
+roomFacilities             0
+nearestPointOfInterests    0
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="encoding-data" class="level3" data-number="13.3.7">
+<h3 data-number="13.3.7" class="anchored" data-anchor-id="encoding-data"><span class="header-section-number">13.3.7</span> Encoding Data</h3>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1015 entries, 0 to 1014
+Data columns (total 14 columns):
+ #   Column                   Non-Null Count  Dtype  
+---  ------                   --------------  -----  
+ 0   rate                     1015 non-null   int32  
+ 1   starRating               1015 non-null   int32  
+ 2   builtYear                1015 non-null   int32  
+ 3   size                     1015 non-null   float64
+ 4   baseOccupancy            1015 non-null   int64  
+ 5   maxChildAge              1015 non-null   int64  
+ 6   maxChildOccupancy        1015 non-null   int64  
+ 7   isBreakfastIncluded      1015 non-null   int64  
+ 8   isWifiIncluded           1015 non-null   int64  
+ 9   isRefundable             1015 non-null   int64  
+ 10  hasLivingRoom            1015 non-null   int64  
+ 11  hotelFacilities          1015 non-null   object 
+ 12  roomFacilities           1015 non-null   object 
+ 13  nearestPointOfInterests  1015 non-null   object 
+dtypes: float64(1), int32(3), int64(7), object(3)
+memory usage: 99.2+ KB</code></pre>
+</div>
+</div>
+<ul>
+<li>Kolom <code>hotelfacilities</code>, <code>roomfacilities</code>, dan <code>nearestPointofInterests</code> merupakan sebuah fitur dengan multi label. Oleh karena itu data tersebut akan dilakukan <em><code>multi-hot encoding</code></em>.</li>
+<li>Proses tersebut akan dilakukan dengan library <code>sklearn.preprocessing.MultiLabelBinarizer</code></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Untuk penjelasan lebih lanjut tentang <em><code>multi-label</code></em> dan <em><code>multi-class</code></em> dapat dilihat <a href="https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html">disini</a></p>
+</div>
+</div>
+<section id="check-data-format" class="level4" data-number="13.3.7.1">
+<h4 data-number="13.3.7.1" class="anchored" data-anchor-id="check-data-format"><span class="header-section-number">13.3.7.1</span> Check data format</h4>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'hotelFacilities'</span>].head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>0    ["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...
+1    ["CARPARK","COFFEE_SHOP","ELEVATOR","RESTAURAN...
+Name: hotelFacilities, dtype: object</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'roomFacilities'</span>].head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>0    ["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...
+1    ["AIR_CONDITIONING","BALCONY_TERRACE","BATHROB...
+Name: roomFacilities, dtype: object</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'nearestPointOfInterests'</span>].head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>0    [{"landmarkId":"900000001343","geoId":null,"na...
+1    [{"landmarkId":"900000001343","geoId":null,"na...
+Name: nearestPointOfInterests, dtype: object</code></pre>
+</div>
+</div>
+<ul>
+<li><code>roomfacilities</code> dan <code>hotelFacilities</code> memiliki format yang sama, yaitu <code>list</code> yang berisi <code>string</code>.</li>
+<li><code>nearestPointofInterests</code> memiliki format yang berbeda, yaitu <code>list</code> yang berisi <code>dictionary</code>/<code>json</code> yang berisi <code>string</code> dan <code>float</code>.</li>
+</ul>
+</section>
+<section id="data-preprocessing" class="level4" data-number="13.3.7.2">
+<h4 data-number="13.3.7.2" class="anchored" data-anchor-id="data-preprocessing"><span class="header-section-number">13.3.7.2</span> Data Preprocessing</h4>
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a MultiLabelBinarizer object</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>mlb <span class="op">=</span> MultiLabelBinarizer()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Daftar kolom hasil encoding akan diexport menjadi file <code>pkl</code> yang akan digunakan pada aplikasi streamlit.</li>
+</ul>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reformat kolom hotelFacilities</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'hotelFacilities'</span>] <span class="op">=</span> df[<span class="st">'hotelFacilities'</span>].<span class="bu">apply</span>(<span class="bu">eval</span>)</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="co"># multi label binarizer untuk kolom hotelFacilities dengan preifx Hotel_</span></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>hotel_facilities <span class="op">=</span> pd.DataFrame(mlb.fit_transform(</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'hotelFacilities'</span>]), columns<span class="op">=</span>[<span class="ss">f'Hotel_</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> col <span class="kw">in</span> mlb.classes_])</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>hotelNewCol <span class="op">=</span> hotel_facilities.shape[<span class="dv">1</span>]</span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Jumlah kolom :'</span>, hotel_facilities.shape[<span class="dv">1</span>])</span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="co"># export hotel_facilities with pickle</span></span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>hotelFacilities <span class="op">=</span> hotel_facilities.columns.tolist()</span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>pickle.dump(hotelFacilities, <span class="bu">open</span>(<span class="st">'hotelFacilities.pkl'</span>, <span class="st">'wb'</span>))</span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a>hotel_facilities.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Jumlah kolom : 223</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Hotel_ACCESSIBILITY_EQUIPMENT</th>
+<th data-quarto-table-cell-role="th">Hotel_ACCESSIBLE_BATHROOM</th>
+<th data-quarto-table-cell-role="th">Hotel_ACCESSIBLE_PARKING</th>
+<th data-quarto-table-cell-role="th">Hotel_ACCESSIBLE_PATH_OF_TRAVEL</th>
+<th data-quarto-table-cell-role="th">Hotel_ACCESS_FRIENDLY</th>
+<th data-quarto-table-cell-role="th">Hotel_AEROBICS</th>
+<th data-quarto-table-cell-role="th">Hotel_AIRPORT_TRANSFER</th>
+<th data-quarto-table-cell-role="th">Hotel_AIRPORT_TRANSFER_SURCHARGE</th>
+<th data-quarto-table-cell-role="th">Hotel_AIR_CONDITIONING</th>
+<th data-quarto-table-cell-role="th">Hotel_AIR_CONDITIONING_IN_RESTAURANT</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Hotel_VOLLEYBALL</th>
+<th data-quarto-table-cell-role="th">Hotel_WATERSLIDE</th>
+<th data-quarto-table-cell-role="th">Hotel_WATER_SPORT</th>
+<th data-quarto-table-cell-role="th">Hotel_WEDDING_SERVICE</th>
+<th data-quarto-table-cell-role="th">Hotel_WHEELCHAIR_ACCESSIBLE</th>
+<th data-quarto-table-cell-role="th">Hotel_WIFI_FREE</th>
+<th data-quarto-table-cell-role="th">Hotel_WIFI_PUBLIC_AREA</th>
+<th data-quarto-table-cell-role="th">Hotel_WIFI_PUBLIC_AREA_SURCHARGE</th>
+<th data-quarto-table-cell-role="th">Hotel_WIFI_SURCHARGE</th>
+<th data-quarto-table-cell-role="th">Hotel_WINERY</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>2 rows × 223 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reformat kolom roomFacilities</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'roomFacilities'</span>] <span class="op">=</span> df[<span class="st">'roomFacilities'</span>].<span class="bu">apply</span>(<span class="bu">eval</span>)</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="co"># multi label binarizer untuk kolom roomFacilities dengan preifx Room_</span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>room_facilities <span class="op">=</span> pd.DataFrame(mlb.fit_transform(df[<span class="st">'roomFacilities'</span>]), columns<span class="op">=</span>[</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>                               <span class="ss">f'Room_</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> col <span class="kw">in</span> mlb.classes_])</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>roomNewCol <span class="op">=</span> room_facilities.shape[<span class="dv">1</span>]</span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Jumlah kolom :'</span>, roomNewCol)</span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="co"># export room_facilities with pickle</span></span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>roomFacilities <span class="op">=</span> room_facilities.columns.tolist()</span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>pickle.dump(roomFacilities, <span class="bu">open</span>(<span class="st">'roomFacilities.pkl'</span>, <span class="st">'wb'</span>))</span>
+<span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a>room_facilities.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Jumlah kolom : 70</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Room_AIR_CONDITIONING</th>
+<th data-quarto-table-cell-role="th">Room_BALCONY</th>
+<th data-quarto-table-cell-role="th">Room_BALCONY_TERRACE</th>
+<th data-quarto-table-cell-role="th">Room_BATHROBES</th>
+<th data-quarto-table-cell-role="th">Room_BATHTUB</th>
+<th data-quarto-table-cell-role="th">Room_BLACKOUT_CURTAINS</th>
+<th data-quarto-table-cell-role="th">Room_BLACKOUT_DRAPES_CURTAINS</th>
+<th data-quarto-table-cell-role="th">Room_CLOTHES_DRYER</th>
+<th data-quarto-table-cell-role="th">Room_COFFEE_TEA_MAKER</th>
+<th data-quarto-table-cell-role="th">Room_COMPLIMENTARY_BOTTLED_WATER</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Room_SLIPPERS</th>
+<th data-quarto-table-cell-role="th">Room_SOUNDPROOFED_ROOMS</th>
+<th data-quarto-table-cell-role="th">Room_TELEVISION</th>
+<th data-quarto-table-cell-role="th">Room_TELEVISION_LCD_PLASMA_SCREEN</th>
+<th data-quarto-table-cell-role="th">Room_TOILETRIES</th>
+<th data-quarto-table-cell-role="th">Room_TOWELS_PROVIDED</th>
+<th data-quarto-table-cell-role="th">Room_TURNDOWN_SERVICE</th>
+<th data-quarto-table-cell-role="th">Room_TWENTY_FOUR_HOUR_ROOM_SERVICE</th>
+<th data-quarto-table-cell-role="th">Room_WHEELCHAIR_ACCESSIBLE</th>
+<th data-quarto-table-cell-role="th">Room_WIFI_SURCHARGE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>...</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>2 rows × 70 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reformat kolom nearestPointOfInterests</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'nearestPointOfInterests'</span>] <span class="op">=</span> df[<span class="st">'nearestPointOfInterests'</span>].<span class="bu">apply</span>(</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: [item[<span class="st">'landmarkType'</span>] <span class="cf">for</span> item <span class="kw">in</span> json.loads(x)])</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="co"># multi label binarizer untuk kolom nearestPointOfInterests dengan preifx Point_</span></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>pointOfInterests <span class="op">=</span> pd.DataFrame(mlb.fit_transform(</span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'nearestPointOfInterests'</span>]), columns<span class="op">=</span>[<span class="ss">f'Point_</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> col <span class="kw">in</span> mlb.classes_])</span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>pointNewCol <span class="op">=</span> pointOfInterests.shape[<span class="dv">1</span>]</span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Jumlah kolom :'</span>, pointNewCol)</span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a><span class="co"># export pointOfInterests with pickle</span></span>
+<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a>pointInterests <span class="op">=</span> pointOfInterests.columns.tolist()</span>
+<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>pickle.dump(pointInterests, <span class="bu">open</span>(<span class="st">'pointInterests.pkl'</span>, <span class="st">'wb'</span>))</span>
+<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-16"><a href="#cb83-16" aria-hidden="true" tabindex="-1"></a>pointOfInterests.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Jumlah kolom : 15</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Point_AIRPORT</th>
+<th data-quarto-table-cell-role="th">Point_ATTRACTION</th>
+<th data-quarto-table-cell-role="th">Point_BEACH</th>
+<th data-quarto-table-cell-role="th">Point_HOSPITAL</th>
+<th data-quarto-table-cell-role="th">Point_MONUMENT</th>
+<th data-quarto-table-cell-role="th">Point_MUSEUM</th>
+<th data-quarto-table-cell-role="th">Point_OFFICIAL_BUILDING</th>
+<th data-quarto-table-cell-role="th">Point_OTHERS</th>
+<th data-quarto-table-cell-role="th">Point_PLACE_OF_WORSHIP</th>
+<th data-quarto-table-cell-role="th">Point_RESTAURANT</th>
+<th data-quarto-table-cell-role="th">Point_SCHOOL</th>
+<th data-quarto-table-cell-role="th">Point_SHOPPING_AREA</th>
+<th data-quarto-table-cell-role="th">Point_STORE</th>
+<th data-quarto-table-cell-role="th">Point_TERMINAL</th>
+<th data-quarto-table-cell-role="th">Point_TRAIN_STATION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="menggabungkan-hasil-encoding" class="level5" data-number="13.3.7.2.1">
+<h5 data-number="13.3.7.2.1" class="anchored" data-anchor-id="menggabungkan-hasil-encoding"><span class="header-section-number">13.3.7.2.1</span> Menggabungkan hasil encoding</h5>
+<div class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total kolom encoding</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>totalNewCol <span class="op">=</span> hotelNewCol <span class="op">+</span> roomNewCol <span class="op">+</span> pointNewCol</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total kolom encoding :'</span>, totalNewCol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total kolom encoding : 308</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># menghapus kolom hotelFacilities, roomFacilities, dan nearestPointOfInterests</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">'hotelFacilities'</span>, <span class="st">'roomFacilities'</span>, <span class="st">'nearestPointOfInterests'</span>])</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'df shape :'</span>, df.shape)</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'hotel_facilities shape :'</span>, hotel_facilities.shape)</span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'room_facilities shape :'</span>, room_facilities.shape)</span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'pointOfInterests shape :'</span>, pointOfInterests.shape)</span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([df, hotel_facilities, room_facilities,</span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>               pointOfInterests], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>df shape : (1015, 11)
+hotel_facilities shape : (1015, 223)
+room_facilities shape : (1015, 70)
+pointOfInterests shape : (1015, 15)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="48">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rate</th>
+<th data-quarto-table-cell-role="th">starRating</th>
+<th data-quarto-table-cell-role="th">builtYear</th>
+<th data-quarto-table-cell-role="th">size</th>
+<th data-quarto-table-cell-role="th">baseOccupancy</th>
+<th data-quarto-table-cell-role="th">maxChildAge</th>
+<th data-quarto-table-cell-role="th">maxChildOccupancy</th>
+<th data-quarto-table-cell-role="th">isBreakfastIncluded</th>
+<th data-quarto-table-cell-role="th">isWifiIncluded</th>
+<th data-quarto-table-cell-role="th">isRefundable</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Point_MUSEUM</th>
+<th data-quarto-table-cell-role="th">Point_OFFICIAL_BUILDING</th>
+<th data-quarto-table-cell-role="th">Point_OTHERS</th>
+<th data-quarto-table-cell-role="th">Point_PLACE_OF_WORSHIP</th>
+<th data-quarto-table-cell-role="th">Point_RESTAURANT</th>
+<th data-quarto-table-cell-role="th">Point_SCHOOL</th>
+<th data-quarto-table-cell-role="th">Point_SHOPPING_AREA</th>
+<th data-quarto-table-cell-role="th">Point_STORE</th>
+<th data-quarto-table-cell-role="th">Point_TERMINAL</th>
+<th data-quarto-table-cell-role="th">Point_TRAIN_STATION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1008264</td>
+<td>5</td>
+<td>2013</td>
+<td>40.0</td>
+<td>2</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1049587</td>
+<td>5</td>
+<td>2013</td>
+<td>40.0</td>
+<td>2</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>...</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1521212</td>
+<td>4</td>
+<td>2013</td>
+<td>53.0</td>
+<td>2</td>
+<td>5</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>696969</td>
+<td>4</td>
+<td>2013</td>
+<td>24.0</td>
+<td>2</td>
+<td>5</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>927273</td>
+<td>4</td>
+<td>2013</td>
+<td>28.0</td>
+<td>2</td>
+<td>5</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>...</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 319 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1015 entries, 0 to 1014
+Columns: 319 entries, rate to Point_TRAIN_STATION
+dtypes: float64(1), int32(311), int64(7)
+memory usage: 1.3 MB</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="export-data-ke-csv" class="level3" data-number="13.3.8">
+<h3 data-number="13.3.8" class="anchored" data-anchor-id="export-data-ke-csv"><span class="header-section-number">13.3.8</span> Export Data ke CSV</h3>
+<div class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'kamar-hotel-yogyakarta.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>col <span class="op">=</span> df.columns</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="co"># export col with pickle</span></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>pickle.dump(col, <span class="bu">open</span>(<span class="st">'col.pkl'</span>, <span class="st">'wb'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Index(['rate', 'starRating', 'builtYear', 'size', 'baseOccupancy',
+       'maxChildAge', 'maxChildOccupancy', 'isBreakfastIncluded',
+       'isWifiIncluded', 'isRefundable',
+       ...
+       'Point_MUSEUM', 'Point_OFFICIAL_BUILDING', 'Point_OTHERS',
+       'Point_PLACE_OF_WORSHIP', 'Point_RESTAURANT', 'Point_SCHOOL',
+       'Point_SHOPPING_AREA', 'Point_STORE', 'Point_TERMINAL',
+       'Point_TRAIN_STATION'],
+      dtype='object', length=319)</code></pre>
+</div>
+</div>
+</section>
+<section id="data-anlisis" class="level3" data-number="13.3.9">
+<h3 data-number="13.3.9" class="anchored" data-anchor-id="data-anlisis"><span class="header-section-number">13.3.9</span> Data Anlisis</h3>
+<div class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> df.starRating.value_counts()</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(value)</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co"># starRating Distribution by percentage</span></span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>value_percentage <span class="op">=</span> value <span class="op">/</span> <span class="bu">len</span>(df) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create a list of tuples where each tuple contains the value and index of each element in the value_percentage series</span></span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>value_percentage_list <span class="op">=</span> [(value_percentage[i], i)</span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a>                         <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(value_percentage))]</span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the list by the value in descending order</span></span>
+<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a>value_percentage_list_sorted <span class="op">=</span> <span class="bu">sorted</span>(value_percentage_list, reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-14"><a href="#cb95-14" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>), dpi<span class="op">=</span><span class="dv">80</span>,</span>
+<span id="cb95-15"><a href="#cb95-15" aria-hidden="true" tabindex="-1"></a>                       gridspec_kw<span class="op">=</span>{<span class="st">'width_ratios'</span>: [<span class="dv">1</span>, <span class="fl">0.5</span>]})</span>
+<span id="cb95-16"><a href="#cb95-16" aria-hidden="true" tabindex="-1"></a>sns.histplot(df, x<span class="op">=</span><span class="st">"rate"</span>, hue<span class="op">=</span><span class="st">'starRating'</span>, palette<span class="op">=</span><span class="st">'bright'</span>,</span>
+<span id="cb95-17"><a href="#cb95-17" aria-hidden="true" tabindex="-1"></a>             ax<span class="op">=</span>ax[<span class="dv">0</span>]).<span class="bu">set</span>(title<span class="op">=</span><span class="st">'Rate Distribution by starRating'</span>)</span>
+<span id="cb95-18"><a href="#cb95-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-19"><a href="#cb95-19" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>value_percentage.index, y<span class="op">=</span>value_percentage.values,</span>
+<span id="cb95-20"><a href="#cb95-20" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span><span class="st">'bright'</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>]).<span class="bu">set</span>(title<span class="op">=</span><span class="st">'starRating percentage'</span>)</span>
+<span id="cb95-21"><a href="#cb95-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-22"><a href="#cb95-22" aria-hidden="true" tabindex="-1"></a><span class="co"># add the percentage text using the sorted list</span></span>
+<span id="cb95-23"><a href="#cb95-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (v, index) <span class="kw">in</span> <span class="bu">enumerate</span>(value_percentage_list_sorted):</span>
+<span id="cb95-24"><a href="#cb95-24" aria-hidden="true" tabindex="-1"></a>    ax[<span class="dv">1</span>].text(index, v <span class="op">+</span> <span class="fl">0.5</span>, <span class="bu">str</span>(<span class="bu">round</span>(v, <span class="dv">2</span>)) <span class="op">+</span> <span class="st">'%'</span>,</span>
+<span id="cb95-25"><a href="#cb95-25" aria-hidden="true" tabindex="-1"></a>               color<span class="op">=</span><span class="st">'black'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb95-26"><a href="#cb95-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-27"><a href="#cb95-27" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>starRating
+0    305
+3    225
+2    161
+1    147
+4    143
+5     34
+Name: count, dtype: int64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="project_regresi_files/figure-html/cell-54-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>filtered_0 <span class="op">=</span> df[df[<span class="st">'starRating'</span>] <span class="op">==</span> <span class="fl">0.0</span>]</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>filtered_1 <span class="op">=</span> df[df[<span class="st">'starRating'</span>] <span class="op">==</span> <span class="fl">1.0</span>]</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>filtered_2 <span class="op">=</span> df[df[<span class="st">'starRating'</span>] <span class="op">==</span> <span class="fl">2.0</span>]</span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>filtered_3 <span class="op">=</span> df[df[<span class="st">'starRating'</span>] <span class="op">==</span> <span class="fl">3.0</span>]</span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>filtered_4 <span class="op">=</span> df[df[<span class="st">'starRating'</span>] <span class="op">==</span> <span class="fl">4.0</span>]</span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>filtered_5 <span class="op">=</span> df[df[<span class="st">'starRating'</span>] <span class="op">==</span> <span class="fl">5.0</span>]</span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Skew value for every starRating'</span>)</span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.groupby(<span class="st">'starRating'</span>)[<span class="st">'rate'</span>].skew())</span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a><span class="co"># OriginalRate Distribution by starRating using hisplot inside subplot</span></span>
+<span id="cb97-12"><a href="#cb97-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>), dpi<span class="op">=</span><span class="dv">80</span>,</span>
+<span id="cb97-13"><a href="#cb97-13" aria-hidden="true" tabindex="-1"></a>                       gridspec_kw<span class="op">=</span>{<span class="st">'width_ratios'</span>: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]})</span>
+<span id="cb97-14"><a href="#cb97-14" aria-hidden="true" tabindex="-1"></a>sns.histplot(filtered_0, x<span class="op">=</span><span class="st">"rate"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>, <span class="dv">0</span>]).<span class="bu">set</span>(</span>
+<span id="cb97-15"><a href="#cb97-15" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Rate Distribution by 0 starRating'</span>)</span>
+<span id="cb97-16"><a href="#cb97-16" aria-hidden="true" tabindex="-1"></a>sns.histplot(filtered_1, x<span class="op">=</span><span class="st">"rate"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>, <span class="dv">1</span>]).<span class="bu">set</span>(</span>
+<span id="cb97-17"><a href="#cb97-17" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Rate Distribution by 1 starRating'</span>)</span>
+<span id="cb97-18"><a href="#cb97-18" aria-hidden="true" tabindex="-1"></a>sns.histplot(filtered_2, x<span class="op">=</span><span class="st">"rate"</span>, ax<span class="op">=</span>ax[<span class="dv">0</span>, <span class="dv">2</span>]).<span class="bu">set</span>(</span>
+<span id="cb97-19"><a href="#cb97-19" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Rate Distribution by 2 starRating'</span>)</span>
+<span id="cb97-20"><a href="#cb97-20" aria-hidden="true" tabindex="-1"></a>sns.histplot(filtered_3, x<span class="op">=</span><span class="st">"rate"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>, <span class="dv">0</span>]).<span class="bu">set</span>(</span>
+<span id="cb97-21"><a href="#cb97-21" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Rate Distribution by 3 starRating'</span>)</span>
+<span id="cb97-22"><a href="#cb97-22" aria-hidden="true" tabindex="-1"></a>sns.histplot(filtered_4, x<span class="op">=</span><span class="st">"rate"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>, <span class="dv">1</span>]).<span class="bu">set</span>(</span>
+<span id="cb97-23"><a href="#cb97-23" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Rate Distribution by 4 starRating'</span>)</span>
+<span id="cb97-24"><a href="#cb97-24" aria-hidden="true" tabindex="-1"></a>sns.histplot(filtered_5, x<span class="op">=</span><span class="st">"rate"</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>, <span class="dv">2</span>]).<span class="bu">set</span>(</span>
+<span id="cb97-25"><a href="#cb97-25" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Rate Distribution by 5 starRating'</span>)</span>
+<span id="cb97-26"><a href="#cb97-26" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Skew value for every starRating
+starRating
+0    2.167239
+1    2.119075
+2    1.963175
+3    1.234573
+4    0.136950
+5    0.172502
+Name: rate, dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="project_regresi_files/figure-html/cell-55-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistik Harga tiap rating bintang hotel</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>dfRateStat <span class="op">=</span> df.groupby(<span class="st">'starRating'</span>).agg(</span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'rate'</span>: [<span class="st">'mean'</span>, <span class="st">'std'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>, <span class="kw">lambda</span> x: x.quantile(<span class="fl">0.25</span>), <span class="st">'median'</span>, <span class="kw">lambda</span> x: x.quantile(<span class="fl">0.75</span>)]})</span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="co"># change the column name from index 4 and 6</span></span>
+<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a>dfRateStat <span class="op">=</span> dfRateStat.rename(</span>
+<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="st">'&lt;lambda_0&gt;'</span>: <span class="st">'25%'</span>, <span class="st">'&lt;lambda_1&gt;'</span>: <span class="st">'75%'</span>})</span>
+<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a>dfRateStat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="55">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th colspan="7" data-quarto-table-cell-role="th" data-halign="left">rate</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">min</th>
+<th data-quarto-table-cell-role="th">max</th>
+<th data-quarto-table-cell-role="th">25%</th>
+<th data-quarto-table-cell-role="th">median</th>
+<th data-quarto-table-cell-role="th">75%</th>
+</tr>
+<tr class="header">
+<th data-quarto-table-cell-role="th">starRating</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>3.191067e+05</td>
+<td>171570.704430</td>
+<td>82645</td>
+<td>1239669</td>
+<td>206612.0</td>
+<td>289256.0</td>
+<td>371901.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2.972719e+05</td>
+<td>149305.342175</td>
+<td>90909</td>
+<td>938609</td>
+<td>206612.0</td>
+<td>264463.0</td>
+<td>330579.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3.785267e+05</td>
+<td>195403.723931</td>
+<td>114876</td>
+<td>1399537</td>
+<td>247934.0</td>
+<td>329752.0</td>
+<td>455988.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>5.947459e+05</td>
+<td>305081.185819</td>
+<td>177686</td>
+<td>1528926</td>
+<td>371901.0</td>
+<td>516529.0</td>
+<td>709703.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>8.620919e+05</td>
+<td>302233.532163</td>
+<td>321395</td>
+<td>1521212</td>
+<td>613572.5</td>
+<td>846281.0</td>
+<td>1102204.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>1.127378e+06</td>
+<td>247495.951682</td>
+<td>736969</td>
+<td>1534866</td>
+<td>909555.0</td>
+<td>1103609.0</td>
+<td>1368749.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>Pada kota Yogyakarta tidak terdapat banyak hotel bintang 5.</li>
+<li>Mayoritas hotel di Yogyakarta adalah hotel bintang 0.</li>
+<li>Terdapat hotel bintang 2 yang memiliki harga setara dengan hotel bintang 5.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dari tabel statistik tersebut mengindikasikan beberapa nilai yang tidak wajar. Untuk penelitian selanjutnya bisa dilakukan pembersihan data lebih mendalam lagi.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Hasil dari <em><code>multi-hot encoding</code></em> juga belum dilakukan <code>pembersihan data</code>, selain itu dengan banyaknya hasil kolom juga dapat dilakukan reduksi dimensi, contohnya menggunakan <code>PCA</code>. Oleh karena itu untuk penelitian selanjutnya bisa dilakukan pembersihan data lebih mendalam lagi dan dilakukan reduksi dimensi.</p>
+</div>
+</div>
+<p>Masih banyak informasi-informasi yang dapat di ambil dari data ini, seperti:</p>
+<ul>
+<li>Perbandingan harga hotel bintang 5 dengan hotel bintang 0.</li>
+<li>Landmark apa yang paling banyak dicari oleh pengunjung hotel?</li>
+<li>Fasilitas apa yang sudah manjadi standar pada hotel bintang 3?</li>
+<li>Dan masih banyak lagi.</li>
+</ul>
+</section>
+</section>
+<section id="pemodelan-machine-learning" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="pemodelan-machine-learning"><span class="header-section-number">13.4</span> Pemodelan Machine Learning</h2>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xgboost <span class="im">as</span> xgb</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.experimental <span class="im">import</span> enable_halving_search_cv</span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, HalvingGridSearchCV</span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVR</span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, r2_score</span>
+<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython <span class="im">import</span> display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./project_klasifikasi.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Project Klasifikasi Sentimen Analisis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
