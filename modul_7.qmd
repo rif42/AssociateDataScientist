@@ -812,7 +812,7 @@ display(df)
 
 
 
-### Imputing  
+#### Imputing  
 Imputing adalah proses penggantian data outlier dengan nilai-nilai yang diprediksi atau diestimasi berdasarkan karakteristik data. Teknik imputasi sudah di bahas secara detail di bab sebelumnya  
 
 **Kelebihan**  
@@ -824,7 +824,7 @@ Imputing adalah proses penggantian data outlier dengan nilai-nilai yang dipredik
 - Berpotensi merusak distribusi data  
 
 
-### Normalization  
+#### Normalization  
 Adalah metode untuk mengubah skala nilai dalam dataset sehingga nilainya berkisar antara 0 dan 1. Untuk melakukan normalisasi data, kita membagi data berdasarkan nilai minimum dan maksimum dari data. Proses normalisasi baik digunakan untuk dataset yang mempunyai distribusi data non-normal atau tidak beraturan.  
 Rumus dari normalisasi adalah:  
 $$
@@ -841,7 +841,7 @@ $$
 - Tidak menghilangkan outlier secara langsung, hanya mengurangi efek dari outlier  
 
 
-#### Normalization - Hands On Coding  
+##### Normalization - Hands On Coding  
 Kita akan menggunakan dataset lagu spotify dengan fitur loudness, mirip seperti bab-bab sebelumnya.  
 Pertama kita cek batasan-batasan data dari fitur loudness  
 
@@ -882,7 +882,7 @@ df['loudness'].describe()
 
 Data telah ter-normalisasi! Namun, apa efek dari normalisasi selain mengubah rentang data? Efek yang paling umum adalah jarak data dari kedua ujung menjadi lebih sama-rata. Hal ini dapat menambah akurasi model machine learning.  
 
-### Standarization / Z-Score  
+#### Standarization / Z-Score  
 Standarisasi data adalah suatu proses dalam analisis data yang mengubah variabel-variabel menjadi memiliki rata-rata nol dan standar deviasi satu. Dalam standarisasi data, setiap nilai data dikurangi dengan rata-rata dari seluruh data, kemudian hasilnya dibagi dengan standar deviasi data. Dengan melakukan hal ini, nilai-nilai data akan berada pada skala yang relatif terhadap variabilitas data. Proses standarisasi menggunakan rumus sebagai berikut:  
 
 $$
@@ -897,7 +897,7 @@ $$
 - Tidak dapat menentukan batasan data  
 - Hasil dapat berupa angka negatif  
 
-#### Standardization / Z-score - Hands On Coding  
+##### Standardization / Z-score - Hands On Coding  
 Kita akan menggunakan dataset lagu spotify dengan fitur loudness, mirip seperti bab-bab sebelumnya.  
 Pertama kita cek batasan-batasan data dari fitur loudness  
 
@@ -914,11 +914,79 @@ fig.show()
 Lalu kita akan gunakan function z-score scaler untuk melakukan proses normalisasi terhadap data loudness.  
 
 ```{python}
-import scipy.stats as stats
+mean = round(np.mean(df['loudness']),2)
+std = round(np.std(df['loudness']),2)
+normalized=round((df['loudness']-mean)/std,2)
 
-stats.zscore(df['loudness'])
+print(f'mean = ', mean)
+print(f'std deviation = ', std)
+normalized.describe()
 
-df['loudness'].describe()
+```
 
+Selanjutnya kita buat diagram histogramnya untuk mengecek perubahan distribusi data.  
 
+```{python}
+fig = px.histogram(normalized, x="loudness")
+fig.show()
+
+```
+
+Jika kita bandingkan histogram data asli dengan data yang di standarisasi, distribusi data tidak berbeda jauh. Selain itu, batas data minimal mengecil dari -31 menjadi -3, dan batas data maksimal membesar dari -2 menjadi 1.  
+
+## Dokumentasi Fitur  
+Dokumentasi data dapat menjembatani kesenjangan antara transaksi (pembuatan data) dan analisis (konsumsi data). Dokumentasi data yang baik memungkinkan pengguna, ataupun rekan tim untuk memahami siapa/apa/kapan/di mana/bagaimana/mengapa data tersebut dibentuk ataupun dikonsumsi.
+
+Secara umum, dokumentasi fitur dari sebuah dataset mempunyai beberapa poin, yaitu :  
+- Nama fitur  
+- Definisi  
+- Tipe data  
+- Skala  
+- Sumber data  
+- Keterangan  
+
+Mari kita lakukan sebuah dokumentasi fitur dari dataset spotify yang kita gunakan di slide sebelumnya. Dengan menggunakan code data.info() kita bisa mengetahui banyak hal tentang dataset kita  
+```{python}
+df = pd.read_csv('./data_sampled_100.csv')
+df.info()
+```
+
+### Nama Fitur  
+Fitur atau kolom adalah satuan data yang mendeskripsikan aspek tertentu dalam data. Di dalam dataset ini, kita mempunyai beberapa fitur, antara lain :  
+- Valence  
+- Year  
+- Acousticness  
+- Artists  
+- Danceability  
+- Duration_ms  
+- Energy  
+- Explicit  
+- ID  
+- Instrumentalness  
+- Key  
+- Liveness  
+- Loudness  
+- Mode  
+- Name  
+- Popularity  
+- Release_date  
+- Speechiness  
+- Tempo  
+
+### Definisi Fitur
+Setiap fitur mempunyai definisi atau penjelasan makna tertentu. Definisi yang ada di bawah hanya sebagian dari dataset saja. Untuk definisi keseluruhan data bisa dilihat di https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features.  
+Beriku definisi fitur dari dataset :  
+- **name**, Nama lagu  
+- **artists**, Nama artis pembuat lagu  
+- **year**, Tahun rilis lagu  
+- **popularity**, Tingkat popularitas lagu. Nilai popularitas adalah antara 0 dan 100, dengan 100 menjadi nilai maksimal.  
+- **key**, adalah kunci lagu dari lagu tersebut. kunci lagu direpresentasikan menggunakan angka menurut Pitch Class Notation Standard. Misalnya, 0 = C, 1 = C♯/D♭, 2 = D, dan seterusnya. Jika tidak ada kunci, maka nilai -1.  
+- **mode**, Mode dari lagu tersebut. 1 = Major, 0 = Minor.  
+
+### Tipe Data  
+Tipe data sangatlah penting karena tipe data menentukan operasi atau function apa yang bisa dilakukan terhadap data tersebut. Sebagai contoh, untuk menentukan nilai random, kita tidak bisa menggunakan angka float (pecahan), kita harus menggunakan angka integer (bulat).  
+Kita dapat dengan mudah mengecek tipe data dari sebuah dataset menggunakan function `data.info()`  
+```{python}
+df = pd.read_csv('./data_sampled_100.csv')
+df.info()
 ```
