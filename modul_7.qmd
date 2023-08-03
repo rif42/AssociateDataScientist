@@ -18,6 +18,13 @@ Diharapkan fitur-fitur yang di modifikasi atau ditambah dapat menambah kualitas 
 Kita akan melakukan proses feature enginnering ke sebuah dataset dibawah ini   
 Jangan lupa untuk menginstall library pandas menggunakan command `pip install pandas`
 ```{python}
+from spacy import displacy
+import spacy
+from matplotlib import pyplot as plt
+import cv2
+from sklearn.preprocessing import MinMaxScaler
+import time
+import random
 import plotly.express as px
 from sklearn.impute import KNNImputer
 from keras.optimizers import Adam
@@ -774,22 +781,21 @@ Diketahui ada 1 buah outlier. Selanjutnya kita akan menentukan nilai q1 dan q3 s
 ```{python}
 q1 = np.percentile(df['loudness'], 25)
 q3 = np.percentile(df['loudness'], 75)
-print(f'q1 = ',q1)
-print(f'q3 = ',q3)
+print(f'q1 = ', q1)
+print(f'q3 = ', q3)
 ```
 
 Nilai q1 dan q3 ini akan kita gunakan untuk memberi batasan terhadap angka random yang akan kita generate sebagai nilai winsorizing kita.  
 
 ```{python}
-import random
-import time
 
-#nilai n menyesuaikan jumlah data outlier
+# nilai n menyesuaikan jumlah data outlier
 outliercount = len(outlier)
 
 # generate random number
 random.seed(time.time_ns())
-winsorized_outlier = [random.randint(int(q1),int(q3)) for i in range(outliercount)]
+winsorized_outlier = [random.randint(int(q1), int(q3))
+                      for i in range(outliercount)]
 print(winsorized_outlier)
 ```
 
@@ -798,13 +804,14 @@ Selanjutnya, kita akan memasukkan nilai winsorizing ke outlier, lalu masukkan ou
 
 ```{python}
 for i in range(len(winsorized_outlier)):
-    outlier.iloc[i,12] = winsorized_outlier[i]
+    outlier.iloc[i, 12] = winsorized_outlier[i]
 
 # masukkan outlier ke dataset induk
 for i in range(len(outlier)):
-    id = outlier.iloc[i,8] # ambil ID dari data outlier
-    index = df[df['id'] == id].index[0] # cari index dari data outlier di dataset
-    df.iloc[index,12] = outlier.iloc[i,12] # gantikan dataset dengan outlier
+    id = outlier.iloc[i, 8]  # ambil ID dari data outlier
+    # cari index dari data outlier di dataset
+    index = df[df['id'] == id].index[0]
+    df.iloc[index, 12] = outlier.iloc[i, 12]  # gantikan dataset dengan outlier
 
 df = df.sort_values(by='loudness')
 display(df)
@@ -861,7 +868,6 @@ fig.show()
 Lalu kita akan gunakan function minmax scaler untuk melakukan proses normalisasi terhadap data loudness.  
 
 ```{python}
-from sklearn.preprocessing import MinMaxScaler
 
 # buat objek scaler
 scaler = MinMaxScaler()
@@ -914,9 +920,9 @@ fig.show()
 Lalu kita akan gunakan function z-score scaler untuk melakukan proses normalisasi terhadap data loudness.  
 
 ```{python}
-mean = round(np.mean(df['loudness']),2)
-std = round(np.std(df['loudness']),2)
-normalized=round((df['loudness']-mean)/std,2)
+mean = round(np.mean(df['loudness']), 2)
+std = round(np.std(df['loudness']), 2)
+normalized = round((df['loudness']-mean)/std, 2)
 
 print(f'mean = ', mean)
 print(f'std deviation = ', std)
@@ -985,8 +991,377 @@ Beriku definisi fitur dari dataset :
 
 ### Tipe Data  
 Tipe data sangatlah penting karena tipe data menentukan operasi atau function apa yang bisa dilakukan terhadap data tersebut. Sebagai contoh, untuk menentukan nilai random, kita tidak bisa menggunakan angka float (pecahan), kita harus menggunakan angka integer (bulat).  
-Kita dapat dengan mudah mengecek tipe data dari sebuah dataset menggunakan function `data.info()`  
+Kita dapat mengecek tipe data dari sebuah dataset menggunakan function `data.info()`  
 ```{python}
 df = pd.read_csv('./data_sampled_100.csv')
 df.info()
 ```
+
+Definisi dari tipe data di dataset :  
+- **float**, angka pecahan  
+- **int**, angka bulat   
+- **object**, kombinasi antara teks dan angka 
+
+### Skala Data  
+Skala atau rentang data adalah batasan-batasan data yang ada di sebuah dataset. Skala data bisa diperoleh menggunakan kode `data.describe()` 
+
+```{python}
+df = pd.read_csv('./data_sampled_100.csv')
+df.describe()
+```
+
+### Sumber Data  
+Data diperoleh dari kaggle dengan link https://www.kaggle.com/datasets/vatsalmavani/spotify-dataset  
+Kaggle adalah platform dataset open source. Namun dataset spotify ini dapat di scrape secara mandiri dengan mendaftar sebagai developer di spotify dan mengambil data menggunakan API spotify.  
+Setelah di download data diambil 100 baris secara random untuk meningkatkan performa dari coding.  
+
+### Keterangan  
+Data mempunyai beberapa lagu yang tidak valid, jadi harus dilakukan proses data cleaning.  
+
+# Pelabelan Data  
+Pelabelan data (data labeling) adalah proses menandai atau memberi label pada data dengan kelas atau kategori yang sesuai. 
+
+Kuantitas & kualitas data pelatihan yang secara langsung menentukan keberhasilan suatu algoritma AI sehingga tidak mengherankan jika rata-rata 80% waktu yang dihabiskan untuk proyek AI membahas data pelatihan yang mencakup proses pelabelan data.
+
+Keakuratan model AI Anda berkorelasi langsung dengan kualitas data yang digunakan untuk melatihnya. 
+Hal ini menjadi satu alasan mengapa proses pelabelan data merupakan bagian integral dari alur kerja persiapan data dalam membangun model AI yang handal.
+
+## Data Training  
+Machine learning dibagi menjadi dua, yaitu supervised dan unsupervised learning.  
+**Unsupervised learning** menggunakan dataset tanpa label untuk menemukan sebuah pola, struktur atau hubungan antar fitur untuk melatih algoritma machine learning.  
+**Supervised learning** menggunakan dataset yang mempunyai label untuk melatih algoritma machine learning memprediksi nilai atau mengklasifikasikan sesuatu.  
+Namun, tidak semua dataset mempunyai label. Dan tidak semua dataset yang tidak mempunyai label dapat di training menggunakan unsupervised learning. Jadi, kita harus melakukan proses labeling dataset.  
+
+![Gambar12. Pelabelan data gambar](./12.label.png) 
+
+Ketika sebuah dataset diberi sebuah label, maka label tersebut sebagai dasar kebenaran atau ground truth.   
+Pelabelan dataset sangatlah penting untuk proses machine learning. Proses labeling data dapat mempengaruhi kualitas dan akurasi dari sebuah model.   
+Selain itu, pelabelan dataset dapat meningkatkan kualitas dari dataset, sehingga dataset dapat diproses oleh lebih banyak algoritma machine learning. 
+
+Contoh lain dari pelabelan dataset deteksi email spam :  
+![Gambar13. Pelabelan email spam](./13.emailspam.png)  
+
+Kesimpulannya, jika pelabelan dataset tidak akurat, maka hasil prediksi yang dibuat oleh algoritma machine learning tidak akan akurat
+
+## Metode Pelabelan Data  
+Data labeling adalah langkah yang sangat penting dalam proses pengembangan model machine learning. Proses ini terlihat simpel, namun sebenarnya tidak semudah itu untuk diimplementasikan. 
+Sebagai data scientist/data engineer, kita harus mempertimbangkan semua faktor dan metode yang ada untuk menentukan implementasi yang terbaik.
+Seperti semua hal di dunia programming, setiap metode pelabelan data mempunyai kelebihan dan kekurangan. Berikut beberapa metode pelabelan data yang sering digunakan :  
+
+### Internal Labeling  
+Proses labeling data oleh data scientist, data engineer, atau staf expert lain yang bekerja di perusahaan.  
+**Kekuatan**  
+- Kualitas labeling tinggi  
+- Akurasi labeling tinggi  
+- Kemanan data terkontrol  
+
+**Kelemahan**  
+- Membutuhkan waktu dan tenaga yang banyak  
+- Cukup mahal  
+
+
+### Synthetic labeling  
+Proses labeling data yang dilakukan dengan men-generate data baru (dengan pattern yang mirip) dari data yang sudah ada. Contohnya adalah imagen (image generator) dimana sebuah gambar diputar dan digeser sehingga menghasilkan data baru. Proses ini biasanya dilakukan untuk melatih sebuah model machine learning  
+**Kekuatan**  
+- Cepat  
+- Tidak membutuhkan tenaga yang banyak  
+
+**Kelemahan**  
+- Tidak semua algoritma bisa menerima semua jenis generated data  
+
+### Programmatic labeling  
+Proses labeling data yang dilakukan oleh algoritma atau mesin, umumnya algoritma machine learning berbentuk klasifikasi, clustering, atau regresi.  
+**Kekuatan**  
+- Proses labeling cepat dan dapat diskalakan dengan mudah  
+- Tidak membutuhkan tenaga yang banyak  
+
+**Kelemahan**  
+- Kualitas labeling tergantung pada kualitas dataset dan penerapan algoritma machine learning  
+- Cukup mahal tergantung dengan skala dan penggunaan hardware  
+- Proses training model bisa lama  
+
+### Outsourcing  
+Outsourcing adalah kegiatan merekrut perusahaan atau organisasi untuk melakukan proses data labeling. Salah satu pertimbangan utama adalah spesialisasi dan kompetensi dari sebuah perusahaan atau organisasi tersebut.  
+**Kekuatan**  
+- Simple  
+- Hasil labeling akurat  
+
+**Kelemahan**  
+- Mahal  
+- Memakan waktu lama  
+
+### Crowdsourcing  
+Crowdsourcing adalah proses dimana pekerjaan data labeling didistribusikan ke khalayak publik, umumnya freelancer melalui platform website. Contohnya adalah project ReCaptcha dimana manusia diminta untuk mengisi captcha, lalu hasilnya dimasukkan ke algoritma machine learning untuk memprediksi captcha.  
+**Kekuatan**  
+- Paling efisien, dapat mengolah banyak data dalam waktu singkat  
+
+**Kelemahan**  
+- Perlu mengembangkan workflow yang cocok untuk freelancer  
+- Akurasi tergantung dengan QA dan workflow  
+- Potensi kebocoran data tinggi  
+
+## Penggunaan Data Labeling dalam Pengolahan Citra  
+Pengolahan citra adalah kegiatan memanipulasi data yang berbentuk gambar atau video. Di bidang machine learning, pengolahan citra adalah salah satu bidang yang paling penting.   
+Model machine learning pengolah citra yang sering dibuat meliputi: klasifikasi, segmentasi, deteksi objek, dan estimasi pose. Semua proses pembuatan model machine learning sangat erat kaitannya dengan pelabelan data yang digunakan di data training.  
+Tujuan akhir dari semua model yang telah disebutkan adalah melabeli sebuah gambar atau video dengan sesuatu.  
+
+### Image Classification  
+![Gambar14. Contoh klasifikasi gambar kucing](./14.imgclass.png)  
+Image classification model adalah jenis model dalam bidang pengolahan citra yang digunakan untuk mengklasifikasikan gambar ke dalam berbagai kategori atau kelas yang telah ditentukan sebelumnya. Tujuan dari model ini adalah untuk mengidentifikasi dan memprediksi kelas atau label yang sesuai dengan gambar yang diberikan.  
+
+### Image Segmentation  
+![Gambar15. Contoh segmentasi gambar kucing](./15.imgsegm.png)  
+Image segmentation adalah proses dalam pengolahan citra yang membagi atau memisahkan gambar menjadi beberapa bagian/segmen yang lebih kecil. Setiap segmen mewakili area yang memiliki karakteristik visual yang serupa, seperti warna, tekstur, atau bentuk. Tujuan dari image segmentation adalah untuk memahami struktur internal gambar dan mengidentifikasi objek yang ada di dalamnya.  
+Kemiripan antara segmentasi dan klasifikasi adalah objek atau hasil prediksi hanya mempunyai satu nilai
+
+### Object Detection  
+![Gambar16. Contoh object detection gambar hewan](./16.imgdetect.png)  
+Deteksi objek adalah proses dalam pengolahan citra yang bertujuan untuk mengidentifikasi dan memetakan objek-objek tertentu dalam sebuah gambar atau video. Tujuan utama dari deteksi objek adalah untuk menemukan dan menandai lokasi serta batas-batas objek yang ada dalam sebuah gambar.  
+Perbedaan object detection dengan metode-metode sebelumnya yaitu objek atau hasil prediksi mempunyai lebih dari satu hasil
+
+### Pengolahan Citra - Hands On Coding  
+Kita akan membuat model object detection menggunakan library OpenCV. Kita juga akan menggunakan algoritma classifier bernama Haar Cascade. Untuk file lengkapnya bisa dilihat di sini [link paper](https://www.researchgate.net/publication/3940582_Rapid_Object_Detection_using_a_Boosted_Cascade_of_Simple_Features).  
+Algoritma ini menggunakan sebuah sistem machine learning dimana kita memberikan gambar positif dan negatif. Gambar positif adalah gambar objek yang kita ingin klasifikasikan, sedangkan gambar negatif adalah gambar objek yang tidak ingin kita klasifikasikan.  
+Karena keterbatasan waktu, kita akan menggunakan model yang sudah jadi untuk melakukan deteksi objek pada gambar yang kita inginkan. Pada kasus ini, kita akan mendeteksi rambu lalu lintas stop.  
+
+#### Download Library  
+Library bisa di download menggunakan `pip install opencv-python` dan `pip install matplotlib`
+
+#### Import Library  
+buat file python dan import package-package sebagai berikut:  
+- import cv2  
+- import matplotlib.pyplot as plt  
+
+#### Download Model dan Gambar Contoh  
+Download pre-trained model yang mempunyai format .xml di [link ini](https://drive.google.com/file/d/1amieL09Q8G5auRC2_l9hwehuqFkKDHwf/view). Jangan lupa download gambar stop sign.  
+
+![Gambar17. Contoh gambar stop sign](./image.jpg)  
+
+#### Ekstrak Model dan Gambar ke Directory  
+
+#### Tampilkan Gambar Menggunakan OpenCV dan Matplotlib   
+
+```{python}
+# buka gambar menggunakan opencv
+img = cv2.imread("image.jpg")
+
+# OpenCV membuka gambar menggunakan metode BRG (blue red green)
+# namun kita ingin membuka dengan metoded RGB (red green blue)
+# kita harus konversi dari BRG ke RGB
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+# kita juga membutuhkan gambar versi grayscale (hitam putih)
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# menampilkan gambar menggunakan matplotlib
+plt.subplot(1, 1, 1)
+plt.imshow(img_rgb)
+plt.show()
+```
+
+#### Buat Algoritma Deteksi Objek  
+```{python}
+# load model yang sudah dilatih untuk mendeteksi stop sign
+# model berbentuk file xml
+stop_data = cv2.CascadeClassifier('stop_data.xml')
+
+# buat ukuran kotak minimum agar ukuran kotak yang terdeteksi tidak terlalu kecil
+found = stop_data.detectMultiScale(img_gray,
+                                   minSize=(5, 5))
+
+# hitung jumlah objek yang ditemukan.
+amount_found = len(found)
+
+# jika objek tidak ditemukan maka tidak dilakukan apa-apa
+if amount_found != 0:
+
+    # jika objek yang ditemukan lebih dari satu, maka :
+    for (x, y, width, height) in found:
+
+        # kita gambar sebuah kotak hijau di objek yang ditemukan
+        cv2.rectangle(img_rgb, (x, y),
+                      (x + height, y + width),
+                      (0, 255, 0), 5)
+
+# tampilkan hasil citra menggunakan plt
+plt.subplot(1, 1, 1)
+plt.imshow(img_rgb)
+plt.show()
+```
+
+#### Eksperimen!  
+Cari gambar rambu lalu lintas stop di internet atau ambil foto secara langsung, lalu masukkan gambar tersebut ke coding. Terapkan algoritma dan lihat apakah algoritma deteksi objek berjalan dengan sempurna.
+
+Petunjuk : edit line `cv2.imread(“[nama file foto]”)` untuk menggunakan gambar atau foto anda sendiri  
+
+## Penggunaan Data Labeling dalam Natural Language Processing  
+Natural Language Processing atau NLP mengacu pada analisis bahasa manusia dan bentuknya selama interaksi baik dengan manusia lain maupun dengan mesin. 
+Menjadi bagian dari linguistik komputasi awalnya, NLP telah berkembang lebih lanjut dengan bantuan Artificial Intelligence dan Deep Learning.  
+
+### Sentiment Analysis  
+![Gambar17. Contoh Sentimen](./17.sentiment.png)   
+Adalah sebuah proses pemberian label sentimen terhadap sebuah teks (kata, kalimat, atau paragraf) berdasarkan ekspresi perasaan manusia. Tujuan utamanya adalah untuk mengkategorikan teks berdasarkan sentimen yang diekspresikan oleh teks.  
+Teks dianalisa dengan mempertimbangkan beberapa faktor, antara lain : pemilihan kata, konteks, subjektivitas, dan beberapa faktor lain. Lalu sebuah sentimen berupa perasaan (marah, sedih, bahagia, bingung) dilabelkan ke teks tersebut.  
+
+### Named Entity Recognition (NER)  
+![Gambar17. Contoh Named Entity Recognition](./18.NER.png)   
+Adalah sebuah proses pemberian label entitas dalam sebuah teks. Entitas adalah sebuah kategori luas yang dapat diatur oleh pembuat algoritma. Contoh dari entitas antara lain, nama seseorang, lokasi, negara, organisasi, besaran, jumlah uang, dan lain lain.  
+Tujuan utama dari NER adalah mengekstrak informasi entitas dari sebuah teks. Dalam proses labeling, algoritma harus memperhatikan konteks, struktur kata, dan arti tersirat dalam sebuah teks untuk mengidentifikasi sebuah entitas secara akurat.  
+
+### Part of Speech Tagging (POS-tagging)  
+![Gambar17. Contoh Part Of Speech](./19.POS.png)   
+Adalah sebuah proses pemberian label kategori tata-bahasa (grammar) dalam sebuah teks. Pada umumnya sebuah kalimat terdiri dari beberapa kata yang termasuk dalam kategori grammar kata benda (noun), kata sifat (adjective), keterangan (adverb), kata ganti (pronoun), dan lain-lain.  
+Tujuan utama POS-tagging adalah untuk menentukan kategori grammar dari sebuah kata di dalam sebuah konteks yang ada di teks. POS-tagging sangatlah penting karena grammar atau tata-bahasa dapat mengubah makna dari sebuah kalimat secara keseluruhan.  
+
+### Hands On Coding  
+Dalam praktikum ini kita akan membuat algoritma Named Entity Recognition menggunakan library spaCy dan sebuah artikel.  
+#### Download Library dan Dataset yang Dibutuhkan   
+- python -m pip install -U pip setuptools wheel  
+- pip install -U spacy  
+- python -m spacy download en_core_web_sm  
+
+#### Import library  
+- import spacy  
+- from spacy import displacy  
+
+#### Masukkan Model NER SpaCy  
+```{python}
+NER = spacy.load("en_core_web_sm")
+```
+
+#### Tentukan Artikel yang Akan di Proses. Artikel Harus Berbahasa Inggris.  
+```{python}
+rawtext = "Asus Zenfone 10 will please everyone who finds the current flagship cellphones too bulky: the compact and relatively light smartphone comes with a lot of memory on request, which also works as fast as an arrow. It scores with very high system performance, long software updates, fast WiFi 7 and a stylish, IP-certified case that is also available in brighter color variants. At a price of US$749, however, the smartphone competes with the Samsung Galaxy S23 or the Apple iPhone 13 mini and you have to accept a few weaknesses. For example, compared to Samsung's flagship, the camera lacks the optical zoom capability, which reduces the flexibility of the camera setup. Compared to the iPhone, the images appear less sharp. The screen could also be a little brighter, the strong heating of the phone under high load is annoying and the battery life is average. The fact that Asus installs a USB 2.0 port in its Zenfone 10 is also no reason for joy. But users who want a 3.5mm port combined with high performance will hardly get past the Zenfone 10."
+```
+
+#### Masukkan Artikel ke Fungsi NER, Lalu tampilkan hasilnya 
+```{python}
+text1 = NER(rawtext)
+
+for word in text1.ents:
+    print(word.text, '-', word.label_)
+
+```
+
+#### Kesimpulan  
+Hasil dari NER adalah sebuah kata yang dideteksi dan kategori dari kata tersebut. Namun bisa dilihat bahwa hasil dari algoritma tidak 100% akurat. Ada beberapa hasil yang labelnya tidak sesuai, contohnya “Asus - PERSON”. Algoritma melabeli kata Asus sebagai sebuah nama orang, padahal Asus seharusnya adalah sebuah organisasi (ORG).
+
+#### Eksperimen!  
+Cari teks dari artikel, wikipedia, berita, lalu masukkan teks tersebut ke algoritma NER dan analisa hasil dan akurasi dari algoritma.  
+Petunjuk : masukkan teks ke dalam variable rawtext sebagai string (“”)
+
+## Analisa Kualitas dan Akurasi Data untuk Pelabelan  
+**Akurasi** dalam pelabelan data mengukur seberapa dekat pelabelan dengan ground truth, atau seberapa baik fitur berlabel dalam data set konsisten dengan kondisi dunia nyata. Dalam model pemrosesan bahasa alami (NLP) contohnya adalah seberapa akurat model memberikan label sentimen terhadap sebuah teks.  
+
+**Kualitas** dalam pelabelan data adalah tentang akurasi dataset secara keseluruhan. Apakah pekerjaan semua pemberi label terlihat sama? Apakah pelabelan secara konsisten akurat di seluruh data set?  
+
+### Definisi Data yang Berkualitas  
+Proses pelabelan data selalu bertumpu pada kualitas data. Trash in, trash out adalah sebuah mantra yang populer di dunia pengolahan data. Artinya, data yang tidak berkualitas tidak dapat menghasilkan produk yang berkualitas.   
+Maka dari itu, data harus kita tentukan kualitas dan akurasinya agar kita dapat menentukan ekspektasi terhadap hasil dari pelabelan data yang akan kita lakukan. Pada umumnya data yang berkualitas mempunyai :  
+- Tidak ada nilai kosong/korup  
+- Nilai unik tiap entry  
+- Variasi seimbang  
+- Metode pengambilan data yang tangguh  
+- Dokumentasi lengkap  
+- Format yang rapi  
+
+### Faktor-faktor yang mempengaruhi kualitas proses pelabelan data  
+#### Pemahaman Data  
+Data mempunyai banyak fitur dan value. Pengetahuan tentang fitur data dan nilai-nilai yang ada didalamnya akan sangat membantu untuk menentukan proses pelabelan data.  
+
+#### Kompetensi Developer/Trainer  
+Developer harus mempunyai pengetahuan yang luas di bidang machine learning atau bidang yang relevan. Developer harus bisa menentukan kualitas dataset, langkah-langkah data preprocessing, algoritma yang sesuai, dan cara untuk mengukur akurasi pelabelan.
+
+#### Ketangguhan Workflow  
+Proses pelabelan data pasti mempunyai tahap-tahap yang ditetapkan oleh kepemimpinan. Proses atau workflow tersebut harus tahan terhadap gangguan-gangguan seperti human error, machine error, perubahan requirements, ambiguitas, sehingga proses dapat berjalan lancar selamanya. Salah satu proses terpenting yaitu QA, yang akan kita bahas di slide selanjutnya
+
+### Metode QA untuk mengukur kualitas data  
+#### Consensus Algorithm  
+Adalah sebuah metodologi untuk mencapai sebuah keputusan mengenai kualitas data dengan cara mengumpulkan persetujuan (consensus) dari semua atau sebagian orang yang melakukan proses data labeling.  
+
+#### Benchmarking dan Gold Standard  
+Adalah proses membandingkan hasil data labeling dari beberapa model dengan mengaplikasikan model tersebut ke dataset yang sering digunakan. Tujuan utamanya dalah untuk memperoleh batas bawah (baseline) atau reference point untuk mengevaluasi kualitas dari model. Gold standard adalah sebuah hasil pelabelan dari sebuah model berkualitas tinggi terhadap dataset berkualitas tinggi. Gold standard merepresentasikan teknologi terbaik, aplikasi terakurat, dan dataset berkualitas paling tinggi, hasilnya adalah nilai akurasi yang paling tinggi diantara riset atau percobaan lain.  
+
+#### Cronbach Alpha Test  
+Adalah sebuah metode untuk mengukur tingkat konsistensi dari beberapa variabel yang mempunyai variabel laten yang sama. Variabel laten adalah variabel yang tidak mempunyai metrik atau ukuran secara tersendiri. Untuk mengukur variabel laten, diperlukan beberapa variabel lain yang saling berhubungan dan mempunyai konsistensi tinggi. Cronbach Alpha berfungsi untuk mengukur variabel lain ini.   
+Contohnya adalah kita kana mengukur tingkat ekstroversi seseorang. Tingkat ekstroversi ini adalah variabel laten karena kita tidak bisa mengukur tingkat ekstroversi dengan sendirinya. Maka diperlukan kuesioner dengan 5 pertanyaan. Hasil dari 5 pertanyaan inilah yang akan kita tes dengan Cronbach Alpha Test untuk menentukan apakah mereka merepresentasikan tingkat ekstroversi seseorang.  
+
+### Hands On Coding - Cronbach Alpha Test  
+Rumus dari Cronbach Alpha test adalah:  
+$$
+\alpha = \dfrac{k}{k-1}(1-\dfrac{\Sigma s^2_i}{s^2_X})
+$$  
+
+$\alpha$ = koefisien reliabilitas
+$k$ = jumlah item set
+$s^2_i$ = nilai variance setiap item i dimana i = 1, 2, ..., k,
+$s^2_X$ = nilai variance dari semua item
+
+Nilai α diatas 0.7 termasuk cukup bagus untuk sebuah paper.  
+
+Sebagai contoh, kita akan membuat sebuah sistem untuk mengecek kepuasan pelanggan terhadap 5 produk baru kita. Pelanggan diberikan sebuah kuesioner dan pelanggan akan memberi rating dari 1-5 terhadap 5 produk baru kita.  
+
+#### Install dan Import Library  
+- `pip install numpy`  
+- `pip install scipy`  
+
+#### Buat Data Menggunakan NumPy  
+Anda dapat menambahkan data baru
+```{python}
+data = np.array([[4,3,5,2,4], [5,4,4,3,5], [3,2,3,4,3], [4,4,5,5,4]])
+print(data)
+```
+#### Hitung Rata-Rata dari Setiap Item/Fitur  
+```{python}
+item_means = np.mean(data,axis=0)  
+print(item_means)
+```
+
+#### Hitung Variansi dari Total Skor dan Skor Setiap Item  
+``` {python}
+total_var = np.var(np.sum(data, axis=1))
+item_var = np.var(data, axis=0, ddof=1)
+print(f'total variance : ',total_var)
+print(f'item variance : ',item_var)
+```
+
+#### Hitung Rata-Rata dari Setiap Item/Fitur  
+```{python}
+num_items = len(item_means)
+cronbach_alpha = (num_items / (num_items - 1)) * (1-(np.sum(item_var) / total_var))
+print(f'Nilai Cronbach Alpha adalah : ', cronbach_alpha)  
+```
+
+Hasil nilai Cronbach Alpha adalah 0.4. Nilai ini menunjukkan bahwa konsistensi dari kuesioner yang terdiri dari 5 fitur (item 1 - 5) tergolong rendah dan tidak mencerminkan kepuasan pelanggan secara akurat.  
+Pada umumnya, nilai Cronbach Alpha yang tergolong bagus adalah diatas 0.7
+
+## Keamanan Pelabelan Data  
+Pelabelan data adalah sebuah pekerjaan yang memakan banyak waktu dan tenaga. Proses pelabelan data mempunyai banyak cabang dan workflow, dan di setiap langkah workflow selalu ada resiko kebocoran data.   
+Terlebih jika pekerjaan pelabelan data dikerjakan oleh organisasi lain yang berada di luar kendali kita. Oleh karena itu, kita harus membuat sebuah workflow yang dapat mencegah kebocoran data, serta paham tentang prinsip-prinsip dasar tentang keamanan data.
+
+### Resiko Keamanan Outsourcing Data Labeling  
+- Mengakses data dari jaringan yang tidak aman atau menggunakan perangkat tanpa perlindungan malware  
+- Mengunduh atau simpan sebagian data (mis., screen capture, flash drive)  
+- Memberi label data saat berada di tempat umum  
+- Tidak memiliki pelatihan, konteks, atau akuntabilitas terkait dengan aturan keamanan untuk pekerjaan labeling  
+- Bekerja di lingkungan fisik atau digital yang tidak disertifikasi untuk mematuhi peraturan data (mis., HIPAA, SOC 2).  
+
+### Tiga area yang perlu menjadi perhatian untuk menjaga keamanan dokumen  
+- Orang dan Tenaga Kerja: Ini dapat mencakup pemeriksaan latar belakang untuk pekerja dan mungkin mengharuskan pemberi label untuk menandatangani perjanjian kerahasiaan (NDA) atau dokumen serupa yang menguraikan persyaratan keamanan data.  
+- Teknologi dan Jaringan: Pekerja mungkin diminta untuk menyerahkan perangkat yang mereka bawa ke tempat kerja, seperti ponsel atau tablet.  
+- Fasilitas dan Ruang Kerja: Pekerja dapat duduk di tempat yang menghalangi orang lain untuk melihat pekerjaan mereka.  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
