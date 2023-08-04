@@ -1,0 +1,101 @@
+id,name,artist,popularity,duration_ms,year,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo
+5R8J6WCnV1E2lDJgVoaA4P,b'Threats',b'Jean Grae',41,246293,2008,0.677,0.631,0,-6.363,1,0.0578,0.0986,4.59e-06,0.245,0.454,90.12
+5ex7brQNeKhyh6wjQoMDr0,"b""Queen's Philosophy""",b'Sa-Roc',16,193750,2013,0.849,0.572,7,-10.119,1,0.358,0.0335,0,0.109,0.497,97.106
+0t7k99JA9z0KaMw1BoEpk8,b'9th vs. Thought',b'Black Thought',38,167741,2018,0.751,0.933,7,-2.188,1,0.294,0.0255,0,0.071,0.458,93.032
+1LM6EReMkAxuDXDF26ekl2,b'Get By',b'Talib Kweli',58,227426,2002,0.662,0.928,2,-4.688,1,0.377,0.00324,0,0.17,0.775,90.509
+5DWbvNiVrH2u0Si9e21ZjW,b'We Comin',b'Sa-Roc',7,209655,2015,0.659,0.859,8,-2.767,1,0.423,0.301,0,0.715,0.709,174.542
+0AeXtgRernMx6BDInIxtm8,b'Freedom Form Flowing',b'Gift Of Gab',45,272860,2018,0.751,0.86,2,-3.57,1,0.287,0.454,4.1e-05,0.0849,0.655,162.06
+5wkW9SLgv1DCO3Ll6WGjNg,b'Hood Supreme',b'Sa-Roc',17,216521,2015,0.78,0.729,1,-9.01,0,0.51,0.106,0,0.294,0.805,91.948
+1DaqUrqQOam8bCbzBUdqao,b'Maximum Frequency',b'Sa-Roc',14,228000,2014,0.746,0.953,1,-3.329,0,0.288,0.00292,0,0.598,0.882,90.12
+0sztU8yO2eSFM7PCAeKdAT,b'Never Been In Love',b'Talib Kweli',43,300653,2004,0.757,0.748,6,-7.091,0,0.253,0.408,0,0.178,0.559,96.073
+4YoLbz1TKv8HQh2lRzpjiA,b'Eye of the Phoenix',b'Sa-Roc',5,124450,2016,0.817,0.717,1,-7.663,1,0.297,0.000695,3.47e-05,0.168,0.589,91.0
+5t2bG4wMvpyfRnYic2A1hI,b'Nightmare',b'Avenged Sevenfold',57,374453,2010,0.529,0.948,7,-4.928,1,0.0795,0.000319,0.0001,0.2,0.241,129.98
+6m8dDOTv96S6BObyont2L9,b'Ms. Hill',b'Talib Kweli',41,224280,2005,0.622,0.67,8,-8.076,0,0.368,0.0554,0,0.573,0.242,90.816
+72gByp7oLONJBOg0YntwTZ,b'End of the World',b'Sa-Roc',14,278382,2015,0.675,0.524,3,-10.372,1,0.398,0.0668,0,0.26,0.341,84.882
+1UAhEIfzcm8hp9TXdbMCtz,b'NSFW (Not Safe For Weak Rappers)',b'Sa-Roc',18,226956,2016,0.653,0.594,1,-6.945,1,0.466,0.0471,1.35e-05,0.41,0.382,183.971
+2ybbKsBCWsq0f9dgbIIxon,b'Legendary',b'Sa-Roc',4,186734,2014,0.654,0.946,2,-3.148,1,0.285,0.0495,0,0.227,0.57,98.541
+39ZiU2QVBvDQzeepJjg8tp,b'Blinded in Chains',b'Avenged Sevenfold',62,394466,2005,0.245,0.961,2,-4.223,0,0.0852,9.79e-05,0.00433,0.164,0.574,96.0
+3NZzsmrtxfJd8nJBImXhRr,b'The Moors of Alhambra',b'Sa-Roc',11,149138,2013,0.591,0.807,4,-5.695,0,0.384,0.0623,0,0.593,0.457,87.455
+0QTGhJ1LKgSj2PQLslXLzg,"b""Lilith's Psalm""",b'Sa-Roc',21,187428,2015,0.942,0.575,2,-10.119,1,0.2,0.0309,0,0.11,0.816,105.005
+2BzQBXEmNFP6YTLgr1mRd2,b'MetaMorpheus',b'Sa-Roc',10,222469,2016,0.591,0.615,1,-6.294,1,0.479,0.0048,0,0.279,0.416,165.815
+2TA0vUqYBjLuUIcgZzYL2v,b'WWII (Word War II)',b'Sa-Roc',16,128780,2016,0.763,0.825,1,-6.061,1,0.441,0.0149,0,0.437,0.235,81.993
+5oqSr3rehtGgZyDh0LCSA7,b'Gotta Get Mine',b'MC Breed',53,264760,1993,0.855,0.52,7,-12.07,1,0.268,0.184,0,0.114,0.402,92.451
+1HSGn0KVpyv9H6l2KRwmAI,b'Battle Hymn',b'Vinnie Paz',42,387240,2012,0.551,0.899,11,-5.219,0,0.217,0.0031,0,0.369,0.642,87.457
+01Xbm079iYopmVs8ZMqYGR,b'Pay Your Dues',b'Apathy',26,218826,2016,0.658,0.819,3,-7.692,1,0.297,0.129,0,0.123,0.402,89.986
+4gps46WZXlN1Z9EbdU4VQJ,b'Kindness For Weakness',b'Dilated Peoples',38,249280,2006,0.605,0.914,1,-1.518,1,0.377,0.273,0,0.0569,0.25,190.11
+1d1fZUceM2zK6HETEYtzxJ,b'Blood Runs Cold',b'Jedi Mind Tricks',44,235226,2000,0.725,0.704,1,-6.688,1,0.34,0.131,9.65e-05,0.398,0.81,95.054
+4V1sXrFbpRp7aIDPCy08MO,b'Equality',b'Afu-Ra',43,277320,2000,0.634,0.908,7,-2.654,1,0.303,0.168,0,0.101,0.701,88.875
+3QXackOVhioop7C1VaaSp7,b'Nothing but Strangeness (feat. Looptroop Rockers & Hilltop Hoods)',b'Cunninlynguists',39,198120,2009,0.841,0.597,7,-9.086,1,0.277,0.0934,0,0.113,0.707,92.031
+7x2zy4YgLY731TKaDFFeuj,b'When It Rains (feat. Aloe Blacc)',b'Dag Savage',48,176605,2014,0.68,0.51,7,-9.126,1,0.281,0.155,0,0.691,0.698,90.055
+4Nrg8EG7wWTiTOumtpw8gk,b'Let The Drummer Kick',b'Citizen Cope',59,257093,2002,0.766,0.641,9,-3.777,0,0.0445,0.0165,0.0386,0.0809,0.579,85.011
+5Wpy3gCoY3tQJxAaXWDWy7,b'Late For The Sky (feat. Slug & Aesop Rock)',b'Evidence',32,337560,2011,0.362,0.862,1,-3.295,1,0.35,0.0361,0,0.855,0.659,76.206
+63BokRfXSQhEU6Qi2dSJpZ,b'Mind Playing Tricks on Me',b'Geto Boys',68,308733,1991,0.886,0.512,10,-11.825,0,0.237,0.207,0,0.0991,0.454,93.997
+0fQ4aYENEakPclOlAyFtAX,b'Oh My',b'Sweatshop Union',39,235613,2008,0.873,0.482,6,-6.252,1,0.121,0.681,0.000434,0.0921,0.711,93.204
+6bO0RKtbyVtaKcNwvX8VUt,b'Definition Of A Rap Flow (Albee 3000)',b'R.A. The Rugged Man',47,209280,2013,0.919,0.841,9,-3.509,1,0.325,0.335,0,0.0749,0.795,110.951
+2yfK4aneEYgrXSEUWhrVYQ,b'Suicide',b'Jedi Mind Tricks',34,232840,2006,0.683,0.872,1,-5.476,1,0.187,0.00374,0.000199,0.145,0.465,93.946
+3qDpYCA6FoVvODVaZWScXO,b'Point Of No Return',b'Immortal Technique',56,241826,2003,0.624,0.836,7,-6.995,0,0.383,0.277,0,0.294,0.501,86.971
+0fzo46p4NjXy6DGWmgdAtX,b'Guide You Through Shadows (feat. Ra Scion & Substantial)',b'Cunninlynguists',23,275454,2014,0.611,0.783,1,-6.455,0,0.0615,0.262,7.44e-06,0.269,0.278,88.016
+3kPWpLBQDkzpKKbwOcjn1e,b'Fraudulent Cloth',b'Jedi Mind Tricks',44,251307,2015,0.345,0.907,8,-2.985,0,0.107,0.305,0,0.377,0.329,182.788
+3jmHcu9v3FFRgtztbEejgk,b'Children Sing',b'PaceWon & Mr. Green',39,306893,2008,0.39,0.89,1,-6.145,1,0.203,0.0479,0,0.226,0.558,83.052
+32cQeY533XTAc4L6fzcIgG,b'Enemies With Benefits F. Tonedeff',b'Cunninlynguists',31,277205,2011,0.356,0.718,1,-7.739,0,0.135,0.0631,2.85e-05,0.346,0.144,99.561
+6o7Ox5vC4eGaO3WBv77NQc,b'Freedom Of Speech',b'Immortal Technique',40,187000,2003,0.899,0.656,10,-6.633,0,0.193,0.155,0,0.061,0.959,96.355
+2CpP9fn0s3EQN4ErGEF7UX,b'Beyond the Sun (feat. J Live)',b'Cunninlynguists',39,161193,2014,0.687,0.582,6,-7.334,0,0.178,0.32,2.95e-05,0.0997,0.514,90.048
+0lD1Olt2y5u9d5zUUERxRC,b'Pour Me Another',b'Atmosphere',42,289746,2005,0.373,0.913,9,-5.052,0,0.413,0.0045,0.577,0.133,0.422,173.583
+2ulWTEGFSGdV85pweEluAS,b'Razorblade Salvation',b'Jedi Mind Tricks',44,261093,2006,0.735,0.886,7,-4.31,1,0.131,0.00285,0.848,0.142,0.498,92.382
+6qfna7A7WvUwyNoqVwbhnc,"b""Love Ain't (f. Tonedeff) [Deluxe Edition]""",b'Cunninlynguists',30,241533,2010,0.669,0.768,7,-7.101,1,0.325,0.648,0.00361,0.671,0.556,93.948
+1f58xau99Rdn0hhcJTwRhz,b'Uncommon Valor: A Vietnam Story',b'Jedi Mind Tricks',50,242200,2006,0.764,0.877,2,-7.009,1,0.329,0.133,0.0435,0.298,0.65,93.211
+7eDrxsh5PQnsqiVNZxN9Z6,b'2020',b'Sol',39,224400,2012,0.761,0.668,4,-7.081,1,0.273,0.285,1.85e-06,0.122,0.455,83.047
+141ZBfcyIaGpr6Ub2sQ51w,b'Melancholy Hopeful',b'Marcus D',22,250266,2012,0.662,0.704,9,-7.211,0,0.0863,0.0787,0,0.141,0.24,95.93
+6KsqFiw7IDFQM7QHBORGlN,b'Stars Shine Brightest (In The Darkest Of Night) F. Rick Warren',b'Cunninlynguists',33,242484,2011,0.454,0.856,10,-5.853,0,0.103,0.0225,0.000283,0.189,0.629,175.988
+0dcMqjeDpwqB2xhzMsld0p,b'El Ma\xc3\xb1ana',b'Gorillaz',65,235360,2005,0.644,0.728,9,-8.396,0,0.029,0.000988,0.0279,0.473,0.607,132.488
+57Xjny5yNzAcsxnusKmAfA,b'Reptilia',b'The Strokes',79,219826,2003,0.489,0.649,9,-5.11,1,0.0336,0.000603,0.713,0.101,0.77,158.009
+2bfGNzdiRa1jXZRdfssSzR,b'Dirty Harry',b'Gorillaz',73,230426,2005,0.625,0.877,10,-7.176,0,0.162,0.0315,0.0811,0.672,0.865,192.296
+3oQqC98i1EhNRcXqIMoWQD,b'Soul Of Freedom feat. Cise Starr',b'Uyama Hiroto',44,302333,2014,0.641,0.873,8,-5.527,0,0.0759,0.608,0.696,0.144,0.69,93.977
+2QqAVlaV6Y45ebsXxfS5i8,b'Take Time',b'Awon',35,267906,2014,0.674,0.625,9,-8.7,1,0.0942,0.493,2.88e-06,0.16,0.603,171.992
+1r8VribZEm5y27e7F1UYlI,b'When I Close My Eyes',b'SoulChef',26,209706,2010,0.591,0.711,0,-4.943,0,0.19,0.863,0,0.109,0.517,92.187
+2kUeMGOCBJEjTBc2PHeEU5,"b""Say Somethin'""",b'SoulChef',31,269986,2010,0.745,0.566,1,-6.007,1,0.087,0.336,0,0.0848,0.475,95.032
+462T2Je5iJcUHIuvqYGgM9,b'Swell',b'Common Market',33,228728,2008,0.828,0.65,1,-5.837,1,0.201,0.272,0,0.0977,0.618,85.012
+6vmPUsrVk873GWkJwygHKD,b'nagashi',b'Idealism',53,109948,2017,0.726,0.357,10,-8.727,1,0.044,0.862,0.915,0.134,0.644,85.046
+7IRTS6jZPmNBIizSiAOcQZ,b'Boys\xe2\x80\x99 Bop',b'Birocratic',35,180000,2017,0.58,0.849,9,-6.193,0,0.0489,0.03,0.513,0.097,0.781,87.987
+6bmJYo1KS2X2nzQrCGzdOe,b'Benzi Box',b'DANGERDOOM',63,180093,2005,0.894,0.458,2,-8.594,1,0.0508,0.0666,0.0187,0.107,0.682,97.01
+5kY75d5UPbz9xa3inTmiC8,"b""Comin' Up (feat. Mistah F.A.B.)""",b'The Grouch & Eligh',24,244506,2009,0.655,0.594,1,-5.182,1,0.06,0.0825,0.000233,0.102,0.508,79.953
+3dPQuX8Gs42Y7b454ybpMR,b'Seven Nation Army',b'The White Stripes',87,232106,2003,0.743,0.446,4,-7.807,0,0.0683,0.0039,0.118,0.337,0.278,123.596
+4M88Wd7Aps5LGRWMOC7gSH,b'Some Kind of Nature (feat. Lou Reed)',b'Gorillaz',56,179866,2010,0.769,0.75,10,-5.092,1,0.0304,0.115,0.0208,0.0909,0.942,97.229
+1RKUoGiLEbcXN4GY4spQDx,b'Clint Eastwood',b'Gorillaz',78,340920,2001,0.663,0.694,10,-8.627,0,0.171,0.0253,0,0.0698,0.525,167.953
+4iG2gAwKXsOcijVaVXzRPW,b'Time to Pretend',b'MGMT',75,261000,2007,0.438,0.94,2,-3.249,1,0.0452,8.74e-05,0.0777,0.3,0.421,100.99
+4j4pPKE3xAblPIbhxScC1j,b'Rawnald Gregory Erickson the Second',b'STRFKR',67,173693,2008,0.9,0.538,7,-7.879,1,0.0343,0.229,0.843,0.287,0.713,95.508
+5KUNwkaNf8l5A9sXZhiCgI,b'Rapp Snitch Knishes feat. Mr. Fantastik',b'MF DOOM',80,172893,2004,0.728,0.832,7,-6.827,1,0.267,0.327,0,0.504,0.825,95.051
+6lrDckuosGpwEHtm1hHBcf,b'November Has Come',b'Gorillaz',63,165093,2005,0.702,0.567,7,-8.561,1,0.239,0.0815,2.75e-05,0.0864,0.667,84.153
+5WmxGs0hBmoo9bcGlY0twV,b'Beautiful Girl',b'Cunninlynguists',42,204706,2006,0.384,0.787,8,-5.861,0,0.336,0.142,2.79e-05,0.39,0.544,84.85
+5NcQLidkHKJHjzhhxPkbx3,b'Black Lake',b'Emancipator',39,218573,2010,0.59,0.477,11,-13.461,0,0.0307,0.452,0.516,0.0963,0.286,90.499
+1sE6ODOwN9yI7PO0xCpSPD,b'THE POSSE',b'The Grouch',16,254678,2014,0.671,0.686,6,-4.477,1,0.226,0.0543,0,0.117,0.544,85.026
+4dLM3Batl5GAUQyZdCbVFo,"b""Anotha' (BBQ)""",b'People Under The Stairs',37,264920,2008,0.9,0.661,10,-6.489,0,0.368,0.152,0.00013,0.644,0.658,104.231
+0U6Rolz9wr2tAkVPKUKNU5,b'Before and After',b'Lyrics Born',24,276213,2003,0.828,0.637,1,-7.355,0,0.166,0.0432,1.91e-06,0.374,0.649,92.699
+3njlXiLTQyFXQwXNB9qvRb,b'So Cold',b'Collective Efforts',12,197920,2010,0.686,0.759,1,-6.771,1,0.167,0.00973,3.23e-05,0.234,0.664,89.524
+5roUoEWuTQ8Z8meO0A1Pcf,b'Pictures On My Wall',b'People Under The Stairs',29,276733,2014,0.829,0.747,1,-6.605,0,0.266,0.577,8.58e-06,0.214,0.529,89.82
+10KM0tUxrvaCQV25hq6dL8,b'The Travelers',b'Brother Ali',26,318133,2009,0.833,0.729,1,-5.758,1,0.243,0.106,0,0.105,0.462,93.999
+5kfBmqSGinIjj3dZsclSX0,b'Motion Movement',b'Blue Scholars',32,226946,2004,0.813,0.714,6,-6.414,0,0.203,0.0884,0,0.19,0.329,95.312
+5my9fP5XJ2oo0YHT43pJYu,b'Antenna',b'Zion I',27,238973,2009,0.702,0.553,2,-6.834,0,0.107,0.17,0,0.133,0.373,101.994
+7s1upm7yr7ZjrzXMwHawtG,b'Sexual Healing - Kygo Remix',b'Marvin Gaye',66,368316,2015,0.689,0.68,0,-7.196,0,0.0427,0.321,0.0211,0.0431,0.646,100.987
+3koCCeSaVUyrRo3N2gHrd8,"b""Let's Groove""","b'Earth, Wind & Fire'",79,339320,1981,0.869,0.648,11,-8.698,0,0.0633,0.121,2.17e-05,0.126,0.9,125.035
+1HRtVWNhS9tEvDQyOKD9Fs,"b""Don't Stop 'Til You Get Enough - 2003 Edit""",b'Michael Jackson',61,236440,1979,0.872,0.946,4,-3.105,1,0.0656,0.0502,0.0161,0.298,0.943,119.01
+7tqhbajSfrz2F7E1Z75ASX,"b""Ain't No Mountain High Enough""",b'Marvin Gaye',87,151666,1967,0.663,0.6,7,-10.87,1,0.032,0.43,0,0.184,0.8,129.991
+1k1Bqnv2R0uJXQN4u6LKYt,"b""Ain't No Sunshine""",b'Bill Withers',84,125093,1971,0.527,0.415,4,-11.451,0,0.122,0.457,1.72e-05,0.117,0.515,78.169
+4CoGNqLap7UGU5Q3VdKug0,"b""Ain't Too Proud To Beg""",b'The Temptations',69,156173,1966,0.763,0.656,0,-6.86,1,0.0417,0.549,0,0.125,0.926,118.394
+4o6BgsqLIBViaGVbx5rbRk,b'You Make My Dreams (Come True)',b'Daryl Hall & John Oates',83,190626,1980,0.751,0.501,5,-12.151,1,0.0551,0.234,0.112,0.0467,0.902,167.057
+5ChkMS8OtdzJeqyybCc9R5,b'Billie Jean',b'Michael Jackson',83,293826,2008,0.92,0.654,11,-3.051,0,0.0401,0.0236,0.0153,0.036,0.847,117.046
+7qHqlaHTawgXSvT0G1wM4q,b'Close to Home',b'Sweatshop Union',16,293666,2008,0.795,0.726,5,-6.122,0,0.212,0.409,0,0.503,0.537,96.116
+0uMn8WKu3qtQLaUyal1bsz,b'Mastermind',b'Deltron 3030',55,214306,2000,0.741,0.657,0,-9.589,0,0.0374,0.00224,0.00756,0.0825,0.25,94.211
+4n3U09x3m3d1pNz0Sj7WNV,b'Anything Is Everything',b'The Dynospectrum',31,293200,1998,0.898,0.546,8,-7.57,0,0.313,0.0021,0.00015,0.426,0.229,88.39
+2WFggVC84b18ZkJTNgFnGP,b'believe',b'Kenichiro Nishihara',25,263960,2015,0.82,0.775,2,-7.599,1,0.223,0.59,2.59e-06,0.106,0.44,95.984
+3Zl9FktbaF6nTI0cGpKYwr,b'Sunny Side Of Hell',b'Grieves',38,237106,2011,0.733,0.683,1,-5.87,1,0.18,0.114,2.15e-06,0.268,0.388,79.96
+3ut5Nkw2Hbv76fpzmujOFp,b'Everything',b'Murs',37,214026,2008,0.682,0.814,8,-4.549,1,0.118,0.000443,0.000449,0.332,0.681,88.045
+0pb0Y7tsJAXiPMYXatq4Og,b'On The Rocks',b'Grieves',41,185373,2011,0.592,0.509,11,-6.685,1,0.376,0.0421,0,0.0814,0.63,180.12
+2sKRFpIJi1x1px6mAKewIs,b'Slow Cure',b'Common Market',25,247405,2008,0.772,0.806,2,-4.048,1,0.331,0.361,0,0.0641,0.592,85.024
+3F2nXlS9FIJiaHqna12k1U,b'This Far',b'Collective Efforts',28,305853,2010,0.789,0.739,3,-7.452,0,0.169,0.531,0.0744,0.109,0.464,103.469
+29jmo4Awj9WdrcQ1AK8ghv,b'Walking Away',b'Brother Ali',35,238920,2007,0.856,0.454,1,-6.192,1,0.269,0.458,1.26e-06,0.0829,0.792,89.887
+3QOmgrh6ElgcPKwOAnbwgu,b'The Best Day',b'Atmosphere',57,216893,2010,0.882,0.624,6,-5.372,1,0.0681,0.358,0,0.0678,0.899,96.898
+76QX42psCJ7qa37hGVhMjS,b'Southside Revival',b'Blue Scholars',24,296893,2006,0.815,0.828,6,-4.238,1,0.282,0.358,6.39e-06,0.101,0.508,89.064
+51bB0OmoieIGoYZNT3RNyh,"b""The Humans' race""",b'Sweatshop Union',24,254146,2006,0.774,0.782,1,-6.594,1,0.0982,0.289,0,0.232,0.813,97.906
+5PnwUFbEjJeKlXtKCEs6ET,b'Mic Like a Memory [Deluxe Edition] (feat. Kory Calico)',b'Cunninlynguists',33,276100,2001,0.486,0.565,1,-8.741,1,0.0711,0.273,0.237,0.128,0.213,92.208
+7cHRys0Lhk9642dLaPUMkm,b'Soon It Will Be Cold Enough to Build Fires',b'Emancipator',57,180520,2008,0.707,0.467,7,-15.094,0,0.0488,0.849,0.685,0.0957,0.419,94.417

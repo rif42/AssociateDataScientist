@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Associate Data Scientist - 14&nbsp; Project Clustering - Spotify Playlist Clustering</title>
+<title>Associate Data Scientist - 12&nbsp; Project Clustering - Spotify Playlist Clustering</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./project_regresi.html" rel="prev">
+<link href="./modul_10.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -60,6 +94,25 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+if (typeof require !== 'undefined') {
+require.undef("plotly");
+requirejs.config({
+    paths: {
+        'plotly': ['https://cdn.plot.ly/plotly-2.24.1.min']
+    }
+});
+require(['plotly'], function(Plotly) {
+    window._Plotly = Plotly;
+});
+}
+</script>
+
 
 
 </head>
@@ -73,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project_clustering.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project_clustering.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -166,20 +219,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project_klasifikasi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Project Klasifikasi Sentimen Analisis</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./project_regresi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Project Regresi Hotel Yogyakarta</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./project_clustering.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></span></a>
   </div>
 </li>
     </ul>
@@ -192,37 +233,59 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><span class="header-section-number">15</span> Project Overview</a>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><span class="header-section-number">12.1</span> Project Overview</a>
   <ul class="collapse">
-  <li><a href="#spotify" id="toc-spotify" class="nav-link" data-scroll-target="#spotify"><span class="header-section-number">15.1</span> Spotify</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">15.2</span> Python</a></li>
-  <li><a href="#streamlit" id="toc-streamlit" class="nav-link" data-scroll-target="#streamlit"><span class="header-section-number">15.3</span> Streamlit</a></li>
-  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">15.4</span> Clustering</a></li>
-  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="header-section-number">15.5</span> K-Means</a></li>
+  <li><a href="#spotify" id="toc-spotify" class="nav-link" data-scroll-target="#spotify"><span class="header-section-number">12.1.1</span> Spotify</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">12.1.2</span> Python</a></li>
+  <li><a href="#streamlit" id="toc-streamlit" class="nav-link" data-scroll-target="#streamlit"><span class="header-section-number">12.1.3</span> Streamlit</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">12.1.4</span> Clustering</a></li>
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="header-section-number">12.1.5</span> K-Means</a></li>
   </ul></li>
-  <li><a href="#application-flow" id="toc-application-flow" class="nav-link" data-scroll-target="#application-flow"><span class="header-section-number">16</span> Application Flow</a>
+  <li><a href="#application-flow" id="toc-application-flow" class="nav-link" data-scroll-target="#application-flow"><span class="header-section-number">12.2</span> Application Flow</a>
   <ul class="collapse">
-  <li><a href="#user-flow" id="toc-user-flow" class="nav-link" data-scroll-target="#user-flow"><span class="header-section-number">16.1</span> User Flow</a></li>
-  <li><a href="#data-flow" id="toc-data-flow" class="nav-link" data-scroll-target="#data-flow"><span class="header-section-number">16.2</span> Data Flow</a></li>
-  <li><a href="#function-flow" id="toc-function-flow" class="nav-link" data-scroll-target="#function-flow"><span class="header-section-number">16.3</span> Function Flow</a></li>
+  <li><a href="#user-flow" id="toc-user-flow" class="nav-link" data-scroll-target="#user-flow"><span class="header-section-number">12.2.1</span> User Flow</a></li>
+  <li><a href="#data-flow" id="toc-data-flow" class="nav-link" data-scroll-target="#data-flow"><span class="header-section-number">12.2.2</span> Data Flow</a></li>
+  <li><a href="#function-flow" id="toc-function-flow" class="nav-link" data-scroll-target="#function-flow"><span class="header-section-number">12.2.3</span> Function Flow</a></li>
   </ul></li>
-  <li><a href="#membuat-akun-spotify-developer" id="toc-membuat-akun-spotify-developer" class="nav-link" data-scroll-target="#membuat-akun-spotify-developer"><span class="header-section-number">17</span> Membuat Akun Spotify Developer</a>
+  <li><a href="#membuat-akun-spotify-developer" id="toc-membuat-akun-spotify-developer" class="nav-link" data-scroll-target="#membuat-akun-spotify-developer"><span class="header-section-number">12.3</span> Membuat Akun Spotify Developer</a>
   <ul class="collapse">
-  <li><a href="#daftar-sebagai-spotify-developer" id="toc-daftar-sebagai-spotify-developer" class="nav-link" data-scroll-target="#daftar-sebagai-spotify-developer"><span class="header-section-number">17.1</span> Daftar Sebagai Spotify Developer</a></li>
-  <li><a href="#pergi-ke-dashboard-spotify-dan-tekan-create-app" id="toc-pergi-ke-dashboard-spotify-dan-tekan-create-app" class="nav-link" data-scroll-target="#pergi-ke-dashboard-spotify-dan-tekan-create-app"><span class="header-section-number">17.2</span> Pergi ke dashboard spotify dan tekan create app</a></li>
-  <li><a href="#isi-form-dengan-data" id="toc-isi-form-dengan-data" class="nav-link" data-scroll-target="#isi-form-dengan-data"><span class="header-section-number">17.3</span> Isi form dengan data</a></li>
-  <li><a href="#klik-app-yang-sudah-dibuat" id="toc-klik-app-yang-sudah-dibuat" class="nav-link" data-scroll-target="#klik-app-yang-sudah-dibuat"><span class="header-section-number">17.4</span> Klik app yang sudah dibuat</a></li>
-  <li><a href="#pergi-ke-settings-cari-clientid-dan-clientsecret" id="toc-pergi-ke-settings-cari-clientid-dan-clientsecret" class="nav-link" data-scroll-target="#pergi-ke-settings-cari-clientid-dan-clientsecret"><span class="header-section-number">17.5</span> Pergi ke settings, cari ClientID dan ClientSecret</a></li>
+  <li><a href="#daftar-sebagai-spotify-developer" id="toc-daftar-sebagai-spotify-developer" class="nav-link" data-scroll-target="#daftar-sebagai-spotify-developer"><span class="header-section-number">12.3.1</span> Daftar Sebagai Spotify Developer</a></li>
+  <li><a href="#pergi-ke-dashboard-spotify-dan-tekan-create-app" id="toc-pergi-ke-dashboard-spotify-dan-tekan-create-app" class="nav-link" data-scroll-target="#pergi-ke-dashboard-spotify-dan-tekan-create-app"><span class="header-section-number">12.3.2</span> Pergi ke dashboard spotify dan tekan create app</a></li>
+  <li><a href="#isi-form-dengan-data" id="toc-isi-form-dengan-data" class="nav-link" data-scroll-target="#isi-form-dengan-data"><span class="header-section-number">12.3.3</span> Isi form dengan data</a></li>
+  <li><a href="#klik-app-yang-sudah-dibuat" id="toc-klik-app-yang-sudah-dibuat" class="nav-link" data-scroll-target="#klik-app-yang-sudah-dibuat"><span class="header-section-number">12.3.4</span> Klik app yang sudah dibuat</a></li>
+  <li><a href="#pergi-ke-settings-cari-clientid-dan-clientsecret" id="toc-pergi-ke-settings-cari-clientid-dan-clientsecret" class="nav-link" data-scroll-target="#pergi-ke-settings-cari-clientid-dan-clientsecret"><span class="header-section-number">12.3.5</span> Pergi ke settings, cari ClientID dan ClientSecret</a></li>
   </ul></li>
-  <li><a href="#buat-repositori-di-github" id="toc-buat-repositori-di-github" class="nav-link" data-scroll-target="#buat-repositori-di-github"><span class="header-section-number">18</span> Buat Repositori di Github</a>
+  <li><a href="#buat-repositori-di-github" id="toc-buat-repositori-di-github" class="nav-link" data-scroll-target="#buat-repositori-di-github"><span class="header-section-number">12.4</span> Buat Repositori di Github</a>
   <ul class="collapse">
-  <li><a href="#login-ke-github" id="toc-login-ke-github" class="nav-link" data-scroll-target="#login-ke-github"><span class="header-section-number">18.1</span> Login ke Github</a></li>
-  <li><a href="#buat-repository-baru" id="toc-buat-repository-baru" class="nav-link" data-scroll-target="#buat-repository-baru"><span class="header-section-number">18.2</span> Buat Repository Baru</a></li>
-  <li><a href="#simpan-alamat-git-git-remote" id="toc-simpan-alamat-git-git-remote" class="nav-link" data-scroll-target="#simpan-alamat-git-git-remote"><span class="header-section-number">18.3</span> Simpan Alamat Git (git remote)</a></li>
-  <li><a href="#open-folder-di-code-editor" id="toc-open-folder-di-code-editor" class="nav-link" data-scroll-target="#open-folder-di-code-editor"><span class="header-section-number">18.4</span> Open Folder di Code Editor</a></li>
-  <li><a href="#buat-file-baru" id="toc-buat-file-baru" class="nav-link" data-scroll-target="#buat-file-baru"><span class="header-section-number">18.5</span> Buat File Baru</a></li>
-  <li><a href="#push-file-ke-repository" id="toc-push-file-ke-repository" class="nav-link" data-scroll-target="#push-file-ke-repository"><span class="header-section-number">18.6</span> Push File ke Repository</a></li>
+  <li><a href="#login-ke-github" id="toc-login-ke-github" class="nav-link" data-scroll-target="#login-ke-github"><span class="header-section-number">12.4.1</span> Login ke Github</a></li>
+  <li><a href="#buat-repository-baru" id="toc-buat-repository-baru" class="nav-link" data-scroll-target="#buat-repository-baru"><span class="header-section-number">12.4.2</span> Buat Repository Baru</a></li>
+  <li><a href="#simpan-alamat-git-git-remote" id="toc-simpan-alamat-git-git-remote" class="nav-link" data-scroll-target="#simpan-alamat-git-git-remote"><span class="header-section-number">12.4.3</span> Simpan Alamat Git (git remote)</a></li>
+  <li><a href="#open-folder-di-code-editor" id="toc-open-folder-di-code-editor" class="nav-link" data-scroll-target="#open-folder-di-code-editor"><span class="header-section-number">12.4.4</span> Open Folder di Code Editor</a></li>
+  <li><a href="#buat-file-baru" id="toc-buat-file-baru" class="nav-link" data-scroll-target="#buat-file-baru"><span class="header-section-number">12.4.5</span> Buat File Baru</a></li>
+  <li><a href="#push-file-ke-repository" id="toc-push-file-ke-repository" class="nav-link" data-scroll-target="#push-file-ke-repository"><span class="header-section-number">12.4.6</span> Push File ke Repository</a></li>
   </ul></li>
+  <li><a href="#pengambilan-dataset" id="toc-pengambilan-dataset" class="nav-link" data-scroll-target="#pengambilan-dataset"><span class="header-section-number">12.5</span> Pengambilan Dataset</a>
+  <ul class="collapse">
+  <li><a href="#buka-file-notebook" id="toc-buka-file-notebook" class="nav-link" data-scroll-target="#buka-file-notebook"><span class="header-section-number">12.5.1</span> Buka File Notebook</a></li>
+  <li><a href="#import-library-yang-dibutuhkan" id="toc-import-library-yang-dibutuhkan" class="nav-link" data-scroll-target="#import-library-yang-dibutuhkan"><span class="header-section-number">12.5.2</span> Import Library yang Dibutuhkan</a></li>
+  <li><a href="#masukkan-variable-client_id-client_secret-dan-playlist_url" id="toc-masukkan-variable-client_id-client_secret-dan-playlist_url" class="nav-link" data-scroll-target="#masukkan-variable-client_id-client_secret-dan-playlist_url"><span class="header-section-number">12.5.3</span> Masukkan variable client_id, client_secret, dan playlist_url</a></li>
+  <li><a href="#buat-fungsi-gettoken" id="toc-buat-fungsi-gettoken" class="nav-link" data-scroll-target="#buat-fungsi-gettoken"><span class="header-section-number">12.5.4</span> Buat fungsi getToken()</a></li>
+  <li><a href="#buat-fungsi-getauthheader" id="toc-buat-fungsi-getauthheader" class="nav-link" data-scroll-target="#buat-fungsi-getauthheader"><span class="header-section-number">12.5.5</span> Buat fungsi getAuthHeader()</a></li>
+  <li><a href="#buat-fungsi-getaudiofeatures" id="toc-buat-fungsi-getaudiofeatures" class="nav-link" data-scroll-target="#buat-fungsi-getaudiofeatures"><span class="header-section-number">12.5.6</span> Buat fungsi getAudioFeatures()</a></li>
+  <li><a href="#buat-fungsi-getplaylistitems" id="toc-buat-fungsi-getplaylistitems" class="nav-link" data-scroll-target="#buat-fungsi-getplaylistitems"><span class="header-section-number">12.5.7</span> Buat fungsi getPlaylistItems()</a></li>
+  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing"><span class="header-section-number">12.5.8</span> Data Preprocessing</a></li>
+  </ul></li>
+  <li><a href="#clustering-menggunakan-k-means" id="toc-clustering-menggunakan-k-means" class="nav-link" data-scroll-target="#clustering-menggunakan-k-means"><span class="header-section-number">12.6</span> Clustering Menggunakan K-Means</a></li>
+  <li><a href="#deploy-ke-streamlit" id="toc-deploy-ke-streamlit" class="nav-link" data-scroll-target="#deploy-ke-streamlit"><span class="header-section-number">12.7</span> Deploy ke Streamlit</a>
+  <ul class="collapse">
+  <li><a href="#buat-file-bernama-streamlit_app.py" id="toc-buat-file-bernama-streamlit_app.py" class="nav-link" data-scroll-target="#buat-file-bernama-streamlit_app.py"><span class="header-section-number">12.7.1</span> Buat file bernama streamlit_app.py</a></li>
+  <li><a href="#tambahkan-fungsi-dataprocessing" id="toc-tambahkan-fungsi-dataprocessing" class="nav-link" data-scroll-target="#tambahkan-fungsi-dataprocessing"><span class="header-section-number">12.7.2</span> Tambahkan fungsi dataProcessing()</a></li>
+  <li><a href="#buat-file-requirements.txt" id="toc-buat-file-requirements.txt" class="nav-link" data-scroll-target="#buat-file-requirements.txt"><span class="header-section-number">12.7.3</span> Buat file requirements.txt</a></li>
+  <li><a href="#upload-ke-github-repository" id="toc-upload-ke-github-repository" class="nav-link" data-scroll-target="#upload-ke-github-repository"><span class="header-section-number">12.7.4</span> Upload ke github repository</a></li>
+  <li><a href="#buat-akun-streamlit" id="toc-buat-akun-streamlit" class="nav-link" data-scroll-target="#buat-akun-streamlit"><span class="header-section-number">12.7.5</span> Buat Akun Streamlit</a></li>
+  <li><a href="#create-new-app-isi-form" id="toc-create-new-app-isi-form" class="nav-link" data-scroll-target="#create-new-app-isi-form"><span class="header-section-number">12.7.6</span> Create new app, isi form</a></li>
+  </ul></li>
+  <li><a href="#kesimpulan" id="toc-kesimpulan" class="nav-link" data-scroll-target="#kesimpulan"><span class="header-section-number">12.8</span> Kesimpulan</a></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +294,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></h1>
 </div>
 
 
@@ -246,13 +309,13 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="project-overview" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> Project Overview</h1>
+<section id="project-overview" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="project-overview"><span class="header-section-number">12.1</span> Project Overview</h2>
 <p>Project ini berfungsi untuk membuat sebuah aplikasi untuk melakukan proses clustering terhadap lagu-lagu yang ada di dalam sebuah playlist spotify.<br>
 Lagu-lagu tersebut dikelompokan berdasarkan karakteristik lagu (audio feature) yang kita dapatkan dari spotify web API.<br>
 Perlu diingat bahwa untuk project ini, kita akan buat algoritmanya dahulu, mengetesnya di notebook kita, lalu kita akan mengubahnya menjadi file python dan mengupload nya di Streamlit.</p>
-<section id="spotify" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="spotify"><span class="header-section-number">15.1</span> Spotify</h2>
+<section id="spotify" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="spotify"><span class="header-section-number">12.1.1</span> Spotify</h3>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
@@ -272,8 +335,8 @@ Perlu diingat bahwa untuk project ini, kita akan buat algoritmanya dahulu, menge
 </div>
 <p>Spotify adalah platform musik digital yang menyediakan layanan streaming musik dan podcast. Musik dan podcast di-stream melalui internet tanpa perlu mengunduhnya secara permanen. Pengguna dapat membuat playlist pribadi dan menyimpan lagu favorit di Library.</p>
 </section>
-<section id="python" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="python"><span class="header-section-number">15.2</span> Python</h2>
+<section id="python" class="level3" data-number="12.1.2">
+<h3 data-number="12.1.2" class="anchored" data-anchor-id="python"><span class="header-section-number">12.1.2</span> Python</h3>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
@@ -293,8 +356,8 @@ Perlu diingat bahwa untuk project ini, kita akan buat algoritmanya dahulu, menge
 </div>
 <p>Python adalah bahasa pemrograman serba guna yang dikembangkan pada awal 1990-an oleh Guido van Rossum. Tidak perlu mendeklarasikan tipe data variabel, dan nilai variabel dapat berubah saat program berjalan. Python mengutamakan kejelasan dan menghindari penggunaan tanda kurung kurawal atau titik koma. Python menyediakan pustaka bawaan (standard library) yang kaya, serta banyak modul dan pustaka dari pihak ketiga yang memperluas fungsionalitasnya.</p>
 </section>
-<section id="streamlit" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="streamlit"><span class="header-section-number">15.3</span> Streamlit</h2>
+<section id="streamlit" class="level3" data-number="12.1.3">
+<h3 data-number="12.1.3" class="anchored" data-anchor-id="streamlit"><span class="header-section-number">12.1.3</span> Streamlit</h3>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
@@ -314,8 +377,8 @@ Perlu diingat bahwa untuk project ini, kita akan buat algoritmanya dahulu, menge
 </div>
 <p>Streamlit adalah framework open-source untuk mengembangkan aplikasi web interaktif dengan menggunakan bahasa pemrograman Python. Tujuannya adalah menyederhanakan proses pembuatan aplikasi web dengan memungkinkan pengembang untuk membuat aplikasi dengan mudah menggunakan kode Python yang sederhana dan familiar.</p>
 </section>
-<section id="clustering" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="clustering"><span class="header-section-number">15.4</span> Clustering</h2>
+<section id="clustering" class="level3" data-number="12.1.4">
+<h3 data-number="12.1.4" class="anchored" data-anchor-id="clustering"><span class="header-section-number">12.1.4</span> Clustering</h3>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
@@ -335,8 +398,8 @@ Perlu diingat bahwa untuk project ini, kita akan buat algoritmanya dahulu, menge
 </div>
 <p>Clustering adalah proses pengelompokan data atau objek-objek serupa menjadi kelompok-kelompok yang lebih homogen berdasarkan kesamaan fitur atau karakteristik tertentu.</p>
 </section>
-<section id="k-means" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="k-means"><span class="header-section-number">15.5</span> K-Means</h2>
+<section id="k-means" class="level3" data-number="12.1.5">
+<h3 data-number="12.1.5" class="anchored" data-anchor-id="k-means"><span class="header-section-number">12.1.5</span> K-Means</h3>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
@@ -355,20 +418,21 @@ Perlu diingat bahwa untuk project ini, kita akan buat algoritmanya dahulu, menge
 </div>
 </div>
 <p>Algoritma k-means adalah metode clustering yang mengelompokkan data menjadi beberapa kelompok berdasarkan jaraknya ke pusat kelompok yang ditentukan secara iteratif.</p>
+<p>Untuk penjelasan Algoritma Clustering K-Means, bisa mengunjungi video ini https://www.youtube.com/watch?v=3XwBZbqo0mQ</p>
 </section>
 </section>
-<section id="application-flow" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Application Flow</h1>
+<section id="application-flow" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="application-flow"><span class="header-section-number">12.2</span> Application Flow</h2>
 <p>User flow adalah interaksi antara user dan aplikasi ini harus kita pelajari dan petakan secara detail agar aplikasi bisa digunakan dengan user secara nyaman.<br>
 Data flow adalah alur dari data yang ada di dalam aplikasi.<br>
 Function flow adalah struktur dari fungsi yang ada di dalam aplikasi</p>
-<section id="user-flow" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="user-flow"><span class="header-section-number">16.1</span> User Flow</h2>
+<section id="user-flow" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="user-flow"><span class="header-section-number">12.2.1</span> User Flow</h3>
 <p>User flow dari aplikasi yang akan kita buat cukup simple :<br>
 <img src="./6.userflow.png" class="img-fluid" alt="Gambar6. User Flow"></p>
 </section>
-<section id="data-flow" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="data-flow"><span class="header-section-number">16.2</span> Data Flow</h2>
+<section id="data-flow" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="data-flow"><span class="header-section-number">12.2.2</span> Data Flow</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./7.dataflow.png" class="img-fluid figure-img"></p>
@@ -376,8 +440,8 @@ Function flow adalah struktur dari fungsi yang ada di dalam aplikasi</p>
 </figure>
 </div>
 </section>
-<section id="function-flow" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="function-flow"><span class="header-section-number">16.3</span> Function Flow</h2>
+<section id="function-flow" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="function-flow"><span class="header-section-number">12.2.3</span> Function Flow</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./8.functionflow.png" class="img-fluid figure-img"></p>
@@ -386,10 +450,10 @@ Function flow adalah struktur dari fungsi yang ada di dalam aplikasi</p>
 </div>
 </section>
 </section>
-<section id="membuat-akun-spotify-developer" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> Membuat Akun Spotify Developer</h1>
-<section id="daftar-sebagai-spotify-developer" class="level2" data-number="17.1">
-<h2 data-number="17.1" class="anchored" data-anchor-id="daftar-sebagai-spotify-developer"><span class="header-section-number">17.1</span> Daftar Sebagai Spotify Developer</h2>
+<section id="membuat-akun-spotify-developer" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="membuat-akun-spotify-developer"><span class="header-section-number">12.3</span> Membuat Akun Spotify Developer</h2>
+<section id="daftar-sebagai-spotify-developer" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="daftar-sebagai-spotify-developer"><span class="header-section-number">12.3.1</span> Daftar Sebagai Spotify Developer</h3>
 <p>Untuk mengakses web API spotify, kita harus mendaftar sebagai spotify developer. Berikut langkahnya:<br>
 - Pergi ke https://developer.spotify.com<br>
 - Klik tombol daftar di pojok kanan atas<br>
@@ -398,8 +462,8 @@ Function flow adalah struktur dari fungsi yang ada di dalam aplikasi</p>
 - Pergi ke dashboard<br>
 Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi developer spotify! Ikuti langkah-langkah selanjutnya.</p>
 </section>
-<section id="pergi-ke-dashboard-spotify-dan-tekan-create-app" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="pergi-ke-dashboard-spotify-dan-tekan-create-app"><span class="header-section-number">17.2</span> Pergi ke dashboard spotify dan tekan create app</h2>
+<section id="pergi-ke-dashboard-spotify-dan-tekan-create-app" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="pergi-ke-dashboard-spotify-dan-tekan-create-app"><span class="header-section-number">12.3.2</span> Pergi ke dashboard spotify dan tekan create app</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./9.dashboard.png" class="img-fluid figure-img"></p>
@@ -407,8 +471,8 @@ Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi devel
 </figure>
 </div>
 </section>
-<section id="isi-form-dengan-data" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="isi-form-dengan-data"><span class="header-section-number">17.3</span> Isi form dengan data</h2>
+<section id="isi-form-dengan-data" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="isi-form-dengan-data"><span class="header-section-number">12.3.3</span> Isi form dengan data</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./10.createapp.png" class="img-fluid figure-img"></p>
@@ -420,8 +484,8 @@ Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi devel
 <strong>Website</strong>, website personal dari pembuat aplikasi<br>
 <strong>Redirect URI</strong>, umumnya user akan ditujukan ke URI ini ketika mengalami kegagalan request. namun untuk project ini, kita dapat mengisinya dengan apapun, seperti URL akun github atau linkedin</p>
 </section>
-<section id="klik-app-yang-sudah-dibuat" class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="klik-app-yang-sudah-dibuat"><span class="header-section-number">17.4</span> Klik app yang sudah dibuat</h2>
+<section id="klik-app-yang-sudah-dibuat" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="klik-app-yang-sudah-dibuat"><span class="header-section-number">12.3.4</span> Klik app yang sudah dibuat</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./11.app.png" class="img-fluid figure-img"></p>
@@ -429,8 +493,8 @@ Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi devel
 </figure>
 </div>
 </section>
-<section id="pergi-ke-settings-cari-clientid-dan-clientsecret" class="level2" data-number="17.5">
-<h2 data-number="17.5" class="anchored" data-anchor-id="pergi-ke-settings-cari-clientid-dan-clientsecret"><span class="header-section-number">17.5</span> Pergi ke settings, cari ClientID dan ClientSecret</h2>
+<section id="pergi-ke-settings-cari-clientid-dan-clientsecret" class="level3" data-number="12.3.5">
+<h3 data-number="12.3.5" class="anchored" data-anchor-id="pergi-ke-settings-cari-clientid-dan-clientsecret"><span class="header-section-number">12.3.5</span> Pergi ke settings, cari ClientID dan ClientSecret</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./12.credentials.png" class="img-fluid figure-img"></p>
@@ -439,11 +503,11 @@ Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi devel
 </div>
 </section>
 </section>
-<section id="buat-repositori-di-github" class="level1" data-number="18">
-<h1 data-number="18"><span class="header-section-number">18</span> Buat Repositori di Github</h1>
+<section id="buat-repositori-di-github" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="buat-repositori-di-github"><span class="header-section-number">12.4</span> Buat Repositori di Github</h2>
 <p>Github adalah aplikasi untuk mengontrol versioning dari koding kita. Github akan melacak perubahan yang kita buat di dalam file koding, sehingga kita dapat membandingkan atau kembali ke versi sebelumnya. Dalam project ini, Github juga digunakan untuk proses deployment di Streamlit.</p>
-<section id="login-ke-github" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="login-ke-github"><span class="header-section-number">18.1</span> Login ke Github</h2>
+<section id="login-ke-github" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="login-ke-github"><span class="header-section-number">12.4.1</span> Login ke Github</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./13.git.png" class="img-fluid figure-img"></p>
@@ -452,8 +516,8 @@ Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi devel
 </div>
 <p>Pergi ke Github.com dan login atau daftar akun baru. Jika anda membuat akun baru, jangan lupa verifikasi akun setelah dibuat. Jika anda sudah login, maka dashboard akun anda akan tampil seperti berikut:</p>
 </section>
-<section id="buat-repository-baru" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="buat-repository-baru"><span class="header-section-number">18.2</span> Buat Repository Baru</h2>
+<section id="buat-repository-baru" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="buat-repository-baru"><span class="header-section-number">12.4.2</span> Buat Repository Baru</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./14.repo.png" class="img-fluid figure-img"></p>
@@ -463,8 +527,8 @@ Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi devel
 <p>Di side tab sebelah kiri dashboard anda klik tombol new untuk membuat sebuah repository baru. Repository adalah sebuah tempat untuk menyimpan code-code anda.<br>
 Isi kolom seperti contoh, nama dan deskripsi bebas. Pastikan bahwa repository bersifat public. Lalu klik create repository</p>
 </section>
-<section id="simpan-alamat-git-git-remote" class="level2" data-number="18.3">
-<h2 data-number="18.3" class="anchored" data-anchor-id="simpan-alamat-git-git-remote"><span class="header-section-number">18.3</span> Simpan Alamat Git (git remote)</h2>
+<section id="simpan-alamat-git-git-remote" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="simpan-alamat-git-git-remote"><span class="header-section-number">12.4.3</span> Simpan Alamat Git (git remote)</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./15.gitremote.png" class="img-fluid figure-img"></p>
@@ -473,8 +537,8 @@ Isi kolom seperti contoh, nama dan deskripsi bebas. Pastikan bahwa repository be
 </div>
 <p>Setelah membuat repositori, halaman ini akan muncul. Copy alamat git (https://github.com/rif42/githubtest0.git) dan simpan data ini</p>
 </section>
-<section id="open-folder-di-code-editor" class="level2" data-number="18.4">
-<h2 data-number="18.4" class="anchored" data-anchor-id="open-folder-di-code-editor"><span class="header-section-number">18.4</span> Open Folder di Code Editor</h2>
+<section id="open-folder-di-code-editor" class="level3" data-number="12.4.4">
+<h3 data-number="12.4.4" class="anchored" data-anchor-id="open-folder-di-code-editor"><span class="header-section-number">12.4.4</span> Open Folder di Code Editor</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./16.openfolder.png" class="img-fluid figure-img"></p>
@@ -483,8 +547,8 @@ Isi kolom seperti contoh, nama dan deskripsi bebas. Pastikan bahwa repository be
 </div>
 <p>Buka code editor anda (contoh VScode atau IntelliJ), buka terminal, lalu open folder dan pilih sebuah folder.</p>
 </section>
-<section id="buat-file-baru" class="level2" data-number="18.5">
-<h2 data-number="18.5" class="anchored" data-anchor-id="buat-file-baru"><span class="header-section-number">18.5</span> Buat File Baru</h2>
+<section id="buat-file-baru" class="level3" data-number="12.4.5">
+<h3 data-number="12.4.5" class="anchored" data-anchor-id="buat-file-baru"><span class="header-section-number">12.4.5</span> Buat File Baru</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./17.newfile.png" class="img-fluid figure-img"></p>
@@ -493,12 +557,1213 @@ Isi kolom seperti contoh, nama dan deskripsi bebas. Pastikan bahwa repository be
 </div>
 <p>Buat file baru, dan namai file nya spotify_clustering.ipynb. File ini adalah sebuah notebook, mirip seperti jupyter notebook. Format notebook sangat bagus untuk eksperimen koding. Setelah file dibuat, tidak perlu diisi apapun.</p>
 </section>
-<section id="push-file-ke-repository" class="level2" data-number="18.6">
-<h2 data-number="18.6" class="anchored" data-anchor-id="push-file-ke-repository"><span class="header-section-number">18.6</span> Push File ke Repository</h2>
-<p>Buka terminal dengan cara menekan (ctrl + shift + <code>) atau membuka terminal &gt; new terminal di top bar vscode. Lalu ketik command berikut:   -</code>git add .<code>, command ini berfungsi untuk menyimpan semua perubahan dalam file   -</code>git commit -m “first”<code>, command ini berfungsi untuk menyimpan commit, sebuah langkah terakhir untuk menyimpan semua perubahan yang ada di dalam repository. Teks yang ada di dalam tanda petik adalah message atau deskripsi dari commit.   -</code>git remote add origin [url]<code>, URL disini adalah alamat git yang didapat di langkah 4c (https://github.com/rif42/githubtest0.git)   -</code>git push origin master`, mengirim semua commit ke repository secara final</p>
-
-
+<section id="push-file-ke-repository" class="level3" data-number="12.4.6">
+<h3 data-number="12.4.6" class="anchored" data-anchor-id="push-file-ke-repository"><span class="header-section-number">12.4.6</span> Push File ke Repository</h3>
+<p>Buka terminal dengan cara menekan (ctrl + shift + `) atau membuka terminal &gt; new terminal di top bar vscode. Lalu ketik command berikut:</p>
+<ul>
+<li><code>git add .</code>, command ini berfungsi untuk menyimpan semua perubahan dalam file<br>
+</li>
+<li><code>git commit -m "first"</code>, command ini berfungsi untuk menyimpan commit, sebuah langkah terakhir untuk menyimpan semua perubahan yang ada di dalam repository. Teks yang ada di dalam tanda petik adalah message atau deskripsi dari commit.<br>
+</li>
+<li><code>git remote add origin [url]</code>, URL disini adalah alamat git yang didapat di langkah 4c (https://github.com/rif42/githubtest0.git)<br>
+</li>
+<li><code>git push origin master</code>, mengirim semua commit ke repository secara final</li>
+</ul>
 </section>
+</section>
+<section id="pengambilan-dataset" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="pengambilan-dataset"><span class="header-section-number">12.5</span> Pengambilan Dataset</h2>
+<p>Dataset dari aplikasi yang kita gunakan adalah lagu-lagu yang ada didalam playlist dari user. Untuk mengambil lagu tersebut, kita perlu membuat sebuah script untuk berkomunikasi dengan spotify web API dan mengambil data yang kita butuhkan.</p>
+<section id="buka-file-notebook" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="buka-file-notebook"><span class="header-section-number">12.5.1</span> Buka File Notebook</h3>
+<p>Buka code editor anda dan temukan file notebook yang telah dibuat di langkah sebelumnya. Pastikan bahwa git repository telah aktif dengan menulis <code>git status</code> di terminal.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./18.ipynb.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar18. Buka file notebook (.ipynb)</figcaption>
+</figure>
+</div>
+</section>
+<section id="import-library-yang-dibutuhkan" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="import-library-yang-dibutuhkan"><span class="header-section-number">12.5.2</span> Import Library yang Dibutuhkan</h3>
+<p>Jika library belum terinstall, maka jalankan command ini di terminal, lalu import<br>
+- pip install streamlit<br>
+- pip install pandas<br>
+- pip install numpy<br>
+- pip install scikit-learn<br>
+- pip install plotly-express<br>
+- pip install nbformat<br>
+- pip install ipykernel<br>
+Library yang tidak disebutkan diatas adalah library built in (seperti base64, json, csv), kita tidak perlu menginstall nya, kita hanya perlu mengimpornya saja</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> base64</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> requests <span class="im">import</span> post, get</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="masukkan-variable-client_id-client_secret-dan-playlist_url" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="masukkan-variable-client_id-client_secret-dan-playlist_url"><span class="header-section-number">12.5.3</span> Masukkan variable client_id, client_secret, dan playlist_url</h3>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>client_id <span class="op">=</span> <span class="st">'97aeaf1e98f943edb1344ab86f71692a'</span> <span class="co">##ganti variabel dengan client_id milik anda</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>client_secret <span class="op">=</span> <span class="st">'9f35e123caa7490b904ad6bcb98f4ba9'</span> <span class="co">##ganti variabel dengan client_secret milik anda</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>playlistId <span class="op">=</span> <span class="st">'1dtCMTYzAOzwKXqklxPJNS'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">## 37i9dQZF1DXbrUpGvoi3TS - 1(similar sad songs)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">## 1dtCMTYzAOzwKXqklxPJNS - 2(old songs, rock, rap)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">## 0IN7IWKmIfwlEysGyWUuRg - 3(mix of modern electronic, pop, and rock)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> []</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>dataset2 <span class="op">=</span> []</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>dataset3 <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ganti isi variable dengan client id dan client secret yang diperoleh dari akun spotify developer yang kita bahas di slide 14.<br>
+Anda dapat menggunakan contoh URL playlist atau memasukkan URL playlist anda sendiri.<br>
+Setelah itu, buat 3 variable kosong untuk menampung hasil pengolahan data kita di slide selanjutnya.</p>
+</section>
+<section id="buat-fungsi-gettoken" class="level3" data-number="12.5.4">
+<h3 data-number="12.5.4" class="anchored" data-anchor-id="buat-fungsi-gettoken"><span class="header-section-number">12.5.4</span> Buat fungsi getToken()</h3>
+<p>Kita akan menggunakan key Client ID dan Client Secret untuk mendapatkan akses token. Token ini berfungsi untuk memperbolehkan seseorang mengakses dan menggunakan spotify web API Pertama kita gabungkan string Client ID dan Client Secret, lalu kita encode key tersebut menggunakan algoritma enkripsi base64, dan kita kirim key tersebut ke server spotify web API. Panggil fungsi tersebut untuk mengecek apakah token bisa terambil atau tidak.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getToken():</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># gabungkan client_id dan client_secret</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    auth_string <span class="op">=</span> client_id <span class="op">+</span> <span class="st">':'</span> <span class="op">+</span> client_secret</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># encode ke base64</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    auth_b64 <span class="op">=</span> base64.b64encode(auth_string.encode(<span class="st">'utf-8'</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># url untuk mengambil token</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="st">'https://accounts.spotify.com/api/token'</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># header untuk mengambil token - sesuai dengan guide dari spotify</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> {</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Authorization'</span>: <span class="st">'Basic '</span> <span class="op">+</span> auth_b64.decode(<span class="st">'utf-8'</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Content-Type'</span>: <span class="st">'application/x-www-form-urlencoded'</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># data untuk mengambil token - sesuai dengan guide dari spotify</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {<span class="st">'grant_type'</span>: <span class="st">'client_credentials'</span>}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># kirim request POST ke spotify</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> post(url, headers<span class="op">=</span>headers, data<span class="op">=</span>data)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># parse response ke json</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    json_result <span class="op">=</span> json.loads(result.content)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> json_result[<span class="st">'access_token'</span>]</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ambil token untuk akses API</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> token</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">## panggil fungsi getToken() dibawah ini</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="buat-fungsi-getauthheader" class="level3" data-number="12.5.5">
+<h3 data-number="12.5.5" class="anchored" data-anchor-id="buat-fungsi-getauthheader"><span class="header-section-number">12.5.5</span> Buat fungsi getAuthHeader()</h3>
+<p>Fungsi ini berguna untuk mengambil token dan memasukkan token ke sebuah objek header request. Header request adalah sebuah metode identifikasi dan otorisasi di dalam API.<br>
+Bearer berarti kita adalah sebuah klien yang meminta data. Di dalam objek header request, kita menyematkan token yang kita dapatkan untuk menandakan bahwa kita sudah mempunyai izin untuk mengakses API.<br>
+Fungsi ini akan dipanggil nanti ketika kita akan me-request data dari API</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">## pengambilan token untuk otorisasi API</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getAuthHeader(token):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">'Authorization'</span>: <span class="st">'Bearer '</span> <span class="op">+</span> token}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="buat-fungsi-getaudiofeatures" class="level3" data-number="12.5.6">
+<h3 data-number="12.5.6" class="anchored" data-anchor-id="buat-fungsi-getaudiofeatures"><span class="header-section-number">12.5.6</span> Buat fungsi getAudioFeatures()</h3>
+<p>Fungsi ini berguna untuk mengambil data karakteristik lagu. Fungsi ini mengambil token dan ID track (sebuah lagu).<br>
+Token didapatkan dari pemanggilan fungsi getToken() dan getAuthHeader(). ID track didapatkan dari list lagu yang diambil oleh fungsi getPlaylistItems(). Data karakteristik lagu yang dihasilkan oleh fungsi ini akan disimpan di variabel dataset2.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">## pengambilan audio features dari track (lagu)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getAudioFeatures(token, trackId):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># endpoint untuk akses playlist</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f'https://api.spotify.com/v1/audio-features/</span><span class="sc">{</span>trackId<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ambil token untuk otorisasi, gunakan sebagai header</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> getAuthHeader(token)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> get(url, headers<span class="op">=</span>headers)  <span class="co"># kirim request GET ke spotify</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    json_result <span class="op">=</span> json.loads(result.content)  <span class="co"># parse response ke json</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ambil data yang diperlukan dari response</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    audio_features_temp <span class="op">=</span> [</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'danceability'</span>],</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'energy'</span>],</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'key'</span>],</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'loudness'</span>],</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'mode'</span>],</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'speechiness'</span>],</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'acousticness'</span>],</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'instrumentalness'</span>],</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'liveness'</span>],</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'valence'</span>],</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        json_result[<span class="st">'tempo'</span>],</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    dataset2.append(audio_features_temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="buat-fungsi-getplaylistitems" class="level3" data-number="12.5.7">
+<h3 data-number="12.5.7" class="anchored" data-anchor-id="buat-fungsi-getplaylistitems"><span class="header-section-number">12.5.7</span> Buat fungsi getPlaylistItems()</h3>
+<p>Fungsi ini berguna untuk mengambil lagu-lagu yang ada di playlist. Fungsi ini mengambil token dan playlistID sebagai parameter nya. Token didapatkan dari pemanggilan fungsi getToken() dan getAuthHeader(). playlistID adalah variabel yang berisi URL playlist spotify yang nantinya diisi oleh user. Untuk mengambil data dari spotify web API, kita harus menginput URL yang benar, disertai parameter (limit, market, fields) yang dibutuhkan. Semua variabel, ditambah header akan digabungkan dan membuat request ke web API</p>
+<pre><code>def getPlaylistItems(token, playlistId):
+    # endpoint untuk akses playlist
+    url = f'https://api.spotify.com/v1/playlists/{playlistId}/tracks'
+    limit = '&amp;limit=100'  # batas maksimal track yang diambil
+    market = '?market=ID'  # negara yang tempat aplikasi diakses
+    # format data dari track yang diambil
+    fields = '&amp;fields=items%28track%28id%2Cname%2Cartists%2Cpopularity%2C+duration_ms%2C+album%28release_date%29%29%29'
+    url = url+market+fields+limit  # gabungkan semua parameter
+    # ambil token untuk otorisasi, gunakan sebagai header
+    headers = getAuthHeader(token)
+    result = get(url, headers=headers)  # kirim request GET ke spotify
+    json_result = json.loads(result.content)  # parse response ke json
+    # print(json_result)</code></pre>
+<p>Masih di fungsi yang sama, Hasil request kita yang disebut dengan response, akan ditampung di variabel json_result. Namun kita hanya mengambil beberapa fitur saja. Selanjutnya fitur-fitur tersebut kita masukkan ke variabel dataset.</p>
+<pre><code>    # ambil data yang diperlukan dari response
+    for i in range(len(json_result['items'])):
+        playlist_items_temp = []
+        playlist_items_temp.append(json_result['items'][i]['track']['id'])
+        playlist_items_temp.append(
+            json_result['items'][i]['track']['name'].encode('utf-8'))
+        playlist_items_temp.append(
+            json_result['items'][i]['track']['artists'][0]['name'].encode('utf-8'))
+        playlist_items_temp.append(
+            json_result['items'][i]['track']['popularity'])
+        playlist_items_temp.append(
+            json_result['items'][i]['track']['duration_ms'])
+        playlist_items_temp.append(
+            int(json_result['items'][i]['track']['album']['release_date'][0:4]))
+        dataset.append(playlist_items_temp)</code></pre>
+<p>Variabel dataset tadi berisikan lagu-lagu yang ada di dalam sebuah playlist. Sekarang kita akan ambil karakteristik lagu-lagu tersebut. Untuk mengambil lagu menggunakan fungsi getAudioFeatures() kita membutukan track ID dan token. Jadi, kita akan membuat sebuah for loop di dalam dataset, mengambil trackID nya saja (menggunakan array index 0), lalu kita panggil fungsi getAudioFeatures() dan sematkan trackID dan token sebagai parameternya.</p>
+<pre><code>    for i in range(len(dataset)):
+        getAudioFeatures(token, dataset[i][0])</code></pre>
+<p>Hasil dari fungsi getPlaylistItems() disimpan di variabel dataset. Hasil dari fungsi getAudioFeatures() disimpan di variabel dataset2. Selanjutnya, kita akan menggabungkan isi dari kedua variabel kedalam variabel dataset3, lalu meng-export nya menjadi file .csv</p>
+<pre><code>
+    # gabungkan dataset dan dataset2
+    for i in range(len(dataset)):
+        dataset3.append(dataset[i]+dataset2[i])
+
+    print(dataset3)
+    # convert dataset3 into csv
+    with open('dataset.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["id", "name", "artist", "popularity", "duration_ms", "year", "danceability", "energy", "key", "loudness", "mode",
+                         "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"])
+        writer.writerows(dataset3)</code></pre>
+<p>Untuk langkah terakhit, tulis coding dibawah untuk menjalankan semua fungsi dan menghasilkan dataset.csv</p>
+<p><code>token = getToken() print('access token : '+token) getPlaylistItems(token, playlistId)</code></p>
+<p>Jika kita gabungkan semua coding, maka coding akan menjadi seperti yang dibawah :</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pengambilan track (lagu) dari playlist</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getPlaylistItems(token, playlistId):</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># endpoint untuk akses playlist</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f'https://api.spotify.com/v1/playlists/</span><span class="sc">{</span>playlistId<span class="sc">}</span><span class="ss">/tracks'</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    limit <span class="op">=</span> <span class="st">'&amp;limit=100'</span>  <span class="co"># batas maksimal track yang diambil</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    market <span class="op">=</span> <span class="st">'?market=ID'</span>  <span class="co"># negara yang tempat aplikasi diakses</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># format data dari track yang diambil</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    fields <span class="op">=</span> <span class="st">'&amp;fields=items%28track</span><span class="sc">%28i</span><span class="st">d%2Cname%2Cartists%2Cpopularity%2C+duration_ms%2C+album</span><span class="sc">%28r</span><span class="st">elease_date</span><span class="sc">%29%</span><span class="st">29%29'</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> url<span class="op">+</span>market<span class="op">+</span>fields<span class="op">+</span>limit  <span class="co"># gabungkan semua parameter</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ambil token untuk otorisasi, gunakan sebagai header</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    headers <span class="op">=</span> getAuthHeader(token)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> get(url, headers<span class="op">=</span>headers)  <span class="co"># kirim request GET ke spotify</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    json_result <span class="op">=</span> json.loads(result.content)  <span class="co"># parse response ke json</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(json_result)</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ambil data yang diperlukan dari response</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(json_result[<span class="st">'items'</span>])):</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        playlist_items_temp <span class="op">=</span> []</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        playlist_items_temp.append(json_result[<span class="st">'items'</span>][i][<span class="st">'track'</span>][<span class="st">'id'</span>])</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        playlist_items_temp.append(</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>            json_result[<span class="st">'items'</span>][i][<span class="st">'track'</span>][<span class="st">'name'</span>].encode(<span class="st">'utf-8'</span>))</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        playlist_items_temp.append(</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>            json_result[<span class="st">'items'</span>][i][<span class="st">'track'</span>][<span class="st">'artists'</span>][<span class="dv">0</span>][<span class="st">'name'</span>].encode(<span class="st">'utf-8'</span>))</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        playlist_items_temp.append(</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>            json_result[<span class="st">'items'</span>][i][<span class="st">'track'</span>][<span class="st">'popularity'</span>])</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        playlist_items_temp.append(</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>            json_result[<span class="st">'items'</span>][i][<span class="st">'track'</span>][<span class="st">'duration_ms'</span>])</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        playlist_items_temp.append(</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>            <span class="bu">int</span>(json_result[<span class="st">'items'</span>][i][<span class="st">'track'</span>][<span class="st">'album'</span>][<span class="st">'release_date'</span>][<span class="dv">0</span>:<span class="dv">4</span>]))</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        dataset.append(playlist_items_temp)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ambil audio features dari semua track di dalam playlist</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(dataset)):</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        getAudioFeatures(token, dataset[i][<span class="dv">0</span>])</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># gabungkan dataset dan dataset2</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(dataset)):</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        dataset3.append(dataset[i]<span class="op">+</span>dataset2[i])</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(dataset3)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert dataset3 into csv</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">'dataset.csv'</span>, <span class="st">'w'</span>, newline<span class="op">=</span><span class="st">''</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>        writer <span class="op">=</span> csv.writer(<span class="bu">file</span>)</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>        writer.writerow([<span class="st">"id"</span>, <span class="st">"name"</span>, <span class="st">"artist"</span>, <span class="st">"popularity"</span>, <span class="st">"duration_ms"</span>, <span class="st">"year"</span>, <span class="st">"danceability"</span>, <span class="st">"energy"</span>, <span class="st">"key"</span>, <span class="st">"loudness"</span>, <span class="st">"mode"</span>,</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"speechiness"</span>, <span class="st">"acousticness"</span>, <span class="st">"instrumentalness"</span>, <span class="st">"liveness"</span>, <span class="st">"valence"</span>, <span class="st">"tempo"</span>])</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>        writer.writerows(dataset3)</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> getToken()</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'access token : '</span><span class="op">+</span>token)</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>getPlaylistItems(token, playlistId)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>access token : BQDIOTTmvYaO4n94u_XXrz-pb5kVmGP8siXqjWiHrjhIxr3a7kbDpA5_4qujJhOARmaPRRpkaQWRYa3fifZpaX7kFzybKSGXis-7yxwOsI5XZ20TfNk</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[['5R8J6WCnV1E2lDJgVoaA4P', b'Threats', b'Jean Grae', 41, 246293, 2008, 0.677, 0.631, 0, -6.363, 1, 0.0578, 0.0986, 4.59e-06, 0.245, 0.454, 90.12], ['5ex7brQNeKhyh6wjQoMDr0', b"Queen's Philosophy", b'Sa-Roc', 16, 193750, 2013, 0.849, 0.572, 7, -10.119, 1, 0.358, 0.0335, 0, 0.109, 0.497, 97.106], ['0t7k99JA9z0KaMw1BoEpk8', b'9th vs. Thought', b'Black Thought', 38, 167741, 2018, 0.751, 0.933, 7, -2.188, 1, 0.294, 0.0255, 0, 0.071, 0.458, 93.032], ['1LM6EReMkAxuDXDF26ekl2', b'Get By', b'Talib Kweli', 58, 227426, 2002, 0.662, 0.928, 2, -4.688, 1, 0.377, 0.00324, 0, 0.17, 0.775, 90.509], ['5DWbvNiVrH2u0Si9e21ZjW', b'We Comin', b'Sa-Roc', 7, 209655, 2015, 0.659, 0.859, 8, -2.767, 1, 0.423, 0.301, 0, 0.715, 0.709, 174.542], ['0AeXtgRernMx6BDInIxtm8', b'Freedom Form Flowing', b'Gift Of Gab', 45, 272860, 2018, 0.751, 0.86, 2, -3.57, 1, 0.287, 0.454, 4.1e-05, 0.0849, 0.655, 162.06], ['5wkW9SLgv1DCO3Ll6WGjNg', b'Hood Supreme', b'Sa-Roc', 17, 216521, 2015, 0.78, 0.729, 1, -9.01, 0, 0.51, 0.106, 0, 0.294, 0.805, 91.948], ['1DaqUrqQOam8bCbzBUdqao', b'Maximum Frequency', b'Sa-Roc', 14, 228000, 2014, 0.746, 0.953, 1, -3.329, 0, 0.288, 0.00292, 0, 0.598, 0.882, 90.12], ['0sztU8yO2eSFM7PCAeKdAT', b'Never Been In Love', b'Talib Kweli', 43, 300653, 2004, 0.757, 0.748, 6, -7.091, 0, 0.253, 0.408, 0, 0.178, 0.559, 96.073], ['4YoLbz1TKv8HQh2lRzpjiA', b'Eye of the Phoenix', b'Sa-Roc', 5, 124450, 2016, 0.817, 0.717, 1, -7.663, 1, 0.297, 0.000695, 3.47e-05, 0.168, 0.589, 91.0], ['5t2bG4wMvpyfRnYic2A1hI', b'Nightmare', b'Avenged Sevenfold', 57, 374453, 2010, 0.529, 0.948, 7, -4.928, 1, 0.0795, 0.000319, 0.0001, 0.2, 0.241, 129.98], ['6m8dDOTv96S6BObyont2L9', b'Ms. Hill', b'Talib Kweli', 41, 224280, 2005, 0.622, 0.67, 8, -8.076, 0, 0.368, 0.0554, 0, 0.573, 0.242, 90.816], ['72gByp7oLONJBOg0YntwTZ', b'End of the World', b'Sa-Roc', 14, 278382, 2015, 0.675, 0.524, 3, -10.372, 1, 0.398, 0.0668, 0, 0.26, 0.341, 84.882], ['1UAhEIfzcm8hp9TXdbMCtz', b'NSFW (Not Safe For Weak Rappers)', b'Sa-Roc', 18, 226956, 2016, 0.653, 0.594, 1, -6.945, 1, 0.466, 0.0471, 1.35e-05, 0.41, 0.382, 183.971], ['2ybbKsBCWsq0f9dgbIIxon', b'Legendary', b'Sa-Roc', 4, 186734, 2014, 0.654, 0.946, 2, -3.148, 1, 0.285, 0.0495, 0, 0.227, 0.57, 98.541], ['39ZiU2QVBvDQzeepJjg8tp', b'Blinded in Chains', b'Avenged Sevenfold', 62, 394466, 2005, 0.245, 0.961, 2, -4.223, 0, 0.0852, 9.79e-05, 0.00433, 0.164, 0.574, 96.0], ['3NZzsmrtxfJd8nJBImXhRr', b'The Moors of Alhambra', b'Sa-Roc', 11, 149138, 2013, 0.591, 0.807, 4, -5.695, 0, 0.384, 0.0623, 0, 0.593, 0.457, 87.455], ['0QTGhJ1LKgSj2PQLslXLzg', b"Lilith's Psalm", b'Sa-Roc', 21, 187428, 2015, 0.942, 0.575, 2, -10.119, 1, 0.2, 0.0309, 0, 0.11, 0.816, 105.005], ['2BzQBXEmNFP6YTLgr1mRd2', b'MetaMorpheus', b'Sa-Roc', 10, 222469, 2016, 0.591, 0.615, 1, -6.294, 1, 0.479, 0.0048, 0, 0.279, 0.416, 165.815], ['2TA0vUqYBjLuUIcgZzYL2v', b'WWII (Word War II)', b'Sa-Roc', 16, 128780, 2016, 0.763, 0.825, 1, -6.061, 1, 0.441, 0.0149, 0, 0.437, 0.235, 81.993], ['5oqSr3rehtGgZyDh0LCSA7', b'Gotta Get Mine', b'MC Breed', 53, 264760, 1993, 0.855, 0.52, 7, -12.07, 1, 0.268, 0.184, 0, 0.114, 0.402, 92.451], ['1HSGn0KVpyv9H6l2KRwmAI', b'Battle Hymn', b'Vinnie Paz', 42, 387240, 2012, 0.551, 0.899, 11, -5.219, 0, 0.217, 0.0031, 0, 0.369, 0.642, 87.457], ['01Xbm079iYopmVs8ZMqYGR', b'Pay Your Dues', b'Apathy', 26, 218826, 2016, 0.658, 0.819, 3, -7.692, 1, 0.297, 0.129, 0, 0.123, 0.402, 89.986], ['4gps46WZXlN1Z9EbdU4VQJ', b'Kindness For Weakness', b'Dilated Peoples', 38, 249280, 2006, 0.605, 0.914, 1, -1.518, 1, 0.377, 0.273, 0, 0.0569, 0.25, 190.11], ['1d1fZUceM2zK6HETEYtzxJ', b'Blood Runs Cold', b'Jedi Mind Tricks', 44, 235226, 2000, 0.725, 0.704, 1, -6.688, 1, 0.34, 0.131, 9.65e-05, 0.398, 0.81, 95.054], ['4V1sXrFbpRp7aIDPCy08MO', b'Equality', b'Afu-Ra', 43, 277320, 2000, 0.634, 0.908, 7, -2.654, 1, 0.303, 0.168, 0, 0.101, 0.701, 88.875], ['3QXackOVhioop7C1VaaSp7', b'Nothing but Strangeness (feat. Looptroop Rockers &amp; Hilltop Hoods)', b'Cunninlynguists', 39, 198120, 2009, 0.841, 0.597, 7, -9.086, 1, 0.277, 0.0934, 0, 0.113, 0.707, 92.031], ['7x2zy4YgLY731TKaDFFeuj', b'When It Rains (feat. Aloe Blacc)', b'Dag Savage', 48, 176605, 2014, 0.68, 0.51, 7, -9.126, 1, 0.281, 0.155, 0, 0.691, 0.698, 90.055], ['4Nrg8EG7wWTiTOumtpw8gk', b'Let The Drummer Kick', b'Citizen Cope', 59, 257093, 2002, 0.766, 0.641, 9, -3.777, 0, 0.0445, 0.0165, 0.0386, 0.0809, 0.579, 85.011], ['5Wpy3gCoY3tQJxAaXWDWy7', b'Late For The Sky (feat. Slug &amp; Aesop Rock)', b'Evidence', 32, 337560, 2011, 0.362, 0.862, 1, -3.295, 1, 0.35, 0.0361, 0, 0.855, 0.659, 76.206], ['63BokRfXSQhEU6Qi2dSJpZ', b'Mind Playing Tricks on Me', b'Geto Boys', 68, 308733, 1991, 0.886, 0.512, 10, -11.825, 0, 0.237, 0.207, 0, 0.0991, 0.454, 93.997], ['0fQ4aYENEakPclOlAyFtAX', b'Oh My', b'Sweatshop Union', 39, 235613, 2008, 0.873, 0.482, 6, -6.252, 1, 0.121, 0.681, 0.000434, 0.0921, 0.711, 93.204], ['6bO0RKtbyVtaKcNwvX8VUt', b'Definition Of A Rap Flow (Albee 3000)', b'R.A. The Rugged Man', 47, 209280, 2013, 0.919, 0.841, 9, -3.509, 1, 0.325, 0.335, 0, 0.0749, 0.795, 110.951], ['2yfK4aneEYgrXSEUWhrVYQ', b'Suicide', b'Jedi Mind Tricks', 34, 232840, 2006, 0.683, 0.872, 1, -5.476, 1, 0.187, 0.00374, 0.000199, 0.145, 0.465, 93.946], ['3qDpYCA6FoVvODVaZWScXO', b'Point Of No Return', b'Immortal Technique', 56, 241826, 2003, 0.624, 0.836, 7, -6.995, 0, 0.383, 0.277, 0, 0.294, 0.501, 86.971], ['0fzo46p4NjXy6DGWmgdAtX', b'Guide You Through Shadows (feat. Ra Scion &amp; Substantial)', b'Cunninlynguists', 23, 275454, 2014, 0.611, 0.783, 1, -6.455, 0, 0.0615, 0.262, 7.44e-06, 0.269, 0.278, 88.016], ['3kPWpLBQDkzpKKbwOcjn1e', b'Fraudulent Cloth', b'Jedi Mind Tricks', 44, 251307, 2015, 0.345, 0.907, 8, -2.985, 0, 0.107, 0.305, 0, 0.377, 0.329, 182.788], ['3jmHcu9v3FFRgtztbEejgk', b'Children Sing', b'PaceWon &amp; Mr. Green', 39, 306893, 2008, 0.39, 0.89, 1, -6.145, 1, 0.203, 0.0479, 0, 0.226, 0.558, 83.052], ['32cQeY533XTAc4L6fzcIgG', b'Enemies With Benefits F. Tonedeff', b'Cunninlynguists', 31, 277205, 2011, 0.356, 0.718, 1, -7.739, 0, 0.135, 0.0631, 2.85e-05, 0.346, 0.144, 99.561], ['6o7Ox5vC4eGaO3WBv77NQc', b'Freedom Of Speech', b'Immortal Technique', 40, 187000, 2003, 0.899, 0.656, 10, -6.633, 0, 0.193, 0.155, 0, 0.061, 0.959, 96.355], ['2CpP9fn0s3EQN4ErGEF7UX', b'Beyond the Sun (feat. J Live)', b'Cunninlynguists', 39, 161193, 2014, 0.687, 0.582, 6, -7.334, 0, 0.178, 0.32, 2.95e-05, 0.0997, 0.514, 90.048], ['0lD1Olt2y5u9d5zUUERxRC', b'Pour Me Another', b'Atmosphere', 42, 289746, 2005, 0.373, 0.913, 9, -5.052, 0, 0.413, 0.0045, 0.577, 0.133, 0.422, 173.583], ['2ulWTEGFSGdV85pweEluAS', b'Razorblade Salvation', b'Jedi Mind Tricks', 44, 261093, 2006, 0.735, 0.886, 7, -4.31, 1, 0.131, 0.00285, 0.848, 0.142, 0.498, 92.382], ['6qfna7A7WvUwyNoqVwbhnc', b"Love Ain't (f. Tonedeff) [Deluxe Edition]", b'Cunninlynguists', 30, 241533, 2010, 0.669, 0.768, 7, -7.101, 1, 0.325, 0.648, 0.00361, 0.671, 0.556, 93.948], ['1f58xau99Rdn0hhcJTwRhz', b'Uncommon Valor: A Vietnam Story', b'Jedi Mind Tricks', 50, 242200, 2006, 0.764, 0.877, 2, -7.009, 1, 0.329, 0.133, 0.0435, 0.298, 0.65, 93.211], ['7eDrxsh5PQnsqiVNZxN9Z6', b'2020', b'Sol', 39, 224400, 2012, 0.761, 0.668, 4, -7.081, 1, 0.273, 0.285, 1.85e-06, 0.122, 0.455, 83.047], ['141ZBfcyIaGpr6Ub2sQ51w', b'Melancholy Hopeful', b'Marcus D', 22, 250266, 2012, 0.662, 0.704, 9, -7.211, 0, 0.0863, 0.0787, 0, 0.141, 0.24, 95.93], ['6KsqFiw7IDFQM7QHBORGlN', b'Stars Shine Brightest (In The Darkest Of Night) F. Rick Warren', b'Cunninlynguists', 33, 242484, 2011, 0.454, 0.856, 10, -5.853, 0, 0.103, 0.0225, 0.000283, 0.189, 0.629, 175.988], ['0dcMqjeDpwqB2xhzMsld0p', b'El Ma\xc3\xb1ana', b'Gorillaz', 65, 235360, 2005, 0.644, 0.728, 9, -8.396, 0, 0.029, 0.000988, 0.0279, 0.473, 0.607, 132.488], ['57Xjny5yNzAcsxnusKmAfA', b'Reptilia', b'The Strokes', 79, 219826, 2003, 0.489, 0.649, 9, -5.11, 1, 0.0336, 0.000603, 0.713, 0.101, 0.77, 158.009], ['2bfGNzdiRa1jXZRdfssSzR', b'Dirty Harry', b'Gorillaz', 73, 230426, 2005, 0.625, 0.877, 10, -7.176, 0, 0.162, 0.0315, 0.0811, 0.672, 0.865, 192.296], ['3oQqC98i1EhNRcXqIMoWQD', b'Soul Of Freedom feat. Cise Starr', b'Uyama Hiroto', 44, 302333, 2014, 0.641, 0.873, 8, -5.527, 0, 0.0759, 0.608, 0.696, 0.144, 0.69, 93.977], ['2QqAVlaV6Y45ebsXxfS5i8', b'Take Time', b'Awon', 35, 267906, 2014, 0.674, 0.625, 9, -8.7, 1, 0.0942, 0.493, 2.88e-06, 0.16, 0.603, 171.992], ['1r8VribZEm5y27e7F1UYlI', b'When I Close My Eyes', b'SoulChef', 26, 209706, 2010, 0.591, 0.711, 0, -4.943, 0, 0.19, 0.863, 0, 0.109, 0.517, 92.187], ['2kUeMGOCBJEjTBc2PHeEU5', b"Say Somethin'", b'SoulChef', 31, 269986, 2010, 0.745, 0.566, 1, -6.007, 1, 0.087, 0.336, 0, 0.0848, 0.475, 95.032], ['462T2Je5iJcUHIuvqYGgM9', b'Swell', b'Common Market', 33, 228728, 2008, 0.828, 0.65, 1, -5.837, 1, 0.201, 0.272, 0, 0.0977, 0.618, 85.012], ['6vmPUsrVk873GWkJwygHKD', b'nagashi', b'Idealism', 53, 109948, 2017, 0.726, 0.357, 10, -8.727, 1, 0.044, 0.862, 0.915, 0.134, 0.644, 85.046], ['7IRTS6jZPmNBIizSiAOcQZ', b'Boys\xe2\x80\x99 Bop', b'Birocratic', 35, 180000, 2017, 0.58, 0.849, 9, -6.193, 0, 0.0489, 0.03, 0.513, 0.097, 0.781, 87.987], ['6bmJYo1KS2X2nzQrCGzdOe', b'Benzi Box', b'DANGERDOOM', 63, 180093, 2005, 0.894, 0.458, 2, -8.594, 1, 0.0508, 0.0666, 0.0187, 0.107, 0.682, 97.01], ['5kY75d5UPbz9xa3inTmiC8', b"Comin' Up (feat. Mistah F.A.B.)", b'The Grouch &amp; Eligh', 24, 244506, 2009, 0.655, 0.594, 1, -5.182, 1, 0.06, 0.0825, 0.000233, 0.102, 0.508, 79.953], ['3dPQuX8Gs42Y7b454ybpMR', b'Seven Nation Army', b'The White Stripes', 87, 232106, 2003, 0.743, 0.446, 4, -7.807, 0, 0.0683, 0.0039, 0.118, 0.337, 0.278, 123.596], ['4M88Wd7Aps5LGRWMOC7gSH', b'Some Kind of Nature (feat. Lou Reed)', b'Gorillaz', 56, 179866, 2010, 0.769, 0.75, 10, -5.092, 1, 0.0304, 0.115, 0.0208, 0.0909, 0.942, 97.229], ['1RKUoGiLEbcXN4GY4spQDx', b'Clint Eastwood', b'Gorillaz', 78, 340920, 2001, 0.663, 0.694, 10, -8.627, 0, 0.171, 0.0253, 0, 0.0698, 0.525, 167.953], ['4iG2gAwKXsOcijVaVXzRPW', b'Time to Pretend', b'MGMT', 75, 261000, 2007, 0.438, 0.94, 2, -3.249, 1, 0.0452, 8.74e-05, 0.0777, 0.3, 0.421, 100.99], ['4j4pPKE3xAblPIbhxScC1j', b'Rawnald Gregory Erickson the Second', b'STRFKR', 67, 173693, 2008, 0.9, 0.538, 7, -7.879, 1, 0.0343, 0.229, 0.843, 0.287, 0.713, 95.508], ['5KUNwkaNf8l5A9sXZhiCgI', b'Rapp Snitch Knishes feat. Mr. Fantastik', b'MF DOOM', 80, 172893, 2004, 0.728, 0.832, 7, -6.827, 1, 0.267, 0.327, 0, 0.504, 0.825, 95.051], ['6lrDckuosGpwEHtm1hHBcf', b'November Has Come', b'Gorillaz', 63, 165093, 2005, 0.702, 0.567, 7, -8.561, 1, 0.239, 0.0815, 2.75e-05, 0.0864, 0.667, 84.153], ['5WmxGs0hBmoo9bcGlY0twV', b'Beautiful Girl', b'Cunninlynguists', 42, 204706, 2006, 0.384, 0.787, 8, -5.861, 0, 0.336, 0.142, 2.79e-05, 0.39, 0.544, 84.85], ['5NcQLidkHKJHjzhhxPkbx3', b'Black Lake', b'Emancipator', 39, 218573, 2010, 0.59, 0.477, 11, -13.461, 0, 0.0307, 0.452, 0.516, 0.0963, 0.286, 90.499], ['1sE6ODOwN9yI7PO0xCpSPD', b'THE POSSE', b'The Grouch', 16, 254678, 2014, 0.671, 0.686, 6, -4.477, 1, 0.226, 0.0543, 0, 0.117, 0.544, 85.026], ['4dLM3Batl5GAUQyZdCbVFo', b"Anotha' (BBQ)", b'People Under The Stairs', 37, 264920, 2008, 0.9, 0.661, 10, -6.489, 0, 0.368, 0.152, 0.00013, 0.644, 0.658, 104.231], ['0U6Rolz9wr2tAkVPKUKNU5', b'Before and After', b'Lyrics Born', 24, 276213, 2003, 0.828, 0.637, 1, -7.355, 0, 0.166, 0.0432, 1.91e-06, 0.374, 0.649, 92.699], ['3njlXiLTQyFXQwXNB9qvRb', b'So Cold', b'Collective Efforts', 12, 197920, 2010, 0.686, 0.759, 1, -6.771, 1, 0.167, 0.00973, 3.23e-05, 0.234, 0.664, 89.524], ['5roUoEWuTQ8Z8meO0A1Pcf', b'Pictures On My Wall', b'People Under The Stairs', 29, 276733, 2014, 0.829, 0.747, 1, -6.605, 0, 0.266, 0.577, 8.58e-06, 0.214, 0.529, 89.82], ['10KM0tUxrvaCQV25hq6dL8', b'The Travelers', b'Brother Ali', 26, 318133, 2009, 0.833, 0.729, 1, -5.758, 1, 0.243, 0.106, 0, 0.105, 0.462, 93.999], ['5kfBmqSGinIjj3dZsclSX0', b'Motion Movement', b'Blue Scholars', 32, 226946, 2004, 0.813, 0.714, 6, -6.414, 0, 0.203, 0.0884, 0, 0.19, 0.329, 95.312], ['5my9fP5XJ2oo0YHT43pJYu', b'Antenna', b'Zion I', 27, 238973, 2009, 0.702, 0.553, 2, -6.834, 0, 0.107, 0.17, 0, 0.133, 0.373, 101.994], ['7s1upm7yr7ZjrzXMwHawtG', b'Sexual Healing - Kygo Remix', b'Marvin Gaye', 66, 368316, 2015, 0.689, 0.68, 0, -7.196, 0, 0.0427, 0.321, 0.0211, 0.0431, 0.646, 100.987], ['3koCCeSaVUyrRo3N2gHrd8', b"Let's Groove", b'Earth, Wind &amp; Fire', 79, 339320, 1981, 0.869, 0.648, 11, -8.698, 0, 0.0633, 0.121, 2.17e-05, 0.126, 0.9, 125.035], ['1HRtVWNhS9tEvDQyOKD9Fs', b"Don't Stop 'Til You Get Enough - 2003 Edit", b'Michael Jackson', 61, 236440, 1979, 0.872, 0.946, 4, -3.105, 1, 0.0656, 0.0502, 0.0161, 0.298, 0.943, 119.01], ['7tqhbajSfrz2F7E1Z75ASX', b"Ain't No Mountain High Enough", b'Marvin Gaye', 87, 151666, 1967, 0.663, 0.6, 7, -10.87, 1, 0.032, 0.43, 0, 0.184, 0.8, 129.991], ['1k1Bqnv2R0uJXQN4u6LKYt', b"Ain't No Sunshine", b'Bill Withers', 84, 125093, 1971, 0.527, 0.415, 4, -11.451, 0, 0.122, 0.457, 1.72e-05, 0.117, 0.515, 78.169], ['4CoGNqLap7UGU5Q3VdKug0', b"Ain't Too Proud To Beg", b'The Temptations', 69, 156173, 1966, 0.763, 0.656, 0, -6.86, 1, 0.0417, 0.549, 0, 0.125, 0.926, 118.394], ['4o6BgsqLIBViaGVbx5rbRk', b'You Make My Dreams (Come True)', b'Daryl Hall &amp; John Oates', 83, 190626, 1980, 0.751, 0.501, 5, -12.151, 1, 0.0551, 0.234, 0.112, 0.0467, 0.902, 167.057], ['5ChkMS8OtdzJeqyybCc9R5', b'Billie Jean', b'Michael Jackson', 83, 293826, 2008, 0.92, 0.654, 11, -3.051, 0, 0.0401, 0.0236, 0.0153, 0.036, 0.847, 117.046], ['7qHqlaHTawgXSvT0G1wM4q', b'Close to Home', b'Sweatshop Union', 16, 293666, 2008, 0.795, 0.726, 5, -6.122, 0, 0.212, 0.409, 0, 0.503, 0.537, 96.116], ['0uMn8WKu3qtQLaUyal1bsz', b'Mastermind', b'Deltron 3030', 55, 214306, 2000, 0.741, 0.657, 0, -9.589, 0, 0.0374, 0.00224, 0.00756, 0.0825, 0.25, 94.211], ['4n3U09x3m3d1pNz0Sj7WNV', b'Anything Is Everything', b'The Dynospectrum', 31, 293200, 1998, 0.898, 0.546, 8, -7.57, 0, 0.313, 0.0021, 0.00015, 0.426, 0.229, 88.39], ['2WFggVC84b18ZkJTNgFnGP', b'believe', b'Kenichiro Nishihara', 25, 263960, 2015, 0.82, 0.775, 2, -7.599, 1, 0.223, 0.59, 2.59e-06, 0.106, 0.44, 95.984], ['3Zl9FktbaF6nTI0cGpKYwr', b'Sunny Side Of Hell', b'Grieves', 38, 237106, 2011, 0.733, 0.683, 1, -5.87, 1, 0.18, 0.114, 2.15e-06, 0.268, 0.388, 79.96], ['3ut5Nkw2Hbv76fpzmujOFp', b'Everything', b'Murs', 37, 214026, 2008, 0.682, 0.814, 8, -4.549, 1, 0.118, 0.000443, 0.000449, 0.332, 0.681, 88.045], ['0pb0Y7tsJAXiPMYXatq4Og', b'On The Rocks', b'Grieves', 41, 185373, 2011, 0.592, 0.509, 11, -6.685, 1, 0.376, 0.0421, 0, 0.0814, 0.63, 180.12], ['2sKRFpIJi1x1px6mAKewIs', b'Slow Cure', b'Common Market', 25, 247405, 2008, 0.772, 0.806, 2, -4.048, 1, 0.331, 0.361, 0, 0.0641, 0.592, 85.024], ['3F2nXlS9FIJiaHqna12k1U', b'This Far', b'Collective Efforts', 28, 305853, 2010, 0.789, 0.739, 3, -7.452, 0, 0.169, 0.531, 0.0744, 0.109, 0.464, 103.469], ['29jmo4Awj9WdrcQ1AK8ghv', b'Walking Away', b'Brother Ali', 35, 238920, 2007, 0.856, 0.454, 1, -6.192, 1, 0.269, 0.458, 1.26e-06, 0.0829, 0.792, 89.887], ['3QOmgrh6ElgcPKwOAnbwgu', b'The Best Day', b'Atmosphere', 57, 216893, 2010, 0.882, 0.624, 6, -5.372, 1, 0.0681, 0.358, 0, 0.0678, 0.899, 96.898], ['76QX42psCJ7qa37hGVhMjS', b'Southside Revival', b'Blue Scholars', 24, 296893, 2006, 0.815, 0.828, 6, -4.238, 1, 0.282, 0.358, 6.39e-06, 0.101, 0.508, 89.064], ['51bB0OmoieIGoYZNT3RNyh', b"The Humans' race", b'Sweatshop Union', 24, 254146, 2006, 0.774, 0.782, 1, -6.594, 1, 0.0982, 0.289, 0, 0.232, 0.813, 97.906], ['5PnwUFbEjJeKlXtKCEs6ET', b'Mic Like a Memory [Deluxe Edition] (feat. Kory Calico)', b'Cunninlynguists', 33, 276100, 2001, 0.486, 0.565, 1, -8.741, 1, 0.0711, 0.273, 0.237, 0.128, 0.213, 92.208], ['7cHRys0Lhk9642dLaPUMkm', b'Soon It Will Be Cold Enough to Build Fires', b'Emancipator', 57, 180520, 2008, 0.707, 0.467, 7, -15.094, 0, 0.0488, 0.849, 0.685, 0.0957, 0.419, 94.417]]</code></pre>
+</div>
+</div>
+<p>Jika anda masih bingung, bisa melihat gambar function flow dibawah ini :<br>
+<img src="./8.functionflow.png" class="img-fluid" alt="Gambar8. Function Flow"></p>
+</section>
+<section id="data-preprocessing" class="level3" data-number="12.5.8">
+<h3 data-number="12.5.8" class="anchored" data-anchor-id="data-preprocessing"><span class="header-section-number">12.5.8</span> Data Preprocessing</h3>
+<p>Spotify web API terkenal dengan format dan prosedur API yang sangat tangguh, sehingga bug atau kesalahan dataset jarang ditemui. Namun kita tetap harus mengecek dataset kita.</p>
+<section id="data-understanding" class="level4" data-number="12.5.8.1">
+<h4 data-number="12.5.8.1" class="anchored" data-anchor-id="data-understanding"><span class="header-section-number">12.5.8.1</span> Data Understanding</h4>
+<p>Sebagai seorang data scientist, kita perlu memahami dataset kita secara sepenuhnya. Berikut adalah penjelasan singkat dari beberapa fitur di dalam dataset yang akan kita gunakan. Untuk deskripsi sepenuhnya, bisa mengunjungi https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features.</p>
+<ul>
+<li>Acousticness, Tingkat intensitas akustik di dalam lagu tersebut. 0.0 = Lagu tersebut tidak akustik, 1.0 = Lagu tersebut sangat akustik.<br>
+</li>
+<li>Loudness, Kekuatan suara keseluruhan dari sebuah lagu dalam desibel (dB). Nilai kekuatan suara dihitung rata-rata sepanjang seluruh lagu dan bermanfaat untuk membandingkan kekuatan suara relatif antara lagu-lagu. Kekuatan suara adalah kualitas dari suara yang merupakan korelasi psikologis utama dari kekuatan fisik (amplitudo). Nilai-nilai biasanya berkisar antara -60 hingga 0 dB.<br>
+</li>
+<li>Tempo, Rata rata kecepatan atau tempo dari sebuah lagu, diukur menggunakan beats (ketukan) per minute (BPM).</li>
+</ul>
+</section>
+<section id="muat-data" class="level4" data-number="12.5.8.2">
+<h4 data-number="12.5.8.2" class="anchored" data-anchor-id="muat-data"><span class="header-section-number">12.5.8.2</span> Muat Data</h4>
+<p>Ketika coding pengambilan dataset dijalankan, sebuah file csv bernama dataset.csv akan muncul. File ini berisi dataset yang akan kita olah. Muat dataset menggunakan pandas dataframe dan check apakah dataset sudah benar.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">## muat dataset</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'dataset.csv'</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">artist</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">duration_ms</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">danceability</th>
+<th data-quarto-table-cell-role="th">energy</th>
+<th data-quarto-table-cell-role="th">key</th>
+<th data-quarto-table-cell-role="th">loudness</th>
+<th data-quarto-table-cell-role="th">mode</th>
+<th data-quarto-table-cell-role="th">speechiness</th>
+<th data-quarto-table-cell-role="th">acousticness</th>
+<th data-quarto-table-cell-role="th">instrumentalness</th>
+<th data-quarto-table-cell-role="th">liveness</th>
+<th data-quarto-table-cell-role="th">valence</th>
+<th data-quarto-table-cell-role="th">tempo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5R8J6WCnV1E2lDJgVoaA4P</td>
+<td>b'Threats'</td>
+<td>b'Jean Grae'</td>
+<td>41</td>
+<td>246293</td>
+<td>2008</td>
+<td>0.677</td>
+<td>0.631</td>
+<td>0</td>
+<td>-6.363</td>
+<td>1</td>
+<td>0.0578</td>
+<td>0.09860</td>
+<td>0.000005</td>
+<td>0.245</td>
+<td>0.454</td>
+<td>90.120</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>5ex7brQNeKhyh6wjQoMDr0</td>
+<td>b"Queen's Philosophy"</td>
+<td>b'Sa-Roc'</td>
+<td>16</td>
+<td>193750</td>
+<td>2013</td>
+<td>0.849</td>
+<td>0.572</td>
+<td>7</td>
+<td>-10.119</td>
+<td>1</td>
+<td>0.3580</td>
+<td>0.03350</td>
+<td>0.000000</td>
+<td>0.109</td>
+<td>0.497</td>
+<td>97.106</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0t7k99JA9z0KaMw1BoEpk8</td>
+<td>b'9th vs. Thought'</td>
+<td>b'Black Thought'</td>
+<td>38</td>
+<td>167741</td>
+<td>2018</td>
+<td>0.751</td>
+<td>0.933</td>
+<td>7</td>
+<td>-2.188</td>
+<td>1</td>
+<td>0.2940</td>
+<td>0.02550</td>
+<td>0.000000</td>
+<td>0.071</td>
+<td>0.458</td>
+<td>93.032</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1LM6EReMkAxuDXDF26ekl2</td>
+<td>b'Get By'</td>
+<td>b'Talib Kweli'</td>
+<td>58</td>
+<td>227426</td>
+<td>2002</td>
+<td>0.662</td>
+<td>0.928</td>
+<td>2</td>
+<td>-4.688</td>
+<td>1</td>
+<td>0.3770</td>
+<td>0.00324</td>
+<td>0.000000</td>
+<td>0.170</td>
+<td>0.775</td>
+<td>90.509</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5DWbvNiVrH2u0Si9e21ZjW</td>
+<td>b'We Comin'</td>
+<td>b'Sa-Roc'</td>
+<td>7</td>
+<td>209655</td>
+<td>2015</td>
+<td>0.659</td>
+<td>0.859</td>
+<td>8</td>
+<td>-2.767</td>
+<td>1</td>
+<td>0.4230</td>
+<td>0.30100</td>
+<td>0.000000</td>
+<td>0.715</td>
+<td>0.709</td>
+<td>174.542</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="decode---encode-ke-base64" class="level4" data-number="12.5.8.3">
+<h4 data-number="12.5.8.3" class="anchored" data-anchor-id="decode---encode-ke-base64"><span class="header-section-number">12.5.8.3</span> Decode - Encode ke base64</h4>
+<p>Dataset harus di encode-decode agar semua karakter ter-standarisasi dan file bisa dibaca dan diproses, bebas dari korupsi data. Karena data yang diambil dari spotify web API di encode menggunakan bas64, maka kita akan men-decode data tersebut menggunakan algoritma yang sama.<br>
+Namun ketika di decode, muncul efek samping seperti penambahan (‘b) di depan data dan (’) dibelakang data.<br>
+Kita akan menghapus efek samping tersebut menggunakan teknik string slicing.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Hapus karakter yang tidak perlu pada kolom artist dan name</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'artist'</span>] <span class="op">=</span> data[<span class="st">'artist'</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="bu">str</span>(x)[<span class="dv">2</span>:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'name'</span>] <span class="op">=</span> data[<span class="st">'name'</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="bu">str</span>(x)[<span class="dv">2</span>:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">artist</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">duration_ms</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">danceability</th>
+<th data-quarto-table-cell-role="th">energy</th>
+<th data-quarto-table-cell-role="th">key</th>
+<th data-quarto-table-cell-role="th">loudness</th>
+<th data-quarto-table-cell-role="th">mode</th>
+<th data-quarto-table-cell-role="th">speechiness</th>
+<th data-quarto-table-cell-role="th">acousticness</th>
+<th data-quarto-table-cell-role="th">instrumentalness</th>
+<th data-quarto-table-cell-role="th">liveness</th>
+<th data-quarto-table-cell-role="th">valence</th>
+<th data-quarto-table-cell-role="th">tempo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5R8J6WCnV1E2lDJgVoaA4P</td>
+<td>Threats</td>
+<td>Jean Grae</td>
+<td>41</td>
+<td>246293</td>
+<td>2008</td>
+<td>0.677</td>
+<td>0.631</td>
+<td>0</td>
+<td>-6.363</td>
+<td>1</td>
+<td>0.0578</td>
+<td>0.09860</td>
+<td>0.000005</td>
+<td>0.245</td>
+<td>0.454</td>
+<td>90.120</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>5ex7brQNeKhyh6wjQoMDr0</td>
+<td>Queen's Philosophy</td>
+<td>Sa-Roc</td>
+<td>16</td>
+<td>193750</td>
+<td>2013</td>
+<td>0.849</td>
+<td>0.572</td>
+<td>7</td>
+<td>-10.119</td>
+<td>1</td>
+<td>0.3580</td>
+<td>0.03350</td>
+<td>0.000000</td>
+<td>0.109</td>
+<td>0.497</td>
+<td>97.106</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0t7k99JA9z0KaMw1BoEpk8</td>
+<td>9th vs. Thought</td>
+<td>Black Thought</td>
+<td>38</td>
+<td>167741</td>
+<td>2018</td>
+<td>0.751</td>
+<td>0.933</td>
+<td>7</td>
+<td>-2.188</td>
+<td>1</td>
+<td>0.2940</td>
+<td>0.02550</td>
+<td>0.000000</td>
+<td>0.071</td>
+<td>0.458</td>
+<td>93.032</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1LM6EReMkAxuDXDF26ekl2</td>
+<td>Get By</td>
+<td>Talib Kweli</td>
+<td>58</td>
+<td>227426</td>
+<td>2002</td>
+<td>0.662</td>
+<td>0.928</td>
+<td>2</td>
+<td>-4.688</td>
+<td>1</td>
+<td>0.3770</td>
+<td>0.00324</td>
+<td>0.000000</td>
+<td>0.170</td>
+<td>0.775</td>
+<td>90.509</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5DWbvNiVrH2u0Si9e21ZjW</td>
+<td>We Comin</td>
+<td>Sa-Roc</td>
+<td>7</td>
+<td>209655</td>
+<td>2015</td>
+<td>0.659</td>
+<td>0.859</td>
+<td>8</td>
+<td>-2.767</td>
+<td>1</td>
+<td>0.4230</td>
+<td>0.30100</td>
+<td>0.000000</td>
+<td>0.715</td>
+<td>0.709</td>
+<td>174.542</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="cek-nilai-kosong" class="level4" data-number="12.5.8.4">
+<h4 data-number="12.5.8.4" class="anchored" data-anchor-id="cek-nilai-kosong"><span class="header-section-number">12.5.8.4</span> Cek Nilai Kosong</h4>
+<p>Sebagai efek samping dari encode-decode, terkadang kolom nama kosong. Maka kita harus menemukan data tersebut dan menghapusnya, agar algoritma dapat memproses data yang benar.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">##delete empty string in name column</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[data[<span class="st">'name'</span>] <span class="op">!=</span> <span class="st">''</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">##reset index</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">artist</th>
+<th data-quarto-table-cell-role="th">popularity</th>
+<th data-quarto-table-cell-role="th">duration_ms</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">danceability</th>
+<th data-quarto-table-cell-role="th">energy</th>
+<th data-quarto-table-cell-role="th">key</th>
+<th data-quarto-table-cell-role="th">loudness</th>
+<th data-quarto-table-cell-role="th">mode</th>
+<th data-quarto-table-cell-role="th">speechiness</th>
+<th data-quarto-table-cell-role="th">acousticness</th>
+<th data-quarto-table-cell-role="th">instrumentalness</th>
+<th data-quarto-table-cell-role="th">liveness</th>
+<th data-quarto-table-cell-role="th">valence</th>
+<th data-quarto-table-cell-role="th">tempo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5R8J6WCnV1E2lDJgVoaA4P</td>
+<td>Threats</td>
+<td>Jean Grae</td>
+<td>41</td>
+<td>246293</td>
+<td>2008</td>
+<td>0.677</td>
+<td>0.631</td>
+<td>0</td>
+<td>-6.363</td>
+<td>1</td>
+<td>0.0578</td>
+<td>0.09860</td>
+<td>0.000005</td>
+<td>0.245</td>
+<td>0.454</td>
+<td>90.120</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>5ex7brQNeKhyh6wjQoMDr0</td>
+<td>Queen's Philosophy</td>
+<td>Sa-Roc</td>
+<td>16</td>
+<td>193750</td>
+<td>2013</td>
+<td>0.849</td>
+<td>0.572</td>
+<td>7</td>
+<td>-10.119</td>
+<td>1</td>
+<td>0.3580</td>
+<td>0.03350</td>
+<td>0.000000</td>
+<td>0.109</td>
+<td>0.497</td>
+<td>97.106</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0t7k99JA9z0KaMw1BoEpk8</td>
+<td>9th vs. Thought</td>
+<td>Black Thought</td>
+<td>38</td>
+<td>167741</td>
+<td>2018</td>
+<td>0.751</td>
+<td>0.933</td>
+<td>7</td>
+<td>-2.188</td>
+<td>1</td>
+<td>0.2940</td>
+<td>0.02550</td>
+<td>0.000000</td>
+<td>0.071</td>
+<td>0.458</td>
+<td>93.032</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1LM6EReMkAxuDXDF26ekl2</td>
+<td>Get By</td>
+<td>Talib Kweli</td>
+<td>58</td>
+<td>227426</td>
+<td>2002</td>
+<td>0.662</td>
+<td>0.928</td>
+<td>2</td>
+<td>-4.688</td>
+<td>1</td>
+<td>0.3770</td>
+<td>0.00324</td>
+<td>0.000000</td>
+<td>0.170</td>
+<td>0.775</td>
+<td>90.509</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5DWbvNiVrH2u0Si9e21ZjW</td>
+<td>We Comin</td>
+<td>Sa-Roc</td>
+<td>7</td>
+<td>209655</td>
+<td>2015</td>
+<td>0.659</td>
+<td>0.859</td>
+<td>8</td>
+<td>-2.767</td>
+<td>1</td>
+<td>0.4230</td>
+<td>0.30100</td>
+<td>0.000000</td>
+<td>0.715</td>
+<td>0.709</td>
+<td>174.542</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="feature-selection" class="level4" data-number="12.5.8.5">
+<h4 data-number="12.5.8.5" class="anchored" data-anchor-id="feature-selection"><span class="header-section-number">12.5.8.5</span> Feature Selection</h4>
+<p>Tujuan utama kita adalah untuk melakukan clustering terhadap karakteristik lagu. Dalam dataset, ada beberapa fitur yang tidak mencerminkan karakteristik dari sebuah lagu, maka kita harus menghapus fitur-fitur tersebut.<br>
+anda bisa melihat deskripsi dari fitur tersebut di section data understanding di slide sebelumnya.</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">## drop name artist and year column</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> data.copy()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> data2.drop([<span class="st">'artist'</span>, <span class="st">'name'</span>, <span class="st">'year'</span>, <span class="st">'popularity'</span>, <span class="st">'key'</span>,<span class="st">'duration_ms'</span>, <span class="st">'mode'</span>, <span class="st">'id'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>data2.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">danceability</th>
+<th data-quarto-table-cell-role="th">energy</th>
+<th data-quarto-table-cell-role="th">loudness</th>
+<th data-quarto-table-cell-role="th">speechiness</th>
+<th data-quarto-table-cell-role="th">acousticness</th>
+<th data-quarto-table-cell-role="th">instrumentalness</th>
+<th data-quarto-table-cell-role="th">liveness</th>
+<th data-quarto-table-cell-role="th">valence</th>
+<th data-quarto-table-cell-role="th">tempo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.677</td>
+<td>0.631</td>
+<td>-6.363</td>
+<td>0.0578</td>
+<td>0.09860</td>
+<td>0.000005</td>
+<td>0.245</td>
+<td>0.454</td>
+<td>90.120</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.849</td>
+<td>0.572</td>
+<td>-10.119</td>
+<td>0.3580</td>
+<td>0.03350</td>
+<td>0.000000</td>
+<td>0.109</td>
+<td>0.497</td>
+<td>97.106</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0.751</td>
+<td>0.933</td>
+<td>-2.188</td>
+<td>0.2940</td>
+<td>0.02550</td>
+<td>0.000000</td>
+<td>0.071</td>
+<td>0.458</td>
+<td>93.032</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0.662</td>
+<td>0.928</td>
+<td>-4.688</td>
+<td>0.3770</td>
+<td>0.00324</td>
+<td>0.000000</td>
+<td>0.170</td>
+<td>0.775</td>
+<td>90.509</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0.659</td>
+<td>0.859</td>
+<td>-2.767</td>
+<td>0.4230</td>
+<td>0.30100</td>
+<td>0.000000</td>
+<td>0.715</td>
+<td>0.709</td>
+<td>174.542</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="normalisasi-minmax" class="level4" data-number="12.5.8.6">
+<h4 data-number="12.5.8.6" class="anchored" data-anchor-id="normalisasi-minmax"><span class="header-section-number">12.5.8.6</span> Normalisasi MinMax</h4>
+<p>beberapa fitur mempunyai batasan nilai yang berbeda-beda dan jaraknya cukup jauh. sebagai contoh, di fitur loudness, batasan nilai adalah -60 sampai -3, sedangkan di variabel instrumentalness, batasan nilai adalah 0 sampai 3.490000e-01. Untuk data min max selengkapnya bisa dicek di code dibawah.<br>
+nilai spread yang cukup besar ini dapat mempengaruhi hasil akhir clusterisasi, maka kita harus melakukan proses standarisasi agar semua fitur mempunyai batasan yang sama, yaitu 0 sampai 1</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">## normalize all data to 0 and 1</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> data2.values <span class="co">##returns a numpy array</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>min_max_scaler <span class="op">=</span> preprocessing.MinMaxScaler()</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>x_scaled <span class="op">=</span> min_max_scaler.fit_transform(x)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> pd.DataFrame(x_scaled)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">## convert to dataframe</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>data2.columns <span class="op">=</span> [<span class="st">'acousticness'</span>,<span class="st">'danceability'</span>,<span class="st">'energy'</span>,<span class="st">'instrumentalness'</span>,<span class="st">'loudness'</span>, <span class="st">'liveness'</span>, <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>,<span class="st">'valence'</span>]</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">## data2.head()</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>data2.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">acousticness</th>
+<th data-quarto-table-cell-role="th">danceability</th>
+<th data-quarto-table-cell-role="th">energy</th>
+<th data-quarto-table-cell-role="th">instrumentalness</th>
+<th data-quarto-table-cell-role="th">loudness</th>
+<th data-quarto-table-cell-role="th">liveness</th>
+<th data-quarto-table-cell-role="th">speechiness</th>
+<th data-quarto-table-cell-role="th">tempo</th>
+<th data-quarto-table-cell-role="th">valence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>100.000000</td>
+<td>100.000000</td>
+<td>100.000000</td>
+<td>100.000000</td>
+<td>100.000000</td>
+<td>100.000000</td>
+<td>100.000000</td>
+<td>100.000000</td>
+<td>100.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.649197</td>
+<td>0.585248</td>
+<td>0.621026</td>
+<td>0.359235</td>
+<td>0.229716</td>
+<td>0.078974</td>
+<td>0.232926</td>
+<td>0.524761</td>
+<td>0.257162</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.209422</td>
+<td>0.246602</td>
+<td>0.182713</td>
+<td>0.269414</td>
+<td>0.248781</td>
+<td>0.224460</td>
+<td>0.220864</td>
+<td>0.242270</td>
+<td>0.258519</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.554878</td>
+<td>0.396109</td>
+<td>0.540513</td>
+<td>0.095010</td>
+<td>0.035447</td>
+<td>0.000000</td>
+<td>0.078968</td>
+<td>0.376074</td>
+<td>0.116634</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.659254</td>
+<td>0.588576</td>
+<td>0.625700</td>
+<td>0.348233</td>
+<td>0.132589</td>
+<td>0.000003</td>
+<td>0.130647</td>
+<td>0.515951</td>
+<td>0.153260</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.795552</td>
+<td>0.795116</td>
+<td>0.735747</td>
+<td>0.557173</td>
+<td>0.371026</td>
+<td>0.004142</td>
+<td>0.319902</td>
+<td>0.685276</td>
+<td>0.236485</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="dimensionality-reduction-using-principal-component-analysis-pca" class="level4" data-number="12.5.8.7">
+<h4 data-number="12.5.8.7" class="anchored" data-anchor-id="dimensionality-reduction-using-principal-component-analysis-pca"><span class="header-section-number">12.5.8.7</span> Dimensionality Reduction using Principal Component Analysis (PCA)</h4>
+<p>Setelah kita menghapus fitur yang tidak terpakai, kita masih mempunyai 9 fitur. Kita tidak dapat melakukan proses clustering dengan 9 fitur, karena proses clustering hanya bisa dilakukan dengan maksimal 2 fitur. Oleh karena itu diperlukan metode dimensionality reduction dengan Principal Component Analysis untuk mengkondensasi 9 fitur menjadi 2 fitur. Nilai intrinsik yang ada di 9 fitur tidak akan hilang, nilai tersebut akan direpresentasikan ke bentuk yang lebih kecil, menjadi 2 fitur.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Lakukan PCA untuk mengurangi jumlah fitur menjadi 2 fitur saja</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>pca.fit(data2)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>pca_data <span class="op">=</span> pca.transform(data2)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">## buat dataframe dari hasil pca</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>pca_df <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>pca_data, columns<span class="op">=</span>[<span class="st">'x'</span>, <span class="st">'y'</span>])</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>pca_df.head()</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">## plot pca_df using plotly</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(pca_df, x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y'</span>, title<span class="op">=</span><span class="st">'PCA'</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>                            <div id="564ec38c-7065-492c-b41b-a086d56b7ee1" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("564ec38c-7065-492c-b41b-a086d56b7ee1")) {                    Plotly.newPlot(                        "564ec38c-7065-492c-b41b-a086d56b7ee1",                        [{"hovertemplate":"x=%{x}\u003cbr\u003ey=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#000001","symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":[0.1359720421090195,0.05074051602090565,-0.38668550313139416,-0.4539583001641539,-0.7095366359692206,-0.18835350779020318,-0.2844124670268119,-0.5523131046484486,0.055277878953341894,-0.09736881934744475,-0.3426570284102757,-0.35723939055157966,-0.043628959568030486,-0.47365889834565106,-0.4501176647521103,-0.37012740142445005,-0.5313452305214212,0.25244021756048873,-0.47406851230816655,-0.5075612703431549,0.2929372923413671,-0.3859400043120029,-0.17660331257637166,-0.5705450943498728,-0.20147820528898283,-0.32166782445033937,0.13721010224154617,-0.051514088220340225,0.17324099370767246,-0.7562770400351462,0.3542176054973479,0.6065916910512437,-0.1113299121667416,-0.21924775209243186,-0.2915464336934041,0.03426817355757638,-0.44921887960217344,-0.32102351136929164,-0.19214525808805782,0.2013038307572889,0.248167827346132,-0.5487448589112779,0.06392908917849162,-0.15016951795364974,-0.274584615498399,0.08159657589750773,0.06399756535832764,-0.31241466855294214,-0.06218210140450924,0.19618551968419637,-0.47254235744417106,0.36896688274049383,0.2557289623280655,0.27910463815491016,0.34294434972429183,0.17913017024958905,1.1255075174119495,0.13521887507058603,0.4699177168179113,0.20286014287812962,0.22079623451304176,0.17714912219302814,-0.05850605344552535,-0.32661169617160307,0.6453506354620424,-0.18646278097381394,0.15520972460424573,-0.4024139709628827,0.7722474930641405,-0.07216398051960449,-0.2577623117084347,0.03473721087165079,-0.0817187752593234,0.1248227528168823,-0.03553215424970999,-0.032686205701441574,0.22337830449775545,0.32201680205656635,0.2805048295881484,-0.1807867221746264,0.42932743502458665,0.5557516270073105,0.4238262299224983,0.5000920238593803,0.19306728770771023,-0.02834203679611817,0.22699827750520038,-0.07874798747400776,0.19453879688538067,-0.013668397467456834,-0.17079097739229857,-0.17863022129266093,-0.08843109629742403,0.24858946018382572,0.3932384995209416,0.3994195189803509,-0.07051622510997418,0.12025922678648125,0.3345765317205595,1.0726255218994232],"xaxis":"x","y":[0.01689419940636574,-0.4178916352350507,-0.039132570927957286,-0.10030980035976661,0.13066862500313678,0.25614444009834936,-0.47519843006453744,-0.07441477451987115,-0.15474212579030203,-0.256603727052241,0.4093568420176841,-0.3868319527371335,-0.5072384031465451,-0.03449614864346243,0.030574071854082386,0.4621149799054972,-0.27953022165699887,-0.20298628082829054,-0.05575475585457764,-0.46046033356881366,-0.41612203945864185,0.045698466050777355,-0.15766357753842983,0.3714832138661521,-0.24149595978351768,-0.0005038235574424762,-0.2940270232822228,-0.36838721124489215,0.06538783922224883,-0.13122571180215264,-0.3814935630443564,-0.17034628287715517,-0.099385302500622,0.03660908562113993,-0.25365054685870664,0.06868176950179183,0.7049350147955425,0.11729860145677508,0.10377457099246698,-0.10527939558399614,-0.13420099872410823,0.5695190380390033,0.4128439353069641,-0.28432817561973117,-0.17271867069861208,-0.2796801421051957,0.029985313348754445,0.6484884517247097,0.28750722899315273,0.8412283027202614,0.5475102688478234,0.4521877372638971,0.35711865068987747,-0.020689038470924802,-0.033348060405764886,-0.1874503003956798,0.18176231966725398,0.44423652383881856,-0.09949942651217772,0.009078330622087094,0.03223393577300773,0.21413500414018238,0.3164048163167853,0.41395831820616835,0.23402237257971165,-0.12880042294717353,-0.22505686964848537,-0.09765847746074326,0.10635937095896451,-0.10265172426687871,-0.40373990434307955,-0.1701373542252757,-0.019497247639837352,-0.24937123410873857,-0.17287039564429604,-0.1615110862495228,-0.032950185364536665,0.15319701955123835,0.14254166057547066,0.3101564123406214,0.21798716920376396,-0.187831976780668,0.20284891816531322,0.35164654774186443,0.19910835435307353,-0.18533855565248422,-0.001148426510404499,-0.5072972467818258,-0.16306912566831383,-0.18078971092880772,0.07174492347658197,0.1369135150246427,-0.20783215782850045,-0.03173802560966221,-0.3301546745875508,0.02722490742136405,-0.16768073768624803,0.0746511356845295,0.1143802897866102,0.08360945862840005],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1,"#000022"],[0.2,"#000023"],[0.3,"#000024"],[0.4,"#000025"],[0.5,"#000026"],[0.6,"#000027"],[0.7,"#000028"],[0.8,"#000029"],[0.9,"#000030"],[1.0,"#000031"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"x"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"y"}},"legend":{"tracegroupgap":0},"title":{"text":"PCA"}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('564ec38c-7065-492c-b41b-a086d56b7ee1');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="clustering-menggunakan-k-means" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="clustering-menggunakan-k-means"><span class="header-section-number">12.6</span> Clustering Menggunakan K-Means</h2>
+<p>Clustering adalah proses pengelompokan data atau objek-objek serupa menjadi kelompok-kelompok yang lebih homogen berdasarkan kesamaan fitur atau karakteristik tertentu.<br>
+Algoritma k-means adalah metode clustering yang mengelompokkan data menjadi beberapa kelompok berdasarkan jaraknya ke pusat kelompok yang ditentukan secara iteratif.</p>
+<p>Dataset akan kita ubah bentuknya menjadi list menggunakan fungsi zip.<br>
+Lalu kita aplikasikan algoritma K-Means menggunakan parameter n-init=10 dan max_iter=1000. N-init berfungsi untuk menambah konsistensi hasil dan max_iter=1000 untuk menambah akurasi clustering.<br>
+Lalu kita buat graf scatter plot menggunakan library plotly-express</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">## rubah bentuk data ke list </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(pca_df[<span class="st">'x'</span>], pca_df[<span class="st">'y'</span>]))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">## fit kmeans model</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_init<span class="op">=</span><span class="dv">10</span>, max_iter<span class="op">=</span><span class="dv">1000</span>).fit(data2)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">## make scatter plot using plotly</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(pca_df, x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y'</span>, color<span class="op">=</span>kmeans.labels_, color_continuous_scale<span class="op">=</span><span class="st">'rainbow'</span>, hover_data<span class="op">=</span>[data.artist, data.name])</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>                            <div id="d1a1229c-1da5-4cc6-939d-bd4f6ec5bfb5" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("d1a1229c-1da5-4cc6-939d-bd4f6ec5bfb5")) {                    Plotly.newPlot(                        "d1a1229c-1da5-4cc6-939d-bd4f6ec5bfb5",                        [{"customdata":[["Jean Grae","Threats"],["Sa-Roc","Queen's Philosophy"],["Black Thought","9th vs. Thought"],["Talib Kweli","Get By"],["Sa-Roc","We Comin"],["Gift Of Gab","Freedom Form Flowing"],["Sa-Roc","Hood Supreme"],["Sa-Roc","Maximum Frequency"],["Talib Kweli","Never Been In Love"],["Sa-Roc","Eye of the Phoenix"],["Avenged Sevenfold","Nightmare"],["Talib Kweli","Ms. Hill"],["Sa-Roc","End of the World"],["Sa-Roc","NSFW (Not Safe For Weak Rappers)"],["Sa-Roc","Legendary"],["Avenged Sevenfold","Blinded in Chains"],["Sa-Roc","The Moors of Alhambra"],["Sa-Roc","Lilith's Psalm"],["Sa-Roc","MetaMorpheus"],["Sa-Roc","WWII (Word War II)"],["MC Breed","Gotta Get Mine"],["Vinnie Paz","Battle Hymn"],["Apathy","Pay Your Dues"],["Dilated Peoples","Kindness For Weakness"],["Jedi Mind Tricks","Blood Runs Cold"],["Afu-Ra","Equality"],["Cunninlynguists","Nothing but Strangeness (feat. Looptroop Rockers & Hilltop Hoods)"],["Dag Savage","When It Rains (feat. Aloe Blacc)"],["Citizen Cope","Let The Drummer Kick"],["Evidence","Late For The Sky (feat. Slug & Aesop Rock)"],["Geto Boys","Mind Playing Tricks on Me"],["Sweatshop Union","Oh My"],["R.A. The Rugged Man","Definition Of A Rap Flow (Albee 3000)"],["Jedi Mind Tricks","Suicide"],["Immortal Technique","Point Of No Return"],["Cunninlynguists","Guide You Through Shadows (feat. Ra Scion & Substantial)"],["Jedi Mind Tricks","Fraudulent Cloth"],["PaceWon & Mr. Green","Children Sing"],["Cunninlynguists","Enemies With Benefits F. Tonedeff"],["Immortal Technique","Freedom Of Speech"],["Cunninlynguists","Beyond the Sun (feat. J Live)"],["Atmosphere","Pour Me Another"],["Jedi Mind Tricks","Razorblade Salvation"],["Cunninlynguists","Love Ain't (f. Tonedeff) [Deluxe Edition]"],["Jedi Mind Tricks","Uncommon Valor: A Vietnam Story"],["Sol","2020"],["Marcus D","Melancholy Hopeful"],["Cunninlynguists","Stars Shine Brightest (In The Darkest Of Night) F. Rick Warren"],["Gorillaz","El Ma\\xc3\\xb1ana"],["The Strokes","Reptilia"],["Gorillaz","Dirty Harry"],["Uyama Hiroto","Soul Of Freedom feat. Cise Starr"],["Awon","Take Time"],["SoulChef","When I Close My Eyes"],["SoulChef","Say Somethin'"],["Common Market","Swell"],["Idealism","nagashi"],["Birocratic","Boys\\xe2\\x80\\x99 Bop"],["DANGERDOOM","Benzi Box"],["The Grouch & Eligh","Comin' Up (feat. Mistah F.A.B.)"],["The White Stripes","Seven Nation Army"],["Gorillaz","Some Kind of Nature (feat. Lou Reed)"],["Gorillaz","Clint Eastwood"],["MGMT","Time to Pretend"],["STRFKR","Rawnald Gregory Erickson the Second"],["MF DOOM","Rapp Snitch Knishes feat. Mr. Fantastik"],["Gorillaz","November Has Come"],["Cunninlynguists","Beautiful Girl"],["Emancipator","Black Lake"],["The Grouch","THE POSSE"],["People Under The Stairs","Anotha' (BBQ)"],["Lyrics Born","Before and After"],["Collective Efforts","So Cold"],["People Under The Stairs","Pictures On My Wall"],["Brother Ali","The Travelers"],["Blue Scholars","Motion Movement"],["Zion I","Antenna"],["Marvin Gaye","Sexual Healing - Kygo Remix"],["Earth, Wind & Fire","Let's Groove"],["Michael Jackson","Don't Stop 'Til You Get Enough - 2003 Edit"],["Marvin Gaye","Ain't No Mountain High Enough"],["Bill Withers","Ain't No Sunshine"],["The Temptations","Ain't Too Proud To Beg"],["Daryl Hall & John Oates","You Make My Dreams (Come True)"],["Michael Jackson","Billie Jean"],["Sweatshop Union","Close to Home"],["Deltron 3030","Mastermind"],["The Dynospectrum","Anything Is Everything"],["Kenichiro Nishihara","believe"],["Grieves","Sunny Side Of Hell"],["Murs","Everything"],["Grieves","On The Rocks"],["Common Market","Slow Cure"],["Collective Efforts","This Far"],["Brother Ali","Walking Away"],["Atmosphere","The Best Day"],["Blue Scholars","Southside Revival"],["Sweatshop Union","The Humans' race"],["Cunninlynguists","Mic Like a Memory [Deluxe Edition] (feat. Kory Calico)"],["Emancipator","Soon It Will Be Cold Enough to Build Fires"]],"hovertemplate":"x=%{x}\u003cbr\u003ey=%{y}\u003cbr\u003ehover_data_0=%{customdata[0]}\u003cbr\u003ehover_data_1=%{customdata[1]}\u003cbr\u003ecolor=%{marker.color}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":[0,4,7,7,7,1,4,7,4,4,3,4,4,7,7,3,7,2,7,7,2,7,4,3,4,7,2,4,0,7,2,2,4,1,4,1,3,1,1,2,2,3,6,4,4,4,0,3,1,6,3,6,6,0,0,2,5,6,2,0,0,0,1,3,5,4,2,7,5,4,4,4,1,2,4,4,0,0,0,1,0,2,0,6,0,4,0,4,2,4,1,1,4,0,2,0,4,0,0,5],"coloraxis":"coloraxis","symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":[0.1359720421090195,0.05074051602090565,-0.38668550313139416,-0.4539583001641539,-0.7095366359692206,-0.18835350779020318,-0.2844124670268119,-0.5523131046484486,0.055277878953341894,-0.09736881934744475,-0.3426570284102757,-0.35723939055157966,-0.043628959568030486,-0.47365889834565106,-0.4501176647521103,-0.37012740142445005,-0.5313452305214212,0.25244021756048873,-0.47406851230816655,-0.5075612703431549,0.2929372923413671,-0.3859400043120029,-0.17660331257637166,-0.5705450943498728,-0.20147820528898283,-0.32166782445033937,0.13721010224154617,-0.051514088220340225,0.17324099370767246,-0.7562770400351462,0.3542176054973479,0.6065916910512437,-0.1113299121667416,-0.21924775209243186,-0.2915464336934041,0.03426817355757638,-0.44921887960217344,-0.32102351136929164,-0.19214525808805782,0.2013038307572889,0.248167827346132,-0.5487448589112779,0.06392908917849162,-0.15016951795364974,-0.274584615498399,0.08159657589750773,0.06399756535832764,-0.31241466855294214,-0.06218210140450924,0.19618551968419637,-0.47254235744417106,0.36896688274049383,0.2557289623280655,0.27910463815491016,0.34294434972429183,0.17913017024958905,1.1255075174119495,0.13521887507058603,0.4699177168179113,0.20286014287812962,0.22079623451304176,0.17714912219302814,-0.05850605344552535,-0.32661169617160307,0.6453506354620424,-0.18646278097381394,0.15520972460424573,-0.4024139709628827,0.7722474930641405,-0.07216398051960449,-0.2577623117084347,0.03473721087165079,-0.0817187752593234,0.1248227528168823,-0.03553215424970999,-0.032686205701441574,0.22337830449775545,0.32201680205656635,0.2805048295881484,-0.1807867221746264,0.42932743502458665,0.5557516270073105,0.4238262299224983,0.5000920238593803,0.19306728770771023,-0.02834203679611817,0.22699827750520038,-0.07874798747400776,0.19453879688538067,-0.013668397467456834,-0.17079097739229857,-0.17863022129266093,-0.08843109629742403,0.24858946018382572,0.3932384995209416,0.3994195189803509,-0.07051622510997418,0.12025922678648125,0.3345765317205595,1.0726255218994232],"xaxis":"x","y":[0.01689419940636574,-0.4178916352350507,-0.039132570927957286,-0.10030980035976661,0.13066862500313678,0.25614444009834936,-0.47519843006453744,-0.07441477451987115,-0.15474212579030203,-0.256603727052241,0.4093568420176841,-0.3868319527371335,-0.5072384031465451,-0.03449614864346243,0.030574071854082386,0.4621149799054972,-0.27953022165699887,-0.20298628082829054,-0.05575475585457764,-0.46046033356881366,-0.41612203945864185,0.045698466050777355,-0.15766357753842983,0.3714832138661521,-0.24149595978351768,-0.0005038235574424762,-0.2940270232822228,-0.36838721124489215,0.06538783922224883,-0.13122571180215264,-0.3814935630443564,-0.17034628287715517,-0.099385302500622,0.03660908562113993,-0.25365054685870664,0.06868176950179183,0.7049350147955425,0.11729860145677508,0.10377457099246698,-0.10527939558399614,-0.13420099872410823,0.5695190380390033,0.4128439353069641,-0.28432817561973117,-0.17271867069861208,-0.2796801421051957,0.029985313348754445,0.6484884517247097,0.28750722899315273,0.8412283027202614,0.5475102688478234,0.4521877372638971,0.35711865068987747,-0.020689038470924802,-0.033348060405764886,-0.1874503003956798,0.18176231966725398,0.44423652383881856,-0.09949942651217772,0.009078330622087094,0.03223393577300773,0.21413500414018238,0.3164048163167853,0.41395831820616835,0.23402237257971165,-0.12880042294717353,-0.22505686964848537,-0.09765847746074326,0.10635937095896451,-0.10265172426687871,-0.40373990434307955,-0.1701373542252757,-0.019497247639837352,-0.24937123410873857,-0.17287039564429604,-0.1615110862495228,-0.032950185364536665,0.15319701955123835,0.14254166057547066,0.3101564123406214,0.21798716920376396,-0.187831976780668,0.20284891816531322,0.35164654774186443,0.19910835435307353,-0.18533855565248422,-0.001148426510404499,-0.5072972467818258,-0.16306912566831383,-0.18078971092880772,0.07174492347658197,0.1369135150246427,-0.20783215782850045,-0.03173802560966221,-0.3301546745875508,0.02722490742136405,-0.16768073768624803,0.0746511356845295,0.1143802897866102,0.08360945862840005],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1,"#000022"],[0.2,"#000023"],[0.3,"#000024"],[0.4,"#000025"],[0.5,"#000026"],[0.6,"#000027"],[0.7,"#000028"],[0.8,"#000029"],[0.9,"#000030"],[1.0,"#000031"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"x"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"y"}},"coloraxis":{"colorbar":{"title":{"text":"color"}},"colorscale":[[0.0,"rgb(150,0,90)"],[0.125,"rgb(0,0,200)"],[0.25,"rgb(0,25,255)"],[0.375,"rgb(0,152,255)"],[0.5,"rgb(44,255,150)"],[0.625,"rgb(151,255,0)"],[0.75,"rgb(255,234,0)"],[0.875,"rgb(255,111,0)"],[1.0,"rgb(255,0,0)"]]},"legend":{"tracegroupgap":0},"margin":{"t":60}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('d1a1229c-1da5-4cc6-939d-bd4f6ec5bfb5');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+</section>
+<section id="deploy-ke-streamlit" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="deploy-ke-streamlit"><span class="header-section-number">12.7</span> Deploy ke Streamlit</h2>
+<p>Streamlit adalah framework open-source untuk mengembangkan aplikasi web interaktif dengan menggunakan bahasa pemrograman Python.<br>
+Tujuannya adalah menyederhanakan proses pembuatan aplikasi web dengan memungkinkan pengembang untuk membuat aplikasi dengan mudah menggunakan kode Python yang sederhana dan familiar.</p>
+<section id="buat-file-bernama-streamlit_app.py" class="level3" data-number="12.7.1">
+<h3 data-number="12.7.1" class="anchored" data-anchor-id="buat-file-bernama-streamlit_app.py"><span class="header-section-number">12.7.1</span> Buat file bernama streamlit_app.py</h3>
+<p>Langkah pertama adalah membuat sebuah file baru bernama streamlit_app.py. Kita akan masukkan semua koding yang telah kita buat sebelumnya ke dalam satu file ini.</p>
+<p>Kita telah membahas proses pengambilan dataset, dan telah dijelaskan bahwa kita harus membuat beberapa fungsi seperti getToken(), getPlaylistItems(). Masukkan semua fungsi-fungsi tersebut ke dalam file streamlit_app.py.</p>
+<p>Selain itu, pada bab data preprocessing, terdapat banyak potongan code untuk pemrosesan data. Masukkan semua potongan code tersebut ke dalam sebuah function bernama dataProcessing().</p>
+<p>Akhirnya, berikut fungsi-fungsi yang ada di dalam streamlit_app.py:<br>
+- <strong>getToken()</strong>, untuk mengambil token<br>
+- <strong>getAuthHeader()</strong>, untuk mengisi header request dengan token yang didapat<br>
+- <strong>getAudioFeatures()</strong>, untuk mendapatkan data karakteristik lagu<br>
+- <strong>getPlaylistItems()</strong>, untuk mengambil lagu-lagu yang ada di dalam playlist<br>
+- <strong>dataProcessing()</strong>, untuk memproses dataset dan menghasilkan clustering</p>
+</section>
+<section id="tambahkan-fungsi-dataprocessing" class="level3" data-number="12.7.2">
+<h3 data-number="12.7.2" class="anchored" data-anchor-id="tambahkan-fungsi-dataprocessing"><span class="header-section-number">12.7.2</span> Tambahkan fungsi dataProcessing()</h3>
+<p>Tambahkan <code>dataProcessing()</code> (pemanggilan function dataProcessing()) di bagian paling akhir function getAudioFeatures(). Gunanya untuk melanjutkan pemrosesan data secara otomatis.</p>
+<p>Selain itu, fungsi ini berisi beberapa fungsi-fungsi khusus streamlit yang berguna untuk menampilkan grafik dan hasil dari coding.<br>
+Berikut beberapa contoh fungsi-fungsi streamlit:<br>
+- <code>st.write()</code>, untuk menulis teks atau paragraph. Masukkan teks ke dalam parameter fungsi untuk menampilkannya. Anda dapat menggunakan sintaks markdown (seperti # untuk header, dan ** untuk bold) untuk memanipulasi format teks.<br>
+- <code>st.plotly_chart()</code>, untuk menampilkan grafik menggunakan library plotly. Masukkan variable grafik (fig) ke parameter fungsi untuk meggunakannya.<br>
+- <code>st.text_input()</code>, untuk mendapatkan input yang dimasukkan ke text box oleh user. Masukkan teks ke dalam parameter fungsi untuk memberi label dari text box. Hasil input dari user akan dimasukkan ke sebuah variabel yang dipakai oleh fungsi.<br>
+- <code>st.button()</code>, untuk membuat sebuah tombol. Gunakan fungsi if untuk menjalankan sesuatu jika tombol ditekan. Masukkan teks ke dalam parameter fungsi untuk memberi label dari button.</p>
+<p>Untuk coding dari fungsi dataProcessing() dan fungsi driver streamlit bisa di simak dibawah ini :</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dataProcessing():</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pd.read_csv(<span class="st">'dataset.csv'</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    data</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"## Preprocessing Result"</span>)  <span class="co"># streamlit widget</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> data[[<span class="st">'artist'</span>, <span class="st">'name'</span>, <span class="st">'year'</span>, <span class="st">'popularity'</span>, <span class="st">'key'</span>, <span class="st">'mode'</span>, <span class="st">'duration_ms'</span>, <span class="st">'acousticness'</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>, <span class="st">'loudness'</span>, <span class="st">'liveness'</span>, <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>]]</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> data.drop([<span class="st">'mode'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    data[<span class="st">'artist'</span>] <span class="op">=</span> data[<span class="st">'artist'</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="bu">str</span>(x)[<span class="dv">2</span>:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    data[<span class="st">'name'</span>] <span class="op">=</span> data[<span class="st">'name'</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: <span class="bu">str</span>(x)[<span class="dv">2</span>:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"### Data to be deleted:"</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    data[data[<span class="st">'name'</span>] <span class="op">==</span> <span class="st">''</span>]</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> data[data[<span class="st">'name'</span>] <span class="op">!=</span> <span class="st">''</span>]</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"## Normalization Result"</span>)  <span class="co"># streamlit widget</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    data2 <span class="op">=</span> data.copy()</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    data2 <span class="op">=</span> data2.drop(</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>        [<span class="st">'artist'</span>, <span class="st">'name'</span>, <span class="st">'year'</span>, <span class="st">'popularity'</span>, <span class="st">'key'</span>, <span class="st">'duration_ms'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> data2.values</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    min_max_scaler <span class="op">=</span> preprocessing.MinMaxScaler()</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    x_scaled <span class="op">=</span> min_max_scaler.fit_transform(x)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    data2 <span class="op">=</span> pd.DataFrame(x_scaled)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    data2.columns <span class="op">=</span> [<span class="st">'acousticness'</span>, <span class="st">'danceability'</span>, <span class="st">'energy'</span>, <span class="st">'instrumentalness'</span>,</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'loudness'</span>, <span class="st">'liveness'</span>, <span class="st">'speechiness'</span>, <span class="st">'tempo'</span>, <span class="st">'valence'</span>]</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    data2</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"## Dimensionality Reduction with PCA"</span>)  <span class="co"># streamlit widget</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    pca.fit(data2)</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    pca_data <span class="op">=</span> pca.transform(data2)</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    pca_df <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>pca_data, columns<span class="op">=</span>[<span class="st">'x'</span>, <span class="st">'y'</span>])</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.scatter(pca_df, x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y'</span>, title<span class="op">=</span><span class="st">'PCA'</span>)</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    st.plotly_chart(fig)  <span class="co"># output plotly chart using streamlit</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"## Clustering with K-Means"</span>)  <span class="co"># streamlit widget</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    data2 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(pca_df[<span class="st">'x'</span>], pca_df[<span class="st">'y'</span>]))</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_init<span class="op">=</span><span class="dv">10</span>, max_iter<span class="op">=</span><span class="dv">1000</span>).fit(data2)</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.scatter(pca_df, x<span class="op">=</span><span class="st">'x'</span>, y<span class="op">=</span><span class="st">'y'</span>, color<span class="op">=</span>kmeans.labels_,</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>                     color_continuous_scale<span class="op">=</span><span class="st">'rainbow'</span>, hover_data<span class="op">=</span>[data.artist, data.name])</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    st.plotly_chart(fig)  <span class="co"># output plotly chart using streamlit</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    st.write(<span class="st">"Enjoy!"</span>)</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="co"># streamlit widgets</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>st.write(<span class="st">"# Spotify Playlist Clustering"</span>)</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>client_id <span class="op">=</span> st.text_input(<span class="st">"Enter Client ID"</span>)</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>client_secret <span class="op">=</span> st.text_input(<span class="st">"Enter Client Secret"</span>)</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>playlistId <span class="op">=</span> st.text_input(<span class="st">"Enter Playlist ID"</span>)</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a><span class="co"># streamlit widgets</span></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> st.button(<span class="st">'Create Dataset!'</span>):</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> getToken()</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>    getPlaylistItems(token, playlistId)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2023-08-04 18:42:10.625 
+  Warning: to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run C:\Users\Administrator\AppData\Roaming\Python\Python310\site-packages\ipykernel_launcher.py [ARGUMENTS]</code></pre>
+</div>
+</div>
+</section>
+<section id="buat-file-requirements.txt" class="level3" data-number="12.7.3">
+<h3 data-number="12.7.3" class="anchored" data-anchor-id="buat-file-requirements.txt"><span class="header-section-number">12.7.3</span> Buat file requirements.txt</h3>
+<p>Fungsi dari file ini adalah untuk memberitahu streamlit package apa yang harus di install sebelum di deploy.<br>
+Isi file requirements.txt dengan</p>
+<p><code>scikit-learn</code><br>
+<code>plotly-express</code></p>
+<p>Setelah itu, save file.</p>
+</section>
+<section id="upload-ke-github-repository" class="level3" data-number="12.7.4">
+<h3 data-number="12.7.4" class="anchored" data-anchor-id="upload-ke-github-repository"><span class="header-section-number">12.7.4</span> Upload ke github repository</h3>
+<p>Jika semua coding sudah selesai, maka kita harus meng-upload semua coding kita ke github.</p>
+<ul>
+<li>login ke github<br>
+</li>
+<li>di dashboard github, klik <code>New</code> untuk membuat repository baru<br>
+</li>
+<li>beri nama repositori, deskripsi, dan <strong>pastikan bahwa repository bersifat public</strong>. Lalu klik create repository<br>
+</li>
+<li>kembali ke code editor, masukkan file streamlit_app.py ke dalam folder<br>
+</li>
+<li>ketik <code>git init</code><br>
+</li>
+<li>ketik <code>git add .</code><br>
+</li>
+<li>ketik <code>git remote add origin https://github.com/[username]/[repository_name].git</code></li>
+</ul>
+</section>
+<section id="buat-akun-streamlit" class="level3" data-number="12.7.5">
+<h3 data-number="12.7.5" class="anchored" data-anchor-id="buat-akun-streamlit"><span class="header-section-number">12.7.5</span> Buat Akun Streamlit</h3>
+<ul>
+<li>Pergi ke streamlit.io<br>
+</li>
+<li>Buat akun/masuk menggunakan akun<br>
+</li>
+<li>Sangat direkomendasikan masuk menggunakan akun github</li>
+</ul>
+</section>
+<section id="create-new-app-isi-form" class="level3" data-number="12.7.6">
+<h3 data-number="12.7.6" class="anchored" data-anchor-id="create-new-app-isi-form"><span class="header-section-number">12.7.6</span> Create new app, isi form</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./19.stform.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar19. Form create new app di streamlit</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Repository</strong>, Nama repositori dari github yang akan di upload ke streamlit. format [user github]/[nama repository], contoh : <code>rif42/spotifyclustering</code><br>
+</li>
+<li><strong>Branch</strong>, Branch atau cabang dari repositori yang akan digunakan. Secara default akan diisi master<br>
+</li>
+<li><strong>Main File Path</strong>, Letak file yang akan dijadikan host dari aplikasi streamlit. Pastikan file sudah masuk didalam directory dan repository. Pastikan juga nama dari file sudah benar, sesuai dengan yang ada di repository.<br>
+</li>
+<li><strong>App URL</strong>, domain atau URL yang akan digunakan untuk mengakses aplikasi yang sudah di deploy.</li>
+</ul>
+<p>Klik create app dan tunggu sampai streamlit selesai melakukan proses deploy</p>
+</section>
+</section>
+<section id="kesimpulan" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="kesimpulan"><span class="header-section-number">12.8</span> Kesimpulan</h2>
+<p>Untuk project machine learning clustering ini, kita menggunakan dataset lagu yang diambil dari spotify.</p>
+<p>Untuk melakukan proses pengambilan lagu, kita membutuhkan akses API dari spotify. Pertama kita harus mendaftar sebagai spotify developer di web resmi spotify. Lalu kita mengambil sebuah token menggunakan kredensial yang kita dapat dari akun developer kita. Sebuah token memungkinkan kita untuk mengambil data dari spotify web API secara langsung. user menginput url playlist dan aplikasi akan mengambil semua lagu didalam playlist tersebut dan membuat dataset secara otomatis.</p>
+<p>Dataset yang dihasilkan sudah cukup solid karena spotify web API memang dikenal mempunyai kualitas tinggi. Namun kita tetap melakukan pengecekan konsistensi data. Ketika data diambil dari web, beberapa lagu/artist mempunyai karakter yang tidak dapat ditampilkan seperti huruf kanji, maka kita harus encode-decode karakter tersebut ke standar utf-8. Namun terkadang proses dari encode-decode menghasilkan sebuah string kosong. Walaupun fitur yang lain tidak kosong, data ini tidak bisa kita identifikasi, jadi kita akan hapus data ini.</p>
+<p>Setelah di preproses, kita akan melakukan proses dimensionality reduction menggunakan principal component analysis (PCA). Proses clustering menggunakan scatter plot mengharuskan data mempunyai 2 fitur. Tujuan dari proses PCA adalah mengurangi jumlah fitur dari 9 menjadi 2 tanpa mengurangi makna yang ada didalam dataset.</p>
+<p>Kita melakukan clustering dataset menggunakan algoritma K-Means dengan titik cluster yang diatur secara otomatis. Adapun parameter yang kita masukkan ke algoritma yaitu <strong>n_init=10</strong> untuk menambah konsistensi hasil dan <strong>max_iter=1000</strong> untuk menambah akurasi clustering.</p>
+<p>Hasilnya dataset terbagi menjadi 7 buah cluster (secara otomatis), dan masing masing lagu di dalam cluster mempunyai keunikan tersendiri. Keunikan tersebut dapat direpresentasikan dengan tempo lagu, jenis melodi, jenis instrumen, overall ‘vibe’ dari lagu, dan lain lain. Jumlah cluster dapat diatur menggunakan parameter <strong>n_cluster</strong>.</p>
+<p>Untuk melakukan proses deploy, pertama kita buat github repository dulu. Isi github repository dengan file python (file py, bukan ipynb) yang akan kita gunakan untuk proses deploy. File python ini berisi fungsi-2fung</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -737,8 +2002,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./project_regresi.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Project Regresi Hotel Yogyakarta</span></span>
+      <a href="./modul_10.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Deployment</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

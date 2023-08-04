@@ -17,8 +17,8 @@ book:
     - modul_8.qmd
     - modul_9.qmd
     - modul_10.qmd
-    - project_klasifikasi.qmd
-    - project_regresi.qmd
+    # - project_klasifikasi.qmd
+    # - project_regresi.qmd
     - project_clustering.qmd
 
 bibliography: references.bib
