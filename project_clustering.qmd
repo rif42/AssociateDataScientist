@@ -1,0 +1,162 @@
+---
+title: "Project Clustering - Spotify Playlist Clustering"
+format: html
+---
+
+# Project Overview  
+Project ini berfungsi untuk membuat sebuah aplikasi untuk melakukan proses clustering terhadap lagu-lagu yang ada di dalam sebuah playlist spotify.   
+Lagu-lagu tersebut dikelompokan berdasarkan karakteristik lagu (audio feature) yang kita dapatkan dari spotify web API.  
+Perlu diingat bahwa untuk project ini, kita akan buat algoritmanya dahulu, mengetesnya di notebook kita, lalu kita akan mengubahnya menjadi file python dan mengupload nya di Streamlit.  
+
+## Spotify  
+::: {layout="[[-1], [1], [-1]]"}
+![Gambar1. Logo Spotify](./1.spotify.png)
+:::
+
+
+Spotify adalah platform musik digital yang menyediakan layanan streaming musik dan podcast. Musik dan podcast di-stream melalui internet tanpa perlu mengunduhnya secara permanen. Pengguna dapat membuat playlist pribadi dan menyimpan lagu favorit di Library.  
+
+## Python  
+::: {layout="[[-1], [1], [-1]]"}
+![Gambar2. Logo Python](./2.py.png)
+:::
+
+
+Python adalah bahasa pemrograman serba guna yang dikembangkan pada awal 1990-an oleh Guido van Rossum. Tidak perlu mendeklarasikan tipe data variabel, dan nilai variabel dapat berubah saat program berjalan. Python mengutamakan kejelasan dan menghindari penggunaan tanda kurung kurawal atau titik koma. Python menyediakan pustaka bawaan (standard library) yang kaya, serta banyak modul dan pustaka dari pihak ketiga yang memperluas fungsionalitasnya.  
+
+## Streamlit  
+::: {layout="[[-1], [1], [-1]]"}
+![Gambar3. Logo Streamlit](./3.st.png)
+:::
+
+
+Streamlit adalah framework open-source untuk mengembangkan aplikasi web interaktif dengan menggunakan bahasa pemrograman Python.  Tujuannya adalah menyederhanakan proses pembuatan aplikasi web dengan memungkinkan pengembang untuk membuat aplikasi dengan mudah menggunakan kode Python yang sederhana dan familiar.  
+
+## Clustering  
+::: {layout="[[-1], [1], [-1]]"}
+![Gambar4. Contoh Grafik Clustering](./4.clustering.png)
+:::
+
+
+Clustering adalah proses pengelompokan data atau objek-objek serupa menjadi kelompok-kelompok yang lebih homogen berdasarkan kesamaan fitur atau karakteristik tertentu. 
+
+## K-Means  
+::: {layout="[[-1], [1], [-1]]"}
+![Gambar5. Contoh Clustering Menggunakan Scatter Plot](./5.scatterplot.png)  
+:::
+
+
+Algoritma k-means adalah metode clustering yang mengelompokkan data menjadi beberapa kelompok berdasarkan jaraknya ke pusat kelompok yang ditentukan secara iteratif.  
+
+# Application Flow  
+User flow adalah interaksi antara user dan aplikasi ini harus kita pelajari dan petakan secara detail agar aplikasi bisa digunakan dengan user secara nyaman.  
+Data flow adalah alur dari data yang ada di dalam aplikasi.  
+Function flow adalah struktur dari fungsi yang ada di dalam aplikasi  
+
+## User Flow  
+User flow dari aplikasi yang akan kita buat cukup simple :  
+![Gambar6. User Flow](./6.userflow.png)  
+
+## Data Flow  
+![Gambar7. Data Flow](./7.dataflow.png)  
+
+## Function Flow  
+![Gambar8. Function Flow](./8.functionflow.png)  
+
+
+# Membuat Akun Spotify Developer  
+## Daftar Sebagai Spotify Developer  
+Untuk mengakses web API spotify, kita harus mendaftar sebagai spotify developer. Berikut langkahnya:  
+- Pergi ke https://developer.spotify.com  
+- Klik tombol daftar di pojok kanan atas  
+- Isi form, klik daftar, verifikasi email  
+- Login dengan akun terverifikasi  
+- Pergi ke dashboard  
+Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi developer spotify! Ikuti langkah-langkah selanjutnya.  
+
+## Pergi ke dashboard spotify dan tekan create app  
+![Gambar9. Dashboard Spotify Developer](./9.dashboard.png)  
+
+## Isi form dengan data  
+![Gambar10. Isi Form di halaman Create App](./10.createapp.png)  
+
+
+**App name**, nama dari aplikasi, misal spotify_playlist_clusterization  
+**App description**, deskripsi singkat dari aplikasi yang akan dibuat  
+**Website**, website personal dari pembuat aplikasi  
+**Redirect URI**, umumnya user akan ditujukan ke URI ini ketika mengalami kegagalan request. namun untuk project ini, kita dapat mengisinya dengan apapun, seperti URL akun github atau linkedin  
+
+## Klik app yang sudah dibuat  
+![Gambar11. Daftar App di Spotify Developer](./11.app.png)  
+
+## Pergi ke settings, cari ClientID dan ClientSecret  
+![Gambar12. Client ID dan Client Secret dari App](./12.credentials.png)  
+
+# Buat Repositori di Github  
+Github adalah aplikasi untuk mengontrol versioning dari koding kita. Github akan melacak perubahan yang kita buat di dalam file koding, sehingga kita dapat membandingkan atau kembali ke versi sebelumnya. 
+Dalam project ini, Github juga digunakan untuk proses deployment di Streamlit.  
+
+## Login ke Github  
+![Gambar13. Dashboard Github](./13.git.png)  
+
+
+Pergi ke Github.com dan login atau daftar akun baru. Jika anda membuat akun baru, jangan lupa verifikasi akun setelah dibuat. Jika anda sudah login, maka dashboard akun anda akan tampil seperti berikut:  
+
+## Buat Repository Baru    
+![Gambar14. Github Repo](./14.repo.png)  
+
+
+Di side tab sebelah kiri dashboard anda klik tombol new untuk membuat sebuah repository baru. Repository adalah sebuah tempat untuk menyimpan code-code anda.   
+Isi kolom seperti contoh, nama dan deskripsi bebas. Pastikan bahwa repository bersifat public. Lalu klik create repository
+
+## Simpan Alamat Git (git remote)  
+![Gambar15. Github Remote](./15.gitremote.png)  
+
+
+Setelah membuat repositori, halaman ini akan muncul. Copy alamat git (https://github.com/rif42/githubtest0.git) dan simpan data ini  
+
+## Open Folder di Code Editor   
+![Gambar16. Open Folder di VSCode](./16.openfolder.png)    
+
+
+Buka code editor anda (contoh VScode atau IntelliJ), buka terminal, lalu open folder dan pilih sebuah folder.   
+
+## Buat File Baru  
+![Gambar17. Buat File Baru](./17.newfile.png)   
+
+
+Buat file baru, dan namai file nya spotify_clustering.ipynb. File ini adalah sebuah notebook, mirip seperti jupyter notebook. Format notebook sangat bagus untuk eksperimen koding. Setelah file dibuat, tidak perlu diisi apapun.  
+
+## Push File ke Repository  
+Buka terminal dengan cara menekan (ctrl + shift + `) atau membuka terminal > new terminal di top bar vscode. Lalu ketik command berikut:  
+-  `git add .`, command ini berfungsi untuk menyimpan semua perubahan dalam file  
+-  `git commit -m "first"`, command ini berfungsi untuk menyimpan commit, sebuah langkah terakhir untuk menyimpan semua perubahan yang ada di dalam repository. Teks yang ada di dalam tanda petik adalah message atau deskripsi dari commit.  
+-  `git remote add origin [url]`, URL disini adalah alamat git yang didapat di langkah 4c (https://github.com/rif42/githubtest0.git)  
+-  `git push origin master`, mengirim semua commit ke repository secara final   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

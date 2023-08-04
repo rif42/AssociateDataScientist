@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Associate Data Scientist - 14&nbsp; Project Clustering - Spotify Playlist Clustering</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./project_regresi.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project_clustering.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Associate Data Scientist</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Associate Data Scientist</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Understanding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Telaah Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Validasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Menentukan Objek atau Memilih Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cleaning Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pemodelan Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluasi Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modul_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Deployment</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project_klasifikasi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Project Klasifikasi Sentimen Analisis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project_regresi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Project Regresi Hotel Yogyakarta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./project_clustering.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><span class="header-section-number">15</span> Project Overview</a>
+  <ul class="collapse">
+  <li><a href="#spotify" id="toc-spotify" class="nav-link" data-scroll-target="#spotify"><span class="header-section-number">15.1</span> Spotify</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">15.2</span> Python</a></li>
+  <li><a href="#streamlit" id="toc-streamlit" class="nav-link" data-scroll-target="#streamlit"><span class="header-section-number">15.3</span> Streamlit</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">15.4</span> Clustering</a></li>
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="header-section-number">15.5</span> K-Means</a></li>
+  </ul></li>
+  <li><a href="#application-flow" id="toc-application-flow" class="nav-link" data-scroll-target="#application-flow"><span class="header-section-number">16</span> Application Flow</a>
+  <ul class="collapse">
+  <li><a href="#user-flow" id="toc-user-flow" class="nav-link" data-scroll-target="#user-flow"><span class="header-section-number">16.1</span> User Flow</a></li>
+  <li><a href="#data-flow" id="toc-data-flow" class="nav-link" data-scroll-target="#data-flow"><span class="header-section-number">16.2</span> Data Flow</a></li>
+  <li><a href="#function-flow" id="toc-function-flow" class="nav-link" data-scroll-target="#function-flow"><span class="header-section-number">16.3</span> Function Flow</a></li>
+  </ul></li>
+  <li><a href="#membuat-akun-spotify-developer" id="toc-membuat-akun-spotify-developer" class="nav-link" data-scroll-target="#membuat-akun-spotify-developer"><span class="header-section-number">17</span> Membuat Akun Spotify Developer</a>
+  <ul class="collapse">
+  <li><a href="#daftar-sebagai-spotify-developer" id="toc-daftar-sebagai-spotify-developer" class="nav-link" data-scroll-target="#daftar-sebagai-spotify-developer"><span class="header-section-number">17.1</span> Daftar Sebagai Spotify Developer</a></li>
+  <li><a href="#pergi-ke-dashboard-spotify-dan-tekan-create-app" id="toc-pergi-ke-dashboard-spotify-dan-tekan-create-app" class="nav-link" data-scroll-target="#pergi-ke-dashboard-spotify-dan-tekan-create-app"><span class="header-section-number">17.2</span> Pergi ke dashboard spotify dan tekan create app</a></li>
+  <li><a href="#isi-form-dengan-data" id="toc-isi-form-dengan-data" class="nav-link" data-scroll-target="#isi-form-dengan-data"><span class="header-section-number">17.3</span> Isi form dengan data</a></li>
+  <li><a href="#klik-app-yang-sudah-dibuat" id="toc-klik-app-yang-sudah-dibuat" class="nav-link" data-scroll-target="#klik-app-yang-sudah-dibuat"><span class="header-section-number">17.4</span> Klik app yang sudah dibuat</a></li>
+  <li><a href="#pergi-ke-settings-cari-clientid-dan-clientsecret" id="toc-pergi-ke-settings-cari-clientid-dan-clientsecret" class="nav-link" data-scroll-target="#pergi-ke-settings-cari-clientid-dan-clientsecret"><span class="header-section-number">17.5</span> Pergi ke settings, cari ClientID dan ClientSecret</a></li>
+  </ul></li>
+  <li><a href="#buat-repositori-di-github" id="toc-buat-repositori-di-github" class="nav-link" data-scroll-target="#buat-repositori-di-github"><span class="header-section-number">18</span> Buat Repositori di Github</a>
+  <ul class="collapse">
+  <li><a href="#login-ke-github" id="toc-login-ke-github" class="nav-link" data-scroll-target="#login-ke-github"><span class="header-section-number">18.1</span> Login ke Github</a></li>
+  <li><a href="#buat-repository-baru" id="toc-buat-repository-baru" class="nav-link" data-scroll-target="#buat-repository-baru"><span class="header-section-number">18.2</span> Buat Repository Baru</a></li>
+  <li><a href="#simpan-alamat-git-git-remote" id="toc-simpan-alamat-git-git-remote" class="nav-link" data-scroll-target="#simpan-alamat-git-git-remote"><span class="header-section-number">18.3</span> Simpan Alamat Git (git remote)</a></li>
+  <li><a href="#open-folder-di-code-editor" id="toc-open-folder-di-code-editor" class="nav-link" data-scroll-target="#open-folder-di-code-editor"><span class="header-section-number">18.4</span> Open Folder di Code Editor</a></li>
+  <li><a href="#buat-file-baru" id="toc-buat-file-baru" class="nav-link" data-scroll-target="#buat-file-baru"><span class="header-section-number">18.5</span> Buat File Baru</a></li>
+  <li><a href="#push-file-ke-repository" id="toc-push-file-ke-repository" class="nav-link" data-scroll-target="#push-file-ke-repository"><span class="header-section-number">18.6</span> Push File ke Repository</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Project Clustering - Spotify Playlist Clustering</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="project-overview" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Project Overview</h1>
+<p>Project ini berfungsi untuk membuat sebuah aplikasi untuk melakukan proses clustering terhadap lagu-lagu yang ada di dalam sebuah playlist spotify.<br>
+Lagu-lagu tersebut dikelompokan berdasarkan karakteristik lagu (audio feature) yang kita dapatkan dari spotify web API.<br>
+Perlu diingat bahwa untuk project ini, kita akan buat algoritmanya dahulu, mengetesnya di notebook kita, lalu kita akan mengubahnya menjadi file python dan mengupload nya di Streamlit.</p>
+<section id="spotify" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="spotify"><span class="header-section-number">15.1</span> Spotify</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./1.spotify.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar1. Logo Spotify</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Spotify adalah platform musik digital yang menyediakan layanan streaming musik dan podcast. Musik dan podcast di-stream melalui internet tanpa perlu mengunduhnya secara permanen. Pengguna dapat membuat playlist pribadi dan menyimpan lagu favorit di Library.</p>
+</section>
+<section id="python" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="python"><span class="header-section-number">15.2</span> Python</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./2.py.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar2. Logo Python</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Python adalah bahasa pemrograman serba guna yang dikembangkan pada awal 1990-an oleh Guido van Rossum. Tidak perlu mendeklarasikan tipe data variabel, dan nilai variabel dapat berubah saat program berjalan. Python mengutamakan kejelasan dan menghindari penggunaan tanda kurung kurawal atau titik koma. Python menyediakan pustaka bawaan (standard library) yang kaya, serta banyak modul dan pustaka dari pihak ketiga yang memperluas fungsionalitasnya.</p>
+</section>
+<section id="streamlit" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="streamlit"><span class="header-section-number">15.3</span> Streamlit</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./3.st.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar3. Logo Streamlit</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Streamlit adalah framework open-source untuk mengembangkan aplikasi web interaktif dengan menggunakan bahasa pemrograman Python. Tujuannya adalah menyederhanakan proses pembuatan aplikasi web dengan memungkinkan pengembang untuk membuat aplikasi dengan mudah menggunakan kode Python yang sederhana dan familiar.</p>
+</section>
+<section id="clustering" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="clustering"><span class="header-section-number">15.4</span> Clustering</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./4.clustering.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar4. Contoh Grafik Clustering</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Clustering adalah proses pengelompokan data atau objek-objek serupa menjadi kelompok-kelompok yang lebih homogen berdasarkan kesamaan fitur atau karakteristik tertentu.</p>
+</section>
+<section id="k-means" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="k-means"><span class="header-section-number">15.5</span> K-Means</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p>&nbsp;</p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./5.scatterplot.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar5. Contoh Clustering Menggunakan Scatter Plot</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Algoritma k-means adalah metode clustering yang mengelompokkan data menjadi beberapa kelompok berdasarkan jaraknya ke pusat kelompok yang ditentukan secara iteratif.</p>
+</section>
+</section>
+<section id="application-flow" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Application Flow</h1>
+<p>User flow adalah interaksi antara user dan aplikasi ini harus kita pelajari dan petakan secara detail agar aplikasi bisa digunakan dengan user secara nyaman.<br>
+Data flow adalah alur dari data yang ada di dalam aplikasi.<br>
+Function flow adalah struktur dari fungsi yang ada di dalam aplikasi</p>
+<section id="user-flow" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="user-flow"><span class="header-section-number">16.1</span> User Flow</h2>
+<p>User flow dari aplikasi yang akan kita buat cukup simple :<br>
+<img src="./6.userflow.png" class="img-fluid" alt="Gambar6. User Flow"></p>
+</section>
+<section id="data-flow" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="data-flow"><span class="header-section-number">16.2</span> Data Flow</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./7.dataflow.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar7. Data Flow</figcaption>
+</figure>
+</div>
+</section>
+<section id="function-flow" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="function-flow"><span class="header-section-number">16.3</span> Function Flow</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./8.functionflow.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar8. Function Flow</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="membuat-akun-spotify-developer" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Membuat Akun Spotify Developer</h1>
+<section id="daftar-sebagai-spotify-developer" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="daftar-sebagai-spotify-developer"><span class="header-section-number">17.1</span> Daftar Sebagai Spotify Developer</h2>
+<p>Untuk mengakses web API spotify, kita harus mendaftar sebagai spotify developer. Berikut langkahnya:<br>
+- Pergi ke https://developer.spotify.com<br>
+- Klik tombol daftar di pojok kanan atas<br>
+- Isi form, klik daftar, verifikasi email<br>
+- Login dengan akun terverifikasi<br>
+- Pergi ke dashboard<br>
+Jika anda sudah bisa masuk dashboard, berarti anda sudah terdaftar menjadi developer spotify! Ikuti langkah-langkah selanjutnya.</p>
+</section>
+<section id="pergi-ke-dashboard-spotify-dan-tekan-create-app" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="pergi-ke-dashboard-spotify-dan-tekan-create-app"><span class="header-section-number">17.2</span> Pergi ke dashboard spotify dan tekan create app</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./9.dashboard.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar9. Dashboard Spotify Developer</figcaption>
+</figure>
+</div>
+</section>
+<section id="isi-form-dengan-data" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="isi-form-dengan-data"><span class="header-section-number">17.3</span> Isi form dengan data</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./10.createapp.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar10. Isi Form di halaman Create App</figcaption>
+</figure>
+</div>
+<p><strong>App name</strong>, nama dari aplikasi, misal spotify_playlist_clusterization<br>
+<strong>App description</strong>, deskripsi singkat dari aplikasi yang akan dibuat<br>
+<strong>Website</strong>, website personal dari pembuat aplikasi<br>
+<strong>Redirect URI</strong>, umumnya user akan ditujukan ke URI ini ketika mengalami kegagalan request. namun untuk project ini, kita dapat mengisinya dengan apapun, seperti URL akun github atau linkedin</p>
+</section>
+<section id="klik-app-yang-sudah-dibuat" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="klik-app-yang-sudah-dibuat"><span class="header-section-number">17.4</span> Klik app yang sudah dibuat</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./11.app.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar11. Daftar App di Spotify Developer</figcaption>
+</figure>
+</div>
+</section>
+<section id="pergi-ke-settings-cari-clientid-dan-clientsecret" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="pergi-ke-settings-cari-clientid-dan-clientsecret"><span class="header-section-number">17.5</span> Pergi ke settings, cari ClientID dan ClientSecret</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./12.credentials.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar12. Client ID dan Client Secret dari App</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="buat-repositori-di-github" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Buat Repositori di Github</h1>
+<p>Github adalah aplikasi untuk mengontrol versioning dari koding kita. Github akan melacak perubahan yang kita buat di dalam file koding, sehingga kita dapat membandingkan atau kembali ke versi sebelumnya. Dalam project ini, Github juga digunakan untuk proses deployment di Streamlit.</p>
+<section id="login-ke-github" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="login-ke-github"><span class="header-section-number">18.1</span> Login ke Github</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./13.git.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar13. Dashboard Github</figcaption>
+</figure>
+</div>
+<p>Pergi ke Github.com dan login atau daftar akun baru. Jika anda membuat akun baru, jangan lupa verifikasi akun setelah dibuat. Jika anda sudah login, maka dashboard akun anda akan tampil seperti berikut:</p>
+</section>
+<section id="buat-repository-baru" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="buat-repository-baru"><span class="header-section-number">18.2</span> Buat Repository Baru</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./14.repo.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar14. Github Repo</figcaption>
+</figure>
+</div>
+<p>Di side tab sebelah kiri dashboard anda klik tombol new untuk membuat sebuah repository baru. Repository adalah sebuah tempat untuk menyimpan code-code anda.<br>
+Isi kolom seperti contoh, nama dan deskripsi bebas. Pastikan bahwa repository bersifat public. Lalu klik create repository</p>
+</section>
+<section id="simpan-alamat-git-git-remote" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="simpan-alamat-git-git-remote"><span class="header-section-number">18.3</span> Simpan Alamat Git (git remote)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./15.gitremote.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar15. Github Remote</figcaption>
+</figure>
+</div>
+<p>Setelah membuat repositori, halaman ini akan muncul. Copy alamat git (https://github.com/rif42/githubtest0.git) dan simpan data ini</p>
+</section>
+<section id="open-folder-di-code-editor" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="open-folder-di-code-editor"><span class="header-section-number">18.4</span> Open Folder di Code Editor</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./16.openfolder.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar16. Open Folder di VSCode</figcaption>
+</figure>
+</div>
+<p>Buka code editor anda (contoh VScode atau IntelliJ), buka terminal, lalu open folder dan pilih sebuah folder.</p>
+</section>
+<section id="buat-file-baru" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="buat-file-baru"><span class="header-section-number">18.5</span> Buat File Baru</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./17.newfile.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Gambar17. Buat File Baru</figcaption>
+</figure>
+</div>
+<p>Buat file baru, dan namai file nya spotify_clustering.ipynb. File ini adalah sebuah notebook, mirip seperti jupyter notebook. Format notebook sangat bagus untuk eksperimen koding. Setelah file dibuat, tidak perlu diisi apapun.</p>
+</section>
+<section id="push-file-ke-repository" class="level2" data-number="18.6">
+<h2 data-number="18.6" class="anchored" data-anchor-id="push-file-ke-repository"><span class="header-section-number">18.6</span> Push File ke Repository</h2>
+<p>Buka terminal dengan cara menekan (ctrl + shift + <code>) atau membuka terminal &gt; new terminal di top bar vscode. Lalu ketik command berikut:   -</code>git add .<code>, command ini berfungsi untuk menyimpan semua perubahan dalam file   -</code>git commit -m “first”<code>, command ini berfungsi untuk menyimpan commit, sebuah langkah terakhir untuk menyimpan semua perubahan yang ada di dalam repository. Teks yang ada di dalam tanda petik adalah message atau deskripsi dari commit.   -</code>git remote add origin [url]<code>, URL disini adalah alamat git yang didapat di langkah 4c (https://github.com/rif42/githubtest0.git)   -</code>git push origin master`, mengirim semua commit ke repository secara final</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./project_regresi.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Project Regresi Hotel Yogyakarta</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
